@@ -1,0 +1,8 @@
+<myApp:ConsultListeProfil title="consultListeProfil" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 
+	<Form>
+  		<Form.Section>
+			<Label text="Liste des profils"/>
+			<ListView bxml:id="listeProfil"/>
+		</Form.Section>
+	</Form>
+</myApp:ConsultListeProfil>

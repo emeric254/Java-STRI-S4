@@ -1,0 +1,8 @@
+<myApp:CreationProfil title="CreationProfil" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 
+	<Form>
+  		<Form.Section>
+			<Label text="Creation de votre profil"/>
+			<CalendarButton bxml:id="btPickDate" buttonData="Selectionnez votre date de diplome"/>
+		</Form.Section>
+	</Form>
+</myApp:CreationProfil>

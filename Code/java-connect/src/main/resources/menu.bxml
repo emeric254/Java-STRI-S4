@@ -1,0 +1,11 @@
+<myApp:Menu title="Java Connect !" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 
+	<Form>
+  		<Form.Section>
+			<Label text="Java Connect !"/>
+			<PushButton bxml:id="btConnexion" buttonData="Connexion"/>
+			<PushButton bxml:id="btInscription" buttonData="Inscription"/>
+			<PushButton bxml:id="btListeProfil" buttonData="Liste des profils"/>
+			<PushButton bxml:id="btModifProfil" buttonData="Modifier votre profil"/>
+		</Form.Section>
+	</Form>
+</myApp:Menu>
