@@ -5,6 +5,7 @@
 *.settings
 .settings
 .settings/*
+target
 target/*
 .db
 *.db
