@@ -1,0 +1,11 @@
+*.class
+.class
+*.classpath
+.classpath
+*.settings
+.settings
+.settings/*
+target
+target/*
+.db
+*.db
