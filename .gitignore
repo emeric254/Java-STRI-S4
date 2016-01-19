@@ -9,3 +9,5 @@ target
 target/*
 .db
 *.db
+.project
+*.project
