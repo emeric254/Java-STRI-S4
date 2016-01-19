@@ -1,0 +1,52 @@
+package stri.java_connect.modele;
+
+/**
+ * Class Privilege
+ */
+public class Privilege {
+
+  //
+  // Fields
+  //
+
+  private String nom;
+  
+  //
+  // Constructors
+  //
+  public Privilege ()
+  {
+  };
+  
+  //
+  // Methods
+  //
+
+
+  //
+  // Accessor methods
+  //
+
+  /**
+   * Set the value of nom
+   * @param newVar the new value of nom
+   */
+  private void setNom (String newVar)
+  {
+    nom = newVar;
+  }
+
+  /**
+   * Get the value of nom
+   * @return the value of nom
+   */
+  private String getNom ()
+  {
+    return nom;
+  }
+
+  //
+  // Other methods
+  //
+
+}
