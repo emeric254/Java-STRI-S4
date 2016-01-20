@@ -37,11 +37,11 @@ public class Utilisateur {
 	  telephone = "";
 	  courriel = "";
 	  permissionLecture = "{"
-	  		+ "\"nom\":\"anonyme\","
-	  		+ "\"datediplome\":\"anonyme\","
-	  		+ "\"telephone\":\"anonyme\","
-	  		+ "\"courriel\":\"anonyme\","
-	  		+ "\"competences\":\"anonyme\""
+	  		+ "'nom':'anonyme',"
+	  		+ "'datediplome':'anonyme',"
+	  		+ "'telephone':'anonyme',"
+	  		+ "'courriel':'anonyme',"
+	  		+ "'competences':'anonyme'"
 	  		+ "}";
 	  
 	  privilege = "anonyme";
