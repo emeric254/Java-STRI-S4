@@ -77,6 +77,18 @@ public class SqliteTest
 			
 		}
 	}
+
+	@Test
+	public void memeSuppression5Fois()
+	{
+		testeur.executerMaj("insert into person values(1, 'leo')");
+		for(int i=0; i<5; i++)
+		{
+			System.out.println( " > " + (i+1) );
+			assertTrue("renvoie ok meme si l'id n'y est plus", testeur.executerMaj("delete from person where id=1"));
+			
+		}
+	}
 	
 	@Test
 	public void testEntier()
