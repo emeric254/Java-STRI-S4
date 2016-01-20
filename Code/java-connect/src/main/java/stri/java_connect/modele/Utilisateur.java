@@ -29,6 +29,24 @@ public class Utilisateur {
   //
   public Utilisateur ()
   {
+	  identifiant = "";
+	  motDePasse = "";
+	  
+	  nom = "";
+	  dateDiplome = (long) -1;
+	  telephone = "";
+	  courriel = "";
+	  permissionLecture = "{"
+	  		+ "\"nom\":\"anonyme\","
+	  		+ "\"datediplome\":\"anonyme\","
+	  		+ "\"telephone\":\"anonyme\","
+	  		+ "\"courriel\":\"anonyme\","
+	  		+ "\"competences\":\"anonyme\""
+	  		+ "}";
+	  
+	  privilege = "anonyme";
+	  
+	  Competences = new ArrayDeque<String>();
   };
   
   //
@@ -206,4 +224,48 @@ public class Utilisateur {
   // Other methods
   //
 
+
+  /**
+   * Get Utilisateur JSON String representation
+   * @return the Utilisateur object as a JSON formated String
+   */
+  @Override
+  public String toString()
+  {
+	  String chaine = "{";
+	  chaine += "\"identifiant\":";
+	  chaine += "\"" + identifiant + "\",";
+	  
+	  chaine += "\"motdepasse\":";
+	  chaine += "\"" + motDePasse + "\",";
+	  
+	  chaine += "\"nom\":";
+	  chaine += "\"" + nom + "\",";
+	  
+	  chaine += "\"datediplome\":";
+	  chaine += "\"" + dateDiplome + "\",";
+	  
+	  chaine += "\"telephone\":";
+	  chaine += "\"" + telephone + "\",";
+	  
+	  chaine += "\"courriel\":";
+	  chaine += "\"" + courriel + "\",";
+	  
+	  chaine += "\"permissionlecture\":";
+	  chaine += permissionLecture + ",";
+	  
+	  chaine += "\"privilege\":";
+	  chaine += "\"" + privilege + "\",";
+	  
+	  chaine += "\"competences\":";
+	  chaine += "[";
+	  for(String temp : Competences)
+	  {
+		  chaine += "\"" + temp + "\",";
+	  }
+	  chaine = chaine.substring(0, chaine.length()-1);
+	  chaine += "]";
+	  chaine += "}";
+	  return chaine;
+  }
 }
