@@ -1,6 +1,7 @@
 package stri.java_connect.modele;
 
 import java.util.ArrayDeque;
+import java.util.Date;
 
 /**
  * Class Utilisateur
@@ -122,12 +123,30 @@ public class Utilisateur {
   }
 
   /**
+   * Set the value of dateDiplome
+   * @param newVar the new value of dateDiplome
+   */
+  public void setDateDiplomeFromDate (Date newVar)
+  {
+    setDateDiplome(newVar.getTime());
+  }
+
+  /**
    * Get the value of dateDiplome
    * @return the value of dateDiplome
    */
   public Long getDateDiplome ()
   {
     return dateDiplome;
+  }
+
+  /**
+   * Get the value of dateDiplome as a Date object
+   * @return the value of dateDiplome as a Date object
+   */
+  public Date getDateDiplomeAsDate ()
+  {
+    return new Date(getDateDiplome());
   }
 
   /**
