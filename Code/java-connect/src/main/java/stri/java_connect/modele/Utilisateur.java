@@ -50,6 +50,23 @@ public class Utilisateur {
 	  Competences = new ArrayDeque<String>();
   };
   
+  public Utilisateur (String pId, String pMdp)
+  {
+	  super();
+	  
+	  setIdentifiant(pId);
+	  setMotDePasse(pMdp);
+  };
+  
+  public Utilisateur (String pNom, String pTelephone, String pCourriel)
+  {
+	  super();
+	  
+	  setNom(pNom);
+	  setTelephone(pTelephone);
+	  setCourriel(pCourriel); 
+  };
+  
   //
   // Methods
   //

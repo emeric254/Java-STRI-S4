@@ -42,6 +42,19 @@ public class App
         JSONObject.testValidity(testJson);
         System.out.println(testJson.toString());
         
+
+        Utilisateur test2 = new Utilisateur("id", "mdp");
+        
+        JSONObject testJson2 = new JSONObject(test2);
+        JSONObject.testValidity(testJson2);
+        System.out.println(testJson2.toString());
+
+        Utilisateur test3 = new Utilisateur("nom", "telephone", "courriel");
+        
+        JSONObject testJson3 = new JSONObject(test3);
+        JSONObject.testValidity(testJson3);
+        System.out.println(testJson3.toString());
+        
         System.out.println("END");
     }
 }
