@@ -6,7 +6,8 @@ import java.util.Date;
 /**
  * Class Utilisateur
  */
-public class Utilisateur {
+public class Utilisateur
+{
 
   //
   // Fields
@@ -32,7 +33,6 @@ public class Utilisateur {
   {
 	  identifiant = "";
 	  motDePasse = "";
-	  
 	  nom = "";
 	  dateDiplome = (long) -1;
 	  telephone = "";
@@ -44,24 +44,20 @@ public class Utilisateur {
 	  		+ "'courriel':'anonyme',"
 	  		+ "'competences':'anonyme'"
 	  		+ "}";
-	  
 	  privilege = "anonyme";
-	  
 	  Competences = new ArrayDeque<String>();
   };
   
   public Utilisateur (String pId, String pMdp)
   {
-	  super();
-	  
+	  this();
 	  setIdentifiant(pId);
 	  setMotDePasse(pMdp);
   };
   
   public Utilisateur (String pNom, String pTelephone, String pCourriel)
   {
-	  super();
-	  
+	  this();
 	  setNom(pNom);
 	  setTelephone(pTelephone);
 	  setCourriel(pCourriel); 
@@ -269,39 +265,34 @@ public class Utilisateur {
   public String toString()
   {
 	  String chaine = "{";
-	  chaine += "\"identifiant\":";
-	  chaine += "\"" + identifiant + "\",";
+	  chaine += "\"identifiant\": \"" + identifiant + "\",";
 	  
-	  chaine += "\"motdepasse\":";
-	  chaine += "\"" + motDePasse + "\",";
+	  chaine += "\"motdepasse\": \"" + motDePasse + "\",";
 	  
-	  chaine += "\"nom\":";
-	  chaine += "\"" + nom + "\",";
+	  chaine += "\"nom\": \"" + nom + "\",";
 	  
-	  chaine += "\"datediplome\":";
-	  chaine += "\"" + dateDiplome + "\",";
+	  chaine += "\"datediplome\": \"" + dateDiplome + "\",";
 	  
-	  chaine += "\"telephone\":";
-	  chaine += "\"" + telephone + "\",";
+	  chaine += "\"telephone\": \"" + telephone + "\",";
 	  
-	  chaine += "\"courriel\":";
-	  chaine += "\"" + courriel + "\",";
+	  chaine += "\"courriel\": \"" + courriel + "\",";
 	  
-	  chaine += "\"permissionlecture\":";
-	  chaine += permissionLecture + ",";
+	  chaine += "\"permissionlecture\":" + permissionLecture + ",";
 	  
-	  chaine += "\"privilege\":";
-	  chaine += "\"" + privilege + "\",";
+	  chaine += "\"privilege\": \"" + privilege + "\",";
 	  
-	  chaine += "\"competences\":";
-	  chaine += "[";
+	  chaine += "\"competences\": [";
 	  for(String temp : Competences)
 	  {
 		  chaine += "\"" + temp + "\",";
 	  }
 	  chaine = chaine.substring(0, chaine.length()-1);
-	  chaine += "]";
-	  chaine += "}";
+	  chaine += "] }";
 	  return chaine;
+  }
+  
+  public void fromString(String json)
+  {
+	  // TODO import from json string
   }
 }
