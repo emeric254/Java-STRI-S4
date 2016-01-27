@@ -15,7 +15,6 @@ public class App
         System.out.println( "Hello World!" );
         
         Utilisateur test = new Utilisateur();
-        System.out.println(test);
         
         test.setNom("nomDeTest");
         test.setIdentifiant("IDENTIFIANT");
@@ -29,24 +28,26 @@ public class App
         test.getCompetences().add("competence3");
         test.getCompetences().add("competence4");
 
-        System.out.println(test);
         JSONObject testJson = new JSONObject(test);
         JSONObject.testValidity(testJson);
-        System.out.println(testJson.toString());
         
 
         Utilisateur test2 = new Utilisateur("id", "mdp");
+
+        JSONObject testJson1 = new JSONObject(test2);
+        JSONObject.testValidity(testJson1);
+        System.out.println(testJson1.toString());
         
-        JSONObject testJson2 = new JSONObject(test2);
+        JSONObject testJson2 = new JSONObject(test2.toString());
         JSONObject.testValidity(testJson2);
         System.out.println(testJson2.toString());
 
         Utilisateur test3 = new Utilisateur("nom", "telephone", "courriel");
         
-        JSONObject testJson3 = new JSONObject(test3);
+        JSONObject testJson3 = new JSONObject(test3.toString());
         JSONObject.testValidity(testJson3);
-        System.out.println(testJson3.toString());
         
+        test.fromJSONString(testJson3.toString());
         System.out.println("END");
     }
 }

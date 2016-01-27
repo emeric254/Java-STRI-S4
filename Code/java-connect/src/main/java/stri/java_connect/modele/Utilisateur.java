@@ -3,6 +3,9 @@ package stri.java_connect.modele;
 import java.util.ArrayDeque;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Class Utilisateur
  */
@@ -37,6 +40,8 @@ public class Utilisateur
 	  dateDiplome = (long) -1;
 	  telephone = "";
 	  courriel = "";
+	  permissionLecture = "anonyme";
+	  /*
 	  permissionLecture = "{"
 	  		+ "'nom':'anonyme',"
 	  		+ "'datediplome':'anonyme',"
@@ -44,6 +49,7 @@ public class Utilisateur
 	  		+ "'courriel':'anonyme',"
 	  		+ "'competences':'anonyme'"
 	  		+ "}";
+	   */
 	  privilege = "anonyme";
 	  Competences = new ArrayDeque<String>();
   };
@@ -286,13 +292,25 @@ public class Utilisateur
 	  {
 		  chaine += "\"" + temp + "\",";
 	  }
-	  chaine = chaine.substring(0, chaine.length()-1);
+	  if(Competences.size() > 0)
+		  chaine = chaine.substring(0, chaine.length()-1);
 	  chaine += "] }";
 	  return chaine;
   }
   
-  public void fromString(String json)
+  public void fromJSONString(String json)
   {
 	  // TODO import from json string
+	  JSONObject details = new JSONObject(json);
+	  setIdentifiant(details.getString("identifiant"));
+	  setMotDePasse(details.getString("motdepasse"));
+	  setCourriel(details.getString("courriel"));
+	  setPermissionLecture(details.getString("permissionlecture"));
+	  setPrivilege(details.getString("privilege"));
+	  JSONArray listeCompetences = details.getJSONArray("competences");
+	  for (Object object : listeCompetences)
+	  {
+		  Competences.add((String) object);
+	  }
   }
 }
