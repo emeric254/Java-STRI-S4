@@ -1,8 +1,8 @@
 package stri.java_connect;
 
-import org.json.JSONObject;
 
 import stri.java_connect.modele.Utilisateur;
+import stri.java_connect.utils.JSONValidateur;
 
 /**
  * Hello world!
@@ -28,26 +28,19 @@ public class App
         test.getCompetences().add("competence3");
         test.getCompetences().add("competence4");
 
-        JSONObject testJson = new JSONObject(test);
-        JSONObject.testValidity(testJson);
+        JSONValidateur.valider(test);
         
 
         Utilisateur test2 = new Utilisateur("id", "mdp");
 
-        JSONObject testJson1 = new JSONObject(test2);
-        JSONObject.testValidity(testJson1);
-        System.out.println(testJson1.toString());
-        
-        JSONObject testJson2 = new JSONObject(test2.toString());
-        JSONObject.testValidity(testJson2);
-        System.out.println(testJson2.toString());
+        JSONValidateur.valider(test2.toString());
+
+        JSONValidateur.valider(test2);
 
         Utilisateur test3 = new Utilisateur("nom", "telephone", "courriel");
         
-        JSONObject testJson3 = new JSONObject(test3.toString());
-        JSONObject.testValidity(testJson3);
-        
-        test.fromJSONString(testJson3.toString());
+        JSONValidateur.valider(test3);
+
         System.out.println("END");
     }
 }
