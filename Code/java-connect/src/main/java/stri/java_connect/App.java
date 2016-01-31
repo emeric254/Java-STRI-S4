@@ -17,7 +17,6 @@ public class App
         Utilisateur test = new Utilisateur();
         
         test.setNom("nomDeTest");
-        test.setIdentifiant("IDENTIFIANT");
         test.setMotDePasse("MOTDEPASSE");
         test.setPrivilege("utilisateur");
         test.setDateDiplome((long) 1234567890);

@@ -16,7 +16,6 @@ public class Utilisateur
   // Fields
   //
 
-  private String identifiant;
   private String motDePasse;
   
   private String nom;
@@ -34,7 +33,6 @@ public class Utilisateur
   //
   public Utilisateur ()
   {
-	  identifiant = "";
 	  motDePasse = "";
 	  nom = "";
 	  dateDiplome = (long) -1;
@@ -55,10 +53,10 @@ public class Utilisateur
 	  Competences = new ArrayDeque<String>();
   };
   
-  public Utilisateur (String pId, String pMdp)
+  public Utilisateur (String pCourriel, String pMdp)
   {
 	  this();
-	  setIdentifiant(pId);
+	  setCourriel(pCourriel);
 	  setMotDePasse(pMdp);
   };
   
@@ -78,24 +76,6 @@ public class Utilisateur
   //
   // Accessor methods
   //
-
-  /**
-   * Set the value of identifiant
-   * @param newVar the new value of identifiant
-   */
-  public void setIdentifiant (String newVar)
-  {
-    identifiant = newVar;
-  }
-
-  /**
-   * Get the value of identifiant
-   * @return the value of identifiant
-   */
-  public String getIdentifiant ()
-  {
-    return identifiant;
-  }
 
   /**
    * Set the value of motDePasse
@@ -282,8 +262,7 @@ public class Utilisateur
   public String toString()
   {
 	  String chaine = "{";
-	  chaine += "\"identifiant\": \"" + identifiant + "\",";
-	  
+
 	  chaine += "\"motdepasse\": \"" + motDePasse + "\",";
 	  
 	  chaine += "\"nom\": \"" + nom + "\",";
@@ -313,8 +292,10 @@ public class Utilisateur
   {
 	  // TODO import from json string
 	  JSONObject details = new JSONObject(json);
-	  setIdentifiant(details.getString("identifiant"));
 	  setMotDePasse(details.getString("motdepasse"));
+	  setNom(details.getString("nom"));
+	  setDateDiplome(details.getLong("datediplome"));
+	  setTelephone(details.getString("telephone"));
 	  setCourriel(details.getString("courriel"));
 	  setPermissionLecture(details.getString("permissionlecture"));
 	  setPrivilege(details.getString("privilege"));
@@ -332,4 +313,11 @@ public class Utilisateur
 	  copie.fromJSONString(this.toString());
 	  return copie;
   }
+
+  @Override
+  public boolean equals(Object obj)
+  {
+	return obj.toString().equals(this.toString());
+  }
+  
 }
