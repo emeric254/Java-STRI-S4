@@ -41,6 +41,7 @@ public class Utilisateur
 	  telephone = "";
 	  courriel = "";
 	  permissionLecture = "anonyme";
+	  // TODO permissions plus detaillees
 	  /*
 	  permissionLecture = "{"
 	  		+ "'nom':'anonyme',"
@@ -246,7 +247,8 @@ public class Utilisateur
    */
   public ArrayDeque<String> getCompetences ()
   {
-    return Competences;
+	  // clone to avoid some security issues
+	  return Competences.clone();
   }
 
   /**
@@ -256,6 +258,15 @@ public class Utilisateur
   public void setCompetences (ArrayDeque<String> newVar)
   {
 	  Competences = newVar;
+  }
+
+  /**
+   * Add a Competence
+   * @param newVar the new Competence to add
+   */
+  public void addCompetence (String newVar)
+  {
+	  Competences.add(newVar);
   }
 
   //
@@ -312,5 +323,13 @@ public class Utilisateur
 	  {
 		  Competences.add((String) object);
 	  }
+  }
+  
+  @Override
+  public Utilisateur clone()
+  {
+	  Utilisateur copie = new Utilisateur();
+	  copie.fromJSONString(this.toString());
+	  return copie;
   }
 }
