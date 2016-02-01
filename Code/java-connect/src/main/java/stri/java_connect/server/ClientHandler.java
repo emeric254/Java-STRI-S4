@@ -21,6 +21,10 @@ public class ClientHandler extends Thread
     private String entree; // requete
     private String sortie; // reponse
     
+	/**
+	 * @param pSocketService
+	 * @param pProtocolServer
+	 */
 	public ClientHandler(Socket pSocketService, ControlleurProtocole pProtocolServer)
 	{
         socketService = pSocketService;
@@ -39,6 +43,9 @@ public class ClientHandler extends Thread
 		sortie = null;
 	}
 
+    /**
+     * 
+     */
     public void communiquer()
     {
         try
@@ -61,11 +68,18 @@ public class ClientHandler extends Thread
         }
     }
     
+    /**
+     * @param entree
+     * @return
+     */
     public String traitement (String entree)
     {
 		return protocolServer.traiterRequete(entree);
     }
 
+    /**
+     * 
+     */
     public void fermerService()
     {
         try
@@ -78,6 +92,9 @@ public class ClientHandler extends Thread
         }
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Thread#run()
+     */
     public void run()
     {
         try

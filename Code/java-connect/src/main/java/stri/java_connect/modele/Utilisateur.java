@@ -31,6 +31,10 @@ public class Utilisateur
   //
   // Constructors
   //
+  
+  /**
+   * 
+   */
   public Utilisateur ()
   {
 	  motDePasse = "";
@@ -53,6 +57,10 @@ public class Utilisateur
 	  Competences = new ArrayDeque<String>();
   };
   
+  /**
+   * @param pCourriel
+   * @param pMdp
+   */
   public Utilisateur (String pCourriel, String pMdp)
   {
 	  this();
@@ -60,6 +68,11 @@ public class Utilisateur
 	  setMotDePasse(pMdp);
   };
   
+  /**
+   * @param pNom
+   * @param pTelephone
+   * @param pCourriel
+   */
   public Utilisateur (String pNom, String pTelephone, String pCourriel)
   {
 	  this();
@@ -288,6 +301,9 @@ public class Utilisateur
 	  return chaine;
   }
   
+  /**
+   * @param json
+   */
   public void fromJSONString(String json)
   {
 	  // TODO import from json string

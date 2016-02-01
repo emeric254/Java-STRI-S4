@@ -14,6 +14,10 @@ import stri.java_connect.modele.Utilisateur;
  */
 public abstract class JSONValidateur
 {
+	/**
+	 * @param jsonAvalider
+	 * @return
+	 */
 	public static boolean valider(String jsonAvalider)
 	{
 	    try
@@ -27,6 +31,10 @@ public abstract class JSONValidateur
 		return true;
 	}
 	
+	/**
+	 * @param u
+	 * @return
+	 */
 	public static boolean valider(Utilisateur u)
 	{
 	    return valider(u.toString());

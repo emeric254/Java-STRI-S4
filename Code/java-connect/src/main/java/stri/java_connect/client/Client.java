@@ -18,6 +18,9 @@ public class Client
     PrintStream fluxSortieSocket;
     BufferedReader fluxEntreeSocket;
 
+    /**
+     * @param pPort
+     */
     public Client(int pPort)
     {
     	port = pPort;
@@ -34,6 +37,11 @@ public class Client
         System.out.println("Connexion établie sur 127.0.0.1 " + port);
     }
 
+    /**
+     * @param message
+     * @return
+     * @throws IOException
+     */
     public String communiquer(String message) throws IOException
     {
         fluxSortieSocket.println(message);
@@ -41,6 +49,9 @@ public class Client
         return fluxEntreeSocket.readLine();
     }
     
+    /**
+     * 
+     */
     public void fermer()
     {
         try

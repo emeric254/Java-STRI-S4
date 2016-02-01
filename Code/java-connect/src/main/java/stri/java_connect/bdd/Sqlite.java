@@ -9,6 +9,9 @@ public class Sqlite
 	private Connection connexion;
 	private Statement statement;
 	
+	/**
+	 * @param dbFileName
+	 */
 	public Sqlite(String dbFileName)
 	{
 		nomBDD = dbFileName;
@@ -24,6 +27,9 @@ public class Sqlite
 		dbConnect();
 	}
 	
+	/**
+	 * 
+	 */
 	public void dbConnect()
 	{
 		connexion = null;
@@ -39,6 +45,9 @@ public class Sqlite
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void Init()
 	{
 		if(executerMaj("drop table if exists person") && executerMaj("create table person (id integer, name string)"))
@@ -62,6 +71,9 @@ public class Sqlite
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void close()
 	{
 		try
@@ -77,6 +89,10 @@ public class Sqlite
 		}
 	}
 	
+	/**
+	 * @param sql
+	 * @return
+	 */
 	public ResultSet executerRequete(String sql)
 	{
 		ResultSet rs = null;
@@ -91,6 +107,10 @@ public class Sqlite
 		return rs;
 	}
 	
+	/**
+	 * @param sql
+	 * @return
+	 */
 	public boolean executerMaj(String sql)
 	{
 		boolean state = true;
@@ -106,6 +126,9 @@ public class Sqlite
 		return state;
 	}
 	
+	/**
+	 * 
+	 */
 	public void reset()
 	{
 		close();

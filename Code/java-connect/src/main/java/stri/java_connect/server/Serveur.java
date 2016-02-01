@@ -16,6 +16,9 @@ public class Serveur
     ControlleurProtocole protocolServer;
     ServerSocket socketEcoute;
 
+    /**
+     * @param pProtocolServer
+     */
     public Serveur(ControlleurProtocole pProtocolServer)
     {
     	port = 12345;
@@ -48,6 +51,10 @@ public class Serveur
         }
     }
     
+    /**
+     * @param pProtocolServer
+     * @param pPort
+     */
     public Serveur(ControlleurProtocole pProtocolServer, int pPort)
     {
     	this(pProtocolServer);
