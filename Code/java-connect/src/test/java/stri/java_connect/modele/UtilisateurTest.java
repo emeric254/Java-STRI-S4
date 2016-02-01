@@ -222,15 +222,19 @@ public class UtilisateurTest
 		assertEquals("courriel", u.getCourriel() );
 	}
 
+    @Ignore
 	@Test
 	public void testSetPermissionLecture()
 	{
+	   // TODO
 		fail("Not yet implemented");
 	}
 
+    @Ignore
 	@Test
 	public void testGetPermissionLecture()
 	{
+	   // TODO
 		fail("Not yet implemented");
 	}
 

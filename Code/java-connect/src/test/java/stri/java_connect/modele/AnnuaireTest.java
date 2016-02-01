@@ -110,15 +110,19 @@ public class AnnuaireTest
 		assertEquals(h.values(), a.getCollectionTousUtilisateurs());
 	}
 
+    @Ignore
 	@Test
 	public void testGetArrayTousUtilisateurs()
 	{
+	   // TODO
 		fail("Not yet implemented");
 	}
 
+    @Ignore
 	@Test
 	public void testGetArraySecuriseTousUtilisateurs()
 	{
+	   // TODO
 		fail("Not yet implemented");
 	}
 
