@@ -3,7 +3,6 @@
  */
 package stri.java_connect.protocol;
 
-import java.security.MessageDigest;
 import stri.java_connect.server.ControlleurProtocole;
 import stri.java_connect.utils.CourrielValidateur;
 import stri.java_connect.utils.JSONValidateur;
@@ -154,8 +153,8 @@ public abstract class ProtocoleAnnuaire
 	{
 		if(ControlleurProtocole.requeteCorps(requete).contains(":"))
 		{
-			// TODO valider mot de passe aussi ?
 			String courriel = ControlleurProtocole.requeteCorps(requete).split(":",2)[0];
+			// TODO test mot de passe vide ?
 			return CourrielValidateur.valider(courriel);
 		}
 		return false;
