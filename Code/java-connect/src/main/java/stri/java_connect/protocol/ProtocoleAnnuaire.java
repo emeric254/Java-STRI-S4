@@ -3,9 +3,11 @@
  */
 package stri.java_connect.protocol;
 
+import java.security.MessageDigest;
 import stri.java_connect.server.ControlleurProtocole;
 import stri.java_connect.utils.CourrielValidateur;
 import stri.java_connect.utils.JSONValidateur;
+import stri.java_connect.utils.MD5Hasher;
 
 /**
  * @author emeric
@@ -41,6 +43,16 @@ public abstract class ProtocoleAnnuaire
 	public static String requeteConnexion(String courriel, String motDePasse)
 	{
 		return "CONNEXION " + courriel + ":" + motDePasse;
+	}
+	
+	/**
+	 * @param courriel
+	 * @param motDePasse
+	 * @return
+	 */
+	public static String requeteConnexionHashMD5(String courriel, String motDePasse)
+	{
+		return "CONNEXION " + courriel + ":MD5:" + MD5Hasher.hashString(motDePasse);
 	}
 
 	/**
@@ -99,6 +111,15 @@ public abstract class ProtocoleAnnuaire
 	{
 		return ControlleurProtocole.requeteMethode(requete).equals("MODIFIER");
 	}
+	
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean isRequeteSupression(String requete)
+	{
+		return ControlleurProtocole.requeteMethode(requete).equals("SUPRESSION");
+	}
 
 	//-------------------------------------------------------------------------
 	// testeur de validite du corps requete
@@ -109,7 +130,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean validerRequeteConsulterProfils(String requete)
 	{
-		return ControlleurProtocole.requeteCorps(requete).equals("/profils");
+		return ControlleurProtocole.requeteURI(requete).equals("/profils");
 	}
 	
 	/**
@@ -118,10 +139,9 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean validerRequeteConsulterProfil(String requete)
 	{
-		if(ControlleurProtocole.requeteCorps(requete).startsWith("/profils/"))
+		if(ControlleurProtocole.requeteURI(requete).startsWith("/profils/"))
 		{
-			String courriel = ControlleurProtocole.requeteCorps(requete).substring(9);
-			return CourrielValidateur.valider(courriel);
+			return CourrielValidateur.valider(ControlleurProtocole.requeteCorps(requete));
 		}
 		return false;
 	}
@@ -135,10 +155,19 @@ public abstract class ProtocoleAnnuaire
 		if(ControlleurProtocole.requeteCorps(requete).contains(":"))
 		{
 			// TODO valider mot de passe aussi ?
-			String courriel = ControlleurProtocole.requeteCorps(requete).split(":")[0];
+			String courriel = ControlleurProtocole.requeteCorps(requete).split(":",2)[0];
 			return CourrielValidateur.valider(courriel);
 		}
 		return false;
+	}
+	
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean validerTypeMotDePasseHashMD5(String mdp)
+	{
+		return mdp.startsWith("MD5:");
 	}
 	
 	/**
@@ -158,6 +187,16 @@ public abstract class ProtocoleAnnuaire
 	public static boolean validerRequeteModifier(String requete)
 	{
 		// TODO valider modele aussi ?
-		return JSONValidateur.valider(ControlleurProtocole.requeteCorps(requete));
+		return ControlleurProtocole.requeteURI(requete).startsWith("/profils/");
+		//return JSONValidateur.valider(ControlleurProtocole.requeteCorps(requete));
+	}
+	
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean validerRequeteSupression(String requete)
+	{
+		return ControlleurProtocole.requeteURI(requete).startsWith("/profils/");
 	}
 }

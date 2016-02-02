@@ -24,8 +24,17 @@ public abstract class ControlleurProtocole
      * @param requete
      * @return
      */
+    public static String requeteURI (String requete)
+    {
+    	return requete.trim().split("\n",2)[0].split(" ")[1];
+    }
+    
+    /**
+     * @param requete
+     * @return
+     */
     public static String requeteCorps (String requete)
     {
-        return requete.trim().split(" ")[1];
+        return requete.trim().split("\n",2)[1];
     }
 }
