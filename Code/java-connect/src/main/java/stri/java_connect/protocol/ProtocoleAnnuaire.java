@@ -76,7 +76,7 @@ public abstract class ProtocoleAnnuaire
 	 * @param courriel
 	 * @return
 	 */
-	public static String requetSuppressionProfil(String courriel)
+	public static String requeteSuppressionProfil(String courriel)
 	{
 		return "SUPPRESSION /profils/" + courriel;
 	}
