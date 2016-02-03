@@ -60,16 +60,16 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteInscrire(String utilisateurJson)
 	{
-		return "INSCRIRE " + utilisateurJson;
+		return "INSCRIRE \n" + utilisateurJson;
 	}
 
 	/**
 	 * @param utilisateurJson
 	 * @return
 	 */
-	public static String requeteModifier(String utilisateurJson)
+	public static String requeteModifier(String courriel, String utilisateurJson)
 	{
-		return "MODIFIER " + utilisateurJson;
+		return "MODIFIER /profils/" + courriel + "\n"  + utilisateurJson;
 	}
 	
 	/**
