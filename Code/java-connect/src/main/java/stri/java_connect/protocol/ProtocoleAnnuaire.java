@@ -72,6 +72,15 @@ public abstract class ProtocoleAnnuaire
 		return "MODIFIER " + utilisateurJson;
 	}
 	
+	/**
+	 * @param courriel
+	 * @return
+	 */
+	public static String requetSuppressionProfil(String courriel)
+	{
+		return "SUPPRESSION /profils/" + courriel;
+	}
+	
 	//-------------------------------------------------------------------------
 	// testeurs de type de requete
 	
@@ -115,9 +124,9 @@ public abstract class ProtocoleAnnuaire
 	 * @param requete
 	 * @return
 	 */
-	public static boolean isRequeteSupression(String requete)
+	public static boolean isRequeteSuppression(String requete)
 	{
-		return ControlleurProtocole.requeteMethode(requete).equals("SUPRESSION");
+		return ControlleurProtocole.requeteMethode(requete).equals("SUPPRESSION");
 	}
 
 	//-------------------------------------------------------------------------
@@ -194,7 +203,7 @@ public abstract class ProtocoleAnnuaire
 	 * @param requete
 	 * @return
 	 */
-	public static boolean validerRequeteSupression(String requete)
+	public static boolean validerRequeteSuppression(String requete)
 	{
 		return ControlleurProtocole.requeteURI(requete).startsWith("/profils/");
 	}
