@@ -207,4 +207,59 @@ public abstract class ProtocoleAnnuaire
 	{
 		return ControlleurProtocole.requeteURI(requete).startsWith("/profils/");
 	}
+
+	//-------------------------------------------------------------------------
+	// createur de reponses
+
+	/**
+	 * @return
+	 */
+	public static String erreurImplementionManquante()
+	{
+		return "{\"code\":-2,\"data\":\"implementation manquante\"}";
+	}
+	
+	/**
+	 * @return
+	 */
+	public static String erreurServeur()
+	{
+		return "{\"code\":-1,\"data\":\"erreur du serveur\"}";
+	}
+	
+
+	/**
+	 * @return
+	 */
+	public static String ok(String donnees)
+	{
+		return "{\"code\":0,\"data\":\"" + donnees + "\"}";
+	}
+	
+
+	/**
+	 * @return
+	 */
+	public static String erreurRequete()
+	{
+		return "{\"code\":1,\"data\":\"mauvaise requete\"}";
+	}
+	
+
+	/**
+	 * @return
+	 */
+	public static String erreurInterdit()
+	{
+		return "{\"code\":2,\"data\":\"interdit\"}";
+	}
+	
+
+	/**
+	 * @return
+	 */
+	public static String erreurDeconnexion()
+	{
+		return "{\"code\":3,\"data\":\"connexion perdue\"}";
+	}
 }
