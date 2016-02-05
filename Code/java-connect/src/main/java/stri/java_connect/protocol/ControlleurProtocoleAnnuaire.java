@@ -3,9 +3,10 @@
  */
 package stri.java_connect.protocol;
 
+import org.json.JSONObject;
+
 import stri.java_connect.modele.Annuaire;
 import stri.java_connect.modele.Utilisateur;
-import stri.java_connect.server.ControlleurProtocole;
 
 /**
  * @author emeric
@@ -13,7 +14,6 @@ import stri.java_connect.server.ControlleurProtocole;
  */
 public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 {
-	boolean connecte;
 	Utilisateur utilisateur;
 	Annuaire annuaire;
 	
@@ -22,8 +22,6 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 	 */
 	public ControlleurProtocoleAnnuaire(Annuaire a)
 	{
-		// TODO completer ici
-		connecte = false;
 		utilisateur = null;
 		annuaire = a;
 	}
@@ -33,18 +31,18 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 	{
 		String reponse = ProtocoleAnnuaire.erreurServeur();
 		
-		if(ProtocoleAnnuaire.isRequeteConnexion(requete))
+		if (ProtocoleAnnuaire.isRequeteConnexion(requete))
 		{
-			if(ProtocoleAnnuaire.validerRequeteConnexion(requete))
+			if (ProtocoleAnnuaire.validerRequeteConnexion(requete))
 			{
-				String temp = ControlleurProtocole.requeteCorps(requete);
-				String courriel = "";// TODO recuperation courriel
-				String motdepasse = "";// TODO recuperation motdepasse
+				Utilisateur u = new Utilisateur();
+				u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
 				
-				if(annuaire.existeUtilisateur(courriel))
+				if (annuaire.existeUtilisateur(u.getCourriel()) && utilisateur == null)
 				{
-					utilisateur = annuaire.getUtilisateur(courriel);
-					if(utilisateur.getMotDePasse().equals(motdepasse))
+					utilisateur = annuaire.getUtilisateur(u.getCourriel());
+					
+					if (utilisateur.getMotDePasse().equals(u.getMotDePasse()))
 					{
 						reponse = ProtocoleAnnuaire.ok(utilisateur.toString());
 					}
@@ -56,90 +54,130 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 				}
 				else
 				{
-					// TODO remove comments when done
-					//reponse = ProtocoleAnnuaire.erreurInterdit();
-					
-					// TODO remove this line when done
-					reponse = ProtocoleAnnuaire.erreurImplementionManquante();
+					utilisateur = null;
+					reponse = ProtocoleAnnuaire.erreurInterdit();
 				}
 			}
 			else
-			{
 				reponse = ProtocoleAnnuaire.erreurRequete();
-			}
 		}
-		else if(ProtocoleAnnuaire.isRequeteConsulter(requete))
+		else if (ProtocoleAnnuaire.isRequeteConsulter(requete))
 		{
-			if(ProtocoleAnnuaire.validerRequeteConsulterProfils(requete))
+			if (ProtocoleAnnuaire.validerRequeteConsulterProfils(requete))
 			{
-				// TODO profil alleges ?
-				reponse = ProtocoleAnnuaire.erreurImplementionManquante();
+				// TODO verifier que array to string fonctionne !
+				System.err.println(annuaire.getArrayTousUtilisateurs().toString());
+				// TODO profil alleges ? gestion permissions ? ...
+				reponse = ProtocoleAnnuaire.ok(new JSONObject(annuaire.getArrayTousUtilisateurs().toString()).toString());
 			}
-			else if(ProtocoleAnnuaire.validerRequeteConsulterProfil(requete))
+			else if (ProtocoleAnnuaire.validerRequeteConsulterProfil(requete))
 			{
-				// TODO details profil
-				reponse = ProtocoleAnnuaire.erreurImplementionManquante();
+				// TODO remplacer ça par fonction dans ProtocoleAnnuaire :
+				String courriel = ControlleurProtocole.requeteURI(requete).replace("/profils/", "");
+				
+				if (annuaire.existeUtilisateur(courriel))
+				{
+					Utilisateur temp = annuaire.getUtilisateur(courriel);
+					// TODO gestion permissions !
+					reponse = ProtocoleAnnuaire.ok(temp.toString());
+				}
+				else
+					reponse = ProtocoleAnnuaire.erreurRequete();
 			}
 			else
-			{
 				reponse = ProtocoleAnnuaire.erreurRequete();
-			}
 		}
-		else if(ProtocoleAnnuaire.isRequeteInscrire(requete))
+		else if (ProtocoleAnnuaire.isRequeteInscrire(requete))
 		{
-			if(ProtocoleAnnuaire.validerRequeteInscrire(requete))
+			if (ProtocoleAnnuaire.validerRequeteInscrire(requete))
 			{
-				// TODO inscription
-				reponse = ProtocoleAnnuaire.erreurImplementionManquante();
+				Utilisateur u = new Utilisateur();
+				u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
+				
+				if(annuaire.existeUtilisateur(u.getCourriel()) || utilisateur != null)
+					reponse = ProtocoleAnnuaire.erreurInterdit();
+				else
+				{
+					annuaire.ajoutUtilisateur(utilisateur = u);
+					reponse = ProtocoleAnnuaire.ok(utilisateur.toString());
+				}
 			}
 			else
-			{
 				reponse = ProtocoleAnnuaire.erreurRequete();
-			}
 		}
-		else if(ProtocoleAnnuaire.isRequeteModifier(requete))
+		else if (ProtocoleAnnuaire.isRequeteModifier(requete))
 		{
-			if(utilisateur == null)
-			{
+			if (utilisateur == null)
 				reponse = ProtocoleAnnuaire.erreurInterdit();
-			}
-			else if(ProtocoleAnnuaire.validerRequeteModifier(requete))
+			else if (ProtocoleAnnuaire.validerRequeteModifier(requete))
 			{
-				// TODO modification profil
-				reponse = ProtocoleAnnuaire.erreurImplementionManquante();
+				Utilisateur u = new Utilisateur();
+				u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
+				
+				if (annuaire.existeUtilisateur(u.getCourriel()))
+				{
+					Utilisateur temp = annuaire.getUtilisateur(u.getCourriel());
+					
+					if ( ( utilisateur.getPrivilege().equals("utilisateur") 
+							&& temp.getCourriel().equals(utilisateur.getCourriel())
+							&& temp.getMotDePasse().equals(utilisateur.getMotDePasse()) )
+						|| utilisateur.getPrivilege().equals("administrateur") )
+					{
+						if (utilisateur.getCourriel().equals(u.getCourriel()))
+							utilisateur = u;
+						annuaire.ajoutUtilisateur(u);
+						reponse = ProtocoleAnnuaire.ok(u.toString());
+					}
+					else
+						reponse = ProtocoleAnnuaire.erreurInterdit();
+				}
+				else
+					reponse = ProtocoleAnnuaire.erreurRequete();
 			}
 			else
-			{
 				reponse = ProtocoleAnnuaire.erreurRequete();
-			}
 		}
-		else if(ProtocoleAnnuaire.isRequeteSuppression(requete))
+		else if (ProtocoleAnnuaire.isRequeteSuppression(requete))
 		{
-			if(utilisateur == null)
-			{
+			if (utilisateur == null)
 				reponse = ProtocoleAnnuaire.erreurInterdit();
-			}
-			else if(ProtocoleAnnuaire.validerRequeteSuppression(requete))
+			else if (ProtocoleAnnuaire.validerRequeteSuppression(requete))
 			{
-				// TODO suppression profil
-				reponse = ProtocoleAnnuaire.erreurImplementionManquante();
+				// TODO remplacer ca pars fonction dans ProtocoleAnnuaire :
+				String courriel = ControlleurProtocole.requeteURI(requete).replace("/profils/", "");
+				
+				if (annuaire.existeUtilisateur(courriel))
+				{
+					if (utilisateur.getCourriel().equals(courriel))
+					{
+						annuaire.suppresionUtilisateur(courriel);
+						utilisateur = null;
+						reponse = ProtocoleAnnuaire.erreurDeconnexion();
+					}
+					else if (utilisateur.getPrivilege().equals("administrateur"))
+					{
+						annuaire.suppresionUtilisateur(courriel);
+						reponse = ProtocoleAnnuaire.ok();
+					}
+					else
+						reponse = ProtocoleAnnuaire.erreurInterdit();
+				}
+				else
+					reponse = ProtocoleAnnuaire.erreurRequete();
 			}
 			else
-			{
 				reponse = ProtocoleAnnuaire.erreurRequete();
-			}
 		}
 		else
-		{
 			reponse = ProtocoleAnnuaire.erreurRequete();
-		}
 		return reponse;
 	}
 
 	@Override
 	public String traiterReponse(String reponse)
 	{
-		// TODO
+		if(ProtocoleAnnuaire.isOk(reponse))
+			return ProtocoleAnnuaire.extraireDonnees(reponse);
 		return null;
 	}
 }

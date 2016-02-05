@@ -70,11 +70,11 @@ public class Annuaire
 	}
 	
 	/**
-	 * @param c
+	 * @param courriel
 	 */
-	public void suppresionUtilisateur(String c)
+	public void suppresionUtilisateur(String courriel)
 	{
-		annuaire.remove(c);
+		annuaire.remove(courriel);
 	}
 	
 	public void suppresionUtilisateur(Utilisateur u)

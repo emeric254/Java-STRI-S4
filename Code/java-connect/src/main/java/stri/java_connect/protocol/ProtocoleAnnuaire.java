@@ -5,7 +5,6 @@ package stri.java_connect.protocol;
 
 import org.json.JSONObject;
 
-import stri.java_connect.server.ControlleurProtocole;
 import stri.java_connect.utils.CourrielValidateur;
 import stri.java_connect.utils.JSONValidateur;
 import stri.java_connect.utils.MD5Hasher;
@@ -231,6 +230,15 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
+	 * @return
+	 */
+	public static String ok()
+	{
+		return "{\"code\":0,\"data\":\"\"}";
+	}
+	
+
+	/**
 	 * @param donnees
 	 * @return
 	 */
@@ -334,7 +342,7 @@ public abstract class ProtocoleAnnuaire
 	 * @param reponse
 	 * @return
 	 */
-	public static boolean valideDonees(String reponse)
+	public static boolean valideDonnees(String reponse)
 	{
 		return (JSONValidateur.valider(new JSONObject(reponse).getString("data")));
 	}
@@ -343,7 +351,7 @@ public abstract class ProtocoleAnnuaire
 	 * @param reponse
 	 * @return
 	 */
-	public static String extraireDonees(String reponse)
+	public static String extraireDonnees(String reponse)
 	{
 		return new JSONObject(reponse).getString("data");
 	}

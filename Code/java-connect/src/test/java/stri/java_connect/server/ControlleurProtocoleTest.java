@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import stri.java_connect.protocol.ControlleurProtocole;
+
 public class ControlleurProtocoleTest
 {
 

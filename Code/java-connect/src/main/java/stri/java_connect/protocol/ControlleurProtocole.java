@@ -1,7 +1,7 @@
 /**
  * 
  */
-package stri.java_connect.server;
+package stri.java_connect.protocol;
 
 import org.json.JSONObject;
 

@@ -7,6 +7,8 @@ package stri.java_connect.server;
 import java.io.*;
 import java.net.*;
 
+import stri.java_connect.protocol.ControlleurProtocole;
+
 /**
  * @author emeric
  *
