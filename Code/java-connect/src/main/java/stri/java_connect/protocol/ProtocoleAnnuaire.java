@@ -3,6 +3,8 @@
  */
 package stri.java_connect.protocol;
 
+import org.json.JSONObject;
+
 import stri.java_connect.server.ControlleurProtocole;
 import stri.java_connect.utils.CourrielValidateur;
 import stri.java_connect.utils.JSONValidateur;
@@ -130,7 +132,7 @@ public abstract class ProtocoleAnnuaire
 	}
 
 	//-------------------------------------------------------------------------
-	// testeur de validite du corps requete
+	// valideurs de corps requete
 	
 	/**
 	 * @param requete
@@ -209,7 +211,7 @@ public abstract class ProtocoleAnnuaire
 	}
 
 	//-------------------------------------------------------------------------
-	// createur de reponses
+	// createurs de reponses
 
 	/**
 	 * @return
@@ -229,6 +231,7 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
+	 * @param donnees
 	 * @return
 	 */
 	public static String ok(String donnees)
@@ -261,5 +264,87 @@ public abstract class ProtocoleAnnuaire
 	public static String erreurDeconnexion()
 	{
 		return "{\"code\":3,\"data\":\"connexion perdue\"}";
+	}
+
+	//-------------------------------------------------------------------------
+	// testeurs de reponses
+
+	/**
+	 * @param reponse
+	 * @return
+	 */
+	public static boolean isErreurImplementionManquante(String reponse)
+	{
+		return (new JSONObject(reponse).getInt("code") == -2);
+	}
+	
+	/**
+	 * @param reponse
+	 * @return
+	 */
+	public static boolean isErreurServeur(String reponse)
+	{
+		return (new JSONObject(reponse).getInt("code") == -1);
+	}
+	
+
+	/**
+	 * @param reponse
+	 * @return
+	 */
+	public static boolean isOk(String reponse)
+	{
+		return (new JSONObject(reponse).getInt("code") == 0);
+	}
+	
+
+	/**
+	 * @param reponse
+	 * @return
+	 */
+	public static boolean isErreurRequete(String reponse)
+	{
+		return (new JSONObject(reponse).getInt("code") == 1);
+	}
+	
+
+	/**
+	 * @param reponse
+	 * @return
+	 */
+	public static boolean isErreurInterdit(String reponse)
+	{
+		return (new JSONObject(reponse).getInt("code") == 2);
+	}
+	
+
+	/**
+	 * @param reponse
+	 * @return
+	 */
+	public static boolean isErreurDeconnexion(String reponse)
+	{
+		return (new JSONObject(reponse).getInt("code") == 3);
+	}
+
+	//-------------------------------------------------------------------------
+	// reponse ok - donnees
+
+	/**
+	 * @param reponse
+	 * @return
+	 */
+	public static boolean valideDonees(String reponse)
+	{
+		return (JSONValidateur.valider(new JSONObject(reponse).getString("data")));
+	}
+
+	/**
+	 * @param reponse
+	 * @return
+	 */
+	public static String extraireDonees(String reponse)
+	{
+		return new JSONObject(reponse).getString("data");
 	}
 }

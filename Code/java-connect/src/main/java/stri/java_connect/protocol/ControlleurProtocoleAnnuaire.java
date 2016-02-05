@@ -22,7 +22,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 	 */
 	public ControlleurProtocoleAnnuaire(Annuaire a)
 	{
-		// TODO
+		// TODO completer ici
 		connecte = false;
 		utilisateur = null;
 		annuaire = a;
