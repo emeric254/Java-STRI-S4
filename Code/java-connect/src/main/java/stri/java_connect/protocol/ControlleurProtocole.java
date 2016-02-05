@@ -32,7 +32,7 @@ public abstract class ControlleurProtocole
      */
     public static String requeteURI (String requete)
     {
-    	return requete.trim().split("\n",2)[0].split(" ")[1];
+    	return requete.split("\n")[0].replace(requeteMethode(requete), "").trim();
     }
     
     /**
@@ -54,10 +54,10 @@ public abstract class ControlleurProtocole
      * @param reponse
      * @return
      */
-    public static String reponseCode(String reponse)
+    public static int reponseCode(String reponse)
     {
     	JSONObject js = new JSONObject(reponse);
-    	return "" + js.getInt("code");
+    	return js.getInt("code");
     }
     
     /**

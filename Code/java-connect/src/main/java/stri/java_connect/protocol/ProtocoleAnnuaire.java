@@ -3,8 +3,6 @@
  */
 package stri.java_connect.protocol;
 
-import org.json.JSONObject;
-
 import stri.java_connect.utils.CourrielValidateur;
 import stri.java_connect.utils.JSONValidateur;
 import stri.java_connect.utils.MD5Hasher;
@@ -217,7 +215,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String erreurImplementionManquante()
 	{
-		return "{\"code\":-2,\"data\":\"implementation manquante\"}";
+		return "{\"code\" : -2 , \"data\" : \"implementation manquante\"}";
 	}
 	
 	/**
@@ -225,7 +223,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String erreurServeur()
 	{
-		return "{\"code\":-1,\"data\":\"erreur du serveur\"}";
+		return "{\"code\" : -1 , \"data\" : \"erreur du serveur\"}";
 	}
 	
 
@@ -234,7 +232,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String ok()
 	{
-		return "{\"code\":0,\"data\":\"\"}";
+		return "{\"code\" : 0 , \"data\" : \"\"}";
 	}
 	
 
@@ -244,7 +242,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String ok(String donnees)
 	{
-		return "{\"code\":0,\"data\":\"" + donnees + "\"}";
+		return "{\"code\" : 0 , \"data\" : \"" + donnees + "\"}";
 	}
 	
 
@@ -253,7 +251,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String erreurRequete()
 	{
-		return "{\"code\":1,\"data\":\"mauvaise requete\"}";
+		return "{\"code\" : 1 , \"data\" : \"mauvaise requete\"}";
 	}
 	
 
@@ -262,7 +260,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String erreurInterdit()
 	{
-		return "{\"code\":2,\"data\":\"interdit\"}";
+		return "{\"code\" : 2 , \"data\" : \"interdit\"}";
 	}
 	
 
@@ -271,7 +269,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String erreurDeconnexion()
 	{
-		return "{\"code\":3,\"data\":\"connexion perdue\"}";
+		return "{\"code\" : 3 , \"data\" : \"connexion perdue\"}";
 	}
 
 	//-------------------------------------------------------------------------
@@ -283,7 +281,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isErreurImplementionManquante(String reponse)
 	{
-		return (new JSONObject(reponse).getInt("code") == -2);
+		return (ControlleurProtocole.reponseCode(reponse) == -2);
 	}
 	
 	/**
@@ -292,7 +290,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isErreurServeur(String reponse)
 	{
-		return (new JSONObject(reponse).getInt("code") == -1);
+		return (ControlleurProtocole.reponseCode(reponse) == -1);
 	}
 	
 
@@ -302,7 +300,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isOk(String reponse)
 	{
-		return (new JSONObject(reponse).getInt("code") == 0);
+		return (ControlleurProtocole.reponseCode(reponse) == 0);
 	}
 	
 
@@ -312,7 +310,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isErreurRequete(String reponse)
 	{
-		return (new JSONObject(reponse).getInt("code") == 1);
+		return (ControlleurProtocole.reponseCode(reponse) == 1);
 	}
 	
 
@@ -322,7 +320,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isErreurInterdit(String reponse)
 	{
-		return (new JSONObject(reponse).getInt("code") == 2);
+		return (ControlleurProtocole.reponseCode(reponse) == 2);
 	}
 	
 
@@ -332,7 +330,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isErreurDeconnexion(String reponse)
 	{
-		return (new JSONObject(reponse).getInt("code") == 3);
+		return (ControlleurProtocole.reponseCode(reponse) == 3);
 	}
 
 	//-------------------------------------------------------------------------
@@ -344,7 +342,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean valideDonnees(String reponse)
 	{
-		return (JSONValidateur.valider(new JSONObject(reponse).getString("data")));
+		return JSONValidateur.valider(ControlleurProtocole.reponseDonnees(reponse));
 	}
 
 	/**
@@ -353,6 +351,6 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String extraireDonnees(String reponse)
 	{
-		return new JSONObject(reponse).getString("data");
+		return ControlleurProtocole.reponseDonnees(reponse);
 	}
 }
