@@ -15,7 +15,6 @@ public class ServeurAnnuaire
 	private final static int portDefaut = 12345;
 	private int port;
 	private ControlleurProtocoleAnnuaire controlleur;
-	private Annuaire annuaire;
 	
 	/**
 	 * 
@@ -48,8 +47,7 @@ public class ServeurAnnuaire
 	public ServeurAnnuaire(int pPort, Annuaire pAnnuaire)
 	{
 		port = pPort;
-		annuaire = pAnnuaire;
-		controlleur = new ControlleurProtocoleAnnuaire(annuaire);
+		controlleur = new ControlleurProtocoleAnnuaire(pAnnuaire);
 	}
 
 	public void start()

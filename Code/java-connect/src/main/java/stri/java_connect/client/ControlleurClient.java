@@ -15,7 +15,6 @@ import stri.java_connect.protocol.ProtocoleAnnuaire;
 public class ControlleurClient
 {
 	private final static int portDefaut = 12345;
-	Client client;
 	
 	/**
 	 * 
@@ -30,7 +29,7 @@ public class ControlleurClient
 	 */
 	public ControlleurClient(int pPort)
 	{
-		client = new Client(pPort);
+		Client client = new Client(pPort);
 		//
 		// TODO ici ihm etc ...
 		try

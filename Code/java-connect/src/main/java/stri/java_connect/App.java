@@ -18,7 +18,7 @@ public class App
         Annuaire test = new Annuaire();
         test.ajoutUtilisateur(new Utilisateur("test","mdp"));
         //
-        new ServeurAnnuaire(test).start();
+        //new ServeurAnnuaire(test).start();
         //s.startBlocking();
         new ControlleurClient();
         //
