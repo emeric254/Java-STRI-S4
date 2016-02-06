@@ -15,7 +15,7 @@ public class Utilisateur
   //
   // Fields
   //
-
+	private final static String glt = "\"";
   private String motDePasse;
   
   private String nom;
@@ -276,24 +276,24 @@ public class Utilisateur
   {
 	  String chaine = "{";
 
-	  chaine += "\"motdepasse\": \"" + motDePasse + "\",";
+	  chaine += glt + "motdepasse" + glt + " : " + glt + motDePasse + glt + ",";
 	  
-	  chaine += "\"nom\": \"" + nom + "\",";
+	  chaine += glt + "nom" + glt + " : " + glt + nom + glt + ",";
 	  
-	  chaine += "\"datediplome\": \"" + dateDiplome + "\",";
+	  chaine += glt + "datediplome" + glt + " : " + glt + dateDiplome + glt + ",";
 	  
-	  chaine += "\"telephone\": \"" + telephone + "\",";
+	  chaine += glt + "telephone" + glt + " : " + glt + telephone + glt + ",";
 	  
-	  chaine += "\"courriel\": \"" + courriel + "\",";
+	  chaine += glt + "courriel" + glt + " : " + glt + courriel + glt + ",";
 	  
-	  chaine += "\"permissionlecture\":" + permissionLecture + ",";
+	  chaine += glt + "permissionlecture" + glt + " : " + permissionLecture + ",";
 	  
-	  chaine += "\"privilege\": \"" + privilege + "\",";
+	  chaine += glt + "privilege" + glt + " : " + glt + privilege + glt + ",";
 	  
-	  chaine += "\"competences\": [";
+	  chaine += glt + "competences" + glt + " : [";
 	  for(String temp : Competences)
 	  {
-		  chaine += "\"" + temp + "\",";
+		  chaine += glt + temp + glt + ",";
 	  }
 	  if(Competences.size() > 0)
 		  chaine = chaine.substring(0, chaine.length()-1);
