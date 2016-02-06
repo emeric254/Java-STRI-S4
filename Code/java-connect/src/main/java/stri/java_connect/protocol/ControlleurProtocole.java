@@ -41,7 +41,7 @@ public abstract class ControlleurProtocole
      */
     public static String requeteCorps (String requete)
     {
-        return (requete.contains("\n"))?requete.trim().split("\n",2)[1]:"";
+        return requete.contains("\n") ? requete.trim().split("\n",2)[1] : "";
     }
 
     /**

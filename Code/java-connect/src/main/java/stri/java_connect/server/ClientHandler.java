@@ -101,14 +101,21 @@ public class ClientHandler extends Thread
     {
         try
         {
-            while(!fluxEntreeSocket.ready());
+            while(!fluxEntreeSocket.ready())
+        	{
+            	// attente ...
+        	}
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+        
         while(!fini)
+        {
             communiquer();
+        }
+        
         fermerService();
     }
 }

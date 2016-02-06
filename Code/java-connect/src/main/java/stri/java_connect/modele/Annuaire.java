@@ -6,7 +6,6 @@ package stri.java_connect.modele;
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.HashMap;
-import stri.java_connect.modele.Utilisateur;
 
 /**
  * @author emeric
