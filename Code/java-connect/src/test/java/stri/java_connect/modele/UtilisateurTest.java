@@ -10,6 +10,8 @@ import stri.java_connect.utils.JSONValidateur;
 
 public class UtilisateurTest
 {
+	private final static String courriel = "courriel";
+	private final static String mdp = "mdp";
 
 	@Test
 	public void testUtilisateur()
@@ -20,46 +22,46 @@ public class UtilisateurTest
 	@Test
 	public void testUtilisateurStringString()
 	{
-		Utilisateur u = new Utilisateur("courriel","mdp");
+		Utilisateur u = new Utilisateur(courriel,mdp);
 		assertNotNull(u);
-		assertEquals("courriel", u.getCourriel() );
-		assertEquals("mdp", u.getMotDePasse() );
+		assertEquals(courriel, u.getCourriel() );
+		assertEquals(mdp, u.getMotDePasse() );
 	}
 
 	@Test
 	public void testUtilisateurStringStringString()
 	{
-		Utilisateur u = new Utilisateur("nom","telephone","courriel");
+		Utilisateur u = new Utilisateur("nom","telephone",courriel);
 		assertNotNull(u);
 		assertEquals("nom", u.getNom() );
 		assertEquals("telephone", u.getTelephone() );
-		assertEquals("courriel", u.getCourriel() );
+		assertEquals(courriel, u.getCourriel() );
 	}
 
 	@Test
 	public void testSetMotDePasse()
 	{
 		Utilisateur u = new Utilisateur();
-		u.setMotDePasse("test");
-		assertEquals("test", u.getMotDePasse() );
+		u.setMotDePasse(mdp);
+		assertEquals(mdp, u.getMotDePasse() );
 		
-		u = new Utilisateur("id","mdp");
-		assertEquals("mdp", u.getMotDePasse() );
+		u = new Utilisateur(courriel,mdp);
+		assertEquals(mdp, u.getMotDePasse() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
-		u.setMotDePasse("test");
-		assertEquals("test", u.getMotDePasse() );
+		u = new Utilisateur("nom","telephone",courriel);
+		u.setMotDePasse(mdp);
+		assertEquals(mdp, u.getMotDePasse() );
 	}
 
 	@Test
 	public void testGetMotDePasse()
 	{
-		Utilisateur u = new Utilisateur("id","mdp");
-		assertEquals("mdp", u.getMotDePasse() );
+		Utilisateur u = new Utilisateur(courriel,mdp);
+		assertEquals(mdp, u.getMotDePasse() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
-		u.setMotDePasse("test");
-		assertEquals("test", u.getMotDePasse() );
+		u = new Utilisateur("nom","telephone",courriel);
+		u.setMotDePasse(mdp);
+		assertEquals(mdp, u.getMotDePasse() );
 	}
 
 	@Test
@@ -69,11 +71,11 @@ public class UtilisateurTest
 		u.setNom("test");
 		assertEquals("test", u.getNom() );
 		
-		u = new Utilisateur("id","mdp");
+		u = new Utilisateur(courriel,mdp);
 		u.setNom("test");
 		assertEquals("test", u.getNom() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		assertEquals("nom", u.getNom() );
 	}
 
@@ -83,12 +85,12 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		u.setNom("test");
 		assertEquals("test", u.getNom() );
-		
-		u = new Utilisateur("id","mdp");
+
+		u = new Utilisateur(courriel,mdp);
 		u.setNom("test");
 		assertEquals("test", u.getNom() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		assertEquals("nom", u.getNom() );
 	}
 
@@ -98,12 +100,12 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		u.setDateDiplome((long) 123456789.0);
 		assertTrue((long)123456789.0 == u.getDateDiplome() );
-		
-		u = new Utilisateur("id","mdp");
+
+		u = new Utilisateur(courriel,mdp);
 		u.setDateDiplome((long) 123456789.0);
 		assertTrue((long)123456789.0 == u.getDateDiplome() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		u.setDateDiplome((long) 123456789.0);
 		assertTrue((long)123456789.0 == u.getDateDiplome() );
 	}
@@ -117,12 +119,12 @@ public class UtilisateurTest
 		assertEquals(maintenant, u.getDateDiplomeAsDate() );
 
 		maintenant = new Date();
-		u = new Utilisateur("id","mdp");
+		u = new Utilisateur(courriel,mdp);
 		u.setDateDiplomeFromDate(maintenant);
 		assertEquals(maintenant, u.getDateDiplomeAsDate() );
 
 		maintenant = new Date();
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		u.setDateDiplomeFromDate(maintenant);
 		assertEquals(maintenant, u.getDateDiplomeAsDate() );
 	}
@@ -133,12 +135,12 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		u.setDateDiplome((long) 123456789.0);
 		assertTrue((long)123456789.0 == u.getDateDiplome() );
-		
-		u = new Utilisateur("id","mdp");
+
+		u = new Utilisateur(courriel,mdp);
 		u.setDateDiplome((long) 123456789.0);
 		assertTrue((long)123456789.0 == u.getDateDiplome() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		u.setDateDiplome((long) 123456789.0);
 		assertTrue((long)123456789.0 == u.getDateDiplome() );
 	}
@@ -152,12 +154,12 @@ public class UtilisateurTest
 		assertEquals(maintenant, u.getDateDiplomeAsDate() );
 
 		maintenant = new Date();
-		u = new Utilisateur("id","mdp");
+		u = new Utilisateur(courriel,mdp);
 		u.setDateDiplomeFromDate(maintenant);
 		assertEquals(maintenant, u.getDateDiplomeAsDate() );
 
 		maintenant = new Date();
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		u.setDateDiplomeFromDate(maintenant);
 		assertEquals(maintenant, u.getDateDiplomeAsDate() );
 	}
@@ -168,12 +170,12 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		u.setTelephone("telephone");
 		assertEquals("telephone", u.getTelephone() );
-		
-		u = new Utilisateur("id","mdp");
+
+		u = new Utilisateur(courriel,mdp);
 		u.setTelephone("telephone");
 		assertEquals("telephone", u.getTelephone() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		assertEquals("telephone", u.getTelephone() );
 	}
 
@@ -183,12 +185,12 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		u.setTelephone("telephone");
 		assertEquals("telephone", u.getTelephone() );
-		
-		u = new Utilisateur("id","mdp");
+
+		u = new Utilisateur(courriel,mdp);
 		u.setTelephone("telephone");
 		assertEquals("telephone", u.getTelephone() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		assertEquals("telephone", u.getTelephone() );
 	}
 
@@ -198,12 +200,12 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		u.setCourriel("courriel");
 		assertEquals("courriel", u.getCourriel() );
-		
-		u = new Utilisateur("id","mdp");
+
+		u = new Utilisateur(courriel,mdp);
 		u.setCourriel("courriel");
 		assertEquals("courriel", u.getCourriel() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		assertEquals("courriel", u.getCourriel() );
 	}
 
@@ -213,12 +215,12 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		u.setCourriel("courriel");
 		assertEquals("courriel", u.getCourriel() );
-		
-		u = new Utilisateur("id","mdp");
+
+		u = new Utilisateur(courriel,mdp);
 		u.setCourriel("courriel");
 		assertEquals("courriel", u.getCourriel() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		assertEquals("courriel", u.getCourriel() );
 	}
 
@@ -244,12 +246,12 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		u.setPrivilege("utilisateur");
 		assertEquals("utilisateur", u.getPrivilege() );
-		
-		u = new Utilisateur("id","mdp");
+
+		u = new Utilisateur(courriel,mdp);
 		u.setPrivilege("utilisateur");
 		assertEquals("utilisateur", u.getPrivilege() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		u.setPrivilege("utilisateur");
 		assertEquals("utilisateur", u.getPrivilege() );
 	}
@@ -260,12 +262,12 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		u.setPrivilege("utilisateur");
 		assertEquals("utilisateur", u.getPrivilege() );
-		
-		u = new Utilisateur("id","mdp");
+
+		u = new Utilisateur(courriel,mdp);
 		u.setPrivilege("utilisateur");
 		assertEquals("utilisateur", u.getPrivilege() );
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		u.setPrivilege("utilisateur");
 		assertEquals("utilisateur", u.getPrivilege() );
 	}
@@ -315,12 +317,12 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		assertNotNull(u.toString());
 		assertTrue(JSONValidateur.valider(u.toString()));
-		
-		u = new Utilisateur("id","mdp");
+
+		u = new Utilisateur(courriel,mdp);
 		assertNotNull(u.toString());
 		assertTrue(JSONValidateur.valider(u.toString()));
 		
-		u = new Utilisateur("nom","telephone","courriel");
+		u = new Utilisateur("nom","telephone",courriel);
 		assertNotNull(u.toString());
 		assertTrue(JSONValidateur.valider(u.toString()));
 	}
@@ -328,9 +330,9 @@ public class UtilisateurTest
 	@Test
 	public void testFromJSONString()
 	{
-		Utilisateur u = new Utilisateur("nom","telephone","courriel");
+		Utilisateur u = new Utilisateur("nom","telephone",courriel);
 		u.setDateDiplomeFromDate(new Date());
-		u.setMotDePasse("mdp");
+		u.setMotDePasse(mdp);
 		u.setPermissionLecture("permissions");
 		u.setPrivilege("privileges");
 		ArrayDeque<String> competences = new ArrayDeque<String>();

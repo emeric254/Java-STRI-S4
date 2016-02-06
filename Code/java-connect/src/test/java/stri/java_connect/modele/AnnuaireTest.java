@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 public class AnnuaireTest
 {
+	private final static String courriel = "courriel";
+	private final static String mdp = "mdp";
 
 	@Test
 	public void testAnnuaire()
@@ -29,8 +31,8 @@ public class AnnuaireTest
 		HashMap<String, Utilisateur> h = new HashMap<String, Utilisateur>();
 		Annuaire a = new Annuaire(h);
 		assertNotNull(a);
-		h.put("test", new Utilisateur());
-		h.put("test2", new Utilisateur());
+		h.put(courriel, new Utilisateur());
+		h.put("email", new Utilisateur());
 		assertEquals(h.values(), a.getCollectionTousUtilisateurs());
 	}
 
@@ -51,8 +53,8 @@ public class AnnuaireTest
 	{
 		Annuaire a = new Annuaire();
 		assertNotNull(a);
-		a.ajoutUtilisateur(new Utilisateur("courriel","mdp"));
-		assertTrue(a.existeUtilisateur("courriel"));
+		a.ajoutUtilisateur(new Utilisateur(courriel,mdp));
+		assertTrue(a.existeUtilisateur(courriel));
 	}
 
 	@Test
@@ -60,8 +62,8 @@ public class AnnuaireTest
 	{
 		Annuaire a = new Annuaire();
 		assertNotNull(a);
-		a.ajoutUtilisateur(new Utilisateur("courriel","mdp"));
-		assertTrue(a.existeUtilisateur("courriel"));
+		a.ajoutUtilisateur(new Utilisateur(courriel,mdp));
+		assertTrue(a.existeUtilisateur(courriel));
 		assertFalse(a.getCollectionTousUtilisateurs().size() == 0);
 	}
 
@@ -70,10 +72,10 @@ public class AnnuaireTest
 	{
 		Annuaire a = new Annuaire();
 		assertNotNull(a);
-		a.ajoutUtilisateur(new Utilisateur("courriel","mdp"));
-		a.ajoutUtilisateur(new Utilisateur("courriel2","mdp"));
-		a.suppresionUtilisateur("courriel");
-		assertFalse(a.existeUtilisateur("courriel"));
+		a.ajoutUtilisateur(new Utilisateur(courriel,mdp));
+		a.ajoutUtilisateur(new Utilisateur("other",mdp));
+		a.suppresionUtilisateur(courriel);
+		assertFalse(a.existeUtilisateur(courriel));
 		assertTrue(a.getCollectionTousUtilisateurs().size() == 1);
 	}
 
@@ -82,10 +84,10 @@ public class AnnuaireTest
 	{
 		Annuaire a = new Annuaire();
 		assertNotNull(a);
-		Utilisateur u = new Utilisateur("courriel","mdp");
+		Utilisateur u = new Utilisateur(courriel,mdp);
 		a.ajoutUtilisateur(u);
 		a.suppresionUtilisateur(u);
-		assertFalse(a.existeUtilisateur("courriel"));
+		assertFalse(a.existeUtilisateur(courriel));
 		assertTrue(a.getCollectionTousUtilisateurs().size() == 0);
 	}
 
@@ -94,7 +96,7 @@ public class AnnuaireTest
 	{
 		Annuaire a = new Annuaire();
 		assertNotNull(a);
-		Utilisateur u = new Utilisateur("courriel","mdp");
+		Utilisateur u = new Utilisateur(courriel,mdp);
 		a.ajoutUtilisateur(u);
 		assertEquals(u, a.getUtilisateur(u.getCourriel()));
 	}
@@ -105,8 +107,8 @@ public class AnnuaireTest
 		HashMap<String, Utilisateur> h = new HashMap<String, Utilisateur>();
 		Annuaire a = new Annuaire(h);
 		assertNotNull(a);
-		h.put("test", new Utilisateur());
-		h.put("test2", new Utilisateur());
+		h.put(courriel, new Utilisateur());
+		h.put("other", new Utilisateur());
 		assertEquals(h.values(), a.getCollectionTousUtilisateurs());
 	}
 

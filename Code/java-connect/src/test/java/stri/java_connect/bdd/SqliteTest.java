@@ -14,7 +14,7 @@ public class SqliteTest
 	private static Sqlite testeur;
 	
 	@Before
-    public void setup()
+    public void setUp()
     {
         try
         {
@@ -27,7 +27,7 @@ public class SqliteTest
     } 
     
     @After
-    public void reset()
+    public void tearDown()
     {
     	testeur.reset();
     	testeur.close();
