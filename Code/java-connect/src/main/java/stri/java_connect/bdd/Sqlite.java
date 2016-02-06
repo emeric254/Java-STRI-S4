@@ -40,7 +40,7 @@ public class Sqlite
 	/**
 	 * 
 	 */
-	public void Init()
+	public void init()
 	{
 		if(executerMaj("drop table if exists person") && executerMaj("create table person (id integer, name string)"))
 			System.out.println("partie Tables reussie");
@@ -68,16 +68,16 @@ public class Sqlite
 	 */
 	public void close()
 	{
-		try
+		if(connexion != null)
 		{
-			if(connexion != null)
+			try
 			{
 				connexion.close();
 			}
-		}
-		catch(SQLException e)
-		{
-			System.err.println(e.getMessage());
+			catch(SQLException e)
+			{
+				System.err.println(e.getMessage());
+			}
 		}
 	}
 	

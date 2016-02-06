@@ -80,7 +80,6 @@ public class SqliteTest
 		{
 			System.out.println( " > " + (i+1) );
 			assertTrue("renvoie ok meme si l'id existe deja", testeur.executerMaj("insert into person values(1, 'test')"));
-			
 		}
 	}
 
@@ -92,7 +91,6 @@ public class SqliteTest
 		{
 			System.out.println( " > " + (i+1) );
 			assertTrue("renvoie ok meme si l'id n'y est plus", testeur.executerMaj("delete from person where id=1"));
-			
 		}
 	}
 	
