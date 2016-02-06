@@ -18,8 +18,8 @@ public class App
         Annuaire test = new Annuaire();
         test.ajoutUtilisateur(new Utilisateur("test","mdp"));
         //
-        //new ServeurAnnuaire(test).start();
-        //s.startBlocking();
+        new ServeurAnnuaire(test).start();
+        //
         new ControlleurClient();
         //
         System.out.println("END");
