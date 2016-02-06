@@ -12,18 +12,10 @@ public class Sqlite
 	/**
 	 * @param dbFileName
 	 */
-	public Sqlite(String dbFileName)
+	public Sqlite(String dbFileName) throws ClassNotFoundException
 	{
 		nomBDD = dbFileName;
-		try
-		{
-			Class.forName("org.sqlite.JDBC");
-		}
-		catch (ClassNotFoundException e1)
-		{
-			e1.printStackTrace();
-			System.exit(0);
-		}
+		Class.forName("org.sqlite.JDBC");
 		dbConnect();
 	}
 	

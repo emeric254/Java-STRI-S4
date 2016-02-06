@@ -15,8 +15,8 @@ import stri.java_connect.protocol.ControlleurProtocole;
 public class Serveur
 {
     private int port;
-    ControlleurProtocole protocolServer;
-    ServerSocket socketEcoute;
+    private ControlleurProtocole protocolServer;
+    private ServerSocket socketEcoute;
 
     /**
      * @param pProtocolServer

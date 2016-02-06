@@ -13,10 +13,10 @@ import java.net.*;
 public class Client
 {
     private int port;
-    String reponse;
-    Socket socketService;
-    PrintStream fluxSortieSocket;
-    BufferedReader fluxEntreeSocket;
+    //private String reponse;
+    private Socket socketService;
+    private PrintStream fluxSortieSocket;
+    private BufferedReader fluxEntreeSocket;
 
     /**
      * @param pPort

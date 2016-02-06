@@ -14,7 +14,13 @@ public class SqliteTest
     public static void setup()
     {
     	System.out.println("\ndebut test");
-        testeur = new Sqlite("JUnitTest.db");
+        try
+        {
+			testeur = new Sqlite("JUnitTest.db");
+		} catch (ClassNotFoundException e)
+        {
+			fail("can't load sqlite !");
+		}
     	testeur.reset();
     } 
     

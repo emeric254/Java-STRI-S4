@@ -14,8 +14,8 @@ import stri.java_connect.modele.Utilisateur;
  */
 public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 {
-	Utilisateur utilisateur;
-	Annuaire annuaire;
+	private Utilisateur utilisateur;
+	private Annuaire annuaire;
 	
 	/**
 	 * 
