@@ -3,8 +3,6 @@
  */
 package stri.java_connect.protocol;
 
-import org.json.JSONObject;
-
 import stri.java_connect.modele.Annuaire;
 import stri.java_connect.modele.Utilisateur;
 
@@ -65,10 +63,8 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		{
 			if (ProtocoleAnnuaire.validerRequeteConsulterProfils(requete))
 			{
-				// TODO verifier que array to string fonctionne !
-				System.err.println(annuaire.getArrayTousUtilisateurs().toString());
 				// TODO profil alleges ? gestion permissions ? ...
-				reponse = ProtocoleAnnuaire.ok(new JSONObject(annuaire.getArrayTousUtilisateurs().toString()).toString());
+				reponse = ProtocoleAnnuaire.ok(annuaire.getArrayTousUtilisateurs().toString());
 			}
 			else if (ProtocoleAnnuaire.validerRequeteConsulterProfil(requete))
 			{

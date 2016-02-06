@@ -94,9 +94,6 @@ public class ClientHandler extends Thread
         }
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Thread#run()
-     */
     public void run()
     {
         try

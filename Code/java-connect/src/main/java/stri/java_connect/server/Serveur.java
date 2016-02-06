@@ -39,7 +39,7 @@ public class Serveur
 
         while(true)
         {
-            System.out.println("nouveau client");
+            System.out.println("attente nouveau client");
             try
             {
                 new ClientHandler(socketEcoute.accept(), protocolServer).start();

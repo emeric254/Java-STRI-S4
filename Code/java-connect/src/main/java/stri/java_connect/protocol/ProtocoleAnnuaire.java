@@ -248,7 +248,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String ok(String donnees)
 	{
-		return code + 0 + data + donnees + fin;
+		return code + 0 + ", \"data\" : " + donnees + " }";
 	}
 	
 
