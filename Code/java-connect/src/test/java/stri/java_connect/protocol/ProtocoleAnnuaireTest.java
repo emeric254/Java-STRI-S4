@@ -9,6 +9,9 @@ import stri.java_connect.utils.MD5Hasher;
 
 public class ProtocoleAnnuaireTest
 {
+	private final static String courriel = "test@test.test";
+	private final static String mdp = "motdepasse";
+	private final static String mockstr = "test";
 
 	@Test
 	public void testRequeteConsulterProfils()
@@ -21,7 +24,7 @@ public class ProtocoleAnnuaireTest
 	@Test
 	public void testRequeteConsulterProfil()
 	{
-		String requete = ProtocoleAnnuaire.requeteConsulterProfil("test@test.test");
+		String requete = ProtocoleAnnuaire.requeteConsulterProfil(courriel);
 		assertEquals("CONSULTER", ControlleurProtocole.requeteMethode(requete));
 		assertEquals("/profils/test@test.test", ControlleurProtocole.requeteURI(requete));
 	}
@@ -29,7 +32,7 @@ public class ProtocoleAnnuaireTest
 	@Test
 	public void testRequeteConnexion()
 	{
-		String requete = ProtocoleAnnuaire.requeteConnexion("test@test.test", "motdepasse");
+		String requete = ProtocoleAnnuaire.requeteConnexion(courriel, mdp);
 		assertEquals("CONNEXION", ControlleurProtocole.requeteMethode(requete));
 		assertEquals("test@test.test:motdepasse", ControlleurProtocole.requeteURI(requete));
 	}
@@ -37,9 +40,9 @@ public class ProtocoleAnnuaireTest
 	@Test
 	public void testRequeteConnexionHashMD5()
 	{
-		String requete = ProtocoleAnnuaire.requeteConnexionHashMD5("test@test.test", "motdepasse");
+		String requete = ProtocoleAnnuaire.requeteConnexionHashMD5(courriel, mdp);
 		assertEquals("CONNEXION", ControlleurProtocole.requeteMethode(requete));
-		assertEquals("test@test.test:MD5:"+MD5Hasher.hashString("motdepasse"), ControlleurProtocole.requeteURI(requete));
+		assertEquals("test@test.test:MD5:"+MD5Hasher.hashString(mdp), ControlleurProtocole.requeteURI(requete));
 	}
 
 	@Test
@@ -56,7 +59,7 @@ public class ProtocoleAnnuaireTest
 	public void testRequeteModifier()
 	{
 		String utilisateurJson = new Utilisateur().toString();
-		String requete = ProtocoleAnnuaire.requeteModifierProfil("test@test.test", utilisateurJson);
+		String requete = ProtocoleAnnuaire.requeteModifierProfil(courriel, utilisateurJson);
 		assertEquals("MODIFIER", ControlleurProtocole.requeteMethode(requete));
 		assertEquals("/profils/test@test.test", ControlleurProtocole.requeteURI(requete));
 		assertEquals(utilisateurJson, ControlleurProtocole.requeteCorps(requete));
@@ -65,7 +68,7 @@ public class ProtocoleAnnuaireTest
 	@Test
 	public void testRequeteSuppressionProfil()
 	{
-		String requete = ProtocoleAnnuaire.requeteSuppressionProfil("test@test.test");
+		String requete = ProtocoleAnnuaire.requeteSuppressionProfil(courriel);
 		assertEquals("SUPPRESSION", ControlleurProtocole.requeteMethode(requete));
 		assertEquals("/profils/test@test.test", ControlleurProtocole.requeteURI(requete));
 	}
@@ -74,10 +77,10 @@ public class ProtocoleAnnuaireTest
 	public void testIsRequeteConsulter()
 	{
 		assertFalse(ProtocoleAnnuaire.isRequeteConsulter(ProtocoleAnnuaire.requeteInscrire(new Utilisateur().toString())));
-		assertFalse(ProtocoleAnnuaire.isRequeteConsulter(ProtocoleAnnuaire.requeteConnexion("test@test.test","motdepasse")));
+		assertFalse(ProtocoleAnnuaire.isRequeteConsulter(ProtocoleAnnuaire.requeteConnexion(courriel,mdp)));
 		//
 		assertTrue(ProtocoleAnnuaire.isRequeteConsulter(ProtocoleAnnuaire.requeteConsulterProfils()));
-		assertTrue(ProtocoleAnnuaire.isRequeteConsulter(ProtocoleAnnuaire.requeteConsulterProfil("test@test.test")));
+		assertTrue(ProtocoleAnnuaire.isRequeteConsulter(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
 	}
 
 	@Test
@@ -85,17 +88,17 @@ public class ProtocoleAnnuaireTest
 	{
 		assertFalse(ProtocoleAnnuaire.isRequeteConnexion(ProtocoleAnnuaire.requeteInscrire(new Utilisateur().toString())));
 		assertFalse(ProtocoleAnnuaire.isRequeteConnexion(ProtocoleAnnuaire.requeteConsulterProfils()));
-		assertFalse(ProtocoleAnnuaire.isRequeteConnexion(ProtocoleAnnuaire.requeteConsulterProfil("test@test.test")));
+		assertFalse(ProtocoleAnnuaire.isRequeteConnexion(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
 		//
-		assertTrue(ProtocoleAnnuaire.isRequeteConnexion(ProtocoleAnnuaire.requeteConnexion("test@test.test","motdepasse")));
+		assertTrue(ProtocoleAnnuaire.isRequeteConnexion(ProtocoleAnnuaire.requeteConnexion(courriel,mdp)));
 	}
 
 	@Test
 	public void testIsRequeteInscrire()
 	{
-		assertFalse(ProtocoleAnnuaire.isRequeteInscrire(ProtocoleAnnuaire.requeteConnexion("test@test.test","motdepasse")));
+		assertFalse(ProtocoleAnnuaire.isRequeteInscrire(ProtocoleAnnuaire.requeteConnexion(courriel,mdp)));
 		assertFalse(ProtocoleAnnuaire.isRequeteInscrire(ProtocoleAnnuaire.requeteConsulterProfils()));
-		assertFalse(ProtocoleAnnuaire.isRequeteInscrire(ProtocoleAnnuaire.requeteConsulterProfil("test@test.test")));
+		assertFalse(ProtocoleAnnuaire.isRequeteInscrire(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
 		//
 		assertTrue(ProtocoleAnnuaire.isRequeteInscrire(ProtocoleAnnuaire.requeteInscrire(new Utilisateur().toString())));
 	}
@@ -103,27 +106,27 @@ public class ProtocoleAnnuaireTest
 	@Test
 	public void testIsRequeteModifier()
 	{
-		assertFalse(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteConnexion("test@test.test","motdepasse")));
+		assertFalse(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteConnexion(courriel,mdp)));
 		assertFalse(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteConsulterProfils()));
-		assertFalse(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteConsulterProfil("test@test.test")));
+		assertFalse(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
 		//
-		assertTrue(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteModifierProfil("test@test.test", new Utilisateur().toString())));
+		assertTrue(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteModifierProfil(courriel, new Utilisateur().toString())));
 	}
 
 	@Test
 	public void testIsRequeteSuppression()
 	{
-		assertFalse(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteConnexion("test@test.test","motdepasse")));
+		assertFalse(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteConnexion(courriel,mdp)));
 		assertFalse(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteConsulterProfils()));
-		assertFalse(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteConsulterProfil("test@test.test")));
+		assertFalse(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
 		//
-		assertTrue(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteSuppressionProfil("test@test.test")));
+		assertTrue(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteSuppressionProfil(courriel)));
 	}
 
 	@Test
 	public void testValiderRequeteConsulterProfils()
 	{
-		assertFalse(ProtocoleAnnuaire.validerRequeteConsulterProfils(ProtocoleAnnuaire.requeteConsulterProfil("test@test.test")));
+		assertFalse(ProtocoleAnnuaire.validerRequeteConsulterProfils(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
 		//
 		assertTrue(ProtocoleAnnuaire.validerRequeteConsulterProfils(ProtocoleAnnuaire.requeteConsulterProfils()));
 	}
@@ -133,14 +136,14 @@ public class ProtocoleAnnuaireTest
 	{
 		assertFalse(ProtocoleAnnuaire.validerRequeteConsulterProfil(ProtocoleAnnuaire.requeteConsulterProfils()));
 		//
-		assertTrue(ProtocoleAnnuaire.validerRequeteConsulterProfil(ProtocoleAnnuaire.requeteConsulterProfil("test@test.test")));
+		assertTrue(ProtocoleAnnuaire.validerRequeteConsulterProfil(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
 	}
 
 	@Test
 	public void testValiderRequeteConnexion()
 	{
-		assertTrue(ProtocoleAnnuaire.validerRequeteConnexion(ProtocoleAnnuaire.requeteConnexion("test@test.test", "motdepasse")));
-		assertTrue(ProtocoleAnnuaire.validerRequeteConnexion(ProtocoleAnnuaire.requeteConnexionHashMD5("test@test.test", "motdepasse")));
+		assertTrue(ProtocoleAnnuaire.validerRequeteConnexion(ProtocoleAnnuaire.requeteConnexion(courriel, mdp)));
+		assertTrue(ProtocoleAnnuaire.validerRequeteConnexion(ProtocoleAnnuaire.requeteConnexionHashMD5(courriel, mdp)));
 	}
 
 	@Test
@@ -150,10 +153,10 @@ public class ProtocoleAnnuaireTest
 		assertFalse(ProtocoleAnnuaire.validerTypeMotDePasseHashMD5(":"));
 		assertFalse(ProtocoleAnnuaire.validerTypeMotDePasseHashMD5("::"));
 		assertFalse(ProtocoleAnnuaire.validerTypeMotDePasseHashMD5(":::"));
-		assertFalse(ProtocoleAnnuaire.validerTypeMotDePasseHashMD5("test"));
+		assertFalse(ProtocoleAnnuaire.validerTypeMotDePasseHashMD5(mockstr));
 		//
-		assertTrue(ProtocoleAnnuaire.validerTypeMotDePasseHashMD5("MD5:" + MD5Hasher.hashString("motdepasse")));
-		assertTrue(ProtocoleAnnuaire.validerTypeMotDePasseHashMD5("MD5:" + MD5Hasher.hashString("motdepasse","salt")));
+		assertTrue(ProtocoleAnnuaire.validerTypeMotDePasseHashMD5("MD5:" + MD5Hasher.hashString(mdp)));
+		assertTrue(ProtocoleAnnuaire.validerTypeMotDePasseHashMD5("MD5:" + MD5Hasher.hashString(mdp,mockstr)));
 	}
 
 	@Test
@@ -165,13 +168,13 @@ public class ProtocoleAnnuaireTest
 	@Test
 	public void testValiderRequeteModifierProfil()
 	{
-		assertTrue(ProtocoleAnnuaire.validerRequeteModifierProfil(ProtocoleAnnuaire.requeteModifierProfil("test@test.test", new Utilisateur().toString())));
+		assertTrue(ProtocoleAnnuaire.validerRequeteModifierProfil(ProtocoleAnnuaire.requeteModifierProfil(courriel, new Utilisateur().toString())));
 	}
 
 	@Test
 	public void testValiderRequeteSuppressionProfil()
 	{
-		assertTrue(ProtocoleAnnuaire.validerRequeteSuppressionProfil(ProtocoleAnnuaire.requeteSuppressionProfil("test@test.test")));
+		assertTrue(ProtocoleAnnuaire.validerRequeteSuppressionProfil(ProtocoleAnnuaire.requeteSuppressionProfil(courriel)));
 	}
 
 	@Test
@@ -195,8 +198,8 @@ public class ProtocoleAnnuaireTest
 	@Test
 	public void testOkString()
 	{
-		assertEquals(0, ControlleurProtocole.reponseCode(ProtocoleAnnuaire.ok("test")));
-		assertEquals("test", ControlleurProtocole.reponseDonnees(ProtocoleAnnuaire.ok("test")));
+		assertEquals(0, ControlleurProtocole.reponseCode(ProtocoleAnnuaire.ok(mockstr)));
+		assertEquals(mockstr, ControlleurProtocole.reponseDonnees(ProtocoleAnnuaire.ok(mockstr)));
 	}
 
 	@Test
@@ -233,7 +236,7 @@ public class ProtocoleAnnuaireTest
 	public void testIsOk()
 	{
 		assertTrue(ProtocoleAnnuaire.isOk(ProtocoleAnnuaire.ok()));
-		assertTrue(ProtocoleAnnuaire.isOk(ProtocoleAnnuaire.ok("test")));
+		assertTrue(ProtocoleAnnuaire.isOk(ProtocoleAnnuaire.ok(mockstr)));
 	}
 
 	@Test
@@ -263,13 +266,13 @@ public class ProtocoleAnnuaireTest
 		assertTrue(ProtocoleAnnuaire.valideDonnees(ProtocoleAnnuaire.erreurRequete()));
 		assertTrue(ProtocoleAnnuaire.valideDonnees(ProtocoleAnnuaire.erreurServeur()));
 		assertTrue(ProtocoleAnnuaire.valideDonnees(ProtocoleAnnuaire.ok()));
-		assertTrue(ProtocoleAnnuaire.valideDonnees(ProtocoleAnnuaire.ok("test")));
+		assertTrue(ProtocoleAnnuaire.valideDonnees(ProtocoleAnnuaire.ok(mockstr)));
 	}
 
 	@Test
 	public void testExtraireDonnees()
 	{
-		assertEquals("test", ProtocoleAnnuaire.extraireDonnees(ProtocoleAnnuaire.ok("test")));
+		assertEquals(mockstr, ProtocoleAnnuaire.extraireDonnees(ProtocoleAnnuaire.ok(mockstr)));
 	}
 
 }
