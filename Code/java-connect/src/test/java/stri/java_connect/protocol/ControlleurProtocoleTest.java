@@ -24,7 +24,7 @@ public class ControlleurProtocoleTest
 	@Test
 	public void testRequeteMethode()
 	{
-		String requete = "METHOD /URI/1/2/3\ncorps=test";
+		String requete = "METHOD /URI/1/2/3;corps=test";
 		assertEquals("METHOD", ControlleurProtocole.requeteMethode(requete));
 		// TODO ajouter d'autres cas !
 	}
@@ -32,7 +32,7 @@ public class ControlleurProtocoleTest
 	@Test
 	public void testRequeteURI()
 	{
-		String requete = "METHOD /URI/1/2/3\ncorps=test";
+		String requete = "METHOD /URI/1/2/3;corps=test";
 		assertEquals("/URI/1/2/3", ControlleurProtocole.requeteURI(requete));
 		// TODO ajouter d'autres cas !
 	}
@@ -40,7 +40,7 @@ public class ControlleurProtocoleTest
 	@Test
 	public void testRequeteCorps()
 	{
-		String requete = "METHOD /URI/1/2/3\ncorps=test";
+		String requete = "METHOD /URI/1/2/3;corps=test";
 		assertEquals("corps=test", ControlleurProtocole.requeteCorps(requete));
 		// TODO ajouter d'autres cas !
 	}

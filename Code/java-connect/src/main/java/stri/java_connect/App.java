@@ -1,5 +1,6 @@
 package stri.java_connect;
 
+import stri.java_connect.client.ControlleurClient;
 import stri.java_connect.modele.Annuaire;
 import stri.java_connect.modele.Utilisateur;
 import stri.java_connect.server.ServeurAnnuaire;
@@ -16,9 +17,10 @@ public class App
         //
         Annuaire test = new Annuaire();
         test.ajoutUtilisateur(new Utilisateur("test","mdp"));
-        ServeurAnnuaire s = new ServeurAnnuaire(test);
-        //s.start();
-        s.startBlocking();
+        //
+        new ServeurAnnuaire(test).start();
+        //s.startBlocking();
+        new ControlleurClient();
         //
         System.out.println("END");
     }

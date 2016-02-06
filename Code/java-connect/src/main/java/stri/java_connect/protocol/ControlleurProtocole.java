@@ -32,7 +32,7 @@ public abstract class ControlleurProtocole
      */
     public static String requeteURI (String requete)
     {
-    	return requete.split("\n")[0].replace(requeteMethode(requete), "").trim();
+    	return requete.split(";")[0].replace(requeteMethode(requete), "").trim();
     }
     
     /**
@@ -41,7 +41,7 @@ public abstract class ControlleurProtocole
      */
     public static String requeteCorps (String requete)
     {
-        return requete.contains("\n") ? requete.trim().split("\n",2)[1] : "";
+        return requete.contains(";") ? requete.trim().split(";",2)[1] : "";
     }
 
     /**

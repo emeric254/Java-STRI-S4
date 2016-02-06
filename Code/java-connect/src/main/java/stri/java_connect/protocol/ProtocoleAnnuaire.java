@@ -64,7 +64,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteInscrire(String utilisateurJson)
 	{
-		return "INSCRIRE \n" + utilisateurJson;
+		return "INSCRIRE ;" + utilisateurJson;
 	}
 
 	/**
@@ -73,7 +73,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteModifierProfil(String courriel, String utilisateurJson)
 	{
-		return "MODIFIER " + profilsURI + "/" + courriel + "\n"  + utilisateurJson;
+		return "MODIFIER " + profilsURI + "/" + courriel + ";"  + utilisateurJson;
 	}
 	
 	/**

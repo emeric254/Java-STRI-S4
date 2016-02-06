@@ -10,7 +10,7 @@ import stri.java_connect.protocol.ControlleurProtocoleAnnuaire;
  * @author emeric
  *
  */
-public class ServeurAnnuaire extends Thread
+public class ServeurAnnuaire
 {
 	private final static int portDefaut = 12345;
 	private int port;
@@ -52,13 +52,8 @@ public class ServeurAnnuaire extends Thread
 		controlleur = new ControlleurProtocoleAnnuaire(annuaire);
 	}
 
-	public void startBlocking()
+	public void start()
 	{
-		run();
-	}
-	
-    public void run()
-    {
 		new Serveur(controlleur,port);
     }
 }
