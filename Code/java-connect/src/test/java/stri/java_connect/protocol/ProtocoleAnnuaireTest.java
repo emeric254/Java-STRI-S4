@@ -2,7 +2,6 @@ package stri.java_connect.protocol;
 
 import static org.junit.Assert.*;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import stri.java_connect.modele.Utilisateur;
@@ -175,60 +174,53 @@ public class ProtocoleAnnuaireTest
 		assertTrue(ProtocoleAnnuaire.validerRequeteSuppressionProfil(ProtocoleAnnuaire.requeteSuppressionProfil("test@test.test")));
 	}
 
-	@Ignore
 	@Test
 	public void testErreurImplementionManquante()
 	{
-		ProtocoleAnnuaire.erreurImplementionManquante();
+		assertEquals(-2, ControlleurProtocole.reponseCode(ProtocoleAnnuaire.erreurImplementionManquante()));
 	}
 
-	@Ignore
 	@Test
 	public void testErreurServeur()
 	{
-		ProtocoleAnnuaire.erreurServeur();
+		assertEquals(-1, ControlleurProtocole.reponseCode(ProtocoleAnnuaire.erreurServeur()));
 	}
 
-	@Ignore
 	@Test
 	public void testOk()
 	{
-		ProtocoleAnnuaire.ok();
+		assertEquals(0, ControlleurProtocole.reponseCode(ProtocoleAnnuaire.ok()));
 	}
 
-	@Ignore
 	@Test
 	public void testOkString()
 	{
-		ProtocoleAnnuaire.ok("test");
+		assertEquals(0, ControlleurProtocole.reponseCode(ProtocoleAnnuaire.ok("test")));
+		assertEquals("test", ControlleurProtocole.reponseDonnees(ProtocoleAnnuaire.ok("test")));
 	}
 
-	@Ignore
 	@Test
 	public void testErreurRequete()
 	{
-		ProtocoleAnnuaire.erreurRequete();
+		assertEquals(1, ControlleurProtocole.reponseCode(ProtocoleAnnuaire.erreurRequete()));
 	}
 
-	@Ignore
 	@Test
 	public void testErreurInterdit()
 	{
-		ProtocoleAnnuaire.erreurInterdit();
+		assertEquals(2, ControlleurProtocole.reponseCode(ProtocoleAnnuaire.erreurInterdit()));
 	}
 
-	@Ignore
 	@Test
 	public void testErreurDeconnexion()
 	{
-		ProtocoleAnnuaire.erreurDeconnexion();
+		assertEquals(3, ControlleurProtocole.reponseCode(ProtocoleAnnuaire.erreurDeconnexion()));
 	}
 
 	@Test
 	public void testIsErreurImplementionManquante()
 	{
-
-		ProtocoleAnnuaire.erreurImplementionManquante();
+		assertTrue(ProtocoleAnnuaire.isErreurImplementionManquante(ProtocoleAnnuaire.erreurImplementionManquante()));
 	}
 
 	@Test

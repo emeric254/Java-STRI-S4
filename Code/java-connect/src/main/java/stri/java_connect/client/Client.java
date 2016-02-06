@@ -12,7 +12,6 @@ import java.net.*;
  */
 public class Client
 {
-    private int port;
     //private String reponse;
     private Socket socketService;
     private PrintStream fluxSortieSocket;
@@ -23,10 +22,9 @@ public class Client
      */
     public Client(int pPort)
     {
-    	port = pPort;
         try
         {
-            socketService= new Socket("127.0.0.1", port);
+            socketService= new Socket("127.0.0.1", pPort);
             fluxEntreeSocket = new BufferedReader(new InputStreamReader(socketService.getInputStream()));
             fluxSortieSocket = new PrintStream(socketService.getOutputStream());
         }
@@ -34,7 +32,7 @@ public class Client
         {
             e.printStackTrace();
         }
-        System.out.println("Connexion établie sur 127.0.0.1 " + port);
+        System.out.println("Connexion établie sur 127.0.0.1 " + pPort);
     }
 
     /**

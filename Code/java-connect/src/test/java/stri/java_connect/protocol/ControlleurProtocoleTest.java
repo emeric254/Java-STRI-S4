@@ -10,7 +10,15 @@ public class ControlleurProtocoleTest
 	@Test
 	public void testTraiterRequete()
 	{
-		// abstract method
+		try
+		{
+			ControlleurProtocole.class.newInstance();
+			fail("abstract method !!!");
+		}
+		catch (Exception e)
+		{
+			
+		}
 	}
 
 	@Test
@@ -40,7 +48,15 @@ public class ControlleurProtocoleTest
 	@Test
 	public void testTraiterReponse()
 	{
-		// abstract method
+		try
+		{
+			ControlleurProtocole.class.newInstance();
+			fail("abstract method !!!");
+		}
+		catch (Exception e)
+		{
+			
+		}
 	}
 
 	@Test
