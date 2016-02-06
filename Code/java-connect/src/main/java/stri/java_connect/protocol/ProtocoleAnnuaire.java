@@ -66,7 +66,7 @@ public abstract class ProtocoleAnnuaire
 	 * @param utilisateurJson
 	 * @return
 	 */
-	public static String requeteModifier(String courriel, String utilisateurJson)
+	public static String requeteModifierProfil(String courriel, String utilisateurJson)
 	{
 		return "MODIFIER /profils/" + courriel + "\n"  + utilisateurJson;
 	}
@@ -148,7 +148,7 @@ public abstract class ProtocoleAnnuaire
 	{
 		if(ControlleurProtocole.requeteURI(requete).startsWith("/profils/"))
 		{
-			return CourrielValidateur.valider(ControlleurProtocole.requeteCorps(requete));
+			return CourrielValidateur.valider(ControlleurProtocole.requeteURI(requete).replace("/profils/", ""));
 		}
 		return false;
 	}
@@ -159,9 +159,10 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean validerRequeteConnexion(String requete)
 	{
-		if(ControlleurProtocole.requeteCorps(requete).contains(":"))
+		// HACK !!! utilisation de requeteURI(requete) pour récuperer le couple d'indentification
+		if(ControlleurProtocole.requeteURI(requete).contains(":"))
 		{
-			String courriel = ControlleurProtocole.requeteCorps(requete).split(":",2)[0];
+			String courriel = ControlleurProtocole.requeteURI(requete).split(":",2)[0];
 			// TODO test mot de passe vide ?
 			return CourrielValidateur.valider(courriel);
 		}
@@ -191,7 +192,7 @@ public abstract class ProtocoleAnnuaire
 	 * @param requete
 	 * @return
 	 */
-	public static boolean validerRequeteModifier(String requete)
+	public static boolean validerRequeteModifierProfil(String requete)
 	{
 		// TODO valider modele aussi ?
 		return ControlleurProtocole.requeteURI(requete).startsWith("/profils/");
@@ -202,7 +203,7 @@ public abstract class ProtocoleAnnuaire
 	 * @param requete
 	 * @return
 	 */
-	public static boolean validerRequeteSuppression(String requete)
+	public static boolean validerRequeteSuppressionProfil(String requete)
 	{
 		return ControlleurProtocole.requeteURI(requete).startsWith("/profils/");
 	}
@@ -342,7 +343,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean valideDonnees(String reponse)
 	{
-		return JSONValidateur.valider(ControlleurProtocole.reponseDonnees(reponse));
+		return (ControlleurProtocole.reponseDonnees(reponse).length() >= 0);
 	}
 
 	/**

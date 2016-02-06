@@ -109,7 +109,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		{
 			if (utilisateur == null)
 				reponse = ProtocoleAnnuaire.erreurInterdit();
-			else if (ProtocoleAnnuaire.validerRequeteModifier(requete))
+			else if (ProtocoleAnnuaire.validerRequeteModifierProfil(requete))
 			{
 				Utilisateur u = new Utilisateur();
 				u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
@@ -141,7 +141,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		{
 			if (utilisateur == null)
 				reponse = ProtocoleAnnuaire.erreurInterdit();
-			else if (ProtocoleAnnuaire.validerRequeteSuppression(requete))
+			else if (ProtocoleAnnuaire.validerRequeteSuppressionProfil(requete))
 			{
 				// TODO remplacer ca pars fonction dans ProtocoleAnnuaire :
 				String courriel = ControlleurProtocole.requeteURI(requete).replace("/profils/", "");
