@@ -16,6 +16,8 @@ public class Utilisateur
   // Fields
   //
 	private final static String glt = "\"";
+	private final static String separ = "\" : \"";
+	private final static String vgl = "\" ,";
   private String motDePasse;
   
   private String nom;
@@ -276,24 +278,25 @@ public class Utilisateur
   {
 	  String chaine = "{";
 
-	  chaine += glt + "motdepasse" + glt + " : " + glt + motDePasse + glt + ",";
+	  chaine += glt + "motdepasse" + separ + motDePasse + vgl;
 	  
-	  chaine += glt + "nom" + glt + " : " + glt + nom + glt + ",";
+	  chaine += glt + "nom" + separ + nom + vgl;
 	  
-	  chaine += glt + "datediplome" + glt + " : " + glt + dateDiplome + glt + ",";
+	  chaine += glt + "datediplome" + separ + dateDiplome + vgl;
 	  
-	  chaine += glt + "telephone" + glt + " : " + glt + telephone + glt + ",";
+	  chaine += glt + "telephone" + separ + telephone + vgl;
 	  
-	  chaine += glt + "courriel" + glt + " : " + glt + courriel + glt + ",";
+	  chaine += glt + "courriel" + separ + courriel + vgl;
 	  
-	  chaine += glt + "permissionlecture" + glt + " : " + permissionLecture + ",";
+	  // TODO temporaire avec permissionLecture simple
+	  chaine += glt + "permissionlecture" + separ + permissionLecture + vgl;
 	  
-	  chaine += glt + "privilege" + glt + " : " + glt + privilege + glt + ",";
+	  chaine += glt + "privilege" + separ + privilege + vgl;
 	  
 	  chaine += glt + "competences" + glt + " : [";
 	  for(String temp : Competences)
 	  {
-		  chaine += glt + temp + glt + ",";
+		  chaine += glt + temp + vgl;
 	  }
 	  if(Competences.size() > 0)
 		  chaine = chaine.substring(0, chaine.length()-1);

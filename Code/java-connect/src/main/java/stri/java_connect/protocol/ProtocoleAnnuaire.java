@@ -13,6 +13,8 @@ import stri.java_connect.utils.MD5Hasher;
  */
 public abstract class ProtocoleAnnuaire
 {
+	private final static String profilsURI = "/profils";
+	
 	//-------------------------------------------------------------------------
 	// constructeurs de requete
 	
@@ -21,7 +23,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteConsulterProfils()
 	{
-		return "CONSULTER /profils";
+		return "CONSULTER " + profilsURI;
 	}
 	
 	/**
@@ -30,7 +32,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteConsulterProfil(String courriel)
 	{
-		return "CONSULTER /profils/" + courriel;
+		return "CONSULTER "+ profilsURI + "/" + courriel;
 	}
 	
 	/**
@@ -68,7 +70,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteModifierProfil(String courriel, String utilisateurJson)
 	{
-		return "MODIFIER /profils/" + courriel + "\n"  + utilisateurJson;
+		return "MODIFIER " + profilsURI + "/" + courriel + "\n"  + utilisateurJson;
 	}
 	
 	/**
@@ -77,7 +79,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteSuppressionProfil(String courriel)
 	{
-		return "SUPPRESSION /profils/" + courriel;
+		return "SUPPRESSION " + profilsURI + "/" + courriel;
 	}
 	
 	//-------------------------------------------------------------------------
@@ -137,7 +139,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean validerRequeteConsulterProfils(String requete)
 	{
-		return ControlleurProtocole.requeteURI(requete).equals("/profils");
+		return ControlleurProtocole.requeteURI(requete).equals(profilsURI);
 	}
 	
 	/**
@@ -146,9 +148,9 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean validerRequeteConsulterProfil(String requete)
 	{
-		if(ControlleurProtocole.requeteURI(requete).startsWith("/profils/"))
+		if(ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + "/"))
 		{
-			return CourrielValidateur.valider(ControlleurProtocole.requeteURI(requete).replace("/profils/", ""));
+			return CourrielValidateur.valider(ControlleurProtocole.requeteURI(requete).replace(profilsURI + "/", ""));
 		}
 		return false;
 	}
@@ -195,7 +197,7 @@ public abstract class ProtocoleAnnuaire
 	public static boolean validerRequeteModifierProfil(String requete)
 	{
 		// TODO valider modele aussi ?
-		return ControlleurProtocole.requeteURI(requete).startsWith("/profils/");
+		return ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + "/");
 		//return JSONValidateur.valider(ControlleurProtocole.requeteCorps(requete));
 	}
 	
@@ -205,7 +207,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean validerRequeteSuppressionProfil(String requete)
 	{
-		return ControlleurProtocole.requeteURI(requete).startsWith("/profils/");
+		return ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + "/");
 	}
 
 	//-------------------------------------------------------------------------

@@ -3,15 +3,18 @@ package stri.java_connect.bdd;
 
 import java.sql.*;
 
-import org.junit.*;
 import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class SqliteTest
 {
 	private static Sqlite testeur;
 	
-	@BeforeClass 
-    public static void setup()
+	@Before
+    public void setup()
     {
         try
         {
@@ -23,8 +26,8 @@ public class SqliteTest
     	testeur.reset();
     } 
     
-    @AfterClass
-    public static void reset()
+    @After
+    public void reset()
     {
     	testeur.reset();
     	testeur.close();
@@ -71,20 +74,22 @@ public class SqliteTest
 	@Test
 	public void memeInsertion5Fois()
 	{
+		testeur.executerMaj("create table person (id integer, name string)");
 		testeur.executerMaj("insert into person values(1, 'leo')");
 		for(int i=0; i<5; i++)
 		{
-			assertTrue("renvoie ok meme si l'id existe deja", testeur.executerMaj("insert into person values(1, 'test')"));
+			assertTrue("renvoie normalement ok meme si l'id existe deja", testeur.executerMaj("insert into person values(1, 'test')"));
 		}
 	}
 
 	@Test
 	public void memeSuppression5Fois()
 	{
+		testeur.executerMaj("create table person (id integer, name string)");
 		testeur.executerMaj("insert into person values(1, 'leo')");
 		for(int i=0; i<5; i++)
 		{
-			assertTrue("renvoie ok meme si l'id n'y est plus", testeur.executerMaj("delete from person where id=1"));
+			assertTrue("renvoie normalement ok meme si l'id n'y est plus", testeur.executerMaj("delete from person where id=1"));
 		}
 	}
 	
