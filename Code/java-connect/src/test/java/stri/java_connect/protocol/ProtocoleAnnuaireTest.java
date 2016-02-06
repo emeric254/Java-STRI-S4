@@ -2,8 +2,6 @@ package stri.java_connect.protocol;
 
 import static org.junit.Assert.*;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 
