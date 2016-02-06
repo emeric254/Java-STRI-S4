@@ -6,22 +6,24 @@ import org.junit.Test;
 
 public class MD5HasherTest
 {
+	private final static String str = "test";
+	private final static String salt = "salt";
 
 	@Test
 	public void testHashStringStringString()
 	{
-		assertNotNull(MD5Hasher.hashString("test", "test"));
-		assertNotNull(MD5Hasher.hashString("test", "salt"));
-		assertNotEquals("test", MD5Hasher.hashString("test", "test"));
-		assertNotEquals("test", MD5Hasher.hashString("test", "salt"));
-		assertNotEquals(MD5Hasher.hashString("test", "test"), MD5Hasher.hashString("test", "salt"));
+		assertNotNull(MD5Hasher.hashString(str, str));
+		assertNotNull(MD5Hasher.hashString(str, salt));
+		assertNotEquals(str, MD5Hasher.hashString(str, str));
+		assertNotEquals(str, MD5Hasher.hashString(str, salt));
+		assertNotEquals(MD5Hasher.hashString(str, str), MD5Hasher.hashString(str, salt));
 	}
 
 	@Test
 	public void testHashStringString()
 	{
-		assertNotNull(MD5Hasher.hashString("test"));
-		assertNotEquals("test", MD5Hasher.hashString("test"));
+		assertNotNull(MD5Hasher.hashString(str));
+		assertNotEquals(str, MD5Hasher.hashString(str));
 	}
 
 }

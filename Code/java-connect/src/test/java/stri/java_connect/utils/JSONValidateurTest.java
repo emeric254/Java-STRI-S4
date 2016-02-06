@@ -10,6 +10,7 @@ import stri.java_connect.modele.Utilisateur;
 
 public class JSONValidateurTest
 {
+	private final static String mockstr = "test";
 
 	@Test
 	public void testValiderString()
@@ -19,7 +20,7 @@ public class JSONValidateurTest
 		assertFalse(JSONValidateur.valider("{"));
 		assertFalse(JSONValidateur.valider("}"));
 		assertFalse(JSONValidateur.valider("["));
-		assertFalse(JSONValidateur.valider("test"));
+		assertFalse(JSONValidateur.valider(mockstr));
 		assertFalse(JSONValidateur.valider("[]"));
 		assertFalse(JSONValidateur.valider("{1234567890}"));
 		//
@@ -32,25 +33,25 @@ public class JSONValidateurTest
 	{
 		Utilisateur u = new Utilisateur();
 		assertTrue(JSONValidateur.valider(u));
-		u.setCourriel("test");
+		u.setCourriel(mockstr);
 		assertTrue(JSONValidateur.valider(u));
 		u.setDateDiplome((long) 1234567890);
 		assertTrue(JSONValidateur.valider(u));
 		u.setDateDiplomeFromDate(new Date());
 		assertTrue(JSONValidateur.valider(u));
-		u.setMotDePasse("test");
+		u.setMotDePasse(mockstr);
 		assertTrue(JSONValidateur.valider(u));
-		u.setNom("test");
+		u.setNom(mockstr);
 		assertTrue(JSONValidateur.valider(u));
-		u.setPermissionLecture("test");
+		u.setPermissionLecture(mockstr);
 		assertTrue(JSONValidateur.valider(u));
-		u.setPrivilege("test");
+		u.setPrivilege(mockstr);
 		assertTrue(JSONValidateur.valider(u));
-		u.setTelephone("test");
+		u.setTelephone(mockstr);
 		assertTrue(JSONValidateur.valider(u));
 		for (int i = 0; i < 10; i++)
 		{
-			u.addCompetence("test");
+			u.addCompetence(mockstr);
 			assertTrue(JSONValidateur.valider(u));
 		}
 	}
