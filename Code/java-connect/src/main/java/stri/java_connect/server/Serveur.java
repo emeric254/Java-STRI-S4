@@ -15,8 +15,6 @@ import stri.java_connect.protocol.ControlleurProtocole;
 public class Serveur
 {
     private int port;
-    private ControlleurProtocole protocolServer;
-    private ServerSocket socketEcoute;
 
     /**
      * @param pProtocolServer
@@ -24,11 +22,12 @@ public class Serveur
     public Serveur(ControlleurProtocole pProtocolServer)
     {
     	port = 12345;
-        protocolServer = pProtocolServer;
+    	ControlleurProtocole protocolServer = pProtocolServer;
+    	ServerSocket socketEcoute = null;
 
         try
         {
-            this.socketEcoute= new ServerSocket(port);
+            socketEcoute= new ServerSocket(port);
         }
         catch (Exception e)
         {

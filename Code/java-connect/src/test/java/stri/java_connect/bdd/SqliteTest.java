@@ -13,7 +13,6 @@ public class SqliteTest
 	@BeforeClass 
     public static void setup()
     {
-    	System.out.println("\ndebut test");
         try
         {
 			testeur = new Sqlite("JUnitTest.db");
@@ -29,7 +28,6 @@ public class SqliteTest
     {
     	testeur.reset();
     	testeur.close();
-    	System.out.println("fin test\n");
     }
 
 	@Test
@@ -43,7 +41,6 @@ public class SqliteTest
 	{
 		for(int i=0; i<5; i++)
 		{
-			System.out.println( " > " + (i+1) );
 			assertTrue("on supprime la table avant de la creer", testeur.executerMaj("drop table if exists person") && testeur.executerMaj("create table person (id integer, name string)"));
 		}
 	}
@@ -54,7 +51,6 @@ public class SqliteTest
 		creationTable();
 		for(int i=0; i<3; i++)
 		{
-			System.out.println( " > " + (i+1) );
 			assertFalse("la table existe deja", testeur.executerMaj("create table person (id integer, name string)"));
 			try
 			{
@@ -78,7 +74,6 @@ public class SqliteTest
 		testeur.executerMaj("insert into person values(1, 'leo')");
 		for(int i=0; i<5; i++)
 		{
-			System.out.println( " > " + (i+1) );
 			assertTrue("renvoie ok meme si l'id existe deja", testeur.executerMaj("insert into person values(1, 'test')"));
 		}
 	}
@@ -89,7 +84,6 @@ public class SqliteTest
 		testeur.executerMaj("insert into person values(1, 'leo')");
 		for(int i=0; i<5; i++)
 		{
-			System.out.println( " > " + (i+1) );
 			assertTrue("renvoie ok meme si l'id n'y est plus", testeur.executerMaj("delete from person where id=1"));
 		}
 	}
@@ -98,11 +92,11 @@ public class SqliteTest
 	public void testEntier()
 	{
 
-		if(testeur.executerMaj("drop table if exists person") && testeur.executerMaj("create table person (id integer, name string)"))
-			System.out.println("partie Tables reussie");
-
-		if(testeur.executerMaj("insert into person values(1, 'leo')") && testeur.executerMaj("insert into person values(2, 'yui')"))
-			System.out.println("partie Insertion reussie");
+		assertTrue(testeur.executerMaj("drop table if exists person"));
+		assertTrue(testeur.executerMaj("create table person (id integer, name string)"));
+		assertTrue(testeur.executerMaj("insert into person values(1, 'leo')"));
+		assertTrue(testeur.executerMaj("insert into person values(2, 'yui')"));
+		
 		try
 		{
 			ResultSet rs = testeur.executerRequete("select * from person");
