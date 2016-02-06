@@ -14,6 +14,9 @@ import stri.java_connect.utils.MD5Hasher;
 public abstract class ProtocoleAnnuaire
 {
 	private final static String profilsURI = "/profils";
+	private final static String code = "{\"code\" : ";
+	private final static String data =  ", \"data\" : \"";
+	private final static String fin = "\"}";
 	
 	//-------------------------------------------------------------------------
 	// constructeurs de requete
@@ -218,7 +221,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String erreurImplementionManquante()
 	{
-		return "{\"code\" : -2 , \"data\" : \"implementation manquante\"}";
+		return code + -2 + data + "implementation manquante" + fin;
 	}
 	
 	/**
@@ -226,7 +229,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String erreurServeur()
 	{
-		return "{\"code\" : -1 , \"data\" : \"erreur du serveur\"}";
+		return code + -1 + data + "erreur du serveur" + fin;
 	}
 	
 
@@ -235,7 +238,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String ok()
 	{
-		return "{\"code\" : 0 , \"data\" : \"\"}";
+		return code + 0 + data + fin;
 	}
 	
 
@@ -245,7 +248,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String ok(String donnees)
 	{
-		return "{\"code\" : 0 , \"data\" : \"" + donnees + "\"}";
+		return code + 0 + data + donnees + fin;
 	}
 	
 
@@ -254,7 +257,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String erreurRequete()
 	{
-		return "{\"code\" : 1 , \"data\" : \"mauvaise requete\"}";
+		return code + 1 + data + "mauvaise requete" + fin;
 	}
 	
 
@@ -263,7 +266,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String erreurInterdit()
 	{
-		return "{\"code\" : 2 , \"data\" : \"interdit\"}";
+		return code + 2 + data + "interdit" + fin;
 	}
 	
 
@@ -272,7 +275,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String erreurDeconnexion()
 	{
-		return "{\"code\" : 3 , \"data\" : \"connexion perdue\"}";
+		return code + 3 + data + "connexion perdue" + fin;
 	}
 
 	//-------------------------------------------------------------------------
@@ -284,7 +287,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isErreurImplementionManquante(String reponse)
 	{
-		return (ControlleurProtocole.reponseCode(reponse) == -2);
+		return ControlleurProtocole.reponseCode(reponse) == -2;
 	}
 	
 	/**
@@ -293,7 +296,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isErreurServeur(String reponse)
 	{
-		return (ControlleurProtocole.reponseCode(reponse) == -1);
+		return ControlleurProtocole.reponseCode(reponse) == -1;
 	}
 	
 
@@ -303,7 +306,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isOk(String reponse)
 	{
-		return (ControlleurProtocole.reponseCode(reponse) == 0);
+		return ControlleurProtocole.reponseCode(reponse) == 0;
 	}
 	
 
@@ -313,7 +316,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isErreurRequete(String reponse)
 	{
-		return (ControlleurProtocole.reponseCode(reponse) == 1);
+		return ControlleurProtocole.reponseCode(reponse) == 1;
 	}
 	
 
@@ -323,7 +326,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isErreurInterdit(String reponse)
 	{
-		return (ControlleurProtocole.reponseCode(reponse) == 2);
+		return ControlleurProtocole.reponseCode(reponse) == 2;
 	}
 	
 
@@ -333,7 +336,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean isErreurDeconnexion(String reponse)
 	{
-		return (ControlleurProtocole.reponseCode(reponse) == 3);
+		return ControlleurProtocole.reponseCode(reponse) == 3;
 	}
 
 	//-------------------------------------------------------------------------
@@ -345,7 +348,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static boolean valideDonnees(String reponse)
 	{
-		return (ControlleurProtocole.reponseDonnees(reponse).length() >= 0);
+		return ControlleurProtocole.reponseDonnees(reponse).length() >= 0;
 	}
 
 	/**
