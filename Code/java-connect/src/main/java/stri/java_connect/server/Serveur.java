@@ -14,51 +14,53 @@ import stri.java_connect.protocol.ControlleurProtocole;
  */
 public class Serveur
 {
-    private int port;
+	private final static int portDefaut = 12345;
 
     /**
-     * @param pProtocolServer
+     * Creation d'un serveur sur le port par defaut avec un controlleur de protocole pour assurer la communication
+     * 
+     * @param pProtocolServer le controlleur de protocole
      */
     public Serveur(ControlleurProtocole pProtocolServer)
     {
-    	port = 12345;
+    	this(pProtocolServer, portDefaut);
+    }
+    
+    /**
+     * Creation d'un serveur sur un port specifique et avec un controlleur de protocole pour assurer la communication
+     * 
+     * @param pProtocolServer le controlleur de protocole
+     * @param pPort le port sur lequel doit ecouter le serveur
+     */
+    public Serveur(ControlleurProtocole pProtocolServer, int pPort)
+    {
     	ControlleurProtocole protocolServer = pProtocolServer;
     	ServerSocket socketEcoute = null;
 
         try
         {
-            socketEcoute= new ServerSocket(port);
+            socketEcoute= new ServerSocket(pPort);
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
 
-        System.out.println("Nouveau serveur sur le port " + port);
+        System.out.println("Nouveau serveur sur le port " + pPort);
         System.out.println(socketEcoute);
 
         while(true)
         {
-            System.out.println("attente nouveau client");
+            System.out.println("mise en attente d'un nouveau client");
             try
             {
                 new ClientHandler(socketEcoute.accept(), protocolServer).start();
-                System.out.println("nouvelle session ouverte");
+                System.out.println("lancement d'un nouveau ClientHandler reussi");
             }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
         }
-    }
-    
-    /**
-     * @param pProtocolServer
-     * @param pPort
-     */
-    public Serveur(ControlleurProtocole pProtocolServer, int pPort)
-    {
-    	this(pProtocolServer);
-    	port = pPort;
     }
 }

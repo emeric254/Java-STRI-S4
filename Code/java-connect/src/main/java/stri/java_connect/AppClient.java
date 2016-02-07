@@ -46,5 +46,4 @@ public class AppClient
 			e.printStackTrace();
 		}
 	}
-
 }

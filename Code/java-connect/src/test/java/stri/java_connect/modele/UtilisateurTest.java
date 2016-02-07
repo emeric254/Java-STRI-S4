@@ -355,6 +355,7 @@ public class UtilisateurTest
 		Utilisateur u = new Utilisateur();
 		assertFalse( u == u.clone());
 		assertEquals(u, u.clone());
+		assertNotSame(u, u.clone());
 	}
 
 }

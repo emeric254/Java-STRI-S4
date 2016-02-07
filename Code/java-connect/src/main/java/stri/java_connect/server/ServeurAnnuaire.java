@@ -17,6 +17,7 @@ public class ServeurAnnuaire
 	private ControlleurProtocoleAnnuaire controlleur;
 	
 	/**
+	 * Creation d'un Serveur Annuaire sur le port par defaut avec un annuaire vide
 	 * 
 	 */
 	public ServeurAnnuaire()
@@ -25,7 +26,9 @@ public class ServeurAnnuaire
 	}
 	
 	/**
-	 * @param pPort
+	 * Creation d'un Serveur Annuaire sur un port specifique avec un annuaire vide
+	 * 
+	 * @param pPort le port sur lequel doit ecouter le serveur
 	 */
 	public ServeurAnnuaire(int pPort)
 	{
@@ -33,7 +36,9 @@ public class ServeurAnnuaire
 	}
 	
 	/**
-	 * @param pAnnuaire
+	 * Creation d'un Serveur Annuaire sur le port par defaut avec un annuaire fournit
+	 * 
+	 * @param pAnnuaire l'annuaire a charger pour le serveur
 	 */
 	public ServeurAnnuaire(Annuaire pAnnuaire)
 	{
@@ -41,15 +46,22 @@ public class ServeurAnnuaire
 	}
 	
 	/**
-	 * @param pPort
-	 * @param pAnnuaire
+	 * Creation d'un Serveur Annuaire sur un port specifique avec un annuaire fournit
+	 * 
+	 * @param pPort le port sur lequel doit ecouter le serveur
+	 * @param pAnnuaire l'annuaire a charger pour le serveur
 	 */
 	public ServeurAnnuaire(int pPort, Annuaire pAnnuaire)
 	{
 		port = pPort;
 		controlleur = new ControlleurProtocoleAnnuaire(pAnnuaire);
+		//start();
 	}
 
+	/**
+	 * Lancement du serveur
+	 * 
+	 */
 	public void start()
 	{
 		new Serveur(controlleur,port);

@@ -3,6 +3,7 @@ package stri.java_connect.modele;
 import org.junit.*;
 import static org.junit.Assert.*;
 
+import java.util.ArrayDeque;
 import java.util.HashMap;
 
 
@@ -112,20 +113,41 @@ public class AnnuaireTest
 		assertEquals(h.values(), a.getCollectionTousUtilisateurs());
 	}
 
-    @Ignore
 	@Test
 	public void testGetArrayTousUtilisateurs()
 	{
-	   // TODO
-		fail("Not yet implemented");
+    	ArrayDeque<Utilisateur> l = new ArrayDeque<Utilisateur>();
+    	l.add(new Utilisateur(courriel,mdp));
+    	l.add(new Utilisateur());
+    	Annuaire a = new Annuaire();
+    	for (Utilisateur u : l)
+    	{
+    		a.ajoutUtilisateur(u);
+    	}
+    	assertEquals(l.size(), a.getArrayTousUtilisateurs().size());
 	}
 
-    @Ignore
 	@Test
 	public void testGetArraySecuriseTousUtilisateurs()
 	{
-	   // TODO
-		fail("Not yet implemented");
+    	ArrayDeque<Utilisateur> l = new ArrayDeque<Utilisateur>();
+    	Utilisateur test = new Utilisateur(courriel,mdp);
+    	l.add(test);
+    	l.add(new Utilisateur());
+    	Annuaire a = new Annuaire();
+    	for (Utilisateur u : l)
+    	{
+    		a.ajoutUtilisateur(u);
+    	}
+    	assertEquals(l.size(), a.getArrayTousUtilisateurs().size());
+    	// test securite :
+    	l = a.getArraySecuriseTousUtilisateurs();
+    	test.addCompetence("nothing that never can't be imagined");
+    	for (Utilisateur u : l)
+    	{
+    		assertNotEquals(test, u);
+    		assertNotSame(test, u);
+    	}
 	}
 
 }

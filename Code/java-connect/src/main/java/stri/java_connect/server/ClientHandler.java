@@ -24,8 +24,10 @@ public class ClientHandler extends Thread
     private String sortie; // reponse
     
 	/**
-	 * @param pSocketService
-	 * @param pProtocolServer
+	 * Creation d'un thread pour un client pour communiquer avec lui
+	 * 
+	 * @param pSocketService le socket pour la communication
+	 * @param pProtocolServer le controlleur de protocole pour gerer la communication
 	 */
 	public ClientHandler(Socket pSocketService, ControlleurProtocole pProtocolServer)
 	{
@@ -46,6 +48,7 @@ public class ClientHandler extends Thread
 	}
 
     /**
+     * Communication avec le client
      * 
      */
     public void communiquer()
@@ -71,8 +74,10 @@ public class ClientHandler extends Thread
     }
     
     /**
-     * @param entree
-     * @return
+     * Traitement de la requete du client pour generer une reponse
+     * 
+     * @param entree la requete du client
+     * @return la reponse
      */
     public String traitement (String entree)
     {
@@ -80,6 +85,7 @@ public class ClientHandler extends Thread
     }
 
     /**
+     * arreter la communciation en fermant le socket
      * 
      */
     public void fermerService()
@@ -94,6 +100,9 @@ public class ClientHandler extends Thread
         }
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Thread#run()
+     */
     public void run()
     {
         try
