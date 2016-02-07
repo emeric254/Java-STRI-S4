@@ -22,7 +22,9 @@ public abstract class ProtocoleAnnuaire
 	// constructeurs de requete
 	
 	/**
-	 * @return
+	 * Requete de consultation de la liste des profils
+	 * 
+	 * @return la requete
 	 */
 	public static String requeteConsulterProfils()
 	{
@@ -30,8 +32,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param courriel
-	 * @return
+	 * Requete de consultation des details d'un profil
+	 * 
+	 * @param courriel le courriel du profil a consulter
+	 * @return la requete
 	 */
 	public static String requeteConsulterProfil(String courriel)
 	{
@@ -39,9 +43,11 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param courriel
-	 * @param motDePasse
-	 * @return
+	 * Requete de connexion
+	 * 
+	 * @param courriel le courriel la connexion
+	 * @param motDePasse le mot de passe pour la connexion
+	 * @return la requete
 	 */
 	public static String requeteConnexion(String courriel, String motDePasse)
 	{
@@ -49,9 +55,11 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param courriel
-	 * @param motDePasse
-	 * @return
+	 * Requete de connexion, le mot de passe sera hash en MD5
+	 * 
+	 * @param courriel le courriel la connexion
+	 * @param motDePasse le mot de passe pour la connexion
+	 * @return la requete
 	 */
 	public static String requeteConnexionHashMD5(String courriel, String motDePasse)
 	{
@@ -59,8 +67,10 @@ public abstract class ProtocoleAnnuaire
 	}
 
 	/**
-	 * @param utilisateurJson
-	 * @return
+	 * Requete d'inscription d'un profil utilisateur
+	 * 
+	 * @param utilisateurJson le profil utilisateur a inscrire
+	 * @return la requete
 	 */
 	public static String requeteInscrire(String utilisateurJson)
 	{
@@ -68,8 +78,10 @@ public abstract class ProtocoleAnnuaire
 	}
 
 	/**
-	 * @param utilisateurJson
-	 * @return
+	 * Requete de modification d'un profil utilisateur
+	 * 
+	 * @param utilisateurJson le profil utilisateur a modifier
+	 * @return la requete
 	 */
 	public static String requeteModifierProfil(String courriel, String utilisateurJson)
 	{
@@ -77,8 +89,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param courriel
-	 * @return
+	 * Requete de suppression d'un profil utilisateur
+	 * 
+	 * @param courriel le courriel du profil a supprimer
+	 * @return la requete
 	 */
 	public static String requeteSuppressionProfil(String courriel)
 	{
@@ -89,8 +103,10 @@ public abstract class ProtocoleAnnuaire
 	// testeurs de type de requete
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Tester si la requete est une requete de consultation
+	 * 
+	 * @param requete la requete a tester
+	 * @return true si c'est une requete de consultation, false sinon
 	 */
 	public static boolean isRequeteConsulter(String requete)
 	{
@@ -98,8 +114,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Tester si la requete est une requete de connexion
+	 * 
+	 * @param requete la requete a tester
+	 * @return true si c'est une requete de connexion, false sinon
 	 */
 	public static boolean isRequeteConnexion(String requete)
 	{
@@ -107,8 +125,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Tester si la requete est une requete d'inscription
+	 * 
+	 * @param requete la requete a tester
+	 * @return true si c'est une requete d'inscription, false sinon
 	 */
 	public static boolean isRequeteInscrire(String requete)
 	{
@@ -116,8 +136,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Tester si la requete est une requete de modification
+	 * 
+	 * @param requete la requete a tester
+	 * @return true si c'est une requete de modification, false sinon
 	 */
 	public static boolean isRequeteModifier(String requete)
 	{
@@ -125,8 +147,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Tester si la requete est une requete de suppression
+	 * 
+	 * @param requete la requete a tester
+	 * @return true si c'est une requete de suppression, false sinon
 	 */
 	public static boolean isRequeteSuppression(String requete)
 	{
@@ -137,8 +161,10 @@ public abstract class ProtocoleAnnuaire
 	// valideurs de corps requete
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Valider la requete de consultation de la liste des profils
+	 * 
+	 * @param requete la requete a valider
+	 * @return true si c'est une requete de consultation de la liste des profils valide, false sinon
 	 */
 	public static boolean validerRequeteConsulterProfils(String requete)
 	{
@@ -146,8 +172,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Valider la requete de consultation des details d'un profil
+	 * 
+	 * @param requete la requete a valider
+	 * @return true si c'est une requete de consultation des details d'un profil valide, false sinon
 	 */
 	public static boolean validerRequeteConsulterProfil(String requete)
 	{
@@ -159,8 +187,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Valider la requete de connexion
+	 * 
+	 * @param requete la requete a valider
+	 * @return true si c'est une requete de connexion valide, false sinon
 	 */
 	public static boolean validerRequeteConnexion(String requete)
 	{
@@ -175,8 +205,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Valider que le type de mot de passe d'une connexion est un hash MD5
+	 * 
+	 * @param requete la requete a valider
+	 * @return true si c'est un mot de passe sous forme de hash MD5, false sinon
 	 */
 	public static boolean validerTypeMotDePasseHashMD5(String mdp)
 	{
@@ -184,8 +216,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Valider la requete de'inscription
+	 * 
+	 * @param requete la requete a valider
+	 * @return true si c'est une requete d'inscription valide, false sinon
 	 */
 	public static boolean validerRequeteInscrire(String requete)
 	{
@@ -194,8 +228,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Valider la requete de modification de profil
+	 * 
+	 * @param requete la requete a valider
+	 * @return true si c'est une requete de modification de profil valide, false sinon
 	 */
 	public static boolean validerRequeteModifierProfil(String requete)
 	{
@@ -205,8 +241,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param requete
-	 * @return
+	 * Valider la requete de suppression d'un profil
+	 * 
+	 * @param requete la requete a valider
+	 * @return true si c'est une requete de suppression d'un profil valide, false sinon
 	 */
 	public static boolean validerRequeteSuppressionProfil(String requete)
 	{
