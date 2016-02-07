@@ -14,14 +14,13 @@ public abstract class CourrielValidateur
 	private static final String EMAIL_PATTERN =  "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 	/**
-	 * Validate courriel with regular expression
+	 * Valider un courriel
 	 * 
-	 * @param courriel
-	 * @return true valide courriel, false invalide courriel
+	 * @param courriel le courriel a verifier
+	 * @return true pour un courriel valide, false sinon
 	 */
-	public static boolean valider(final String courriel) {
-		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-		return pattern.matcher(courriel).matches();
-
+	public static boolean valider(final String courriel)
+	{
+		return Pattern.compile(EMAIL_PATTERN).matcher(courriel).matches();
 	}
 }
