@@ -381,17 +381,22 @@ public abstract class ProtocoleAnnuaire
 	// reponse ok - donnees
 
 	/**
-	 * @param reponse
-	 * @return
+	 * Valide les donnees d'une reponse
+	 * 
+	 * @param reponse la reponse dont on veut valider les donnees
+	 * @return true si les donnees sont valides, false sinon
 	 */
 	public static boolean valideDonnees(String reponse)
 	{
+		// TODO voir si on peut faire mieux
 		return ControlleurProtocole.reponseDonnees(reponse).length() >= 0;
 	}
 
 	/**
-	 * @param reponse
-	 * @return
+	 * Extrait les donnees d'une reponse
+	 * 
+	 * @param reponse la reponse dont on doit extraire les donnees
+	 * @return les donnees de la reponse
 	 */
 	public static String extraireDonnees(String reponse)
 	{

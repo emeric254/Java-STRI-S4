@@ -137,14 +137,12 @@ public class UtilisateurTest
 	public void testGetDateDiplome()
 	{
 		testSetDateDiplome();
-		assert new Date().toString().length() > 0;
 	}
 
 	@Test
 	public void testGetDateDiplomeAsDate()
 	{
 		testSetDateDiplomeFromDate();
-		assert new Date().getTime() > 0;
 	}
 
 	@Test
