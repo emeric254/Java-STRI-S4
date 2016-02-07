@@ -18,6 +18,7 @@ public class Annuaire
 	//
 	
 	/**
+	 * Creation d'un Annuaire
 	 * 
 	 */
 	public Annuaire()
@@ -26,7 +27,9 @@ public class Annuaire
 	}
 
 	/**
-	 * @param initialCapacity
+	 * Creation d'un Annuaire avec uen taille de depart
+	 * 
+	 * @param initialCapacity taille de depart
 	 */
 	public Annuaire(int initialCapacity)
 	{
@@ -34,7 +37,9 @@ public class Annuaire
 	}
 
 	/**
-	 * @param pAnnuaire
+	 * Creation d'un Annuaire avec chargement de données
+	 * 
+	 * @param pAnnuaire données a charger
 	 */
 	public Annuaire(HashMap<String, Utilisateur> pAnnuaire)
 	{
@@ -44,6 +49,7 @@ public class Annuaire
 	//
 	
 	/**
+	 * Enleve tous les utilisateurs; vide l'annuaire.
 	 * 
 	 */
 	public void reset()
@@ -52,24 +58,30 @@ public class Annuaire
 	}
 	
 	/**
-	 * @param courriel
-	 * @return
+	 * Verifie l'existance d'un utilisateur grace a son courriel (qui l'identifie)
+	 * 
+	 * @param courriel le courriel qui indentifie l'utilisateur
+	 * @return true si l'utilisateur existe, false sinon
 	 */
 	public boolean existeUtilisateur(String courriel)
 	{
-		return annuaire.containsKey(courriel); // && annuaire.get(courriel) != null  ?
+		return annuaire.containsKey(courriel) && annuaire.get(courriel) != null; 
 	}
 	
 	/**
-	 * @param u
+	 * Ajoute un utilisateur
+	 * 
+	 * @param utilisateur l'utilisateur a ajouter
 	 */
-	public void ajoutUtilisateur(Utilisateur u)
+	public void ajoutUtilisateur(Utilisateur utilisateur)
 	{
-		annuaire.put(u.getCourriel(), u);
+		annuaire.put(utilisateur.getCourriel(), utilisateur);
 	}
 	
 	/**
-	 * @param courriel
+	 * Supprime l'utilisateur correspondant au courriel
+	 * 
+	 * @param courriel le courriel qui identifie l'utilisateur
 	 */
 	public void suppresionUtilisateur(String courriel)
 	{
@@ -82,8 +94,10 @@ public class Annuaire
 	}
 	
 	/**
-	 * @param courriel
-	 * @return
+	 * Retourne l'utilisateur correspondant au courriel
+	 * 
+	 * @param courriel le courriel qui identifie l'utilisateur
+	 * @return l'utilisateur correspondant
 	 */
 	public Utilisateur getUtilisateur(String courriel)
 	{
@@ -91,7 +105,20 @@ public class Annuaire
 	}
 	
 	/**
-	 * @return
+	 * Retourne le clone de l'utilisateur correspondant au courriel
+	 * 
+	 * @param courriel le courriel qui identifie l'utilisateur
+	 * @return le clone de l'utilisateur correspondant
+	 */
+	public Utilisateur getSecuriseUtilisateur(String courriel)
+	{
+		return annuaire.get(courriel).clone();
+	}
+	
+	/**
+	 * Retourne l'ensemble des utilisateurs
+	 * 
+	 * @return Collection <Utilisateur> ensemble des utilisateurs
 	 */
 	public Collection<Utilisateur> getCollectionTousUtilisateurs()
 	{
@@ -99,7 +126,9 @@ public class Annuaire
 	}
 	
 	/**
-	 * @return
+	 * Retourne la liste des utilisateurs
+	 * 
+	 * @return ArrayDeque <Utilisateur> liste des utilisateurs
 	 */
 	public ArrayDeque<Utilisateur> getArrayTousUtilisateurs()
 	{
@@ -107,7 +136,9 @@ public class Annuaire
 	}
 	
 	/**
-	 * @return
+	 * Retourne la liste des utilisateurs (clones)
+	 * 
+	 * @return ArrayDeque <Utilisateur> liste des utilisateurs (clones)
 	 */
 	public ArrayDeque<Utilisateur> getArraySecuriseTousUtilisateurs()
 	{
@@ -117,5 +148,6 @@ public class Annuaire
 			l.add(utilisateur.clone());
 		}
 		return l;
+		// return getArrayTousUtilisateurs().clone(); // fonctionne ou non ???
 	}
 }
