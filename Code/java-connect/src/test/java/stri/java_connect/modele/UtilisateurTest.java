@@ -136,36 +136,13 @@ public class UtilisateurTest
 	@Test
 	public void testGetDateDiplome()
 	{
-		Utilisateur u = new Utilisateur();
-		u.setDateDiplome((long) 123456789.0);
-		assertTrue((long)123456789.0 == u.getDateDiplome() );
-
-		u = new Utilisateur(courriel,mdp);
-		u.setDateDiplome((long) 123456789.0);
-		assertTrue((long)123456789.0 == u.getDateDiplome() );
-		
-		u = new Utilisateur(nom,telephone,courriel);
-		u.setDateDiplome((long) 123456789.0);
-		assertTrue((long)123456789.0 == u.getDateDiplome() );
+		testSetDateDiplome();
 	}
 
 	@Test
 	public void testGetDateDiplomeAsDate()
 	{
-		Date maintenant = new Date();
-		Utilisateur u = new Utilisateur();
-		u.setDateDiplomeFromDate(maintenant);
-		assertEquals(maintenant, u.getDateDiplomeAsDate() );
-
-		maintenant = new Date();
-		u = new Utilisateur(courriel,mdp);
-		u.setDateDiplomeFromDate(maintenant);
-		assertEquals(maintenant, u.getDateDiplomeAsDate() );
-
-		maintenant = new Date();
-		u = new Utilisateur(nom,telephone,courriel);
-		u.setDateDiplomeFromDate(maintenant);
-		assertEquals(maintenant, u.getDateDiplomeAsDate() );
+		testSetDateDiplomeFromDate();
 	}
 
 	@Test
