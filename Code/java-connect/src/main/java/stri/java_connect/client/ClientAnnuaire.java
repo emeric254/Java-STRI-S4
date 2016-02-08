@@ -37,10 +37,22 @@ public class ClientAnnuaire
 	 * @param u
 	 * @throws IOException 
 	 */
-	public void inscription(Utilisateur u) throws IOException
+	public String inscription(Utilisateur u) throws IOException
 	{
 		// TODO
-		System.out.println(client.communiquer(ProtocoleAnnuaire.requeteInscrire(u.toString())));
+		return client.communiquer(ProtocoleAnnuaire.requeteInscrire(u.toString()));
+	}
+	
+	/**
+	 * @param courriel
+	 * @param mdp
+	 * @return 
+	 * @throws IOException 
+	 */
+	public String connexion(String courriel, String mdp) throws IOException
+	{
+		// TODO
+		return client.communiquer(ProtocoleAnnuaire.requeteConnexion(courriel, mdp));
 	}
 	
 	/**
@@ -48,61 +60,50 @@ public class ClientAnnuaire
 	 * @param mdp
 	 * @throws IOException 
 	 */
-	public void connexion(String courriel, String mdp) throws IOException
+	public String connexionMD5(String courriel, String mdp) throws IOException
 	{
 		// TODO
-		System.out.println(client.communiquer(ProtocoleAnnuaire.requeteConnexion(courriel, mdp)));
-	}
-	
-	/**
-	 * @param courriel
-	 * @param mdp
-	 * @throws IOException 
-	 */
-	public void connexionMD5(String courriel, String mdp) throws IOException
-	{
-		// TODO
-		System.out.println(client.communiquer(ProtocoleAnnuaire.requeteConnexionHashMD5(courriel,MD5Hasher.hashString(mdp))));
+		return client.communiquer(ProtocoleAnnuaire.requeteConnexionHashMD5(courriel,MD5Hasher.hashString(mdp)));
 	}
 	
 	/**
 	 * @throws IOException 
 	 * 
 	 */
-	public void consulterProfils() throws IOException
+	public String consulterProfils() throws IOException
 	{
 		// TODO
-		System.out.println(client.communiquer(ProtocoleAnnuaire.requeteConsulterProfils()));
+		return client.communiquer(ProtocoleAnnuaire.requeteConsulterProfils());
 	}
 	
 	/**
 	 * @param courriel
 	 * @throws IOException 
 	 */
-	public void consulterProfil(String courriel) throws IOException
+	public String consulterProfil(String courriel) throws IOException
 	{
 		// TODO
-		System.out.println(client.communiquer(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
+		return client.communiquer(ProtocoleAnnuaire.requeteConsulterProfil(courriel));
 	}
 	
 	/**
 	 * @param utilisateur
 	 * @throws IOException 
 	 */
-	public void modificationProfil(Utilisateur utilisateur) throws IOException
+	public String modificationProfil(Utilisateur utilisateur) throws IOException
 	{
 		// TODO
-		System.out.println(client.communiquer(ProtocoleAnnuaire.requeteModifierProfil(utilisateur.getCourriel(), utilisateur.toString())));
+		return client.communiquer(ProtocoleAnnuaire.requeteModifierProfil(utilisateur.getCourriel(), utilisateur.toString()));
 	}
 	
 	/**
 	 * @param courriel
 	 * @throws IOException 
 	 */
-	public void suppressionProfil(String courriel) throws IOException
+	public String suppressionProfil(String courriel) throws IOException
 	{
 		// TODO
-		System.out.println(client.communiquer(ProtocoleAnnuaire.requeteSuppressionProfil(courriel)));
+		return client.communiquer(ProtocoleAnnuaire.requeteSuppressionProfil(courriel));
 	}
 	
 	/**
