@@ -334,7 +334,7 @@ public abstract class ProtocoleAnnuaire
 	// testeurs de reponses
 
 	/**
-	 * Tester si uen reponse est une erreur d'implementation manquante
+	 * Tester si une reponse est une erreur d'implementation manquante
 	 * 
 	 * @param reponse la reponse a tester
 	 * @return true si c'est cette erreur, false sinon
@@ -345,7 +345,7 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * Tester si uen reponse est une erreur serveur
+	 * Tester si une reponse est une erreur serveur
 	 * 
 	 * @param reponse la reponse a tester
 	 * @return true si c'est cette erreur, false sinon
@@ -357,7 +357,7 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * Tester si uen reponse est une confirmation
+	 * Tester si une reponse est une confirmation
 	 * 
 	 * @param reponse la reponse a tester
 	 * @return true si c'est une confirmation, false sinon
@@ -369,7 +369,7 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * Tester si uen reponse est une erreur de requete
+	 * Tester si une reponse est une erreur de requete
 	 * 
 	 * @param reponse la reponse a tester
 	 * @return true si c'est cette erreur, false sinon
@@ -381,7 +381,7 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * Tester si uen reponse est une erreur de droits
+	 * Tester si une reponse est une erreur de droits
 	 * 
 	 * @param reponse la reponse a tester
 	 * @return true si c'est cette erreur, false sinon
@@ -393,7 +393,7 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * Tester si uen reponse est une erreur de connexion perdue
+	 * Tester si une reponse est une erreur de connexion perdue
 	 * 
 	 * @param reponse la reponse a tester
 	 * @return true si c'est cette erreur, false sinon

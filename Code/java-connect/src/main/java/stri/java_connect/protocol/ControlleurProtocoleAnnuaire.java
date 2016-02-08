@@ -16,6 +16,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 	private Annuaire annuaire;
 	
 	/**
+	 * Creation du controlleur de protocole Annuaire
 	 * 
 	 */
 	public ControlleurProtocoleAnnuaire(Annuaire a)
@@ -24,6 +25,9 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		annuaire = a;
 	}
 
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.ControlleurProtocole#traiterRequete(java.lang.String)
+	 */
 	@Override
 	public String traiterRequete(String requete)
 	{
@@ -176,6 +180,9 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		return reponse;
 	}
 
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.ControlleurProtocole#traiterReponse(java.lang.String)
+	 */
 	@Override
 	public String traiterReponse(String reponse)
 	{
@@ -184,6 +191,9 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.ControlleurProtocole#clone()
+	 */
 	@Override
 	public ControlleurProtocoleAnnuaire clone()
 	{
