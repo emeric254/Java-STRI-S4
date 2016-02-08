@@ -255,7 +255,9 @@ public abstract class ProtocoleAnnuaire
 	// createurs de reponses
 
 	/**
-	 * @return
+	 * Creation de la reponse pour une erreur d'implementation manquante
+	 * 
+	 * @return la reponse
 	 */
 	public static String erreurImplementionManquante()
 	{
@@ -263,7 +265,9 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @return
+	 * Creation de la reponse pour une erreur serveur
+	 * 
+	 * @return la reponse
 	 */
 	public static String erreurServeur()
 	{
@@ -272,7 +276,9 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * @return
+	 * Creation de la reponse ok de confirmation (sans donnees)
+	 * 
+	 * @return la reponse
 	 */
 	public static String ok()
 	{
@@ -281,8 +287,10 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * @param donnees
-	 * @return
+	 * Creation de la reponse ok de confirmation (avec donnees)
+	 * 
+	 * @param donnees les donnees a envoyer dans la reponse
+	 * @return la reponse
 	 */
 	public static String ok(String donnees)
 	{
@@ -291,7 +299,9 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * @return
+	 * Creation de la reponse pour une erreur de requete
+	 * 
+	 * @return la reponse
 	 */
 	public static String erreurRequete()
 	{
@@ -300,7 +310,9 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * @return
+	 * Creation de la reponse pour une erreur de droits
+	 * 
+	 * @return la reponse
 	 */
 	public static String erreurInterdit()
 	{
@@ -309,7 +321,9 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * @return
+	 * Creation de la reponse pour une erreur de connexion perdue
+	 * 
+	 * @return la reponse
 	 */
 	public static String erreurDeconnexion()
 	{
@@ -320,8 +334,10 @@ public abstract class ProtocoleAnnuaire
 	// testeurs de reponses
 
 	/**
-	 * @param reponse
-	 * @return
+	 * Tester si uen reponse est une erreur d'implementation manquante
+	 * 
+	 * @param reponse la reponse a tester
+	 * @return true si c'est cette erreur, false sinon
 	 */
 	public static boolean isErreurImplementionManquante(String reponse)
 	{
@@ -329,8 +345,10 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * @param reponse
-	 * @return
+	 * Tester si uen reponse est une erreur serveur
+	 * 
+	 * @param reponse la reponse a tester
+	 * @return true si c'est cette erreur, false sinon
 	 */
 	public static boolean isErreurServeur(String reponse)
 	{
@@ -339,8 +357,10 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * @param reponse
-	 * @return
+	 * Tester si uen reponse est une confirmation
+	 * 
+	 * @param reponse la reponse a tester
+	 * @return true si c'est une confirmation, false sinon
 	 */
 	public static boolean isOk(String reponse)
 	{
@@ -349,8 +369,10 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * @param reponse
-	 * @return
+	 * Tester si uen reponse est une erreur de requete
+	 * 
+	 * @param reponse la reponse a tester
+	 * @return true si c'est cette erreur, false sinon
 	 */
 	public static boolean isErreurRequete(String reponse)
 	{
@@ -359,8 +381,10 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * @param reponse
-	 * @return
+	 * Tester si uen reponse est une erreur de droits
+	 * 
+	 * @param reponse la reponse a tester
+	 * @return true si c'est cette erreur, false sinon
 	 */
 	public static boolean isErreurInterdit(String reponse)
 	{
@@ -369,8 +393,10 @@ public abstract class ProtocoleAnnuaire
 	
 
 	/**
-	 * @param reponse
-	 * @return
+	 * Tester si uen reponse est une erreur de connexion perdue
+	 * 
+	 * @param reponse la reponse a tester
+	 * @return true si c'est cette erreur, false sinon
 	 */
 	public static boolean isErreurDeconnexion(String reponse)
 	{

@@ -54,7 +54,7 @@ public class Serveur
             System.out.println("mise en attente d'un nouveau client");
             try
             {
-                new ClientHandler(socketEcoute.accept(), protocolServer).start();
+                new ClientHandler(socketEcoute.accept(), protocolServer.clone()).start();
                 System.out.println("lancement d'un nouveau ClientHandler reussi");
             }
             catch (Exception e)

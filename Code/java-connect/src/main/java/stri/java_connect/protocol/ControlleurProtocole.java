@@ -12,14 +12,18 @@ import org.json.JSONObject;
 public abstract class ControlleurProtocole
 {
     /**
-     * @param requete
-     * @return
+     * Traiter une requete pour generer une reponse
+     * 
+     * @param requete la requete a traiter
+     * @return la reponse
      */
     public abstract String traiterRequete (String requete);
 
     /**
-     * @param requete
-     * @return
+     * Extraire la methode d'une requete
+     * 
+     * @param requete la requete ou extraire la methode
+     * @return la methode
      */
     public static String requeteMethode (String requete)
     {
@@ -27,8 +31,10 @@ public abstract class ControlleurProtocole
     }
     
     /**
-     * @param requete
-     * @return
+     * Extraire l'URI d'une requete
+     * 
+     * @param requete la requete ou extraire l'URI
+     * @return l'URI
      */
     public static String requeteURI (String requete)
     {
@@ -36,8 +42,10 @@ public abstract class ControlleurProtocole
     }
     
     /**
-     * @param requete
-     * @return
+     * Extraire le corps d'une requete
+     * 
+     * @param requete la requete ou extraire le corps
+     * @return le corps
      */
     public static String requeteCorps (String requete)
     {
@@ -51,8 +59,10 @@ public abstract class ControlleurProtocole
     public abstract String traiterReponse (String reponse);
     
     /**
-     * @param reponse
-     * @return
+     * Extraire le code d'une reponse
+     * 
+     * @param reponse la reponse ou extraire le code
+     * @return le code
      */
     public static int reponseCode(String reponse)
     {
@@ -61,12 +71,20 @@ public abstract class ControlleurProtocole
     }
     
     /**
-     * @param reponse
-     * @return
+     * Extraire les donnees d'une reponse
+     * 
+     * @param reponse la reponse ou extraire les donnees
+     * @return les donnees
      */
     public static String reponseDonnees(String reponse)
     {
     	JSONObject js = new JSONObject(reponse);
     	return js.getString("data");
     }
+    
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
+    @Override
+    public abstract ControlleurProtocole clone();
 }

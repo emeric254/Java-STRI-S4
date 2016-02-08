@@ -14,7 +14,7 @@ public class ServeurAnnuaire
 {
 	private final static int portDefaut = 12345;
 	private int port;
-	private ControlleurProtocoleAnnuaire controlleur;
+	private Annuaire annuaire;
 	
 	/**
 	 * Creation d'un Serveur Annuaire sur le port par defaut avec un annuaire vide
@@ -42,7 +42,7 @@ public class ServeurAnnuaire
 	 */
 	public ServeurAnnuaire(Annuaire pAnnuaire)
 	{
-		this(portDefaut,pAnnuaire);
+		this(portDefaut, pAnnuaire);
 	}
 	
 	/**
@@ -54,7 +54,7 @@ public class ServeurAnnuaire
 	public ServeurAnnuaire(int pPort, Annuaire pAnnuaire)
 	{
 		port = pPort;
-		controlleur = new ControlleurProtocoleAnnuaire(pAnnuaire);
+		annuaire = pAnnuaire;
 		//start();
 	}
 
@@ -64,6 +64,6 @@ public class ServeurAnnuaire
 	 */
 	public void start()
 	{
-		new Serveur(controlleur,port);
+		new Serveur(new ControlleurProtocoleAnnuaire(annuaire), port);
     }
 }

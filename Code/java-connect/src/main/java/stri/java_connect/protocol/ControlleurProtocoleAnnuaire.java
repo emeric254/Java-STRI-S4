@@ -91,7 +91,14 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 				u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
 				
 				if(annuaire.existeUtilisateur(u.getCourriel()) || utilisateur != null)
+				{
+					System.err.println(u.toString());
+					System.err.println(u.getCourriel());
+					System.err.println(annuaire.existeUtilisateur(u.getCourriel()));
+					System.err.println(utilisateur != null);
+					System.err.println(utilisateur != null ? utilisateur.getCourriel() : "-");
 					reponse = ProtocoleAnnuaire.erreurInterdit();
+				}
 				else
 				{
 					annuaire.ajoutUtilisateur(utilisateur = u);
@@ -175,5 +182,11 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		if(ProtocoleAnnuaire.isOk(reponse))
 			return ProtocoleAnnuaire.extraireDonnees(reponse);
 		return null;
+	}
+	
+	@Override
+	public ControlleurProtocoleAnnuaire clone()
+	{
+		return new ControlleurProtocoleAnnuaire(annuaire);
 	}
 }
