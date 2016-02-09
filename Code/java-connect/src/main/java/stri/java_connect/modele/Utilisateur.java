@@ -324,6 +324,56 @@ public class Utilisateur
         chaine += "] }";
         return chaine;
     }
+    @Override
+    
+    /**
+     * Get Utilisateur JSON String representation reduced for Anonymous reading
+     * 
+     * @return the Utilisateur object as a JSON formated String as Anonymous readable
+     */
+    public String toStringAnonyme()
+    {
+        String chaine = "{";
+        chaine += glt + "nom" + separ + nom + vgl;
+        if(privilege.equals("anonyme")
+        {
+            chaine += glt + "courriel" + separ + courriel + vgl;
+            chaine += glt + "telephone" + separ + telephone + vgl;
+            chaine += glt + "datediplome" + separ + dateDiplome + vgl;
+            chaine += glt + "competences" + glt + " : [";
+            for(String temp : Competences)
+            {
+                chaine += glt + temp + vgl;
+            }
+            if(Competences.size() > 0)
+                chaine = chaine.substring(0, chaine.length()-1);
+        }
+        chaine += "] }";
+        return chaine;
+    }
+    
+    /**
+     * Get Utilisateur JSON String representation reduced for other User reading
+     * 
+     * @return the Utilisateur object as a JSON formated String as User readable
+     */
+    public String toStringUtilisateur()
+    {
+        String chaine = "{";
+        chaine += glt + "nom" + separ + nom + vgl;
+        chaine += glt + "courriel" + separ + courriel + vgl;
+        chaine += glt + "telephone" + separ + telephone + vgl;
+        chaine += glt + "datediplome" + separ + dateDiplome + vgl;
+        chaine += glt + "competences" + glt + " : [";
+        for(String temp : Competences)
+        {
+            chaine += glt + temp + vgl;
+        }
+        if(Competences.size() > 0)
+            chaine = chaine.substring(0, chaine.length()-1);
+        chaine += "] }";
+        return chaine;
+    }
 
     /**
      * Load informations from a JSON representation String
@@ -353,6 +403,22 @@ public class Utilisateur
     {
         Utilisateur copie = new Utilisateur();
         copie.fromJSONString(this.toString());
+        return copie;
+    }
+
+    @Override
+    public Utilisateur cloneAnonyme()
+    {
+        Utilisateur copie = new Utilisateur();
+        copie.fromJSONString(this.toStringAnonyme());
+        return copie;
+    }
+
+    @Override
+    public Utilisateur cloneUtilisateur()
+    {
+        Utilisateur copie = new Utilisateur();
+        copie.fromJSONString(this.toStringUtilisateur());
         return copie;
     }
 

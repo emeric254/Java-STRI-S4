@@ -292,4 +292,54 @@ public class IHM
 
         client.inscription(utilisateur);
     }
+    
+    private void connexion() throws IOException
+    {
+        String mail = "", mdp = "";
+        do
+        {
+            System.out.println("Entrez votre adresse mail (identifiant) : ");
+            try
+            {
+                mail = fluxEntreeStandard.readLine();
+            }
+            catch(IOException e)
+            {
+                mail = "";
+            }
+            
+            System.out.println("Entrez votre mot de passe : ");
+            try
+            {
+                mdp = fluxEntreeStandard.readLine();
+            }
+            catch(IOException e)
+            {
+                mdp = "";
+            }
+        } while (true); // TODO : condition
+        ClientAnnuaire.connexion(mail, mdp);
+    }
+    
+    private void afficherProfil()
+    {
+        afficherProfilUtilisateur(utilisateur)
+    }	
+    
+    private void afficherProfilUtilisateur(Utilisateur pUtilisateur)
+    {
+    	System.out.println("Informations détaillées de votre profil");
+    	System.out.println("  Courriel : " + pUtilisateur.getCourriel());
+    	System.out.println("  Nom : " + pUtilisateur.getNom());
+    	System.out.println("  Téléphone : " + pUtilisateur.getTelephone());
+    	System.out.println("  Date du diplôme : " + pUtilisateur.getDateDiplome());
+    	System.out.println("  Compétences : ");
+    	// TODO affichage liste competences
+    	/*
+    	for(String temp : pUtilisateur.getCompetences())
+  	  	{
+  		  chaine += glt + temp + vgl;
+  	  	}
+  	  	*/
+    }	
 }
