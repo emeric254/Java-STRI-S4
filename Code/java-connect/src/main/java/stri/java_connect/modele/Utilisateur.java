@@ -357,7 +357,7 @@ public class Utilisateur
      * 
      * @return the Utilisateur object as a JSON formated String as User readable
      */
-    public String toStringAnonyme()
+    public String toStringUtilisateur()
     {
         String chaine = "{";
         chaine += glt + "nom" + separ + nom + vgl;
@@ -403,6 +403,22 @@ public class Utilisateur
     {
         Utilisateur copie = new Utilisateur();
         copie.fromJSONString(this.toString());
+        return copie;
+    }
+
+    @Override
+    public Utilisateur cloneAnonyme()
+    {
+        Utilisateur copie = new Utilisateur();
+        copie.fromJSONString(this.toStringAnonyme());
+        return copie;
+    }
+
+    @Override
+    public Utilisateur cloneUtilisateur()
+    {
+        Utilisateur copie = new Utilisateur();
+        copie.fromJSONString(this.toStringUtilisateur());
         return copie;
     }
 
