@@ -43,7 +43,7 @@ public class Utilisateur
         dateDiplome = (long) -1;
         telephone = "";
         courriel = "";
-        permissionLecture = "anonyme";
+        permissionLecture = "utilisateur";
         // TODO permissions plus detaillees
         /*
         permissionLecture = "{"
@@ -54,7 +54,7 @@ public class Utilisateur
             + "'competences':'anonyme'"
             + "}";
         */
-        privilege = "anonyme";
+        privilege = "utilisateur";
         Competences = new ArrayDeque<String>();
     };
 
@@ -324,7 +324,6 @@ public class Utilisateur
         chaine += "] }";
         return chaine;
     }
-    @Override
     
     /**
      * Get Utilisateur JSON String representation reduced for Anonymous reading
@@ -335,7 +334,7 @@ public class Utilisateur
     {
         String chaine = "{";
         chaine += glt + "nom" + separ + nom + vgl;
-        if(privilege.equals("anonyme")
+        if(privilege.equals("anonyme"))
         {
             chaine += glt + "courriel" + separ + courriel + vgl;
             chaine += glt + "telephone" + separ + telephone + vgl;
@@ -406,7 +405,11 @@ public class Utilisateur
         return copie;
     }
 
-    @Override
+    /**
+     * Make a clone of this object
+     * 
+     * @return a clone with only anonymous readable attributes
+     */
     public Utilisateur cloneAnonyme()
     {
         Utilisateur copie = new Utilisateur();
@@ -414,7 +417,11 @@ public class Utilisateur
         return copie;
     }
 
-    @Override
+    /**
+     * Make a clone of this object
+     * 
+     * @return a clone with only user readable attributes
+     */
     public Utilisateur cloneUtilisateur()
     {
         Utilisateur copie = new Utilisateur();

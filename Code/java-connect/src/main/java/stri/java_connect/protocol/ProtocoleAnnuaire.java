@@ -3,6 +3,9 @@
  */
 package stri.java_connect.protocol;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import stri.java_connect.utils.CourrielValidateur;
 import stri.java_connect.utils.JSONValidateur;
 import stri.java_connect.utils.MD5Hasher;
@@ -427,5 +430,29 @@ public abstract class ProtocoleAnnuaire
 	public static String extraireDonnees(String reponse)
 	{
 		return ControlleurProtocole.reponseDonnees(reponse);
+	}
+
+	/**
+	 * Extrait le JSONObject d'une reponse
+	 * 
+	 * @param reponse la reponse dont on doit extraire le JSONObject
+	 * @return le JSONObject
+	 */
+	public static JSONObject extraireJSONObject(String reponse)
+	{
+    	JSONObject js = new JSONObject(reponse);
+    	return js.getJSONObject("data");
+	}
+
+	/**
+	 * Extrait le JSONArray d'une reponse
+	 * 
+	 * @param reponse la reponse dont on doit extraire le JSONArray
+	 * @return le JSONArray
+	 */
+	public static JSONArray extraireJSONArray(String reponse)
+	{
+    	JSONObject js = new JSONObject(reponse);
+    	return js.getJSONArray("data");
 	}
 }

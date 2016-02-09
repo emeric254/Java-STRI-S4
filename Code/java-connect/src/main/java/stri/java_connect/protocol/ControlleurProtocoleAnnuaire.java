@@ -37,14 +37,13 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		{
 			if (ProtocoleAnnuaire.validerRequeteConnexion(requete))
 			{
-				Utilisateur u = new Utilisateur();
-				u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
+				String identifiants = (ControlleurProtocole.requeteURI(requete));
+				String courriel = identifiants.split(":")[0];
 				
-				if (annuaire.existeUtilisateur(u.getCourriel()) && utilisateur == null)
+				if (annuaire.existeUtilisateur(courriel) && utilisateur == null)
 				{
-					utilisateur = annuaire.getUtilisateur(u.getCourriel());
-					
-					if (utilisateur.getMotDePasse().equals(u.getMotDePasse()))
+					utilisateur = annuaire.getUtilisateur(courriel);
+					if (utilisateur.getMotDePasse().equals(identifiants.substring(courriel.length()+1)))
 					{
 						reponse = ProtocoleAnnuaire.ok(utilisateur.toString());
 					}
@@ -96,11 +95,6 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 				
 				if(annuaire.existeUtilisateur(u.getCourriel()) || utilisateur != null)
 				{
-					System.err.println(u.toString());
-					System.err.println(u.getCourriel());
-					System.err.println(annuaire.existeUtilisateur(u.getCourriel()));
-					System.err.println(utilisateur != null);
-					System.err.println(utilisateur != null ? utilisateur.getCourriel() : "-");
 					reponse = ProtocoleAnnuaire.erreurInterdit();
 				}
 				else
