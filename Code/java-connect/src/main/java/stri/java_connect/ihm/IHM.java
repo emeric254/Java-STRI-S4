@@ -302,7 +302,7 @@ public class IHM
         do
         {
             temp = IHMUtilitaires.saisie("En avez vous une autre à saisir ? (O/N)");
-            if (temp.toUpperCase().equals("O"))
+            if (temp.equalsIgnoreCase("O"))
             {
                 do
                 {
@@ -310,7 +310,7 @@ public class IHM
                 } while ( temp.length() <= 0 );
                 utilisateur.addCompetence(temp);
             }
-        } while (!temp.toUpperCase().equals("N"));
+        } while (!temp.equalsIgnoreCase("N"));
 
         String reponse = client.inscription(utilisateur);
         
@@ -328,7 +328,7 @@ public class IHM
         String temp ="";
 
         temp = IHMUtilitaires.saisie("Changer de mot de passe ? (O/N)");
-        if (temp.toUpperCase().equals("O"))
+        if (temp.equalsIgnoreCase("O"))
         {
 	        do
 	        {
@@ -341,7 +341,7 @@ public class IHM
         
 
         temp = IHMUtilitaires.saisie("Changer de nom ? (O/N)");
-        if (temp.toUpperCase().equals("O"))
+        if (temp.equalsIgnoreCase("O"))
         {
 	        do
 	        {
@@ -353,7 +353,7 @@ public class IHM
         temp = "";
 
         temp = IHMUtilitaires.saisie("Changer la visibilite de votre profil ? (O/N)");
-        if (temp.toUpperCase().equals("O"))
+        if (temp.equalsIgnoreCase("O"))
         {
 	        do
 	        {
@@ -368,7 +368,7 @@ public class IHM
 	    temp = "";
 
         temp = IHMUtilitaires.saisie("Changer de numero de telephone ? (O/N)");
-        if (temp.toUpperCase().equals("O"))
+        if (temp.equalsIgnoreCase("O"))
         {
 	        do
 	        {
@@ -381,7 +381,7 @@ public class IHM
 	    temp = "";
 
         temp = IHMUtilitaires.saisie("Changer d'annee de diplomation ? (O/N)");
-        if (temp.toUpperCase().equals("O"))
+        if (temp.equalsIgnoreCase("O"))
         {
 	        do
 	        {
@@ -402,7 +402,7 @@ public class IHM
 	    temp = "";
 
         temp = IHMUtilitaires.saisie("Changer toutes vos competences ? (O/N)");
-        if (temp.toUpperCase().equals("O"))
+        if (temp.equalsIgnoreCase("O"))
         {
 	        do
 	        {
@@ -415,7 +415,7 @@ public class IHM
 	        do
 	        {
 	            temp = IHMUtilitaires.saisie("En avez vous une autre à saisir ? (O/N)");
-	            if (temp.toUpperCase().equals("O"))
+	            if (temp.equalsIgnoreCase("O"))
 	            {
 	                do
 	                {
@@ -423,12 +423,12 @@ public class IHM
 	                } while ( temp.length() <= 0 );
 	                utilisateur.addCompetence(temp);
 	            }
-	        } while (!temp.toUpperCase().equals("N"));
+	        } while (!temp.equalsIgnoreCase("N"));
 	    }
 	    temp = "";
 
         temp = IHMUtilitaires.saisie("Ajouter une competence ? (O/N)");
-        if (temp.toUpperCase().equals("O"))
+        if (temp.equalsIgnoreCase("O"))
         {
 	        do
 	        {
@@ -441,7 +441,7 @@ public class IHM
 	        do
 	        {
 	            temp = IHMUtilitaires.saisie("En avez vous une autre à saisir ? (O/N)");
-	            if (temp.toUpperCase().equals("O"))
+	            if (temp.equalsIgnoreCase("O"))
 	            {
 	                do
 	                {
@@ -449,7 +449,7 @@ public class IHM
 	                } while ( temp.length() <= 0 );
 	                utilisateur.addCompetence(temp);
 	            }
-	        } while (!temp.toUpperCase().equals("N"));
+	        } while (!temp.equalsIgnoreCase("N"));
 	    }
 	    temp = "";
 
