@@ -150,4 +150,36 @@ public class Annuaire
 		return l;
 		// return getArrayTousUtilisateurs().clone(); // fonctionne ou non ???
 	}
+	
+	/**
+	 * Retourne la liste des utilisateurs (clones)
+	 * 
+	 * @return ArrayDeque <Utilisateur> liste des utilisateurs (clones)
+	 */
+	public ArrayDeque<Utilisateur> getArraySecuriseTousUtilisateursAnonyme()
+	{
+		ArrayDeque<Utilisateur> l = new ArrayDeque<Utilisateur>();
+		for (Utilisateur utilisateur : annuaire.values())
+		{
+			l.add(utilisateur.cloneAnonyme());
+		}
+		return l;
+		// return getArrayTousUtilisateurs().clone(); // fonctionne ou non ???
+	}
+	
+	/**
+	 * Retourne la liste des utilisateurs (clones)
+	 * 
+	 * @return ArrayDeque <Utilisateur> liste des utilisateurs (clones)
+	 */
+	public ArrayDeque<Utilisateur> getArraySecuriseTousUtilisateursUtilisateur()
+	{
+		ArrayDeque<Utilisateur> l = new ArrayDeque<Utilisateur>();
+		for (Utilisateur utilisateur : annuaire.values())
+		{
+			l.add(utilisateur.cloneUtilisateur());
+		}
+		return l;
+		// return getArrayTousUtilisateurs().clone(); // fonctionne ou non ???
+	}
 }
