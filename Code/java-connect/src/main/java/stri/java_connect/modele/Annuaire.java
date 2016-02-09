@@ -52,7 +52,7 @@ public class Annuaire
 	 * Enleve tous les utilisateurs; vide l'annuaire.
 	 * 
 	 */
-	public void reset()
+	public synchronized void reset()
 	{
 		annuaire.clear();
 	}
@@ -73,7 +73,7 @@ public class Annuaire
 	 * 
 	 * @param utilisateur l'utilisateur a ajouter
 	 */
-	public void ajoutUtilisateur(Utilisateur utilisateur)
+	public synchronized void ajoutUtilisateur(Utilisateur utilisateur)
 	{
 		annuaire.put(utilisateur.getCourriel(), utilisateur);
 	}
@@ -83,12 +83,12 @@ public class Annuaire
 	 * 
 	 * @param courriel le courriel qui identifie l'utilisateur
 	 */
-	public void suppresionUtilisateur(String courriel)
+	public synchronized void suppresionUtilisateur(String courriel)
 	{
 		annuaire.remove(courriel);
 	}
 	
-	public void suppresionUtilisateur(Utilisateur u)
+	public synchronized void suppresionUtilisateur(Utilisateur u)
 	{
 		suppresionUtilisateur(u.getCourriel());
 	}

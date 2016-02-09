@@ -55,7 +55,6 @@ public class IHM
 	            try
 	            {
 					afficherInscription();
-					choix = "0";
 				}
 	            catch (IOException e)
 	            {
@@ -63,6 +62,7 @@ public class IHM
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				choix = "0";
 	        }
 	        else if (choix.equals("2"))
 	        {
@@ -70,7 +70,6 @@ public class IHM
 	            try
 	            {
 					afficherConnexion();
-					choix = "0";
 				}
 	            catch (IOException e)
 	            {
@@ -78,6 +77,7 @@ public class IHM
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				choix = "0";
 	        }
 	        else if (choix.equals("3"))
 	        {
@@ -248,6 +248,17 @@ public class IHM
 
         do
         {
+            temp = IHMUtilitaires.saisie("Choisissez la visibilite de votre profil : \n  0 - visibilite minimale\n  1 - visibilite normale");
+        } while ( !(temp.equals("0") || temp.equals("1")) );
+        
+        if(temp.equals("1"))
+        	utilisateur.setPermissionLecture("anonyme");
+        else 
+        	utilisateur.setPermissionLecture("utilisateur");
+        temp = "";
+        
+        do
+        {
             temp = IHMUtilitaires.saisie("Entrez votre nom et prenom :");
         } while ( temp.length() <= 0 );
         
@@ -340,6 +351,21 @@ public class IHM
 	        utilisateur.setNom(temp);
         }
         temp = "";
+
+        temp = IHMUtilitaires.saisie("Changer la visibilite de votre profil ? (O/N)");
+        if (temp.toUpperCase().equals("O"))
+        {
+	        do
+	        {
+	            temp = IHMUtilitaires.saisie("Choisissez la visibilite de votre profil : \n  0 - visibilite minimale\n  1 - visibilite normale");
+	        } while ( !(temp.equals("0") || temp.equals("1")) );
+	        
+	        if(temp.equals("1"))
+	        	utilisateur.setPermissionLecture("anonyme");
+	        else 
+	        	utilisateur.setPermissionLecture("utilisateur");
+	    }
+	    temp = "";
 
         temp = IHMUtilitaires.saisie("Changer de numero de telephone ? (O/N)");
         if (temp.toUpperCase().equals("O"))

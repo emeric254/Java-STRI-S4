@@ -7,6 +7,7 @@ import java.util.ArrayDeque;
 import java.util.Date;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -334,7 +335,7 @@ public class Utilisateur
     {
         String chaine = "{";
         chaine += glt + "nom" + separ + nom + vgl;
-        if(privilege.equals("anonyme"))
+        if(permissionLecture.equals("anonyme"))
         {
             chaine += glt + "courriel" + separ + courriel + vgl;
             chaine += glt + "telephone" + separ + telephone + vgl;
@@ -346,8 +347,11 @@ public class Utilisateur
             }
             if(Competences.size() > 0)
                 chaine = chaine.substring(0, chaine.length()-1);
+            chaine += "]";
         }
-        chaine += "] }";
+        chaine += "}";
+        
+        System.out.println(chaine);
         return chaine;
     }
     
@@ -371,6 +375,8 @@ public class Utilisateur
         if(Competences.size() > 0)
             chaine = chaine.substring(0, chaine.length()-1);
         chaine += "] }";
+        
+        System.out.println(chaine);
         return chaine;
     }
 
@@ -383,18 +389,21 @@ public class Utilisateur
     {
         // TODO import from json string
         JSONObject details = new JSONObject(json);
-        setMotDePasse(details.getString("motdepasse"));
-        setNom(details.getString("nom"));
-        setDateDiplome(details.getLong("datediplome"));
-        setTelephone(details.getString("telephone"));
-        setCourriel(details.getString("courriel"));
-        setPermissionLecture(details.getString("permissionlecture"));
-        setPrivilege(details.getString("privilege"));
-        JSONArray listeCompetences = details.getJSONArray("competences");
-        for (Object object : listeCompetences)
+        try { setMotDePasse(details.getString("motdepasse")); } catch (JSONException e) {}
+        try { setNom(details.getString("nom")); } catch (JSONException e) {}
+        try { setDateDiplome(details.getLong("datediplome")); } catch (JSONException e) {}
+        try { setTelephone(details.getString("telephone")); } catch (JSONException e) {}
+        try { setCourriel(details.getString("courriel")); } catch (JSONException e) {}
+        try { setPermissionLecture(details.getString("permissionlecture")); } catch (JSONException e) {}
+        try { setPrivilege(details.getString("privilege")); } catch (JSONException e) {}
+        try
         {
-            Competences.add((String) object);
-        }
+        	JSONArray listeCompetences = details.getJSONArray("competences");
+	        for (Object object : listeCompetences)
+	        {
+	            Competences.add((String) object);
+	        }
+        } catch (JSONException e) {}
     }
 
     @Override

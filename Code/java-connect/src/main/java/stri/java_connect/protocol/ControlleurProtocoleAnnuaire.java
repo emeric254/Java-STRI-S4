@@ -66,8 +66,10 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		{
 			if (ProtocoleAnnuaire.validerRequeteConsulterProfils(requete))
 			{
-				// TODO profil alleges ? gestion permissions ? ...
-				reponse = ProtocoleAnnuaire.ok(annuaire.getArrayTousUtilisateurs().toString());
+				if (utilisateur != null)
+					reponse = ProtocoleAnnuaire.ok(annuaire.getArraySecuriseTousUtilisateursUtilisateur().toString());
+				else
+					reponse = ProtocoleAnnuaire.ok(annuaire.getArraySecuriseTousUtilisateursAnonyme().toString());
 			}
 			else if (ProtocoleAnnuaire.validerRequeteConsulterProfil(requete))
 			{
@@ -77,8 +79,11 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 				if (annuaire.existeUtilisateur(courriel))
 				{
 					Utilisateur temp = annuaire.getUtilisateur(courriel);
-					// TODO gestion permissions !
-					reponse = ProtocoleAnnuaire.ok(temp.toString());
+					
+					if(utilisateur != null)
+						reponse = ProtocoleAnnuaire.ok(temp.toStringUtilisateur());
+					else
+						reponse = ProtocoleAnnuaire.ok(temp.toStringAnonyme());
 				}
 				else
 					reponse = ProtocoleAnnuaire.erreurRequete();
