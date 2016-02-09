@@ -49,7 +49,7 @@ public class IHM
 
 	        choix = IHMUtilitaires.saisie();
 
-	        if (choix.equals("1"))
+	        if ("1".equals(choix))
 	        {
 	    	    IHMUtilitaires.cleanTerminal();
 	            try
@@ -64,7 +64,7 @@ public class IHM
 				}
 				choix = "0";
 	        }
-	        else if (choix.equals("2"))
+	        else if ("2".equals(choix))
 	        {
 	    	    IHMUtilitaires.cleanTerminal();
 	            try
@@ -79,7 +79,7 @@ public class IHM
 				}
 				choix = "0";
 	        }
-	        else if (choix.equals("3"))
+	        else if ("3".equals(choix))
 	        {
 	    	    IHMUtilitaires.cleanTerminal();
 	    	    try
@@ -92,7 +92,7 @@ public class IHM
 					e.printStackTrace();
 				}
 	        }
-	        else if (choix.equals("0"))
+	        else if ("0".equals(choix))
 	        {
 	        	client.deconnexion();
 	    	    IHMUtilitaires.cleanTerminal();
@@ -102,7 +102,7 @@ public class IHM
 	    	    IHMUtilitaires.cleanTerminal();
 	        	System.out.println("Veuillez choisir quelque chose de valide !");
 	        }
-	    } while (! choix.equals("0") );
+	    } while (! "0".equals(choix) );
 	}
 	
 	/**
@@ -150,7 +150,7 @@ public class IHM
 
 	        choix = IHMUtilitaires.saisie();
 
-	        if (choix.equals("1"))
+	        if ("1".equals(choix))
 	        {
 	            try
 	            {
@@ -162,11 +162,11 @@ public class IHM
 					//e.printStackTrace();
 				}
 	        }
-	        else if (choix.equals("2"))
+	        else if ("2".equals(choix))
             {
                 afficherProfil();
             }
-	        else if (choix.equals("3"))
+	        else if ("3".equals(choix))
 	        {
 	        	try
 	        	{
@@ -178,15 +178,15 @@ public class IHM
 					e.printStackTrace();
 				}
 	        }
-	        else if (choix.equals("4"))
+	        else if ("4".equals(choix))
 	        {
 	        	afficherDetailsProfil();
 	        }
-	        else if (choix.equals("5"))
+	        else if ("5".equals(choix))
 	        {
 	        	System.out.println("Pas encore implemente");
 	        }
-	        else if (choix.equals("0"))
+	        else if ("0".equals(choix))
 	        {
 	        	client.deconnexion();
 	        }
@@ -194,7 +194,7 @@ public class IHM
 	        {
 	        	System.out.println("Veuillez choisir quelque chose de valide !");
 	        }
-        } while (! choix.equals("0"));
+        } while (! "0".equals(choix));
     }
 	
 
@@ -212,8 +212,15 @@ public class IHM
         {
 			temp = client.consulterProfil(temp);
 			Utilisateur u = new Utilisateur();
-			u.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(temp).toString());
-			afficherProfilUtilisateur(u);
+			try
+			{
+				u.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(temp).toString());
+				afficherProfilUtilisateur(u);
+			}
+			catch (JSONException e)
+			{
+				System.out.println("Pas d'utilisateur correspondant ...");
+			}
 		}
         catch (IOException e)
         {
@@ -249,9 +256,9 @@ public class IHM
         do
         {
             temp = IHMUtilitaires.saisie("Choisissez la visibilite de votre profil : \n  0 - visibilite minimale\n  1 - visibilite normale");
-        } while ( !(temp.equals("0") || temp.equals("1")) );
+        } while ( !(temp.equals("0") || "1".equals(temp)) );
         
-        if(temp.equals("1"))
+        if("1".equals(temp))
         	utilisateur.setPermissionLecture("anonyme");
         else 
         	utilisateur.setPermissionLecture("utilisateur");
@@ -302,7 +309,7 @@ public class IHM
         do
         {
             temp = IHMUtilitaires.saisie("En avez vous une autre à saisir ? (O/N)");
-            if (temp.equalsIgnoreCase("O"))
+            if ("O".equalsIgnoreCase(temp))
             {
                 do
                 {
@@ -310,7 +317,7 @@ public class IHM
                 } while ( temp.length() <= 0 );
                 utilisateur.addCompetence(temp);
             }
-        } while (!temp.equalsIgnoreCase("N"));
+        } while (!"N".equalsIgnoreCase(temp));
 
         String reponse = client.inscription(utilisateur);
         
@@ -328,7 +335,7 @@ public class IHM
         String temp ="";
 
         temp = IHMUtilitaires.saisie("Changer de mot de passe ? (O/N)");
-        if (temp.equalsIgnoreCase("O"))
+        if ("O".equalsIgnoreCase(temp))
         {
 	        do
 	        {
@@ -341,7 +348,7 @@ public class IHM
         
 
         temp = IHMUtilitaires.saisie("Changer de nom ? (O/N)");
-        if (temp.equalsIgnoreCase("O"))
+        if ("O".equalsIgnoreCase(temp))
         {
 	        do
 	        {
@@ -353,14 +360,14 @@ public class IHM
         temp = "";
 
         temp = IHMUtilitaires.saisie("Changer la visibilite de votre profil ? (O/N)");
-        if (temp.equalsIgnoreCase("O"))
+        if ("O".equalsIgnoreCase(temp))
         {
 	        do
 	        {
 	            temp = IHMUtilitaires.saisie("Choisissez la visibilite de votre profil : \n  0 - visibilite minimale\n  1 - visibilite normale");
-	        } while ( !(temp.equals("0") || temp.equals("1")) );
+	        } while ( !(temp.equals("0") || "1".equals(temp)) );
 	        
-	        if(temp.equals("1"))
+	        if("1".equals(temp))
 	        	utilisateur.setPermissionLecture("anonyme");
 	        else 
 	        	utilisateur.setPermissionLecture("utilisateur");
@@ -368,7 +375,7 @@ public class IHM
 	    temp = "";
 
         temp = IHMUtilitaires.saisie("Changer de numero de telephone ? (O/N)");
-        if (temp.equalsIgnoreCase("O"))
+        if ("O".equalsIgnoreCase(temp))
         {
 	        do
 	        {
@@ -381,7 +388,7 @@ public class IHM
 	    temp = "";
 
         temp = IHMUtilitaires.saisie("Changer d'annee de diplomation ? (O/N)");
-        if (temp.equalsIgnoreCase("O"))
+        if ("O".equalsIgnoreCase(temp))
         {
 	        do
 	        {
@@ -402,7 +409,7 @@ public class IHM
 	    temp = "";
 
         temp = IHMUtilitaires.saisie("Changer toutes vos competences ? (O/N)");
-        if (temp.equalsIgnoreCase("O"))
+        if ("O".equalsIgnoreCase(temp))
         {
 	        do
 	        {
@@ -415,7 +422,7 @@ public class IHM
 	        do
 	        {
 	            temp = IHMUtilitaires.saisie("En avez vous une autre à saisir ? (O/N)");
-	            if (temp.equalsIgnoreCase("O"))
+	            if ("O".equalsIgnoreCase(temp))
 	            {
 	                do
 	                {
@@ -423,12 +430,12 @@ public class IHM
 	                } while ( temp.length() <= 0 );
 	                utilisateur.addCompetence(temp);
 	            }
-	        } while (!temp.equalsIgnoreCase("N"));
+	        } while (!"N".equalsIgnoreCase(temp));
 	    }
 	    temp = "";
 
         temp = IHMUtilitaires.saisie("Ajouter une competence ? (O/N)");
-        if (temp.equalsIgnoreCase("O"))
+        if ("O".equalsIgnoreCase(temp))
         {
 	        do
 	        {
@@ -441,7 +448,7 @@ public class IHM
 	        do
 	        {
 	            temp = IHMUtilitaires.saisie("En avez vous une autre à saisir ? (O/N)");
-	            if (temp.equalsIgnoreCase("O"))
+	            if ("O".equalsIgnoreCase(temp))
 	            {
 	                do
 	                {
@@ -449,7 +456,7 @@ public class IHM
 	                } while ( temp.length() <= 0 );
 	                utilisateur.addCompetence(temp);
 	            }
-	        } while (!temp.equalsIgnoreCase("N"));
+	        } while (!"N".equalsIgnoreCase(temp));
 	    }
 	    temp = "";
 
@@ -491,7 +498,7 @@ public class IHM
      */
     private void afficherProfilUtilisateur(Utilisateur pUtilisateur)
     {
-    	System.out.println("Informations détaillées de votre profil");
+    	System.out.println("Informations détaillées du profil");
     	if (pUtilisateur.getNom().length() > 0)
     		System.out.println(" > Nom : " + pUtilisateur.getNom());
     	if (pUtilisateur.getCourriel().length() > 0)

@@ -37,7 +37,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		{
 			if (ProtocoleAnnuaire.validerRequeteConnexion(requete))
 			{
-				String identifiants = (ControlleurProtocole.requeteURI(requete));
+				String identifiants = ControlleurProtocole.requeteURI(requete);
 				String courriel = identifiants.split(":")[0];
 				
 				if (annuaire.existeUtilisateur(courriel) && utilisateur == null)

@@ -19,6 +19,11 @@ public class Utilisateur
     private final static String glt = "\"";
     private final static String separ = "\" : \"";
     private final static String vgl = "\" ,";
+    private final static String courrielJSON = glt + "courriel" + separ;
+    private final static String telephoneJSON = glt + "telephone" + separ;
+    private final static String nomJSON = glt + "nom" + separ;
+    private final static String dateDiplomeJSON = glt + "datediplome" + separ;
+    private final static String competencesJSON = glt + "competences" + glt + " : [";
 
     private String motDePasse;
     private String nom;
@@ -302,20 +307,20 @@ public class Utilisateur
 
         chaine += glt + "motdepasse" + separ + motDePasse + vgl;
 
-        chaine += glt + "nom" + separ + nom + vgl;
+        chaine += nomJSON + nom + vgl;
 
-        chaine += glt + "datediplome" + separ + dateDiplome + vgl;
+        chaine += dateDiplomeJSON + dateDiplome + vgl;
 
-        chaine += glt + "telephone" + separ + telephone + vgl;
+        chaine += telephoneJSON + telephone + vgl;
 
-        chaine += glt + "courriel" + separ + courriel + vgl;
+        chaine += courrielJSON + courriel + vgl;
 
         // TODO temporaire avec permissionLecture simple
         chaine += glt + "permissionlecture" + separ + permissionLecture + vgl;
 
         chaine += glt + "privilege" + separ + privilege + vgl;
 
-        chaine += glt + "competences" + glt + " : [";
+        chaine += competencesJSON;
         for(String temp : Competences)
         {
             chaine += glt + temp + vgl;
@@ -334,13 +339,13 @@ public class Utilisateur
     public String toStringAnonyme()
     {
         String chaine = "{";
-        chaine += glt + "nom" + separ + nom + vgl;
-        if(permissionLecture.equals("anonyme"))
+        chaine += nomJSON + nom + vgl;
+        if("anonyme".equals(permissionLecture))
         {
-            chaine += glt + "courriel" + separ + courriel + vgl;
-            chaine += glt + "telephone" + separ + telephone + vgl;
-            chaine += glt + "datediplome" + separ + dateDiplome + vgl;
-            chaine += glt + "competences" + glt + " : [";
+            chaine += courrielJSON + courriel + vgl;
+            chaine += telephoneJSON + telephone + vgl;
+            chaine += dateDiplomeJSON + dateDiplome + vgl;
+            chaine += competencesJSON;
             for(String temp : Competences)
             {
                 chaine += glt + temp + vgl;
@@ -363,11 +368,11 @@ public class Utilisateur
     public String toStringUtilisateur()
     {
         String chaine = "{";
-        chaine += glt + "nom" + separ + nom + vgl;
-        chaine += glt + "courriel" + separ + courriel + vgl;
-        chaine += glt + "telephone" + separ + telephone + vgl;
-        chaine += glt + "datediplome" + separ + dateDiplome + vgl;
-        chaine += glt + "competences" + glt + " : [";
+        chaine += nomJSON + nom + vgl;
+        chaine += courrielJSON + courriel + vgl;
+        chaine += telephoneJSON + telephone + vgl;
+        chaine += dateDiplomeJSON + dateDiplome + vgl;
+        chaine += competencesJSON;
         for(String temp : Competences)
         {
             chaine += glt + temp + vgl;
