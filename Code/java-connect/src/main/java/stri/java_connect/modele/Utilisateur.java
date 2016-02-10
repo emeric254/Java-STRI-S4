@@ -394,11 +394,11 @@ public class Utilisateur
     {
         // TODO import from json string
         JSONObject details = new JSONObject(json);
-        setCourriel(details.getString("courriel"));
-        setMotDePasse(details.getString("motdepasse"));
-        setNom(details.getString("nom"));
-        setPermissionLecture(details.getString("permissionlecture"));
-        setTelephone(details.getString("telephone"));
+        try { setCourriel(details.getString("courriel")); } catch (JSONException e) {}
+        try { setMotDePasse(details.getString("motdepasse")); } catch (JSONException e) {}
+        try { setNom(details.getString("nom")); } catch (JSONException e) {}
+        try { setPermissionLecture(details.getString("permissionlecture")); } catch (JSONException e) {}
+        try { setTelephone(details.getString("telephone")); } catch (JSONException e) {}
         try { setDateDiplome(details.getLong("datediplome")); } catch (JSONException e) {}
         try { setPrivilege(details.getString("privilege")); } catch (JSONException e) {}
         try
