@@ -18,7 +18,7 @@ import stri.java_connect.utils.IHMUtilitaires;
  */
 public class IHM
 {
-	private ClientAnnuaire client;
+    private ClientAnnuaire client;
     private Utilisateur utilisateur;
 	
 	/**
@@ -49,12 +49,14 @@ public class IHM
 
 	        choix = IHMUtilitaires.saisie();
 
+            IHMUtilitaires.cleanTerminal();
+            
 	        if ("1".equals(choix))
 	        {
-	    	    IHMUtilitaires.cleanTerminal();
 	            try
 	            {
 					afficherInscription();
+                    afficherMenuPrincipal();
 				}
 	            catch (IOException e)
 	            {
@@ -66,10 +68,10 @@ public class IHM
 	        }
 	        else if ("2".equals(choix))
 	        {
-	    	    IHMUtilitaires.cleanTerminal();
 	            try
 	            {
 					afficherConnexion();
+                    afficherMenuPrincipal();
 				}
 	            catch (IOException e)
 	            {
@@ -95,11 +97,9 @@ public class IHM
 	        else if ("0".equals(choix))
 	        {
 	        	client.deconnexion();
-	    	    IHMUtilitaires.cleanTerminal();
 	        }
 	        else
 	        {
-	    	    IHMUtilitaires.cleanTerminal();
 	        	System.out.println("Veuillez choisir quelque chose de valide !");
 	        }
 	    } while (! "0".equals(choix) );
@@ -150,6 +150,8 @@ public class IHM
 
 	        choix = IHMUtilitaires.saisie();
 
+            IHMUtilitaires.cleanTerminal();
+
 	        if ("1".equals(choix))
 	        {
 	            try
@@ -184,7 +186,7 @@ public class IHM
 	        }
 	        else if ("5".equals(choix))
 	        {
-	        	System.out.println("Pas encore implemente");
+	        	System.out.println("Pas encore implemente !");
 	        }
 	        else if ("0".equals(choix))
 	        {
@@ -234,14 +236,14 @@ public class IHM
      */
     private void afficherInscription() throws IOException
     {
-        String temp ="";
+        String temp = "";
         utilisateur = new Utilisateur();
-        
+
         do
         {
             temp = IHMUtilitaires.saisie("Entrez votre adresse mail :");
         } while ( !CourrielValidateur.valider(temp) || ProtocoleAnnuaire.isOk(client.consulterProfil(temp)) );
-        
+
         utilisateur.setCourriel(temp);
         temp = "";
 
@@ -249,7 +251,7 @@ public class IHM
         {
             temp = IHMUtilitaires.saisie("Entrez votre mot de passe :");
         } while ( temp.length() <= 0 );
-        
+
         utilisateur.setMotDePasse(temp);
         temp = "";
 
@@ -257,13 +259,13 @@ public class IHM
         {
             temp = IHMUtilitaires.saisie("Choisissez la visibilite de votre profil : \n  0 - visibilite minimale\n  1 - visibilite normale");
         } while ( !("0".equals(temp) || "1".equals(temp)) );
-        
+
         if("1".equals(temp))
         	utilisateur.setPermissionLecture("anonyme");
         else 
         	utilisateur.setPermissionLecture("utilisateur");
         temp = "";
-        
+
         do
         {
             temp = IHMUtilitaires.saisie("Entrez votre nom et prenom :");
@@ -302,7 +304,7 @@ public class IHM
         {
             temp = IHMUtilitaires.saisie("Entrez votre/vos compétences (Une au minumum) :");
         } while ( temp.length() <= 0 );
-        
+
         utilisateur.addCompetence(temp);
     	temp= "";
 
@@ -323,7 +325,6 @@ public class IHM
         
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
-        afficherMenuPrincipal();
     }
 
     /**
@@ -464,7 +465,6 @@ public class IHM
 
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
-        afficherMenuPrincipal();
     }
     
     /**
@@ -482,7 +482,6 @@ public class IHM
         } while (!ProtocoleAnnuaire.isOk(reponse));
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
-        afficherMenuPrincipal();
     }
     
     /**
