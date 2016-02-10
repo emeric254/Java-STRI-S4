@@ -1,0 +1,32 @@
+
+/**
+ * 
+ */
+package stri.java_connect.utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public abstract class JSONLoader
+{
+    public static String readStringJSONObject(JSONObject json, String key)
+    {
+        String temp = "";
+        try
+        {
+            temp = json.getString(key);
+        }
+        catch (JSONException e)
+        {
+            // nothing read
+            temp = "";
+        }
+        return temp;
+    }
+    
+    public static String readStringJSONObjectAsString(String jsonString, String key)
+    {
+        JSONObject json = new JSONObject(jsonString);
+        return readStringJSONObject(json, key);
+    }
+}
