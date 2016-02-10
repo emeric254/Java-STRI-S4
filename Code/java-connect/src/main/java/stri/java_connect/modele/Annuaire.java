@@ -15,8 +15,6 @@ public class Annuaire
 {
 	private HashMap<String, Utilisateur> annuaire;
 	
-	//
-	
 	/**
 	 * Creation d'un Annuaire
 	 * 
@@ -118,7 +116,7 @@ public class Annuaire
 	/**
 	 * Retourne l'ensemble des utilisateurs
 	 * 
-	 * @return Collection <Utilisateur> ensemble des utilisateurs
+	 * @return Collection Collection d'Utilisateur, ensemble des utilisateurs
 	 */
 	public Collection<Utilisateur> getCollectionTousUtilisateurs()
 	{
@@ -128,7 +126,7 @@ public class Annuaire
 	/**
 	 * Retourne la liste des utilisateurs
 	 * 
-	 * @return ArrayDeque <Utilisateur> liste des utilisateurs
+	 * @return ArrayDeque ArrayDeque d'Utilisateur, liste des utilisateurs
 	 */
 	public ArrayDeque<Utilisateur> getArrayTousUtilisateurs()
 	{
@@ -138,7 +136,7 @@ public class Annuaire
 	/**
 	 * Retourne la liste des utilisateurs (clones)
 	 * 
-	 * @return ArrayDeque <Utilisateur> liste des utilisateurs (clones)
+	 * @return ArrayDeque ArrayDeque d'Utilisateur, liste des utilisateurs (clones)
 	 */
 	public ArrayDeque<Utilisateur> getArraySecuriseTousUtilisateurs()
 	{
@@ -154,7 +152,7 @@ public class Annuaire
 	/**
 	 * Retourne la liste des utilisateurs (clones)
 	 * 
-	 * @return ArrayDeque <Utilisateur> liste des utilisateurs (clones)
+	 * @return ArrayDeque ArrayDeque d'Utilisateur, liste des utilisateurs (clones)
 	 */
 	public ArrayDeque<Utilisateur> getArraySecuriseTousUtilisateursAnonyme()
 	{
@@ -170,7 +168,7 @@ public class Annuaire
 	/**
 	 * Retourne la liste des utilisateurs (clones)
 	 * 
-	 * @return ArrayDeque <Utilisateur> liste des utilisateurs (clones)
+	 * @return ArrayDeque ArrayDeque d'Utilisateur, liste des utilisateurs (clones)
 	 */
 	public ArrayDeque<Utilisateur> getArraySecuriseTousUtilisateursUtilisateur()
 	{

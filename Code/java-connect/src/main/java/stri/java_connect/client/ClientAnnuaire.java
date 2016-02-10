@@ -17,7 +17,9 @@ public class ClientAnnuaire
 {
 	private final static int portDefaut = 12345;
 	private Client client;
+	
 	/**
+	 * Creation d'un objet ClientAnnuaire sur le port par defaut
 	 * 
 	 */
 	public ClientAnnuaire()
@@ -26,7 +28,9 @@ public class ClientAnnuaire
 	}
 	
 	/**
+	 * Creation d'un objet ClientAnnuaire sur un port fournit
 	 * 
+	 * @param pPort le port sur lequel demarer
 	 */
 	public ClientAnnuaire(int pPort)
 	{
@@ -34,79 +38,93 @@ public class ClientAnnuaire
 	}
 	
 	/**
-	 * @param u
-	 * @throws IOException 
+	 * Inscrire un utilisateur
+	 * 
+	 * @param u l'utilisateur a inscrire
+	 * @return la reponse a cette requete
+	 * @throws IOException l'exception si la communication echoue
 	 */
 	public String inscription(Utilisateur u) throws IOException
 	{
-		// TODO
 		return client.communiquer(ProtocoleAnnuaire.requeteInscrire(u.toString()));
 	}
 	
 	/**
-	 * @param courriel
-	 * @param mdp
-	 * @return 
-	 * @throws IOException 
+	 * Connecter a un compte utilisateur
+	 * 
+	 * @param courriel le courriel du compte
+	 * @param mdp le mot de passe du compte
+	 * @return la reponse a cette requete
+	 * @throws IOException l'exception si la communication echoue
 	 */
 	public String connexion(String courriel, String mdp) throws IOException
 	{
-		// TODO
 		return client.communiquer(ProtocoleAnnuaire.requeteConnexion(courriel, mdp));
 	}
 	
 	/**
-	 * @param courriel
-	 * @param mdp
-	 * @throws IOException 
+	 * Connecter a un compte utilisateur avec mot de passe qui sera envoye sous forme de hash MD5 
+	 * 
+	 * @param courriel le courriel du compte
+	 * @param mdp le mot de passe du compte
+	 * @return la reponse a cette requete
+	 * @throws IOException l'exception si la communication echoue
 	 */
 	public String connexionMD5(String courriel, String mdp) throws IOException
 	{
-		// TODO
 		return client.communiquer(ProtocoleAnnuaire.requeteConnexionHashMD5(courriel,MD5Hasher.hashString(mdp)));
 	}
 	
 	/**
-	 * @throws IOException 
+	 * Consulter la liste des profils
+	 * 
+	 * @return la reponse a cette requete
+	 * @throws IOException l'exception si la communication echoue
 	 * 
 	 */
 	public String consulterProfils() throws IOException
 	{
-		// TODO
 		return client.communiquer(ProtocoleAnnuaire.requeteConsulterProfils());
 	}
 	
 	/**
-	 * @param courriel
-	 * @throws IOException 
+	 * Consulter un profil
+	 * 
+	 * @param courriel le courriel du compte a consulter
+	 * @return la reponse a cette requete
+	 * @throws IOException l'exception si la communication echoue
 	 */
 	public String consulterProfil(String courriel) throws IOException
 	{
-		// TODO
 		return client.communiquer(ProtocoleAnnuaire.requeteConsulterProfil(courriel));
 	}
 	
 	/**
-	 * @param utilisateur
-	 * @throws IOException 
+	 * Mettre a jour les details d'un objet/compte Utilisateur
+	 * 
+	 * @param utilisateur l'objet Utilisateur mis a jour
+	 * @return la reponse a cette requete
+	 * @throws IOException l'exception si la communication echoue
 	 */
 	public String modificationProfil(Utilisateur utilisateur) throws IOException
 	{
-		// TODO
 		return client.communiquer(ProtocoleAnnuaire.requeteModifierProfil(utilisateur.getCourriel(), utilisateur.toString()));
 	}
 	
 	/**
-	 * @param courriel
-	 * @throws IOException 
+	 * Supprimer un compte/objet Utilisateur
+	 * 
+	 * @param courriel le courriel du compte a supprimer
+	 * @return la reponse a cette requete
+	 * @throws IOException l'exception si la communication echoue
 	 */
 	public String suppressionProfil(String courriel) throws IOException
 	{
-		// TODO
 		return client.communiquer(ProtocoleAnnuaire.requeteSuppressionProfil(courriel));
 	}
 	
 	/**
+	 * Se deconnecter du serveur.
 	 * 
 	 */
 	public void deconnexion()

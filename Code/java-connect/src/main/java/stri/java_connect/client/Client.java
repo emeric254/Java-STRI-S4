@@ -18,7 +18,9 @@ public class Client
     private BufferedReader fluxEntreeSocket;
 
     /**
-     * @param pPort
+     * Creation d'un objet Client sur un port fournit
+     * 
+     * @param pPort le port sur lequel demarer
      */
     public Client(int pPort)
     {
@@ -36,9 +38,11 @@ public class Client
     }
 
     /**
-     * @param message
-     * @return
-     * @throws IOException
+     * Communiquer un message au serveur et attendre sa reponse
+     * 
+     * @param message le message a communiquer
+     * @return la reponse
+     * @throws IOException une exception si la communciation echoue
      */
     public String communiquer(String message) throws IOException
     {
@@ -48,6 +52,7 @@ public class Client
     }
     
     /**
+     * Fermer la connexion.
      * 
      */
     public void fermer()

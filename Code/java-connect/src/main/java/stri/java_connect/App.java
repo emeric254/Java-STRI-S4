@@ -7,11 +7,16 @@ import stri.java_connect.modele.Utilisateur;
 import stri.java_connect.protocol.ProtocoleAnnuaire;
 
 /**
- * Hello world!
+ * @author emeric, remi, thomas
  *
  */
 public class App 
 {
+    /**
+     * Main App.java
+     * 
+     * @param args arguments de lancement
+     */
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
@@ -31,7 +36,9 @@ public class App
     }
     
     /**
-     * @throws IOException
+     * Initialiser l'annuaire du serveur
+     * 
+     * @throws IOException exception si la communication echoue
      */
     private static void initAnnuaire() throws IOException
     {

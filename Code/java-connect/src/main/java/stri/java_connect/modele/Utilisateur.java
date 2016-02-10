@@ -10,8 +10,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import stri.java_connect.utils.JSONLoader;
+
 /**
- * @author emeric
+ * @author emeric, remi
  *
  */
 public class Utilisateur
@@ -394,13 +396,13 @@ public class Utilisateur
     {
         // TODO import from json string
         JSONObject details = new JSONObject(json);
-        try { setCourriel(details.getString("courriel")); } catch (JSONException e) {}
-        try { setMotDePasse(details.getString("motdepasse")); } catch (JSONException e) {}
-        try { setNom(details.getString("nom")); } catch (JSONException e) {}
-        try { setPermissionLecture(details.getString("permissionlecture")); } catch (JSONException e) {}
-        try { setTelephone(details.getString("telephone")); } catch (JSONException e) {}
-        try { setDateDiplome(details.getLong("datediplome")); } catch (JSONException e) {}
-        try { setPrivilege(details.getString("privilege")); } catch (JSONException e) {}
+        setCourriel(JSONLoader.readStringJSONObject(details, "courriel"));
+        setMotDePasse(JSONLoader.readStringJSONObject(details, "motdepasse"));
+        setNom(JSONLoader.readStringJSONObject(details, "nom"));
+        setPermissionLecture(JSONLoader.readStringJSONObject(details, "permissionlecture"));
+        setTelephone(JSONLoader.readStringJSONObject(details, "telephone"));
+        setDateDiplome(Long.parseLong(JSONLoader.readStringJSONObject(details, "datediplome")));
+        setPrivilege(JSONLoader.readStringJSONObject(details, "privilege"));
         try
         {
         	JSONArray listeCompetences = details.getJSONArray("competences");
@@ -411,6 +413,9 @@ public class Utilisateur
         } catch (JSONException e) {}
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
     @Override
     public Utilisateur clone()
     {
@@ -420,7 +425,7 @@ public class Utilisateur
     }
 
     /**
-     * Make a clone of this object
+     * Make a clone of this object with only anonymous readable attributes
      * 
      * @return a clone with only anonymous readable attributes
      */
@@ -432,7 +437,7 @@ public class Utilisateur
     }
 
     /**
-     * Make a clone of this object
+     * Make a clone of this object with only user readable attributes
      * 
      * @return a clone with only user readable attributes
      */
@@ -443,6 +448,9 @@ public class Utilisateur
         return copie;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj)
     {

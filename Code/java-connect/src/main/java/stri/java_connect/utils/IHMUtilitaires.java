@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * @author emeric
+ * @author emeric, remi, thomas
  *
  */
 public abstract class IHMUtilitaires
@@ -19,7 +19,7 @@ public abstract class IHMUtilitaires
      */
     public static void cleanTerminal()
     {
-	    for (int i=0; i< 25; i++)
+	    for (int i = 0; i < 25; i++)
 	    {
 	        System.out.println("");
 	    }

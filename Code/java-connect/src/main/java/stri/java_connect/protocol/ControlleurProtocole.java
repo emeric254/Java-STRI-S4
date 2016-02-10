@@ -53,8 +53,10 @@ public abstract class ControlleurProtocole
     }
 
     /**
-     * @param reponse
-     * @return
+     * Traiter une reponse
+     * 
+     * @param reponse la reponse a traiter
+     * @return le resultat de cette reponse
      */
     public abstract String traiterReponse (String reponse);
     

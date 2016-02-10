@@ -85,7 +85,7 @@ public class ClientHandler extends Thread
     }
 
     /**
-     * arreter la communciation en fermant le socket
+     * Arreter la communciation en fermant le socket
      * 
      */
     public void fermerService()

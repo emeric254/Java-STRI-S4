@@ -13,9 +13,12 @@ import stri.java_connect.server.ServeurAnnuaire;
 public class AppServeurAnnuaire
 {
 	private final static int portDefaut = 12345;
-	/**
-	 * @param args
-	 */
+
+    /**
+     * Main AppServeurAnnuaire.java
+     * 
+     * @param args arguments de lancement, le premier est le port d'ecoute du serveur
+     */
 	public static void main(String[] args)
 	{
 		int port = portDefaut;

@@ -83,7 +83,8 @@ public abstract class ProtocoleAnnuaire
 	/**
 	 * Requete de modification d'un profil utilisateur
 	 * 
-	 * @param utilisateurJson le profil utilisateur a modifier
+	 * @param courriel le courriel de l'utilisateur a modifier
+	 * @param utilisateurJson le profil utilisateur mis a jour
 	 * @return la requete
 	 */
 	public static String requeteModifierProfil(String courriel, String utilisateurJson)
@@ -210,7 +211,7 @@ public abstract class ProtocoleAnnuaire
 	/**
 	 * Valider que le type de mot de passe d'une connexion est un hash MD5
 	 * 
-	 * @param requete la requete a valider
+	 * @param mdp le mot de passe brut
 	 * @return true si c'est un mot de passe sous forme de hash MD5, false sinon
 	 */
 	public static boolean validerTypeMotDePasseHashMD5(String mdp)

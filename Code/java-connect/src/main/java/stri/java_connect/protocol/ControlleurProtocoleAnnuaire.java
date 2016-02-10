@@ -18,6 +18,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 	/**
 	 * Creation du controlleur de protocole Annuaire
 	 * 
+	 * @param a un objet Annuaire deja existant
 	 */
 	public ControlleurProtocoleAnnuaire(Annuaire a)
 	{

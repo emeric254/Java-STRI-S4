@@ -4,6 +4,7 @@
 package stri.java_connect.ihm;
 
 import java.io.IOException;
+import java.util.Calendar;
 import org.json.JSONArray;
 import org.json.JSONException;
 import stri.java_connect.client.ClientAnnuaire;
@@ -22,7 +23,9 @@ public class IHM
     private Utilisateur utilisateur;
 	
 	/**
-	 * @param pClient
+	 * Creation de l'objet IHM, affichage de l'accueil
+	 * 
+	 * @param pClient un objet clientAnnuaire qui permet la communication
 	 */
 	public IHM(ClientAnnuaire pClient)
 	{
@@ -32,6 +35,7 @@ public class IHM
 	}
 	
 	/**
+	 * Menu principal, accueil de l'application (utilisateur pas encore connecte)
 	 * 
 	 */
 	private void afficherAccueil()
@@ -106,7 +110,9 @@ public class IHM
 	}
 	
 	/**
-	 * @throws IOException
+	 * Afficher la liste des profils
+	 * 
+	 * @throws IOException exception si la communication echoue
 	 */
 	private void afficherListeProfils() throws IOException
 	{
@@ -129,6 +135,7 @@ public class IHM
 	}
 
 	/**
+	 * Menu principal une fois connecte
 	 * 
 	 */
 	private void afficherMenuPrincipal()
@@ -187,8 +194,7 @@ public class IHM
 	        }
 	        else if ("5".equals(choix))
 	        {
-	        	System.out.println("Pas encore implemente !");
-	        	//afficherRecherche();
+	        	afficherRecherche();
 	        }
 	        else if ("6".equals(choix))
 	        {
@@ -216,6 +222,7 @@ public class IHM
 	
 
     /**
+     * Afficher les details d'un profil dont on saisit le courriel
      * 
      */
     private void afficherDetailsProfil()
@@ -246,8 +253,9 @@ public class IHM
 	}
 
 	/**
-     * @throws IOException 
-     * 
+	 * S'inscrire
+	 * 
+     * @throws IOException excetpion si la communication echoue 
      */
     private void afficherInscription() throws IOException
     {
@@ -301,10 +309,14 @@ public class IHM
         do
         {
             temp = IHMUtilitaires.saisie("Entrez votre dernière année de diplomation :");
-            // TODO date validator
             try
             {
-            	Long.parseLong(temp);
+            	long l = Long.parseLong(temp);
+            	if (l < 1900 || l > Calendar.getInstance().get(Calendar.YEAR))
+            	{
+            		System.out.println("Annee invalide");
+            		temp = "";
+            	}
             }
             catch(NumberFormatException e)
             {
@@ -343,8 +355,9 @@ public class IHM
     }
 
     /**
-     * @throws IOException 
+     * Modifier son profil
      * 
+     * @throws IOException exception si la communication echoue
      */
     private void afficherModificationProfil() throws IOException
     {
@@ -409,10 +422,14 @@ public class IHM
 	        do
 	        {
 	            temp = IHMUtilitaires.saisie("Entrez votre dernière année de diplomation :");
-	            // TODO date validator
 	            try
 	            {
-	            	Long.parseLong(temp);
+	            	long l = Long.parseLong(temp);
+	            	if (l < 1900 || l > Calendar.getInstance().get(Calendar.YEAR))
+	            	{
+	            		System.out.println("Annee invalide");
+	            		temp = "";
+	            	}
 	            }
 	            catch(NumberFormatException e)
 	            {
@@ -483,7 +500,9 @@ public class IHM
     }
     
     /**
-     * @throws IOException
+     * Connexion a son compte
+     * 
+     * @throws IOException exception si la communication echoue
      */
     private void afficherConnexion() throws IOException
     {
@@ -500,17 +519,20 @@ public class IHM
     }
     
     /**
+     * Rechercher un profil
      * 
      */
     private void afficherRecherche()
     {
     	System.out.println("recherche :");
-    	
+    	// TODO recherche locale dans /profils recu
+    	System.out.println("Pas encore implemente !");
     }
     
     /**
-     * @throws IOException 
+     * Supprimer son propre profil
      * 
+     * @throws IOException exception si la communication echoue 
      */
     private void afficherSuppressionProfil() throws IOException
     {
@@ -519,6 +541,7 @@ public class IHM
     }
     
     /**
+     * Afficher son propre profil
      * 
      */
     private void afficherProfil()
@@ -527,7 +550,9 @@ public class IHM
     }	
     
     /**
-     * @param pUtilisateur
+     * Afficher les details d'un utilisateur
+     * 
+     * @param pUtilisateur l'utilisateur a afficher
      */
     private void afficherProfilUtilisateur(Utilisateur pUtilisateur)
     {
@@ -551,7 +576,9 @@ public class IHM
     }
     
     /**
-     * @param pUtilisateur
+     * Afficher en ligne les details d'un utilisateur
+     * 
+     * @param pUtilisateur l'utilisateur a afficher
      */
     private void afficherLigneProfilUtilisateur(Utilisateur pUtilisateur)
     {
