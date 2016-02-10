@@ -20,7 +20,7 @@ public class AppClient
 	 */
 	public static void main(String[] args)
 	{
-        /*ClientAnnuaire c = new ClientAnnuaire();
+        ClientAnnuaire c = new ClientAnnuaire();
         try
         {
         	// liste profils vide :
@@ -74,7 +74,7 @@ public class AppClient
         {
 			e.printStackTrace();
 		}
-        */
+        
         new IHM(new ClientAnnuaire());
 	}
 }
