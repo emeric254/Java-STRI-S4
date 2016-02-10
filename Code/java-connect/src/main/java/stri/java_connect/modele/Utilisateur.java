@@ -7,6 +7,7 @@ import java.util.ArrayDeque;
 import java.util.Date;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -18,6 +19,11 @@ public class Utilisateur
     private final static String glt = "\"";
     private final static String separ = "\" : \"";
     private final static String vgl = "\" ,";
+    private final static String courrielJSON = glt + "courriel" + separ;
+    private final static String telephoneJSON = glt + "telephone" + separ;
+    private final static String nomJSON = glt + "nom" + separ;
+    private final static String dateDiplomeJSON = glt + "datediplome" + separ;
+    private final static String competencesJSON = glt + "competences" + glt + " : [";
 
     private String motDePasse;
     private String nom;
@@ -43,7 +49,7 @@ public class Utilisateur
         dateDiplome = (long) -1;
         telephone = "";
         courriel = "";
-        permissionLecture = "anonyme";
+        permissionLecture = "utilisateur";
         // TODO permissions plus detaillees
         /*
         permissionLecture = "{"
@@ -54,7 +60,7 @@ public class Utilisateur
             + "'competences':'anonyme'"
             + "}";
         */
-        privilege = "anonyme";
+        privilege = "utilisateur";
         Competences = new ArrayDeque<String>();
     };
 
@@ -301,20 +307,20 @@ public class Utilisateur
 
         chaine += glt + "motdepasse" + separ + motDePasse + vgl;
 
-        chaine += glt + "nom" + separ + nom + vgl;
+        chaine += nomJSON + nom + vgl;
 
-        chaine += glt + "datediplome" + separ + dateDiplome + vgl;
+        chaine += dateDiplomeJSON + dateDiplome + vgl;
 
-        chaine += glt + "telephone" + separ + telephone + vgl;
+        chaine += telephoneJSON + telephone + vgl;
 
-        chaine += glt + "courriel" + separ + courriel + vgl;
+        chaine += courrielJSON + courriel + vgl;
 
         // TODO temporaire avec permissionLecture simple
         chaine += glt + "permissionlecture" + separ + permissionLecture + vgl;
 
         chaine += glt + "privilege" + separ + privilege + vgl;
 
-        chaine += glt + "competences" + glt + " : [";
+        chaine += competencesJSON;
         for(String temp : Competences)
         {
             chaine += glt + temp + vgl;
@@ -322,6 +328,60 @@ public class Utilisateur
         if(Competences.size() > 0)
             chaine = chaine.substring(0, chaine.length()-1);
         chaine += "] }";
+        return chaine;
+    }
+    
+    /**
+     * Get Utilisateur JSON String representation reduced for Anonymous reading
+     * 
+     * @return the Utilisateur object as a JSON formated String as Anonymous readable
+     */
+    public String toStringAnonyme()
+    {
+        String chaine = "{";
+        chaine += nomJSON + nom + vgl;
+        if("anonyme".equals(permissionLecture))
+        {
+            chaine += courrielJSON + courriel + vgl;
+            chaine += telephoneJSON + telephone + vgl;
+            chaine += dateDiplomeJSON + dateDiplome + vgl;
+            chaine += competencesJSON;
+            for(String temp : Competences)
+            {
+                chaine += glt + temp + vgl;
+            }
+            if(Competences.size() > 0)
+                chaine = chaine.substring(0, chaine.length()-1);
+            chaine += "]";
+        }
+        chaine += "}";
+        
+        System.out.println(chaine);
+        return chaine;
+    }
+    
+    /**
+     * Get Utilisateur JSON String representation reduced for other User reading
+     * 
+     * @return the Utilisateur object as a JSON formated String as User readable
+     */
+    public String toStringUtilisateur()
+    {
+        String chaine = "{";
+        chaine += nomJSON + nom + vgl;
+        chaine += courrielJSON + courriel + vgl;
+        chaine += telephoneJSON + telephone + vgl;
+        chaine += dateDiplomeJSON + dateDiplome + vgl;
+        chaine += competencesJSON;
+        for(String temp : Competences)
+        {
+            chaine += glt + temp + vgl;
+        }
+        if(Competences.size() > 0)
+            chaine = chaine.substring(0, chaine.length()-1);
+        chaine += "] }";
+        
+        System.out.println(chaine);
         return chaine;
     }
 
@@ -334,18 +394,21 @@ public class Utilisateur
     {
         // TODO import from json string
         JSONObject details = new JSONObject(json);
-        setMotDePasse(details.getString("motdepasse"));
-        setNom(details.getString("nom"));
-        setDateDiplome(details.getLong("datediplome"));
-        setTelephone(details.getString("telephone"));
-        setCourriel(details.getString("courriel"));
-        setPermissionLecture(details.getString("permissionlecture"));
-        setPrivilege(details.getString("privilege"));
-        JSONArray listeCompetences = details.getJSONArray("competences");
-        for (Object object : listeCompetences)
+        try { setCourriel(details.getString("courriel")); } catch (JSONException e) {}
+        try { setMotDePasse(details.getString("motdepasse")); } catch (JSONException e) {}
+        try { setNom(details.getString("nom")); } catch (JSONException e) {}
+        try { setPermissionLecture(details.getString("permissionlecture")); } catch (JSONException e) {}
+        try { setTelephone(details.getString("telephone")); } catch (JSONException e) {}
+        try { setDateDiplome(details.getLong("datediplome")); } catch (JSONException e) {}
+        try { setPrivilege(details.getString("privilege")); } catch (JSONException e) {}
+        try
         {
-            Competences.add((String) object);
-        }
+        	JSONArray listeCompetences = details.getJSONArray("competences");
+	        for (Object object : listeCompetences)
+	        {
+	            Competences.add((String) object);
+	        }
+        } catch (JSONException e) {}
     }
 
     @Override
@@ -353,6 +416,30 @@ public class Utilisateur
     {
         Utilisateur copie = new Utilisateur();
         copie.fromJSONString(this.toString());
+        return copie;
+    }
+
+    /**
+     * Make a clone of this object
+     * 
+     * @return a clone with only anonymous readable attributes
+     */
+    public Utilisateur cloneAnonyme()
+    {
+        Utilisateur copie = new Utilisateur();
+        copie.fromJSONString(this.toStringAnonyme());
+        return copie;
+    }
+
+    /**
+     * Make a clone of this object
+     * 
+     * @return a clone with only user readable attributes
+     */
+    public Utilisateur cloneUtilisateur()
+    {
+        Utilisateur copie = new Utilisateur();
+        copie.fromJSONString(this.toStringUtilisateur());
         return copie;
     }
 

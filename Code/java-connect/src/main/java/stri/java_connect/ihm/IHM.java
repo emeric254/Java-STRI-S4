@@ -3,10 +3,9 @@
  */
 package stri.java_connect.ihm;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-
+import org.json.JSONArray;
+import org.json.JSONException;
 import stri.java_connect.client.ClientAnnuaire;
 import stri.java_connect.modele.Utilisateur;
 import stri.java_connect.protocol.ProtocoleAnnuaire;
@@ -20,7 +19,6 @@ import stri.java_connect.utils.IHMUtilitaires;
 public class IHM
 {
 	private ClientAnnuaire client;
-    private final BufferedReader fluxEntreeStandard = new BufferedReader(new InputStreamReader(System.in));
     private Utilisateur utilisateur;
 	
 	/**
@@ -42,28 +40,18 @@ public class IHM
 	    IHMUtilitaires.cleanTerminal();
 	    do
 	    {
-	        System.out.println(" = = = Menu principal (vous n'etes pas connecté) = = = ");
-	        System.out.println("\n Saisir votre choix :");
+	        System.out.println(" = = = Menu principal (vous n'etes pas connecté) = = =  \n Saisissez votre choix :");
 	        //
 	        System.out.println("\n =>  1 - Créer un compte (nouvel utilisateur).");
 	        System.out.println("\n =>  2 - Se connecter.");
 	        System.out.println("\n =>  3 - Afficher la liste de tous les étudiants.");
-	        //
 	        System.out.println("\n =>  0 - Quitter.");
-	        
-	        try
-	        {
-	            choix = fluxEntreeStandard.readLine();
-	        }
-	        catch(Exception e)
-	        {
-	            choix = "";
-	        }
 
-	        System.out.println("[DEBUG] Vous avez choisi : " + choix);
+	        choix = IHMUtilitaires.saisie();
 
-	        if (choix.equals("1"))
+	        if ("1".equals(choix))
 	        {
+	    	    IHMUtilitaires.cleanTerminal();
 	            try
 	            {
 					afficherInscription();
@@ -74,26 +62,72 @@ public class IHM
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				choix = "0";
 	        }
-	        else if (choix.equals("2"))
+	        else if ("2".equals(choix))
 	        {
-	            //connexion();
+	    	    IHMUtilitaires.cleanTerminal();
+	            try
+	            {
+					afficherConnexion();
+				}
+	            catch (IOException e)
+	            {
+	            	utilisateur = null;
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				choix = "0";
 	        }
-	        else if (choix.equals("3"))
+	        else if ("3".equals(choix))
 	        {
-	            //afficherTousLesUtilisateur();
+	    	    IHMUtilitaires.cleanTerminal();
+	    	    try
+	    	    {
+					afficherListeProfils();
+				}
+	    	    catch (IOException e)
+	    	    {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	        }
-	        else if (choix.equals("0"))
+	        else if ("0".equals(choix))
 	        {
 	        	client.deconnexion();
+	    	    IHMUtilitaires.cleanTerminal();
 	        }
 	        else
 	        {
+	    	    IHMUtilitaires.cleanTerminal();
 	        	System.out.println("Veuillez choisir quelque chose de valide !");
 	        }
-	    } while (! choix.equals("4") );
+	    } while (! "0".equals(choix) );
 	}
 	
+	/**
+	 * @throws IOException
+	 */
+	private void afficherListeProfils() throws IOException
+	{
+		String temp = client.consulterProfils();
+		try
+		{
+			JSONArray j = ProtocoleAnnuaire.extraireJSONArray(temp);
+			for (int i = 0; i < j.length(); i++)
+			{
+				Utilisateur u = new Utilisateur();
+				u.fromJSONString(j.getJSONObject(i).toString());
+				afficherLigneProfilUtilisateur(u);
+			}
+		}
+		catch (JSONException e)
+		{
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 
 	 */
@@ -104,40 +138,55 @@ public class IHM
         do
         {
             System.out.println(" = = = Menu principal (vous etes connecté) = = = ");
-            System.out.println("Bonjour " + utilisateur.getNom());
-            System.out.println("\n Saisir votre choix :");
+            System.out.println("Bonjour " + utilisateur.getNom() + "\n Saisissez votre choix :");
             //
             System.out.println("\n =>  1 - Afficher la liste de tous les étudiants.");
-            System.out.println("\n =>  2 - Modifier votre profil.");
-            System.out.println("\n =>  3 - Connaitre le détail d'un étudiant.");
-            //System.out.println("\n =>  4 - Messagerie.");
-            //
+            System.out.println("\n =>  2 - Consulter votre profil.");
+            System.out.println("\n =>  3 - Modifier votre profil.");
+            System.out.println("\n =>  4 - Consulter les détails d'un étudiant.");
+            System.out.println("\n =>  5 - Chercher un étudiant.");
+            //System.out.println("\n =>  6 - Messagerie.");
             System.out.println("\n =>  0 - Quitter.");
-            
-            try
-            {
-                choix = fluxEntreeStandard.readLine();
 
-            } catch(Exception e)
-            {
-                choix = "erreur";
-            }
-            
-	        System.out.println("[DEBUG] Vous avez choisi : " + choix);
+	        choix = IHMUtilitaires.saisie();
 
-	        if (choix.equals("1"))
+	        if ("1".equals(choix))
 	        {
-	            //afficherTousLesUtilisateur();
+	            try
+	            {
+					afficherListeProfils();
+				}
+	            catch (IOException e)
+	            {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+				}
 	        }
-	        else if (choix.equals("2"))
+	        else if ("2".equals(choix))
             {
-                //modifierProfil();
+                afficherProfil();
             }
-	        else if (choix.equals("3"))
+	        else if ("3".equals(choix))
 	        {
-	        	//detailsEtudiant();
+	        	try
+	        	{
+					afficherModificationProfil();
+				}
+	        	catch (IOException e)
+	        	{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	        }
-	        else if (choix.equals("0"))
+	        else if ("4".equals(choix))
+	        {
+	        	afficherDetailsProfil();
+	        }
+	        else if ("5".equals(choix))
+	        {
+	        	System.out.println("Pas encore implemente");
+	        }
+	        else if ("0".equals(choix))
 	        {
 	        	client.deconnexion();
 	        }
@@ -145,11 +194,41 @@ public class IHM
 	        {
 	        	System.out.println("Veuillez choisir quelque chose de valide !");
 	        }
-        } while (! choix.equals("0"));
+        } while (! "0".equals(choix));
     }
 	
 
     /**
+     * 
+     */
+    private void afficherDetailsProfil()
+    {
+    	String temp = "";
+        do
+        {
+            temp = IHMUtilitaires.saisie("Entrez l'adresse mail du profil :");
+        } while ( !CourrielValidateur.valider(temp) );
+        try
+        {
+			temp = client.consulterProfil(temp);
+			Utilisateur u = new Utilisateur();
+			try
+			{
+				u.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(temp).toString());
+				afficherProfilUtilisateur(u);
+			}
+			catch (JSONException e)
+			{
+				System.out.println("Pas d'utilisateur correspondant ...");
+			}
+		}
+        catch (IOException e)
+        {
+        	System.out.println("Cette addresse n'existe pas ...");
+		}
+	}
+
+	/**
      * @throws IOException 
      * 
      */
@@ -158,19 +237,9 @@ public class IHM
         String temp ="";
         utilisateur = new Utilisateur();
         
-        //~ Formulaire de création d'un nouveau compte
-        
         do
         {
-            System.out.println("Entrez votre adresse mail (servira d'identifiant) : ");
-            try
-            {
-            	temp = fluxEntreeStandard.readLine();
-            }
-            catch(IOException e)
-            {
-            	temp= "";
-            }
+            temp = IHMUtilitaires.saisie("Entrez votre adresse mail :");
         } while ( !CourrielValidateur.valider(temp) || ProtocoleAnnuaire.isOk(client.consulterProfil(temp)) );
         
         utilisateur.setCourriel(temp);
@@ -178,15 +247,7 @@ public class IHM
 
         do
         {
-        	System.out.println("Entrez votre mot de passe : ");
-            try
-            {
-            	temp = fluxEntreeStandard.readLine();
-            }
-            catch(IOException e)
-            {
-            	temp= "";
-            }
+            temp = IHMUtilitaires.saisie("Entrez votre mot de passe :");
         } while ( temp.length() <= 0 );
         
         utilisateur.setMotDePasse(temp);
@@ -194,15 +255,18 @@ public class IHM
 
         do
         {
-            System.out.println("Entrez votre nom (prenom suivi du nom) : ");
-            try
-            {
-            	temp = fluxEntreeStandard.readLine();
-            }
-            catch(IOException e)
-            {
-            	temp= "";
-            }
+            temp = IHMUtilitaires.saisie("Choisissez la visibilite de votre profil : \n  0 - visibilite minimale\n  1 - visibilite normale");
+        } while ( !("0".equals(temp) || "1".equals(temp)) );
+        
+        if("1".equals(temp))
+        	utilisateur.setPermissionLecture("anonyme");
+        else 
+        	utilisateur.setPermissionLecture("utilisateur");
+        temp = "";
+        
+        do
+        {
+            temp = IHMUtilitaires.saisie("Entrez votre nom et prenom :");
         } while ( temp.length() <= 0 );
         
         utilisateur.setNom(temp);
@@ -210,15 +274,8 @@ public class IHM
 
         do
         {
-            System.out.println("Entrez votre numéro de téléphone : ");
-            try
-            {
-            	temp = fluxEntreeStandard.readLine();
-            }
-            catch(IOException e)
-            {
-            	temp= "";
-            }
+            temp = IHMUtilitaires.saisie("Entrez votre numero de telephone :");
+            // TODO telephone validator
         } while ( temp.length() <= 0 );
         
         utilisateur.setTelephone(temp);
@@ -226,19 +283,15 @@ public class IHM
 
         do
         {
-            System.out.println("Entrez votre dernière année de diplomation : ");
+            temp = IHMUtilitaires.saisie("Entrez votre dernière année de diplomation :");
+            // TODO date validator
             try
             {
-            	temp = fluxEntreeStandard.readLine();
             	Long.parseLong(temp);
             }
             catch(NumberFormatException e)
             {
             	temp = "";
-            }
-            catch(IOException e)
-            {
-            	temp= "";
             }
         } while ( temp.length() <= 0 );
         
@@ -247,15 +300,7 @@ public class IHM
 
         do
         {
-            System.out.println("Entrez votre/vos compétences (Une au minumum) : ");
-            try
-            {
-            	temp = fluxEntreeStandard.readLine();
-            }
-            catch(IOException e)
-            {
-            	temp= "";
-            }
+            temp = IHMUtilitaires.saisie("Entrez votre/vos compétences (Une au minumum) :");
         } while ( temp.length() <= 0 );
         
         utilisateur.addCompetence(temp);
@@ -263,33 +308,236 @@ public class IHM
 
         do
         {
-            System.out.println("En avez vous une autre à saisir ? (O/N)");
-            try
-            {
-            	temp = fluxEntreeStandard.readLine();
-            }
-            catch(IOException e)
-            {
-            	temp= "";
-            }
-            if (temp.toUpperCase().equals("O"))
+            temp = IHMUtilitaires.saisie("En avez vous une autre à saisir ? (O/N)");
+            if ("O".equalsIgnoreCase(temp))
             {
                 do
                 {
-                	System.out.println("Saisir la nouvelle compétence");
-                    try
-                    {
-                    	temp = fluxEntreeStandard.readLine();
-                    }
-                    catch(IOException e)
-                    {
-                    	temp= "";
-                    }
+                    temp = IHMUtilitaires.saisie("Saisir la nouvelle compétence :");
                 } while ( temp.length() <= 0 );
                 utilisateur.addCompetence(temp);
             }
-        } while (!temp.toUpperCase().equals("N"));
+        } while (!"N".equalsIgnoreCase(temp));
 
-        client.inscription(utilisateur);
+        String reponse = client.inscription(utilisateur);
+        
+        utilisateur = new Utilisateur();
+        utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
+        afficherMenuPrincipal();
+    }
+
+    /**
+     * @throws IOException 
+     * 
+     */
+    private void afficherModificationProfil() throws IOException
+    {
+        String temp ="";
+
+        temp = IHMUtilitaires.saisie("Changer de mot de passe ? (O/N)");
+        if ("O".equalsIgnoreCase(temp))
+        {
+	        do
+	        {
+	            temp = IHMUtilitaires.saisie("Entrez votre mot de passe :");
+	        } while ( temp.length() <= 0 );
+	        
+	        utilisateur.setMotDePasse(temp);
+        }
+        temp = "";
+        
+
+        temp = IHMUtilitaires.saisie("Changer de nom ? (O/N)");
+        if ("O".equalsIgnoreCase(temp))
+        {
+	        do
+	        {
+	            temp = IHMUtilitaires.saisie("Entrez votre nom et prenom :");
+	        } while ( temp.length() <= 0 );
+	        
+	        utilisateur.setNom(temp);
+        }
+        temp = "";
+
+        temp = IHMUtilitaires.saisie("Changer la visibilite de votre profil ? (O/N)");
+        if ("O".equalsIgnoreCase(temp))
+        {
+	        do
+	        {
+	            temp = IHMUtilitaires.saisie("Choisissez la visibilite de votre profil : \n  0 - visibilite minimale\n  1 - visibilite normale");
+	        } while ( !(temp.equals("0") || "1".equals(temp)) );
+	        
+	        if("1".equals(temp))
+	        	utilisateur.setPermissionLecture("anonyme");
+	        else 
+	        	utilisateur.setPermissionLecture("utilisateur");
+	    }
+	    temp = "";
+
+        temp = IHMUtilitaires.saisie("Changer de numero de telephone ? (O/N)");
+        if ("O".equalsIgnoreCase(temp))
+        {
+	        do
+	        {
+	            temp = IHMUtilitaires.saisie("Entrez votre numero de telephone :");
+	            // TODO telephone validator
+	        } while ( temp.length() <= 0 );
+	        
+	        utilisateur.setTelephone(temp);
+	    }
+	    temp = "";
+
+        temp = IHMUtilitaires.saisie("Changer d'annee de diplomation ? (O/N)");
+        if ("O".equalsIgnoreCase(temp))
+        {
+	        do
+	        {
+	            temp = IHMUtilitaires.saisie("Entrez votre dernière année de diplomation :");
+	            // TODO date validator
+	            try
+	            {
+	            	Long.parseLong(temp);
+	            }
+	            catch(NumberFormatException e)
+	            {
+	            	temp = "";
+	            }
+	        } while ( temp.length() <= 0 );
+	        
+	        utilisateur.setDateDiplome(Long.parseLong(temp));
+	    }
+	    temp = "";
+
+        temp = IHMUtilitaires.saisie("Changer toutes vos competences ? (O/N)");
+        if ("O".equalsIgnoreCase(temp))
+        {
+	        do
+	        {
+	            temp = IHMUtilitaires.saisie("Entrez votre/vos compétences (Une au minumum) :");
+	        } while ( temp.length() <= 0 );
+	        
+	        utilisateur.addCompetence(temp);
+	    	temp= "";
+	
+	        do
+	        {
+	            temp = IHMUtilitaires.saisie("En avez vous une autre à saisir ? (O/N)");
+	            if ("O".equalsIgnoreCase(temp))
+	            {
+	                do
+	                {
+	                    temp = IHMUtilitaires.saisie("Saisir la nouvelle compétence :");
+	                } while ( temp.length() <= 0 );
+	                utilisateur.addCompetence(temp);
+	            }
+	        } while (!"N".equalsIgnoreCase(temp));
+	    }
+	    temp = "";
+
+        temp = IHMUtilitaires.saisie("Ajouter une competence ? (O/N)");
+        if ("O".equalsIgnoreCase(temp))
+        {
+	        do
+	        {
+	            temp = IHMUtilitaires.saisie("Entrez votre compétences :");
+	        } while ( temp.length() <= 0 );
+	        
+	        utilisateur.addCompetence(temp);
+	    	temp= "";
+	
+	        do
+	        {
+	            temp = IHMUtilitaires.saisie("En avez vous une autre à saisir ? (O/N)");
+	            if ("O".equalsIgnoreCase(temp))
+	            {
+	                do
+	                {
+	                    temp = IHMUtilitaires.saisie("Saisir la nouvelle compétence :");
+	                } while ( temp.length() <= 0 );
+	                utilisateur.addCompetence(temp);
+	            }
+	        } while (!"N".equalsIgnoreCase(temp));
+	    }
+	    temp = "";
+
+        String reponse = client.modificationProfil(utilisateur);
+
+        utilisateur = new Utilisateur();
+        utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
+        afficherMenuPrincipal();
+    }
+    
+    /**
+     * @throws IOException
+     */
+    private void afficherConnexion() throws IOException
+    {
+        String mail = "", mdp = "", reponse = "";
+        do
+        {
+            mail = IHMUtilitaires.saisie("Entrez votre adresse mail :");
+            mdp = IHMUtilitaires.saisie("Entrez votre mot de passe :");
+            
+            reponse = client.connexion(mail, mdp);
+        } while (!ProtocoleAnnuaire.isOk(reponse));
+        utilisateur = new Utilisateur();
+        utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
+        afficherMenuPrincipal();
+    }
+    
+    /**
+     * 
+     */
+    private void afficherProfil()
+    {
+        afficherProfilUtilisateur(utilisateur);
+    }	
+    
+    /**
+     * @param pUtilisateur
+     */
+    private void afficherProfilUtilisateur(Utilisateur pUtilisateur)
+    {
+    	System.out.println("Informations détaillées du profil");
+    	if (pUtilisateur.getNom().length() > 0)
+    		System.out.println(" > Nom : " + pUtilisateur.getNom());
+    	if (pUtilisateur.getCourriel().length() > 0)
+    		System.out.println(" > Courriel : " + pUtilisateur.getCourriel());
+    	if (pUtilisateur.getTelephone().length() > 0)
+    		System.out.println(" > Téléphone : " + pUtilisateur.getTelephone());
+    	if (pUtilisateur.getDateDiplome() > 0)
+    		System.out.println(" > Date du diplôme : " + pUtilisateur.getDateDiplome());
+    	if (pUtilisateur.getCompetences().size() > 0)
+		{
+    		System.out.println(" > Compétences : ");
+	    	for(String temp : pUtilisateur.getCompetences())
+	  	  	{
+	  		  System.out.println("    - " + temp);
+	  	  	}
+		}
+    }
+    
+    /**
+     * @param pUtilisateur
+     */
+    private void afficherLigneProfilUtilisateur(Utilisateur pUtilisateur)
+    {
+    	if (pUtilisateur.getNom().length() > 0)
+    		System.out.print("- Nom : " + pUtilisateur.getNom());
+    	if (pUtilisateur.getCourriel().length() > 0)
+    		System.out.print("; Courriel : " + pUtilisateur.getCourriel());
+    	if (pUtilisateur.getTelephone().length() > 0)
+    		System.out.print("; Téléphone : " + pUtilisateur.getTelephone());
+    	if (pUtilisateur.getDateDiplome() > 0)
+    		System.out.print("; Date du diplôme : " + pUtilisateur.getDateDiplome());
+    	if (pUtilisateur.getCompetences().size() > 0)
+    	{
+    		System.out.print("; Compétences : ");
+	    	for(String temp : pUtilisateur.getCompetences())
+	  	  	{
+	  		  System.out.print(temp + " ");
+	  	  	}
+    	}
+    	System.out.println();
     }
 }
