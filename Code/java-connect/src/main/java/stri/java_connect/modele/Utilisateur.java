@@ -401,7 +401,7 @@ public class Utilisateur
         setNom(JSONLoader.readStringJSONObject(details, "nom"));
         setPermissionLecture(JSONLoader.readStringJSONObject(details, "permissionlecture"));
         setTelephone(JSONLoader.readStringJSONObject(details, "telephone"));
-        setDateDiplome(Long.parseLong(JSONLoader.readStringJSONObject(details, "datediplome")));
+        try { setDateDiplome(Long.parseLong(JSONLoader.readStringJSONObject(details, "datediplome"))); } catch (NumberFormatException e) {}
         setPrivilege(JSONLoader.readStringJSONObject(details, "privilege"));
         try
         {
