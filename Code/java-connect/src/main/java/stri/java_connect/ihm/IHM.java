@@ -394,7 +394,7 @@ public class IHM
 	        do
 	        {
 	            temp = IHMUtilitaires.saisie("Choisissez la visibilite de votre profil : \n  0 - visibilite minimale\n  1 - visibilite normale");
-	        } while ( !(temp.equals("0") || "1".equals(temp)) );
+	        } while ( !("0".equals(temp) || "1".equals(temp)) );
 	        
 	        if("1".equals(temp))
 	        	utilisateur.setPermissionLecture("anonyme");
