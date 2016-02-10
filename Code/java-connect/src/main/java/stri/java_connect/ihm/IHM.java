@@ -65,8 +65,7 @@ public class IHM
 	            catch (IOException e)
 	            {
 	            	utilisateur = null;
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+	            	System.err.println("Erreur fatale lors de votre inscription !");
 				}
 				choix = "0";
 	        }
@@ -80,8 +79,7 @@ public class IHM
 	            catch (IOException e)
 	            {
 	            	utilisateur = null;
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+	            	System.err.println("Erreur fatale lors de votre connexion !");
 				}
 				choix = "0";
 	        }
@@ -94,8 +92,7 @@ public class IHM
 				}
 	    	    catch (IOException e)
 	    	    {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+	            	System.err.println("Erreur fatale lors de l'affichage de la liste !");
 				}
 	        }
 	        else if ("0".equals(choix))
@@ -129,8 +126,7 @@ public class IHM
 		}
 		catch (JSONException e)
 		{
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
+			System.out.println("Erreur dans l'affichage d'un element");
 		}
 	}
 
@@ -168,8 +164,7 @@ public class IHM
 				}
 	            catch (IOException e)
 	            {
-					// TODO Auto-generated catch block
-					//e.printStackTrace();
+	            	System.err.println("Erreur fatale lors de l'affichage de la liste !");
 				}
 	        }
 	        else if ("2".equals(choix))
@@ -184,8 +179,7 @@ public class IHM
 				}
 	        	catch (IOException e)
 	        	{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+	            	System.err.println("Erreur fatale lors de la modification de votre profil !");
 				}
 	        }
 	        else if ("4".equals(choix))
@@ -205,8 +199,7 @@ public class IHM
 				}
 	        	catch (IOException e)
 	        	{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+	            	System.err.println("Erreur fatale lors de la suppression de votre profil !");
 				}
 	        }
 	        else if ("0".equals(choix))
