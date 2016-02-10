@@ -506,7 +506,9 @@ public class IHM
      */
     private void afficherConnexion() throws IOException
     {
-        String mail = "", mdp = "", reponse = "";
+        String mail = "";
+        String mdp = "";
+        String reponse = "";
         do
         {
             mail = IHMUtilitaires.saisie("Entrez votre adresse mail :");
