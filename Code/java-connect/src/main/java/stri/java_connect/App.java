@@ -1,5 +1,11 @@
 package stri.java_connect;
 
+import java.io.IOException;
+
+import stri.java_connect.client.ClientAnnuaire;
+import stri.java_connect.modele.Utilisateur;
+import stri.java_connect.protocol.ProtocoleAnnuaire;
+
 /**
  * Hello world!
  *
@@ -9,7 +15,66 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
+        System.out.println( "Init annuaire utilisateurs" );
+        //
+        try
+        {
+			initAnnuaire();
+		}
+        catch (IOException e)
+        {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         //
         System.out.println("END");
+    }
+    
+    /**
+     * @throws IOException
+     */
+    private static void initAnnuaire() throws IOException
+    {
+        ClientAnnuaire client = new ClientAnnuaire();
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setCourriel("remi.barbaste@univ-tlse3.fr");
+        utilisateur.setMotDePasse("remimdp");
+        utilisateur.setPermissionLecture("anonyme"); /* tous les utilisateurs peuvent voir ce compte */
+        utilisateur.setNom("Remi BARBASTE");
+        utilisateur.setTelephone("0123456798");
+        utilisateur.setDateDiplome(Long.parseLong("2015"));
+        utilisateur.addCompetence("Mthématiques");
+        String reponse = client.inscription(utilisateur);
+        utilisateur = new Utilisateur();
+        utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
+       
+        client = new ClientAnnuaire();
+        utilisateur = new Utilisateur();
+        utilisateur.setCourriel("emeric.tosi@univ-tlse3.fr");
+        utilisateur.setMotDePasse("emericmdp");
+        utilisateur.setPermissionLecture("anonyme"); /* tous les utilisateurs peuvent voir ce compte */
+        utilisateur.setNom("Emeric TOSI");
+        utilisateur.setTelephone("1234657890");
+        utilisateur.setDateDiplome(Long.parseLong("2014"));
+        utilisateur.addCompetence("Informatique");
+        utilisateur.addCompetence("Base de données");
+        reponse = client.inscription(utilisateur);
+        utilisateur = new Utilisateur();
+        utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
+       
+        client = new ClientAnnuaire();
+        utilisateur = new Utilisateur();
+        utilisateur.setCourriel("thomas.maury@univ-tlse3.fr");
+        utilisateur.setMotDePasse("thomasmdp");
+        utilisateur.setPermissionLecture("utilisateur"); /* tous les utilisateurs peuvent voir ce compte */
+        utilisateur.setNom("Thomas Maury");
+        utilisateur.setTelephone("2345678901");
+        utilisateur.setDateDiplome(Long.parseLong("2012"));
+        utilisateur.addCompetence("français");
+        utilisateur.addCompetence("SVT");
+        utilisateur.addCompetence("sport");
+        reponse = client.inscription(utilisateur);
+        utilisateur = new Utilisateur();
+        utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
     }
 }

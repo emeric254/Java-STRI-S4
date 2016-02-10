@@ -13,7 +13,7 @@ import stri.java_connect.utils.CourrielValidateur;
 import stri.java_connect.utils.IHMUtilitaires;
 
 /**
- * @author emeric, remi
+ * @author emeric, remi, thomas
  *
  */
 public class IHM
@@ -145,7 +145,8 @@ public class IHM
             System.out.println("\n =>  3 - Modifier votre profil.");
             System.out.println("\n =>  4 - Consulter les détails d'un étudiant.");
             System.out.println("\n =>  5 - Chercher un étudiant.");
-            //System.out.println("\n =>  6 - Messagerie.");
+            System.out.println("\n =>  6 - Suppression de votre profil.");
+            //System.out.println("\n =>  7 - Messagerie.");
             System.out.println("\n =>  0 - Quitter.");
 
 	        choix = IHMUtilitaires.saisie();
@@ -187,6 +188,20 @@ public class IHM
 	        else if ("5".equals(choix))
 	        {
 	        	System.out.println("Pas encore implemente !");
+	        	//afficherRecherche();
+	        }
+	        else if ("6".equals(choix))
+	        {
+	        	choix = "0";
+	        	try
+	        	{
+					afficherSuppressionProfil();
+				}
+	        	catch (IOException e)
+	        	{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	        }
 	        else if ("0".equals(choix))
 	        {
@@ -487,6 +502,25 @@ public class IHM
     /**
      * 
      */
+    private void afficherRecherche()
+    {
+    	System.out.println("recherche :");
+    	
+    }
+    
+    /**
+     * @throws IOException 
+     * 
+     */
+    private void afficherSuppressionProfil() throws IOException
+    {
+    	System.out.println("suppression de votre profil");
+    	client.suppressionProfil(utilisateur.getCourriel());
+    }
+    
+    /**
+     * 
+     */
     private void afficherProfil()
     {
         afficherProfilUtilisateur(utilisateur);
@@ -534,7 +568,7 @@ public class IHM
     		System.out.print("; Compétences : ");
 	    	for(String temp : pUtilisateur.getCompetences())
 	  	  	{
-	  		  System.out.print(temp + " ");
+	  		  System.out.print(temp + ", ");
 	  	  	}
     	}
     	System.out.println();
