@@ -10,7 +10,9 @@ public class Sqlite
 	private Statement statement;
 	
 	/**
-	 * @param dbFileName
+	 * Creation d'un objet Sqlite
+	 * 
+	 * @param dbFileName le nom de la base de donnees (nom du fichier la reprensentant)
 	 */
 	public Sqlite(String dbFileName) throws ClassNotFoundException
 	{
@@ -20,6 +22,7 @@ public class Sqlite
 	}
 	
 	/**
+	 * Connexion a la base de donnees
 	 * 
 	 */
 	public void dbConnect()
@@ -38,6 +41,7 @@ public class Sqlite
 	}
 	
 	/**
+	 * Initialisation de la base de donnees
 	 * 
 	 */
 	public void init()
@@ -64,6 +68,7 @@ public class Sqlite
 	}
 	
 	/**
+	 * Fermeture de la base de donnees
 	 * 
 	 */
 	public void close()
@@ -82,8 +87,10 @@ public class Sqlite
 	}
 	
 	/**
-	 * @param sql
-	 * @return
+	 * Executer une requete sur la base de donnees
+	 * 
+	 * @param sql la requete
+	 * @return true si reussie, false si erreur
 	 */
 	public ResultSet executerRequete(String sql)
 	{
@@ -100,8 +107,10 @@ public class Sqlite
 	}
 	
 	/**
-	 * @param sql
-	 * @return
+	 * Executer une mise a jour de la (structure de la) base de donnees
+	 * 
+	 * @param sql la requete
+	 * @return true si reussie, false si erreur
 	 */
 	public boolean executerMaj(String sql)
 	{
@@ -119,6 +128,7 @@ public class Sqlite
 	}
 	
 	/**
+	 * Reset de la base de donnees
 	 * 
 	 */
 	public void reset()
