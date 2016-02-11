@@ -1,30 +1,33 @@
 package stri.java_connect.bdd;
 
+import java.io.File;
 import java.sql.*;
-import org.sqlite.*;
 
 public class Sqlite
 {
+	private String nomBDD;
 	private Connection connexion;
 	private Statement statement;
 	
-	public Sqlite(String dbFileName)
+	/**
+	 * @param dbFileName
+	 */
+	public Sqlite(String dbFileName) throws ClassNotFoundException
 	{
-		try
-		{
-			Class.forName("org.sqlite.JDBC");
-		}
-		catch (ClassNotFoundException e1)
-		{
-			e1.printStackTrace();
-			System.exit(0);
-		}
-		
+		nomBDD = dbFileName;
+		Class.forName("org.sqlite.JDBC");
+		dbConnect();
+	}
+	
+	/**
+	 * 
+	 */
+	public void dbConnect()
+	{
 		connexion = null;
-		
 		try
 		{
-			connexion = DriverManager.getConnection("jdbc:sqlite:./" + dbFileName);
+			connexion = DriverManager.getConnection("jdbc:sqlite:./" + nomBDD);
 			statement = connexion.createStatement();
 			statement.setQueryTimeout(20);
 		}
@@ -32,18 +35,21 @@ public class Sqlite
 		{
 			System.err.println(e.getMessage());
 		}
-		System.out.println("SQLite init done !");
 	}
 	
-	public void Init()
+	/**
+	 * 
+	 */
+	public void init()
 	{
+		if(executerMaj("drop table if exists person") && executerMaj("create table person (id integer, name string)"))
+			System.out.println("partie Tables reussie");
+
+		if(executerMaj("insert into person values(1, 'leo')") && executerMaj("insert into person values(2, 'yui')"))
+			System.out.println("partie Insertion reussie");
 		try
 		{
-			statement.executeUpdate("drop table if exists person");
-			statement.executeUpdate("create table person (id integer, name string)");
-			statement.executeUpdate("insert into person values(1, 'leo')");
-			statement.executeUpdate("insert into person values(2, 'yui')");
-			ResultSet rs = statement.executeQuery("select * from person");
+			ResultSet rs = executerRequete("select * from person");
 			while(rs.next())
 			{
 				// read the result set
@@ -55,22 +61,71 @@ public class Sqlite
 		{
 			System.err.println(e.getMessage());
 		}
-		System.out.println("BDD init Success !");
 	}
 	
+	/**
+	 * 
+	 */
 	public void close()
 	{
-		try
+		if(connexion != null)
 		{
-			if(connexion != null)
+			try
 			{
 				connexion.close();
 			}
+			catch(SQLException e)
+			{
+				System.err.println(e.getMessage());
+			}
+		}
+	}
+	
+	/**
+	 * @param sql
+	 * @return
+	 */
+	public ResultSet executerRequete(String sql)
+	{
+		ResultSet rs = null;
+		try
+		{
+			rs = statement.executeQuery(sql);
 		}
 		catch(SQLException e)
 		{
 			System.err.println(e.getMessage());
 		}
-		System.out.println("Bdd closed !");
+		return rs;
+	}
+	
+	/**
+	 * @param sql
+	 * @return
+	 */
+	public boolean executerMaj(String sql)
+	{
+		boolean state = true;
+		try
+		{
+			statement.executeUpdate(sql);
+		}
+		catch(SQLException e)
+		{
+			System.err.println(e.getMessage());
+			state = false;
+		}
+		return state;
+	}
+	
+	/**
+	 * 
+	 */
+	public void reset()
+	{
+		close();
+		File temp = new File("./" + nomBDD);
+		temp.delete();
+		dbConnect();
 	}
 }
