@@ -23,6 +23,13 @@ public class Menu extends Window implements Application, Bindable
 	@BXML
 	private PushButton btModifProfil;
  
+	@BXML
+	private PushButton btMessagerieEmail;
+	
+	
+	@BXML
+	private PushButton btMessagerieP2P;
+	
 	public Menu()
 	{
 	}
@@ -33,6 +40,9 @@ public class Menu extends Window implements Application, Bindable
 		btInscription.getButtonPressListeners().add(inscriptionListener);
 		btListeProfil.getButtonPressListeners().add(listeProfilListener);
 		btModifProfil.getButtonPressListeners().add(modifProfilListener);
+		btMessagerieEmail.getButtonPressListeners().add(messagerieMail);
+		btMessagerieP2P.getButtonPressListeners().add(messagerieP2P);
+
 	}
  
 	public void startup(final Display display, final Map<String, String> properties) throws Exception
@@ -71,6 +81,22 @@ public class Menu extends Window implements Application, Bindable
 		public void buttonPressed(final Button button)
 		{
 			Alert.alert(MessageType.INFO, "Modification profil", Menu.this);
+		}
+	};
+	
+	private final ButtonPressListener messagerieMail = new ButtonPressListener()
+	{
+		public void buttonPressed(final Button button)
+		{
+			Alert.alert(MessageType.INFO, "Messagerie Mail", Menu.this);
+		}
+	};
+	
+	private final ButtonPressListener messagerieP2P = new ButtonPressListener()
+	{
+		public void buttonPressed(final Button button)
+		{
+			Alert.alert(MessageType.INFO, "Messagerie peer to peerl", Menu.this);
 		}
 	};
  
