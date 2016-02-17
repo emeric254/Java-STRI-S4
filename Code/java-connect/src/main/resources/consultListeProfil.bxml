@@ -3,6 +3,8 @@
   		<Form.Section>
 			<Label text="Liste des profils"/>
 			<ListView bxml:id="listeProfil"/>
+			
+			<PushButton bxml:id="btRetour" buttonData="Retour"/>
 		</Form.Section>
 	</Form>
 </myApp:ConsultListeProfil>
