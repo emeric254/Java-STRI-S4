@@ -26,5 +26,4 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
