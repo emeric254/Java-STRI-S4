@@ -25,7 +25,7 @@ public class App
     {
         System.out.println( "Hello World!" );
 
-		DesktopApplicationContext.main(ConsultListeProfil.class, args);
+		DesktopApplicationContext.main(CreationProfil.class, args);
 
         System.out.println( "Init annuaire utilisateurs" );
         //
