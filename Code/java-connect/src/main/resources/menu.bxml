@@ -11,7 +11,7 @@
 					
 			<TablePane styles="{padding:8, horizontalSpacing:6, verticalSpacing:6}">
 					<TablePane.Row height="-1">
-						<BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+						<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
 							<PushButton bxml:id="btConnexion" buttonData="Connexion" styles="{font:{size:14, bold:true}, horizontalAlignment:'center'}"/>
 						</BoxPane>	
 
@@ -25,20 +25,59 @@
 
 
 
-                <TablePane>
+                <TablePane styles="{horizontalSpacing:10, verticalSpacing:10}">
             		<columns>
                 		<TablePane.Column width="1*"/>
            			</columns>
+                     
+                    <TablePane.Row>
+						<Label text="Java Connect !" styles="{font:{size:14, bold:true}, horizontalAlignment:'center'}"/>
+                    </TablePane.Row>
+ 
+		            <TablePane.Row height="-1">
+		                <Separator/>
+		            </TablePane.Row>
  
                     <TablePane.Row>
-                        <BoxPane styles="{verticalAlignment:'center'}">
-                            <Label text="errorLabel" styles="{color:22}"/>
-                        </BoxPane>
-                        <BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
-                            <PushButton bxml:id="btConnexion" buttonData="Connexion"/>
-                                
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btConnexion" buttonData="Connexion"/>         
                         </BoxPane>
                     </TablePane.Row>
+                    
+                    
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btInscription" buttonData="Inscription"/>       
+                        </BoxPane>
+                    </TablePane.Row>                    
+                    
+                    
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btListeProfil" buttonData="Liste des profils"/>        
+                        </BoxPane>
+                    </TablePane.Row>                  
+                   
+                   
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btModifProfil" buttonData="Modifier votre profil"/>           
+                        </BoxPane>
+                    </TablePane.Row>                    
+                
+                
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btMessagerieEmail" buttonData="Messagerie par mail"/>           
+                        </BoxPane>
+                    </TablePane.Row>  
+                    
+                    
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btMessagerieP2P" buttonData="Messagerie peer to peer"/>           
+                        </BoxPane>
+                    </TablePane.Row>                                       
                     
                 </TablePane>
                 
