@@ -30,6 +30,9 @@ public class Menu extends Window implements Application, Bindable
 	@BXML
 	private PushButton btMessagerieP2P;
 	
+	@BXML
+	private BoxPane btBox;
+	
 	public Menu()
 	{
 	}
