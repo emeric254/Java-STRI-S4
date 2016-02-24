@@ -12,7 +12,7 @@ public class CreationProfil extends Window implements Application, Bindable
 	private Window window = null;
 		
 	
-	private TextInput nomInput = null;
+	//private TextInput nomInput = null;
  
 	public CreationProfil()
 	{
@@ -24,7 +24,7 @@ public class CreationProfil extends Window implements Application, Bindable
 	public void startup(final Display display, final Map<String, String> properties) throws Exception
 	{
 		BXMLSerializer bxmlSerializer = new BXMLSerializer();
-		window = (Window) bxmlSerializer.readObject(Menu.class, "/creationProfil.bxml");
+		window = (Window) bxmlSerializer.readObject(CreationProfil.class, "/creationProfil.bxml");
 		window.open(display);
 	}
 	
@@ -75,14 +75,16 @@ public class CreationProfil extends Window implements Application, Bindable
 
             submitButton.getButtonPressListeners().add(new ButtonPressListener() {
             
-            	@Override
-                public void buttonPressed(Button button) {
+            	public void buttonPressed(Button button) {
                     String mail = mailTextInput.getText();
                     String mdp = mdpTextInput.getText();
             		String prenom = prenomTextInput.getText();
                     String nom = nomTextInput.getText();
-                    String adres = 
-
+                    String rue = rueTextInput.getText();
+                    String ville = villeTextInput.getText();
+                    String codePostal = codePostalTextInput.getText();
+                    String numeroTel = numTelTextInput.getText();
+                    
                     Form.Flag flag = null;
                     if (prenom.length() == 0
                         || nom.length() == 0) {
@@ -91,30 +93,19 @@ public class CreationProfil extends Window implements Application, Bindable
 
                     Form.setFlag(nameBoxPane, flag);
 
-                    if (flag == null) {
+               /*     if (flag == null) {
                         errorLabel.setText("");
                         Prompt.prompt("Pretending to submit...", Forms.this);
                     } else {
                         errorLabel.setText("Some required information is missing.");
-                    }
+                    }*/
                 }
             });
         }
-    }
+    
 	
 	
-	
-	
-	
-		
-	private final CalendarButtonSelectionListener calendarButtonSelectListener = new CalendarButtonSelectionListener()
-	{
-		public void selectedDateChanged(CalendarButton calendarButton, CalendarDate previousSelectedDate)
-		{
-			System.out.println(calendarButton.getSelectedDate().toString());
-		}
-	};
- 
+	 
 	public boolean shutdown(final boolean optional) throws Exception
 	{
 		this.close();

@@ -1,8 +1,68 @@
 <myApp:CreationProfil title="CreationProfil" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 
-	<Form>
+	<Border styles="{padding:6}">
+	<!--- <Form>
   		<Form.Section>
 			<Label text="Creation de votre profil"/>
-			<CalendarButton bxml:id="btPickDate" buttonData="Selectionnez votre date de diplome"/>
+			
 		</Form.Section>
 	</Form>
+	-->
+	
+                    <TablePane>
+                        <columns>
+                            <TablePane.Column width="1*"/>
+                        </columns>
+
+                        <TablePane.Row height="1*">
+                            <Form>
+                                <Form.Section heading="Général">
+                                    <BoxPane bxml:id="idConnexionBoxPane" Form.label="connexion">
+                                        <TextInput bxml:id="mailTextInput" prompt="mail"/>
+                                        <TextInput bxml:id="mdpTextInput" prompt="password"/>
+                                    </BoxPane>
+                                    <BoxPane bxml:id="nameBoxPane" Form.label="Nom">
+                                        <TextInput bxml:id="prenomTextInput" prompt="prenom"/>
+                                        <TextInput bxml:id="nomTextInput" prompt="nom"/>
+                                    </BoxPane>
+                                </Form.Section>
+
+                                <Form.Section heading="Adresse">
+                                    <BoxPane bxml:id="addressBoxPane" Form.label="" orientation="vertical">
+                                        <TextInput prompt="Rue" textSize="20"/>
+                                        <TextInput prompt="Code postal" textSize="15"/>
+                                        <TextInput prompt="Ville" textSize="5"/>
+                                    </BoxPane>
+                                </Form.Section>
+
+                                <Form.Section heading="Téléphone">
+                                    <TextInput bxml:id="numTelTextInput" prompt="Numéro de téléphone"/>
+                                </Form.Section>
+                            </Form>
+                        </TablePane.Row>
+
+                        <TablePane.Row height="-1">
+                            <Separator/>
+                        </TablePane.Row>
+
+                        <TablePane.Row height="-1">
+                            <TablePane>
+                                <columns>
+                                    <TablePane.Column width="1*"/>
+                                    <TablePane.Column width="-1"/>
+                                </columns>
+
+                                <TablePane.Row>
+                                    <BoxPane styles="{verticalAlignment:'center'}">
+                                        <Label bxml:id="errorLabel" styles="{color:22}"/>
+                                    </BoxPane>
+                                    <BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+                                        <PushButton bxml:id="submitButton" buttonData="Submit"
+                                            styles="{minimumAspectRatio:3}"/>
+                                    </BoxPane>
+                                </TablePane.Row>
+                            </TablePane>
+                        </TablePane.Row>
+                    </TablePane>
+                </Border>
+           
 </myApp:CreationProfil>
