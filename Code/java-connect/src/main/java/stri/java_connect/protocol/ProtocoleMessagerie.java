@@ -7,13 +7,10 @@ package stri.java_connect.protocol;
  * @author emeric
  *
  */
-public abstract class ProtocoleMessagerie
+public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 {
 	private final static String utilisateursURI = "/utilisateurs";
 	private final static String messagerieURI = "/messagerie";
-	private final static String code = "{\"code\" : ";
-	private final static String data =  ", \"data\" : \"";
-	private final static String fin = "\"}";
 
 	public static String requeteConnexion(String courriel, String mdp)
 	{
