@@ -6,6 +6,8 @@ package stri.java_connect.protocol;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import stri.java_connect.utils.MD5Hasher;
+
 /**
  * @author emeric
  *
@@ -16,6 +18,32 @@ public abstract class ProtocoleGenerique
 	protected final static String data =  ", \"data\" : \"";
 	protected final static String fin = "\"}";
 
+	
+	/**
+	 * Requete de connexion
+	 * 
+	 * @param courriel le courriel la connexion
+	 * @param motDePasse le mot de passe pour la connexion
+	 * @return la requete
+	 */
+	public static String requeteConnexion(String courriel, String motDePasse)
+	{
+		return "CONNEXION " + courriel + ":" + motDePasse;
+	}
+	
+	/**
+	 * Requete de connexion, le mot de passe sera hash en MD5
+	 * 
+	 * @param courriel le courriel la connexion
+	 * @param motDePasse le mot de passe pour la connexion
+	 * @return la requete
+	 */
+	public static String requeteConnexionHashMD5(String courriel, String motDePasse)
+	{
+		return "CONNEXION " + courriel + ":MD5:" + MD5Hasher.hashString(motDePasse);
+	}
+	
+	
 	//-------------------------------------------------------------------------
 	// createurs de reponses
 

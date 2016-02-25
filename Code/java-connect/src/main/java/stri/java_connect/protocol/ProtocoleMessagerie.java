@@ -11,11 +11,6 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 {
 	private final static String utilisateursURI = "/utilisateurs";
 	private final static String messagerieURI = "/messagerie";
-
-	public static String requeteConnexion(String courriel, String mdp)
-	{
-		return null;
-	}
 	
 	public static String requeteEnvoiMessageDiffere(String idutilisateur, String msg)
 	{
@@ -24,38 +19,39 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	
 	public static String requeteConsulterListeUtilisateurConnectes()
 	{
-		return null;
+		return "CONSULTER "+ utilisateursURI;
 	}
 	
-	public static String requeteDetailsUtilisateurConnecte(String couriel)
+	public static String requeteDetailsUtilisateurConnecte(String courriel)
 	{
-		return null;
+		return "CONSULTER "+ utilisateursURI + "/" + courriel;
 	}
 	
 	public static String requeteConsulterListeMessagesManques()
 	{
-		return null;
+		return "CONSULTER "+ messagerieURI;
 	}
 	
 	public static String requeteConsulterDetailsMessagesManque(String idmsg)
 	{
-		return null;
+		return "CONSULTER "+ messagerieURI + "/" + idmsg;
 	}
 	
 	public static String requeteSupprimerListeMessagesManques()
 	{
-		return null;
+		return "SUPPRIMER "+ messagerieURI;
 	}
 	
 	public static String requeteSupprimerMessageManque(String idmsg)
 	{
-		return null;
+		return "SUPPRIMER "+ messagerieURI + "/" + idmsg;
 	}
 	
 	//
 	
 	public static String requeteMessageDirect(String msg)
 	{
+		// TODO message direct
 		return null;
 	}
 	

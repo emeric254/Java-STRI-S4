@@ -5,7 +5,6 @@ package stri.java_connect.protocol;
 
 import stri.java_connect.utils.CourrielValidateur;
 import stri.java_connect.utils.JSONValidateur;
-import stri.java_connect.utils.MD5Hasher;
 
 /**
  * @author emeric
@@ -37,30 +36,6 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	public static String requeteConsulterProfil(String courriel)
 	{
 		return "CONSULTER "+ profilsURI + "/" + courriel;
-	}
-	
-	/**
-	 * Requete de connexion
-	 * 
-	 * @param courriel le courriel la connexion
-	 * @param motDePasse le mot de passe pour la connexion
-	 * @return la requete
-	 */
-	public static String requeteConnexion(String courriel, String motDePasse)
-	{
-		return "CONNEXION " + courriel + ":" + motDePasse;
-	}
-	
-	/**
-	 * Requete de connexion, le mot de passe sera hash en MD5
-	 * 
-	 * @param courriel le courriel la connexion
-	 * @param motDePasse le mot de passe pour la connexion
-	 * @return la requete
-	 */
-	public static String requeteConnexionHashMD5(String courriel, String motDePasse)
-	{
-		return "CONNEXION " + courriel + ":MD5:" + MD5Hasher.hashString(motDePasse);
 	}
 
 	/**
