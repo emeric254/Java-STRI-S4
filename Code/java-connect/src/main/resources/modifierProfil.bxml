@@ -11,8 +11,12 @@
                     </TablePane.Row>
  
 		            <TablePane.Row height="-1">
-		                     <Label text="Nom" styles="{font:{bold:true}}" />
-                			<TextInput bxml:id="stateTextInput" textSize="10" maximumLength="8" />
+		                    <BoxPane bxml:id="idConnexionBoxPane" Form.label="connexion">
+                                <Label text="Nom" styles="{font:{bold:true}}" />
+                                <TextInput bxml:id="nomTextInput" textSize="10" maximumLength="8" />
+                                <TextInput bxml:id="mailTextInput" prompt="mail"/>
+                            	<TextInput bxml:id="mdpTextInput" prompt="password"/>
+                           	</BoxPane>
 		            </TablePane.Row>
  
                     <TablePane.Row>

@@ -1,0 +1,83 @@
+<myApp:AffichageProfil title="AffichageProfil" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 
+	<Border styles="{padding:6}">
+	<!--- <Form>
+  		<Form.Section>
+			<Label text="Informations détaillées du profil"/>
+			
+		</Form.Section>
+	</Form>
+	-->
+	
+                    <TablePane>
+                        <columns>
+                            <TablePane.Column width="1*"/>
+                        </columns>
+
+                        <TablePane.Row height="1*">
+                            <Form>
+                                <Form.Section heading="Général">
+                                    <BoxPane bxml:id="NomBoxPane" Form.label="Nom Prénom">
+		                          		<TextInput bxml:id="nomTextInput" prompt="Nom"/>
+		                            	<TextInput bxml:id="prenomTextInput" prompt="Prénom"/>
+                                    </BoxPane>
+
+                                    <BoxPane bxml:id="MailBoxPane" Form.label="Mail">
+		                          		<TextInput bxml:id="mailTextInput" prompt="Mail"/>
+                                    </BoxPane>                                                                      
+
+                                </Form.Section>
+
+                                <Form.Section heading="Adresse">
+                                    <BoxPane bxml:id="AdresseBoxPane" Form.label="Adresse">
+		                          		<TextInput bxml:id="rueTextInput" prompt="Rue"/>
+		                            	<TextInput bxml:id="codepostaTextInput" prompt="Code postal"/>
+		                            	<TextInput bxml:id="villeTextInput" prompt="Ville"/>
+                                    </BoxPane>
+                                </Form.Section>
+                                
+                                <Form.Section heading="Téléphone">
+                                    <BoxPane bxml:id="telephoneBoxPane" Form.label="Téléphone">                               
+                                    	<TextInput bxml:id="numTelTextInput" prompt="Numéro de téléphone"/>
+                                    </BoxPane>
+                                </Form.Section>
+                                 
+                                <Form.Section heading="Date du diplome">
+                                	<BoxPane bxml:id="diplomeBoxPane" Form.label="Diplome">
+                                    	<TextInput bxml:id="diplomeTextInput" prompt="Date du diplome"/>
+                                    </BoxPane>
+                                </Form.Section>
+
+                                <Form.Section heading="Competences">
+                                	<BoxPane bxml:id="competencesBoxPane" Form.label="Compétences">
+                                    	<TextInput bxml:id="competencesTextInput" prompt="Compétences"/>
+                                    </BoxPane>
+                                </Form.Section>
+                            </Form>
+                        </TablePane.Row>
+
+                        <TablePane.Row height="-1">
+                            <Separator/>
+                        </TablePane.Row>
+
+                        <TablePane.Row height="-1">
+                            <TablePane>
+                                <columns>
+                                    <TablePane.Column width="1*"/>
+                                    <TablePane.Column width="-1"/>
+                                </columns>
+
+                                <TablePane.Row>
+                                    <BoxPane styles="{verticalAlignment:'center'}">
+                                        <Label bxml:id="errorLabel" styles="{color:22}"/>
+                                    </BoxPane>
+                                    <BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+                                        <PushButton bxml:id="submitButton" buttonData="Ok"
+                                            styles="{minimumAspectRatio:3}"/>
+                                    </BoxPane>
+                                </TablePane.Row>
+                            </TablePane>
+                        </TablePane.Row>
+                    </TablePane>
+                </Border>
+           
+</myApp:AffichageProfil>
