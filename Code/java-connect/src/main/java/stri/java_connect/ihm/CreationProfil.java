@@ -48,6 +48,7 @@ public class CreationProfil extends Window implements Application, Bindable
         
         
         private PushButton submitButton = null;
+        private PushButton retourMenuButton = null;
         private Label errorLabel = null;
 
 
@@ -71,6 +72,7 @@ public class CreationProfil extends Window implements Application, Bindable
             numTelTextInput = (TextInput)namespace.get("numTelTextInput");
             
             submitButton = (PushButton)namespace.get("submitButton");
+            retourMenuButton = (PushButton)namespace.get("retourMenuButton");
             errorLabel = (Label)namespace.get("errorLabel");
 
             submitButton.getButtonPressListeners().add(new ButtonPressListener() {
@@ -86,19 +88,26 @@ public class CreationProfil extends Window implements Application, Bindable
                     String numeroTel = numTelTextInput.getText();
                     
                     Form.Flag flag = null;
-                    if (prenom.length() == 0
-                        || nom.length() == 0) {
-                        flag = new Form.Flag(MessageType.ERROR, "Onligatoire");
+                    // Vérification que tous les champs sont remplis
+                    if ((mail.length() == 0)
+                    	|| (mdp.length() == 0)
+                    	|| (prenom.length() == 0)
+                        || (nom.length() == 0)
+                        || (rue.length() == 0)
+                        || (ville.length() == 0)
+                        || (codePostal.length() == 0)
+                        || (numeroTel.length() == 0)) {
+                        flag = new Form.Flag(MessageType.ERROR, "Obligatoire");
                     }
 
                     Form.setFlag(nameBoxPane, flag);
 
-               /*     if (flag == null) {
+                    if (flag == null) {
                         errorLabel.setText("");
-                        Prompt.prompt("Pretending to submit...", Forms.this);
+                        //Prompt.prompt("Pretending to submit...", Forms.this);
                     } else {
                         errorLabel.setText("Some required information is missing.");
-                    }*/
+                    }
                 }
             });
         }

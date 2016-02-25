@@ -1,17 +1,13 @@
 <myApp:CreationProfil title="CreationProfil" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 
 	<Border styles="{padding:6}">
-	<!--- <Form>
-  		<Form.Section>
-			<Label text="Creation de votre profil"/>
-			
-		</Form.Section>
-	</Form>
-	-->
-	
+
                     <TablePane>
                         <columns>
                             <TablePane.Column width="1*"/>
                         </columns>
+                         <TablePane.Row>
+                       		 <Label text="Creation de votre profil"/>
+                        </TablePane.Row>
 
                         <TablePane.Row height="1*">
                             <Form>
@@ -27,10 +23,10 @@
                                 </Form.Section>
 
                                 <Form.Section heading="Adresse">
-                                    <BoxPane bxml:id="addressBoxPane" Form.label="" orientation="vertical">
+                                    <BoxPane bxml:id="addressBoxPane"  orientation="vertical">
                                         <TextInput prompt="Rue" textSize="20"/>
-                                        <TextInput prompt="Code postal" textSize="15"/>
-                                        <TextInput prompt="Ville" textSize="5"/>
+                                        <TextInput prompt="Code postal" textSize="20"/>
+                                        <TextInput prompt="Ville" textSize="20"/>
                                     </BoxPane>
                                 </Form.Section>
 
@@ -56,7 +52,9 @@
                                         <Label bxml:id="errorLabel" styles="{color:22}"/>
                                     </BoxPane>
                                     <BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
-                                        <PushButton bxml:id="submitButton" buttonData="Submit"
+                                        <PushButton bxml:id="retourMenuButton" buttonData="Retour au menu"
+                                            styles="{minimumAspectRatio:3}"/>
+                                        <PushButton bxml:id="submitButton" buttonData="Valider"
                                             styles="{minimumAspectRatio:3}"/>
                                     </BoxPane>
                                 </TablePane.Row>
