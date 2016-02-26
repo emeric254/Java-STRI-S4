@@ -7,14 +7,14 @@ import org.apache.pivot.collections.*;
 import org.apache.pivot.util.*;
 import org.apache.pivot.wtk.*;
 
-public class AffichageProfil extends Window implements Application, Bindable
+public class Messagerie extends Window implements Application, Bindable
 {
 	private Window window = null;
 		
 	
 	//private TextInput nomInput = null;
  
-	public AffichageProfil()
+	public Messagerie()
 	{
 	}
  
@@ -24,7 +24,7 @@ public class AffichageProfil extends Window implements Application, Bindable
 	public void startup(final Display display, final Map<String, String> properties) throws Exception
 	{
 		BXMLSerializer bxmlSerializer = new BXMLSerializer();
-		window = (Window) bxmlSerializer.readObject(AffichageProfil.class, "/affichageProfil.bxml");
+		window = (Window) bxmlSerializer.readObject(Messagerie.class, "/messagerie.bxml");
 		window.open(display);
 	}
 	
@@ -38,16 +38,7 @@ public class AffichageProfil extends Window implements Application, Bindable
 	    private TextInput prenomTextInput = null;
 		private BoxPane MailBoxPane = null;
 	    private TextInput mailTextInput = null;
-        private BoxPane AdresseBoxPane = null;
-        private TextInput rueTextInput = null;
-        private TextInput villeTextInput = null;
-        private TextInput codePostalTextInput = null;
-        private BoxPane telephoneBoxPane = null;
-        private TextInput numTelTextInput = null;
-        private BoxPane diplomeBoxPane = null;
-        private TextInput diplomeTextInput = null;
-        private BoxPane competencesBoxPane = null;
-        private TextInput competencesTextInput = null;
+
 
         
         
@@ -64,17 +55,7 @@ public class AffichageProfil extends Window implements Application, Bindable
         	// Affichage adresse mail
         	MailBoxPane = (BoxPane)namespace.get("nameBoxPane");
             mailTextInput = (TextInput)namespace.get("prenomTextInput");
-            // Saisie adresse
-            AdresseBoxPane = (BoxPane)namespace.get("addressBoxPane");
-            rueTextInput = (TextInput)namespace.get("rueTextInput");
-            villeTextInput = (TextInput)namespace.get("villeTextInput");
-            codePostalTextInput = (TextInput)namespace.get("codePostalTextInput");
-            // Saisie numéro de téléphone
-            telephoneBoxPane = (BoxPane)namespace.get("telephoneBoxPane");
-            numTelTextInput = (TextInput)namespace.get("numTelTextInput");
-            
-            // Date du diplome
-            diplomeBoxPane = (BoxPane)namespace.get("diplomeBoxPane");
+
             
             submitButton = (PushButton)namespace.get("submitButton");
             errorLabel = (Label)namespace.get("errorLabel");
@@ -85,11 +66,7 @@ public class AffichageProfil extends Window implements Application, Bindable
                     String mail = mailTextInput.getText();
             		String prenom = prenomTextInput.getText();
                     String nom = nomTextInput.getText();
-                    String rue = rueTextInput.getText();
-                    String ville = villeTextInput.getText();
-                    String codePostal = codePostalTextInput.getText();
-                    String numeroTel = numTelTextInput.getText();
-                    String dateDiplome = diplomeTextInput.getText();
+
                     
                     Form.Flag flag = null;
                     if (prenom.length() == 0
