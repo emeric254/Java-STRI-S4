@@ -15,6 +15,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	private final static String messagerieURI = "/messagerie";
 	private final static String consulterMethod = "CONSULTER ";
 	private final static String supprimerMethod = "SUPPRIMER ";
+	private final static String inscrireMethod = "INSCRIRE ";
 	
 	/**
 	 * @param idutilisateur
@@ -23,7 +24,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static String requeteEnvoiMessageDiffere(String idutilisateur, String msg)
 	{
-		return null;
+		return inscrireMethod + messagerieURI + "/" + idutilisateur + " " + msg;
 	}
 	
 	/**
@@ -94,7 +95,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static boolean isMessageDirect(String requete)
 	{
-		return requete.startsWith("MESSAGE ") && extraireDateMessageDirect(requete) != null;
+		return requete.startsWith("MESSAGE ") && extraireDateMessageDirect(requete) != null && extraireMessageMessageDirect(requete) != null;
 	}
 	
 	/**
@@ -103,7 +104,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static String extraireTimestampMessageDirect(String requete)
 	{
-		return requete.substring(8).split(" ",1)[0];
+		return requete.substring(8).split(" ",2)[0];
 	}
 	
 	/**
