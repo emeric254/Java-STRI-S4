@@ -9,32 +9,25 @@ import org.apache.pivot.wtk.*;
 
 public class Menu extends Window implements Application, Bindable
 {
-	private Window window = null;
- 
+	private Window window;
 	@BXML
 	private PushButton btConnexion;
-	
 	@BXML
 	private PushButton btInscription;
-	
 	@BXML
 	private PushButton btListeProfil;
-	
 	@BXML
 	private PushButton btModifProfil;
- 
 	@BXML
 	private PushButton btMessagerieEmail;
-	
-	
 	@BXML
 	private PushButton btMessagerieP2P;
-	
 	@BXML
 	private BoxPane btBox;
 	
 	public Menu()
 	{
+		//
 	}
  
 	public void initialize(final Map<String, Object> namespace, final URL location, final Resources resources)
@@ -45,7 +38,6 @@ public class Menu extends Window implements Application, Bindable
 		btModifProfil.getButtonPressListeners().add(modifProfilListener);
 		btMessagerieEmail.getButtonPressListeners().add(messagerieMail);
 		btMessagerieP2P.getButtonPressListeners().add(messagerieP2P);
-
 	}
  
 	public void startup(final Display display, final Map<String, String> properties) throws Exception
@@ -111,9 +103,11 @@ public class Menu extends Window implements Application, Bindable
  
 	public void suspend() throws Exception
 	{
+		//
 	}
  
 	public void resume() throws Exception
 	{
+		//
 	}
 }

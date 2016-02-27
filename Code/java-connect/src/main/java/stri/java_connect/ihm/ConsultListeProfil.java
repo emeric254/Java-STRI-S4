@@ -54,5 +54,4 @@ public class ConsultListeProfil extends Window implements Application, Bindable
 	{
 		//
 	}
-
 }

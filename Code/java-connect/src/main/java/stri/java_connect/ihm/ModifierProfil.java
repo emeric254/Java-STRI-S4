@@ -1,6 +1,5 @@
 package stri.java_connect.ihm;
 
-
 import java.net.URL;
 
 import org.apache.pivot.beans.*;
@@ -10,13 +9,13 @@ import org.apache.pivot.wtk.*;
 
 public class ModifierProfil extends Window implements Application, Bindable
 {
-	private Window window = null;
-	 
-	@BXML
+	private Window window;
+
 	private PushButton btRetour;
  
 	public ModifierProfil()
 	{
+		//
 	}
  
 	public void initialize(final Map<String, Object> namespace, final URL location, final Resources resources)
@@ -38,21 +37,7 @@ public class ModifierProfil extends Window implements Application, Bindable
 			Alert.alert(MessageType.INFO, "Retour acceuil", ModifierProfil.this);
 		}
 	};
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
- 
-	
- 
+
 	public boolean shutdown(final boolean optional) throws Exception
 	{
 		this.close();
@@ -61,11 +46,11 @@ public class ModifierProfil extends Window implements Application, Bindable
  
 	public void suspend() throws Exception
 	{
+		//
 	}
  
 	public void resume() throws Exception
 	{
+		//
 	}
-	
-
 }
