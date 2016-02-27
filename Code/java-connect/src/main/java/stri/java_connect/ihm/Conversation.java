@@ -7,14 +7,14 @@ import org.apache.pivot.collections.*;
 import org.apache.pivot.util.*;
 import org.apache.pivot.wtk.*;
 
-public class Messagerie extends Window implements Application, Bindable
+public class Conversation extends Window implements Application, Bindable
 {
 	private Window window = null;
 		
 	
 	//private TextInput nomInput = null;
  
-	public Messagerie()
+	public Conversation()
 	{
 	}
  
@@ -24,7 +24,7 @@ public class Messagerie extends Window implements Application, Bindable
 	public void startup(final Display display, final Map<String, String> properties) throws Exception
 	{
 		BXMLSerializer bxmlSerializer = new BXMLSerializer();
-		window = (Window) bxmlSerializer.readObject(Messagerie.class, "/messagerie.bxml");
+		window = (Window) bxmlSerializer.readObject(Conversation.class, "/conversation.bxml");
 		window.open(display);
 	}
 	

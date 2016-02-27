@@ -71,7 +71,7 @@
                                         <Label bxml:id="errorLabel" styles="{color:22}"/>
                                     </BoxPane>
                                     <BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
-                                        <PushButton bxml:id="retourMenuButton" buttonData="Retour au menu"
+                                        <PushButton bxml:id="cancelButton" buttonData="Retour au menu"
                                             styles="{minimumAspectRatio:3}"/>
                                         <PushButton bxml:id="submitButton" buttonData="Valider"
                                             styles="{minimumAspectRatio:3}"/>

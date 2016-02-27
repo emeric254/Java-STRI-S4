@@ -52,6 +52,7 @@ public class AffichageProfil extends Window implements Application, Bindable
         
         
         private PushButton submitButton = null;
+        private PushButton cancelButton = null;
         private Label errorLabel = null;
 
 
@@ -107,6 +108,9 @@ public class AffichageProfil extends Window implements Application, Bindable
                     }
                 }
             });
+            
+            cancelButton = (PushButton)namespace.get("cancelButton");
+            //Faire retour menu
         }
     
 	
