@@ -38,6 +38,7 @@ public class Conversation extends Window implements Application, Bindable
 	    private TextInput prenomTextInput = null;
 		private BoxPane MailBoxPane = null;
 	    private TextInput mailTextInput = null;
+	    private TextInput messageTextInput = null;
 
 
         
@@ -51,11 +52,14 @@ public class Conversation extends Window implements Application, Bindable
     	{
             // Affichage nom/prenom 
         	NomBoxPane = (BoxPane)namespace.get("idConnexionBoxPane");
-        	nomTextInput = (TextInput)namespace.get("mailTextInput");
-        	prenomTextInput = (TextInput)namespace.get("mdpTextInput");
+        	nomTextInput = (TextInput)namespace.get("nomTextInput");
+
+        	
         	// Affichage adresse mail
         	MailBoxPane = (BoxPane)namespace.get("nameBoxPane");
-            mailTextInput = (TextInput)namespace.get("prenomTextInput");
+            mailTextInput = (TextInput)namespace.get("mailTextInput");
+            messageTextInput = (TextInput)namespace.get("messageTextInput");
+
 
             
             submitButton = (PushButton)namespace.get("submitButton");
@@ -65,14 +69,15 @@ public class Conversation extends Window implements Application, Bindable
             
             	public void buttonPressed(Button button) {
                     String mail = mailTextInput.getText();
-            		String prenom = prenomTextInput.getText();
                     String nom = nomTextInput.getText();
+                    String message = messageTextInput.getText();
 
                     
                     Form.Flag flag = null;
-                    if (prenom.length() == 0
-                        || nom.length() == 0) {
-                        flag = new Form.Flag(MessageType.ERROR, "Onligatoire");
+                    if (mail.length() == 0
+                        || nom.length() == 0
+                        || message.length() == 0) {
+                        flag = new Form.Flag(MessageType.ERROR, "Obligatoire");
                     }
 
                     Form.setFlag(NomBoxPane, flag);
