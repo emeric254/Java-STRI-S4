@@ -78,7 +78,15 @@ public class CreationProfil extends Window implements Application, Bindable
             submitButton = (PushButton)namespace.get("submitButton");
             retourMenuButton = (PushButton)namespace.get("retourMenuButton");
             errorLabel = (Label)namespace.get("errorLabel");
-
+            
+            retourMenuButton.getButtonPressListeners().add(new ButtonPressListener()
+            {
+            	public void buttonPressed(Button button)
+            	{
+            		DesktopApplicationContext.replaceSplashScreen(getDisplay());
+            	}
+            });
+            
             submitButton.getButtonPressListeners().add(new ButtonPressListener() {
             
             	public void buttonPressed(Button button) {
@@ -124,7 +132,15 @@ public class CreationProfil extends Window implements Application, Bindable
 		this.close();
 		return false;
 	}
- 
+	
+	/*private final ButtonPressListener messagerieP2P = new ButtonPressListener()
+	{
+		public void buttonPressed(final Button button)
+		{
+			Alert.alert(MessageType.INFO, "Messagerie peer to peerl", Menu.this);
+		}
+	};
+ */
 	public void suspend() throws Exception
 	{
 	}
