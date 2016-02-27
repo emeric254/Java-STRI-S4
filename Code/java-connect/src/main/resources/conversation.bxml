@@ -21,15 +21,22 @@
                                 </Form.Section>    
                                 
                                 <Form.Section heading="Message">     
-                                  	<Label text="Saisissez votre message :"/>
+                                  	<Label text="Messages :"/>
                                   	<Border styles="{color:10}">                                  	
                                   	<ScrollPane horizontalScrollBarPolicy="fill"
 	                            		verticalScrollBarPolicy="fill_to_capacity"
 	                            		preferredHeight="240" preferredWidth="240">
-	                            		<TextArea text=""/>
                         			</ScrollPane>     
                         			</Border>  
-                        			                    
+
+                                  	<Label text="Saisie de texte :"/>
+                                  	<Border styles="{color:10}">                                  	
+                                  	<ScrollPane horizontalScrollBarPolicy="fill"
+	                            		verticalScrollBarPolicy="fill_to_capacity"
+	                            		preferredHeight="100" preferredWidth="240">
+	                            		<TextArea text=""/>
+                        			</ScrollPane>     
+                        			</Border>                          			                    
                         			                			
                         			                                                             
                                 </Form.Section>
