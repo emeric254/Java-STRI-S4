@@ -9,95 +9,78 @@ import org.apache.pivot.wtk.*;
 
 public class Conversation extends Window implements Application, Bindable
 {
-	private Window window = null;
-		
-	
-	//private TextInput nomInput = null;
- 
+	private Window window;
+
+	private BoxPane NomBoxPane = null;
+    private TextInput nomTextInput = null;
+    private TextInput prenomTextInput = null;
+    
+	private BoxPane MailBoxPane = null;
+    private TextInput mailTextInput = null;
+    
+    private TextInput messageTextInput = null;
+
+    private PushButton submitButton = null;
+    private PushButton cancelButton = null;
+    private Label errorLabel = null;
+
 	public Conversation()
 	{
+		//
 	}
- 
-	
-		
- 
+
 	public void startup(final Display display, final Map<String, String> properties) throws Exception
 	{
 		BXMLSerializer bxmlSerializer = new BXMLSerializer();
 		window = (Window) bxmlSerializer.readObject(Conversation.class, "/conversation.bxml");
 		window.open(display);
 	}
-	
-	
-	
-	
-	
-	
-		private BoxPane NomBoxPane = null;
-	    private TextInput nomTextInput = null;
-	    private TextInput prenomTextInput = null;
-		private BoxPane MailBoxPane = null;
-	    private TextInput mailTextInput = null;
-	    private TextInput messageTextInput = null;
 
+    public void initialize(final Map<String, Object> namespace, final URL location, final Resources resources)
+	{
+        // Affichage nom/prenom 
+    	NomBoxPane = (BoxPane)namespace.get("idConnexionBoxPane");
+    	nomTextInput = (TextInput)namespace.get("nomTextInput");
 
-        
-        
-        private PushButton submitButton = null;
-        private PushButton cancelButton = null;
-        private Label errorLabel = null;
+    	// Affichage adresse mail
+    	MailBoxPane = (BoxPane)namespace.get("nameBoxPane");
+        mailTextInput = (TextInput)namespace.get("mailTextInput");
+        messageTextInput = (TextInput)namespace.get("messageTextInput");
 
+        submitButton = (PushButton)namespace.get("submitButton");
+        errorLabel = (Label)namespace.get("errorLabel");
 
-        public void initialize(final Map<String, Object> namespace, final URL location, final Resources resources)
-    	{
-            // Affichage nom/prenom 
-        	NomBoxPane = (BoxPane)namespace.get("idConnexionBoxPane");
-        	nomTextInput = (TextInput)namespace.get("nomTextInput");
+        submitButton.getButtonPressListeners().add(new ButtonPressListener()
+        {
+        	public void buttonPressed(Button button)
+        	{
+                String mail = mailTextInput.getText();
+                String nom = nomTextInput.getText();
+                String message = messageTextInput.getText();
 
-        	
-        	// Affichage adresse mail
-        	MailBoxPane = (BoxPane)namespace.get("nameBoxPane");
-            mailTextInput = (TextInput)namespace.get("mailTextInput");
-            messageTextInput = (TextInput)namespace.get("messageTextInput");
-
-
-            
-            submitButton = (PushButton)namespace.get("submitButton");
-            errorLabel = (Label)namespace.get("errorLabel");
-
-            submitButton.getButtonPressListeners().add(new ButtonPressListener() {
-            
-            	public void buttonPressed(Button button) {
-                    String mail = mailTextInput.getText();
-                    String nom = nomTextInput.getText();
-                    String message = messageTextInput.getText();
-
-                    
-                    Form.Flag flag = null;
-                    if (mail.length() == 0
-                        || nom.length() == 0
-                        || message.length() == 0) {
-                        flag = new Form.Flag(MessageType.ERROR, "Obligatoire");
-                    }
-
-                    Form.setFlag(NomBoxPane, flag);
-
-                    if (flag == null) {
-                        errorLabel.setText("");
-                        //Prompt.prompt("Pretending to submit...", Forms.this);
-                    } else {
-                        errorLabel.setText("Some required information is missing.");
-                    }
+                Form.Flag flag = null;
+                if (mail.length() == 0|| nom.length() == 0|| message.length() == 0)
+                {
+                    flag = new Form.Flag(MessageType.ERROR, "Obligatoire");
                 }
-            });
-            
-            cancelButton = (PushButton)namespace.get("cancelButton");
-            //Faire retour menu            
-        }
-    
-	
-	
-	 
+
+                Form.setFlag(NomBoxPane, flag);
+
+                if (flag == null)
+                {
+                    errorLabel.setText("");
+                    //Prompt.prompt("Pretending to submit...", Forms.this);
+                }
+                else
+                {
+                    errorLabel.setText("Some required information is missing.");
+                }
+            }
+        });
+        cancelButton = (PushButton)namespace.get("cancelButton");
+        //Faire retour menu            
+    }
+
 	public boolean shutdown(final boolean optional) throws Exception
 	{
 		this.close();
@@ -106,9 +89,11 @@ public class Conversation extends Window implements Application, Bindable
  
 	public void suspend() throws Exception
 	{
+		//
 	}
  
 	public void resume() throws Exception
 	{
+		//
 	}
 }
