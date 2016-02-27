@@ -10,19 +10,13 @@ import org.apache.pivot.wtk.*;
 public class Menu extends Window implements Application, Bindable
 {
 	private Window window;
-	@BXML
+
 	private PushButton btConnexion;
-	@BXML
 	private PushButton btInscription;
-	@BXML
 	private PushButton btListeProfil;
-	@BXML
 	private PushButton btModifProfil;
-	@BXML
 	private PushButton btMessagerieEmail;
-	@BXML
 	private PushButton btMessagerieP2P;
-	@BXML
 	private BoxPane btBox;
 	
 	public Menu()
