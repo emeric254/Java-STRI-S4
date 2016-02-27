@@ -16,14 +16,22 @@
  
                     <TablePane.Row>
                         <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
-                            <PushButton bxml:id="btConnexion" buttonData="Connexion"/>         
+                            <PushButton bxml:id="btConnexion" buttonData="Connexion"/>
+       
                         </BoxPane>
                     </TablePane.Row>
                     
                     
                     <TablePane.Row>
                         <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
-                            <PushButton bxml:id="btInscription" buttonData="Inscription"/>       
+                            <PushButton bxml:id="btInscription" buttonData="Inscription">       
+                            	<buttonPressListeners>
+	                				importPackage(org.apache.pivot.wtk);
+	                				function buttonPressed(button) {
+	                    			messagerie.open(frame, null);
+	                				}
+            					</buttonPressListeners>
+                            </PushButton>  
                         </BoxPane>
                     </TablePane.Row>                    
                     
