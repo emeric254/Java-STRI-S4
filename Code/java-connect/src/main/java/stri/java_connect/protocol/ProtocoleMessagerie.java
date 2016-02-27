@@ -13,6 +13,8 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 {
 	private final static String utilisateursURI = "/utilisateurs";
 	private final static String messagerieURI = "/messagerie";
+	private final static String consulterMethod = "CONSULTER ";
+	private final static String supprimerMethod = "SUPPRIMER ";
 	
 	/**
 	 * @param idutilisateur
@@ -29,7 +31,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static String requeteConsulterListeUtilisateurConnectes()
 	{
-		return "CONSULTER "+ utilisateursURI;
+		return consulterMethod + utilisateursURI;
 	}
 	
 	/**
@@ -38,7 +40,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static String requeteDetailsUtilisateurConnecte(String courriel)
 	{
-		return "CONSULTER "+ utilisateursURI + "/" + courriel;
+		return consulterMethod + utilisateursURI + "/" + courriel;
 	}
 	
 	/**
@@ -46,7 +48,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static String requeteConsulterListeMessagesManques()
 	{
-		return "CONSULTER "+ messagerieURI;
+		return consulterMethod + messagerieURI;
 	}
 	
 	/**
@@ -55,7 +57,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static String requeteConsulterDetailsMessagesManque(String idmsg)
 	{
-		return "CONSULTER "+ messagerieURI + "/" + idmsg;
+		return consulterMethod + messagerieURI + "/" + idmsg;
 	}
 	
 	/**
@@ -63,7 +65,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static String requeteSupprimerListeMessagesManques()
 	{
-		return "SUPPRIMER "+ messagerieURI;
+		return supprimerMethod + messagerieURI;
 	}
 	
 	/**
@@ -72,7 +74,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static String requeteSupprimerMessageManque(String idmsg)
 	{
-		return "SUPPRIMER "+ messagerieURI + "/" + idmsg;
+		return supprimerMethod + messagerieURI + "/" + idmsg;
 	}
 	
 	//
