@@ -45,7 +45,8 @@ public class CreationProfil extends Window implements Application, Bindable
         private TextInput codePostalTextInput = null;
         private BoxPane telephoneBoxPane = null;
         private TextInput numTelTextInput = null;
-        
+        private BoxPane competencesBoxPane = null;
+        private TextInput competencesTextInput = null;
         
         private PushButton submitButton = null;
         private PushButton retourMenuButton = null;
@@ -70,6 +71,9 @@ public class CreationProfil extends Window implements Application, Bindable
             // Saisie numéro de téléphone
             telephoneBoxPane = (BoxPane)namespace.get("telephoneBoxPane");
             numTelTextInput = (TextInput)namespace.get("numTelTextInput");
+            // Saisie des compétences
+            competencesBoxPane = (BoxPane)namespace.get("competencesBoxPane");
+            competencesTextInput = (TextInput)namespace.get("competencesTextInput");
             
             submitButton = (PushButton)namespace.get("submitButton");
             retourMenuButton = (PushButton)namespace.get("retourMenuButton");

@@ -33,6 +33,14 @@
                                 <Form.Section heading="Téléphone">
                                     <TextInput bxml:id="numTelTextInput" prompt="Numéro de téléphone"/>
                                 </Form.Section>
+                                
+                                <Form.Section heading="Compétences">
+                                	<Label text="Séparez les compétences par des points virgules(;)"/>
+                                    <BoxPane bxml:id="competencesBoxPane">
+                                        <TextInput bxml:id="competencesTextInput" prompt=""/>
+                                    </BoxPane>
+                                </Form.Section>
+                                
                             </Form>
                         </TablePane.Row>
 
