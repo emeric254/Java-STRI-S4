@@ -24,7 +24,7 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	 */
 	public static String requeteConsulterProfils()
 	{
-		return "CONSULTER " + profilsURI;
+		return consulterMethod + profilsURI;
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	 */
 	public static String requeteConsulterProfil(String courriel)
 	{
-		return "CONSULTER "+ profilsURI + "/" + courriel;
+		return consulterMethod + profilsURI + "/" + courriel;
 	}
 
 	/**
@@ -46,7 +46,7 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	 */
 	public static String requeteInscrire(String utilisateurJson)
 	{
-		return "INSCRIRE ;" + utilisateurJson;
+		return inscrireMethod + ";" + utilisateurJson;
 	}
 
 	/**
@@ -58,7 +58,7 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	 */
 	public static String requeteModifierProfil(String courriel, String utilisateurJson)
 	{
-		return "MODIFIER " + profilsURI + "/" + courriel + ";"  + utilisateurJson;
+		return modifierMethod + profilsURI + "/" + courriel + ";"  + utilisateurJson;
 	}
 	
 	/**
@@ -69,65 +69,7 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	 */
 	public static String requeteSuppressionProfil(String courriel)
 	{
-		return "SUPPRESSION " + profilsURI + "/" + courriel;
-	}
-	
-	//-------------------------------------------------------------------------
-	// testeurs de type de requete
-	
-	/**
-	 * Tester si la requete est une requete de consultation
-	 * 
-	 * @param requete la requete a tester
-	 * @return true si c'est une requete de consultation, false sinon
-	 */
-	public static boolean isRequeteConsulter(String requete)
-	{
-		return ControlleurProtocole.requeteMethode(requete).equals("CONSULTER");
-	}
-	
-	/**
-	 * Tester si la requete est une requete de connexion
-	 * 
-	 * @param requete la requete a tester
-	 * @return true si c'est une requete de connexion, false sinon
-	 */
-	public static boolean isRequeteConnexion(String requete)
-	{
-		return ControlleurProtocole.requeteMethode(requete).equals("CONNEXION");
-	}
-	
-	/**
-	 * Tester si la requete est une requete d'inscription
-	 * 
-	 * @param requete la requete a tester
-	 * @return true si c'est une requete d'inscription, false sinon
-	 */
-	public static boolean isRequeteInscrire(String requete)
-	{
-		return ControlleurProtocole.requeteMethode(requete).equals("INSCRIRE");
-	}
-	
-	/**
-	 * Tester si la requete est une requete de modification
-	 * 
-	 * @param requete la requete a tester
-	 * @return true si c'est une requete de modification, false sinon
-	 */
-	public static boolean isRequeteModifier(String requete)
-	{
-		return ControlleurProtocole.requeteMethode(requete).equals("MODIFIER");
-	}
-	
-	/**
-	 * Tester si la requete est une requete de suppression
-	 * 
-	 * @param requete la requete a tester
-	 * @return true si c'est une requete de suppression, false sinon
-	 */
-	public static boolean isRequeteSuppression(String requete)
-	{
-		return ControlleurProtocole.requeteMethode(requete).equals("SUPPRESSION");
+		return supprimerMethod + profilsURI + "/" + courriel;
 	}
 
 	//-------------------------------------------------------------------------

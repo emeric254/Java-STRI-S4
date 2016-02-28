@@ -13,9 +13,6 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 {
 	private final static String utilisateursURI = "/utilisateurs";
 	private final static String messagerieURI = "/messagerie";
-	private final static String consulterMethod = "CONSULTER ";
-	private final static String supprimerMethod = "SUPPRIMER ";
-	private final static String inscrireMethod = "INSCRIRE ";
 	
 	/**
 	 * @param idutilisateur

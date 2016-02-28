@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import stri.java_connect.modele.Utilisateur;
 import stri.java_connect.utils.MD5Hasher;
 
 public class ProtocoleGeneriqueTest
@@ -108,6 +109,56 @@ public class ProtocoleGeneriqueTest
 	public void testIsErreurDeconnexion()
 	{
 		assertTrue(ProtocoleGenerique.isErreurDeconnexion(ProtocoleGenerique.erreurDeconnexion()));
+	}
+	
+	@Test
+	public void testIsRequeteConsulter()
+	{
+		assertFalse(ProtocoleAnnuaire.isRequeteConsulter(ProtocoleAnnuaire.requeteInscrire(new Utilisateur().toString())));
+		assertFalse(ProtocoleAnnuaire.isRequeteConsulter(ProtocoleAnnuaire.requeteConnexion(courriel,mdp)));
+		//
+		assertTrue(ProtocoleAnnuaire.isRequeteConsulter(ProtocoleAnnuaire.requeteConsulterProfils()));
+		assertTrue(ProtocoleAnnuaire.isRequeteConsulter(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
+	}
+
+	@Test
+	public void testIsRequeteConnexion()
+	{
+		assertFalse(ProtocoleAnnuaire.isRequeteConnexion(ProtocoleAnnuaire.requeteInscrire(new Utilisateur().toString())));
+		assertFalse(ProtocoleAnnuaire.isRequeteConnexion(ProtocoleAnnuaire.requeteConsulterProfils()));
+		assertFalse(ProtocoleAnnuaire.isRequeteConnexion(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
+		//
+		assertTrue(ProtocoleAnnuaire.isRequeteConnexion(ProtocoleAnnuaire.requeteConnexion(courriel,mdp)));
+	}
+
+	@Test
+	public void testIsRequeteInscrire()
+	{
+		assertFalse(ProtocoleAnnuaire.isRequeteInscrire(ProtocoleAnnuaire.requeteConnexion(courriel,mdp)));
+		assertFalse(ProtocoleAnnuaire.isRequeteInscrire(ProtocoleAnnuaire.requeteConsulterProfils()));
+		assertFalse(ProtocoleAnnuaire.isRequeteInscrire(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
+		//
+		assertTrue(ProtocoleAnnuaire.isRequeteInscrire(ProtocoleAnnuaire.requeteInscrire(new Utilisateur().toString())));
+	}
+
+	@Test
+	public void testIsRequeteModifier()
+	{
+		assertFalse(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteConnexion(courriel,mdp)));
+		assertFalse(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteConsulterProfils()));
+		assertFalse(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
+		//
+		assertTrue(ProtocoleAnnuaire.isRequeteModifier(ProtocoleAnnuaire.requeteModifierProfil(courriel, new Utilisateur().toString())));
+	}
+
+	@Test
+	public void testIsRequeteSuppression()
+	{
+		assertFalse(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteConnexion(courriel,mdp)));
+		assertFalse(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteConsulterProfils()));
+		assertFalse(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteConsulterProfil(courriel)));
+		//
+		assertTrue(ProtocoleAnnuaire.isRequeteSuppression(ProtocoleAnnuaire.requeteSuppressionProfil(courriel)));
 	}
 
 	@Test

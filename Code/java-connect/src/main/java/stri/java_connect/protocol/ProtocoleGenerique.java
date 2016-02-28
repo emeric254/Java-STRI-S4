@@ -14,6 +14,11 @@ import stri.java_connect.utils.MD5Hasher;
  */
 public abstract class ProtocoleGenerique
 {
+	protected final static String consulterMethod = "CONSULTER ";
+	protected final static String supprimerMethod = "SUPPRIMER ";
+	protected final static String inscrireMethod = "INSCRIRE ";
+	protected final static String modifierMethod = "MODIFIER ";
+	
 	protected final static String code = "{\"code\" : ";
 	protected final static String data =  ", \"data\" : \"";
 	protected final static String fin = "\"}";
@@ -194,6 +199,64 @@ public abstract class ProtocoleGenerique
 	public static boolean isErreurDeconnexion(String reponse)
 	{
 		return ControlleurProtocole.reponseCode(reponse) == 3;
+	}
+	
+	//-------------------------------------------------------------------------
+	// testeurs de type de requete
+	
+	/**
+	 * Tester si la requete est une requete de consultation
+	 * 
+	 * @param requete la requete a tester
+	 * @return true si c'est une requete de consultation, false sinon
+	 */
+	public static boolean isRequeteConsulter(String requete)
+	{
+		return ControlleurProtocole.requeteMethode(requete).equals("CONSULTER");
+	}
+	
+	/**
+	 * Tester si la requete est une requete de connexion
+	 * 
+	 * @param requete la requete a tester
+	 * @return true si c'est une requete de connexion, false sinon
+	 */
+	public static boolean isRequeteConnexion(String requete)
+	{
+		return ControlleurProtocole.requeteMethode(requete).equals("CONNEXION");
+	}
+	
+	/**
+	 * Tester si la requete est une requete d'inscription
+	 * 
+	 * @param requete la requete a tester
+	 * @return true si c'est une requete d'inscription, false sinon
+	 */
+	public static boolean isRequeteInscrire(String requete)
+	{
+		return ControlleurProtocole.requeteMethode(requete).equals("INSCRIRE");
+	}
+	
+	/**
+	 * Tester si la requete est une requete de modification
+	 * 
+	 * @param requete la requete a tester
+	 * @return true si c'est une requete de modification, false sinon
+	 */
+	public static boolean isRequeteModifier(String requete)
+	{
+		return ControlleurProtocole.requeteMethode(requete).equals("MODIFIER");
+	}
+	
+	/**
+	 * Tester si la requete est une requete de suppression
+	 * 
+	 * @param requete la requete a tester
+	 * @return true si c'est une requete de suppression, false sinon
+	 */
+	public static boolean isRequeteSuppression(String requete)
+	{
+		return ControlleurProtocole.requeteMethode(requete).equals("SUPPRIMER");
 	}
 
 	//-------------------------------------------------------------------------
