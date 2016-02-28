@@ -36,16 +36,23 @@ public class Connexion extends Dialog implements Bindable
     	mdpTextInput = (TextInput)namespace.get("mdpTextInput");
         
         submitButton = (PushButton)namespace.get("submitButton");
-        retourMenuButton = (PushButton)namespace.get("retourMenuButton");
+        retourMenuButton = (PushButton)namespace.get("quitter");
         errorLabel = (Label)namespace.get("errorLabel");
         
-        retourMenuButton.getButtonPressListeners().add(new ButtonPressListener()
+        /*retourMenuButton.getButtonPressListeners().add(new ButtonPressListener()
         {
         	public void buttonPressed(Button button)
         	{
-        		DesktopApplicationContext.replaceSplashScreen(getDisplay());
+        		//DesktopApplicationContext.replaceSplashScreen(getDisplay());
+        		shutdown(false);
         	}
-        });
+        	public boolean shutdown(final boolean optional)
+        	{
+        		this.close();
+        		return false;
+        	}
+        };*/
+    
         
         submitButton.getButtonPressListeners().add(new ButtonPressListener()
         {
@@ -74,4 +81,21 @@ public class Connexion extends Dialog implements Bindable
             }
         });
     }
+
+
+	/*private final ButtonPressListener quitter = new ButtonPressListener() {
+		
+		public void buttonPressed(final Button button) 
+		{
+			shutdown(false);
+		}
+	};
+	
+	public boolean shutdown(final boolean optional)
+	{
+		this.close();
+		return false;
+	} */
+    
+
 }

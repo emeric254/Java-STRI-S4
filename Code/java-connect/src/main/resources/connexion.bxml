@@ -3,6 +3,9 @@
 	xmlns:myApp="stri.java_connect.ihm"
 	xmlns="org.apache.pivot.wtk"> 
 
+
+
+
 	<Border styles="{padding:6}">
 
                     <TablePane>
@@ -41,7 +44,10 @@
                                     </BoxPane>
                                     <BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
                                         <PushButton bxml:id="retourMenuButton" buttonData="Retour au menu"
-                                            styles="{minimumAspectRatio:3}"/>
+                                            styles="{minimumAspectRatio:3}">
+                                            
+										</PushButton>                                            
+                                            
                                         <PushButton bxml:id="submitButton" buttonData="Valider"
                                             styles="{minimumAspectRatio:3}"/>
                                     </BoxPane>
