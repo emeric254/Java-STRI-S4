@@ -1,69 +1,63 @@
-<myApp:Messagerie title="Messagerie" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 
-	<Border styles="{padding:6}">
-
+<myApp:Messagerie title="Java connect !" maximized="true"  
+	xmlns:bxml="http://pivot.apache.org/bxml" 
+	xmlns:myApp="stri.java_connect.ihm" 
+	xmlns="org.apache.pivot.wtk"> 
 	
-                    <TablePane>
-                        <columns>
-                            <TablePane.Column width="1*"/>
-                        </columns>
+	<Border styles="{padding:6}">
+        <TablePane>
+            <columns>
+                <TablePane.Column width="1*"/>
+            </columns>
 
-                        <TablePane.Row height="1*">
-                            <Form>
-                                <Form.Section heading="Correspondant">
-                                    <BoxPane bxml:id="NomBoxPane" Form.label="Nom Prénom">
-		                          		<TextInput bxml:id="nomTextInput" prompt="Nom Prénom"/>
-                                    </BoxPane>
+            <TablePane.Row height="1*">
+                <Form>
+                    <Form.Section heading="Correspondant">
+                        <BoxPane bxml:id="NomBoxPane" Form.label="Nom Prénom">
+                      		<TextInput bxml:id="nomTextInput" prompt="Nom Prénom"/>
+                        </BoxPane>
 
-                                    <BoxPane bxml:id="MailBoxPane" Form.label="Mail du destinataire">
-		                          		<TextInput bxml:id="mailTextInput" prompt="Mail"/>
+                        <BoxPane bxml:id="MailBoxPane" Form.label="Mail du destinataire">
+                      		<TextInput bxml:id="mailTextInput" prompt="Mail"/>
+                        </BoxPane> 
+                    </Form.Section>    
+                    
+                    <Form.Section heading="Message">     
+                      	<Label text="Saisissez votre message :"/>
+                      	<Border styles="{color:10}">                                  	
+                      	<ScrollPane horizontalScrollBarPolicy="fill"
+                    		verticalScrollBarPolicy="fill_to_capacity"
+                    		preferredHeight="240" preferredWidth="240">
+                    		<TextArea text=""/>
+            			</ScrollPane>     
+            			</Border>                                                    
+                    </Form.Section>
+                </Form>
+            </TablePane.Row>
 
-                                    </BoxPane> 
-                                </Form.Section>    
-                                
-                                <Form.Section heading="Message">     
-                                  	<Label text="Saisissez votre message :"/>
-                                  	<Border styles="{color:10}">                                  	
-                                  	<ScrollPane horizontalScrollBarPolicy="fill"
-	                            		verticalScrollBarPolicy="fill_to_capacity"
-	                            		preferredHeight="240" preferredWidth="240">
-	                            		<TextArea text=""/>
-                        			</ScrollPane>     
-                        			</Border>  
-                        			                     			
-                        			                                                             
-                                </Form.Section>
+            <TablePane.Row height="-1">
+                <Separator/>
+            </TablePane.Row>
 
+            <TablePane.Row height="-1">
+                <TablePane>
+                    <columns>
+                        <TablePane.Column width="1*"/>
+                        <TablePane.Column width="-1"/>
+                    </columns>
 
-
-
-                            </Form>
-                        </TablePane.Row>
-
-                        <TablePane.Row height="-1">
-                            <Separator/>
-                        </TablePane.Row>
-
-                        <TablePane.Row height="-1">
-                            <TablePane>
-                                <columns>
-                                    <TablePane.Column width="1*"/>
-                                    <TablePane.Column width="-1"/>
-                                </columns>
-
-                                <TablePane.Row>
-                                    <BoxPane styles="{verticalAlignment:'center'}">
-                                        <Label bxml:id="errorLabel" styles="{color:22}"/>
-                                    </BoxPane>
-                                    <BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
-                                        <PushButton bxml:id="retourMenuButton" buttonData="Retour au menu"
-                                            styles="{minimumAspectRatio:3}"/>
-                                        <PushButton bxml:id="submitButton" buttonData="Envoyer"
-                                            styles="{minimumAspectRatio:3}"/>
-                                    </BoxPane>
-                                </TablePane.Row>
-                            </TablePane>
-                        </TablePane.Row>
-                    </TablePane>
-                </Border>
-           
+                    <TablePane.Row>
+                        <BoxPane styles="{verticalAlignment:'center'}">
+                            <Label bxml:id="errorLabel" styles="{color:22}"/>
+                        </BoxPane>
+                        <BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+                            <PushButton bxml:id="retourMenuButton" buttonData="Retour au menu"
+                                styles="{minimumAspectRatio:3}"/>
+                            <PushButton bxml:id="submitButton" buttonData="Envoyer"
+                                styles="{minimumAspectRatio:3}"/>
+                        </BoxPane>
+                    </TablePane.Row>
+                </TablePane>
+            </TablePane.Row>
+        </TablePane>
+    </Border> 
 </myApp:Messagerie>

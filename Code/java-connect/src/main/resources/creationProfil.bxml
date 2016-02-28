@@ -1,7 +1,8 @@
-<myApp:CreationProfil title="CreationProfil" maximized="true"
+<myApp:CreationProfil title="Java connect !" maximized="true"
 	xmlns:bxml="http://pivot.apache.org/bxml"
 	xmlns:myApp="stri.java_connect.ihm"
 	xmlns="org.apache.pivot.wtk"> 
+	
 	<Border styles="{padding:6}">
         <TablePane>
             <columns>
@@ -36,10 +37,16 @@
                         <TextInput bxml:id="numTelTextInput" prompt="Numéro de téléphone"/>
                     </Form.Section>
                     
+                    <Form.Section heading="Année diplomation">
+                   		<BoxPane bxml:id="anneDiplomationBoxPane"  orientation="vertical">
+                        	<TextInput bxml:id="anneeDiplomationTextInput" prompt=""/>
+                        </BoxPane>	
+                    </Form.Section>
+                    
                     <Form.Section heading="Compétences">
                     	<Label text="Séparez les compétences par des points virgules(;)"/>
                         <BoxPane bxml:id="competencesBoxPane">
-                            <TextInput bxml:id="competencesTextInput" prompt=""/>
+                            <TextInput bxml:id="competencesTextInput" prompt="" textSize="40" />
                         </BoxPane>
                     </Form.Section>
                     

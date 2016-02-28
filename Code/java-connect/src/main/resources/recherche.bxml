@@ -1,4 +1,8 @@
-<myApp:Recherche title="Recherche d'un utilisateur" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 
+<myApp:Recherche title="Java connect !" maximized="true" 
+	xmlns:bxml="http://pivot.apache.org/bxml" 
+	xmlns:myApp="stri.java_connect.ihm" 
+	xmlns="org.apache.pivot.wtk"> 
+	
 	<Border styles="{padding:6}">
 
 	
