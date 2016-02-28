@@ -18,7 +18,7 @@
                                 <Form.Section >
                                     <BoxPane bxml:id="idConnexionBoxPane">
                                         <TextInput bxml:id="mailTextInput" prompt="mail"/>
-                                        <TextInput bxml:id="mdpTextInput" prompt="password"/>
+                                        <TextInput password="true" bxml:id="mdpTextInput" prompt="password"/>
                                     </BoxPane>
                                </Form.Section>
                             </Form>
