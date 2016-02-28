@@ -1,29 +1,34 @@
 package stri.java_connect.protocol;
 
-//import stri.java_connect.modele.Utilisateur;
+import stri.java_connect.modele.AnnuaireMessagerie;
+import stri.java_connect.modele.Utilisateur;
 
 public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 {
-	//private Utilisateur utilisateur;
+	private AnnuaireMessagerie annuaire;
+	private Utilisateur utilisateur;
+	
+	public ControlleurProtocoleMessagerie()
+	{
+		utilisateur = null;
+		annuaire = new AnnuaireMessagerie();
+	}
 
 	@Override
 	public String traiterRequete(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String traiterReponse(String reponse)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ControlleurProtocoleMessagerie clone()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return new ControlleurProtocoleMessagerie();
 	}
 }
