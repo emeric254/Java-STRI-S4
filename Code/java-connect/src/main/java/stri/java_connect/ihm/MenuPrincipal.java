@@ -114,7 +114,7 @@ public class MenuPrincipal extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Recherche d'un profil", Menu.this);
+			Alert.alert(MessageType.INFO, "Recherche d'un profil", MenuPrincipal.this);
 		}
 	};
 
@@ -146,7 +146,7 @@ public class MenuPrincipal extends Window implements Application, Bindable
 		
 		public void buttonPressed(final Button button) 
 		{
-			Alert.alert(MessageType.INFO, "Fermeture de la page", Menu.this);	
+			Alert.alert(MessageType.INFO, "Fermeture de la page", MenuPrincipal.this);	
 		}
 	};
 	public boolean shutdown(final boolean optional) throws Exception
