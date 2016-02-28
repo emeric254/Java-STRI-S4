@@ -23,11 +23,15 @@ public class Menu extends Window implements Application, Bindable
 	@BXML
 	private PushButton btListeProfil;
 	@BXML
+	private PushButton btRechercherProfil;
+	@BXML
 	private PushButton btModifProfil;
 	@BXML
 	private PushButton btMessagerieEmail;
 	@BXML
 	private PushButton btMessagerieP2P;
+	@BXML
+	private PushButton btQuitter;
 	@BXML
 	private BoxPane btBox;
 
@@ -42,9 +46,11 @@ public class Menu extends Window implements Application, Bindable
 		btConnexion.getButtonPressListeners().add(connexionListener);
 		btInscription.getButtonPressListeners().add(inscriptionListener);
 		btListeProfil.getButtonPressListeners().add(listeProfilListener);
+		btRechercherProfil.getButtonPressListeners().add(rechercherProfilListener);
 		btModifProfil.getButtonPressListeners().add(modifProfilListener);
 		btMessagerieEmail.getButtonPressListeners().add(messagerieMail);
 		btMessagerieP2P.getButtonPressListeners().add(messagerieP2P);
+		btQuitter.getButtonPressListeners().add(quitter);
 		
 		// par defaut pas connecter donc pas ces btn
 		btModifProfil.setVisible(false);
@@ -90,6 +96,14 @@ public class Menu extends Window implements Application, Bindable
 			Alert.alert(MessageType.INFO, "Liste profils", Menu.this);
 		}
 	};
+	
+	private final ButtonPressListener rechercherProfilListener = new ButtonPressListener()
+	{
+		public void buttonPressed(final Button button)
+		{
+			Alert.alert(MessageType.INFO, "Recherche d'un profil", Menu.this);
+		}
+	};
 
 	private final ButtonPressListener modifProfilListener = new ButtonPressListener()
 	{
@@ -115,6 +129,13 @@ public class Menu extends Window implements Application, Bindable
 		}
 	};
 
+	private final ButtonPressListener quitter = new ButtonPressListener() {
+		
+		public void buttonPressed(final Button button) 
+		{
+			Alert.alert(MessageType.INFO, "Fermeture de la page", Menu.this);	
+		}
+	};
 	public boolean shutdown(final boolean optional) throws Exception
 	{
 		this.close();
