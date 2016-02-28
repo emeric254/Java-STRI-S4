@@ -1,21 +1,25 @@
 package stri.java_connect.ihm;
 
+import java.io.IOException;
 import java.net.URL;
 
 import org.apache.pivot.beans.*;
 import org.apache.pivot.collections.*;
+import org.apache.pivot.serialization.*;
 import org.apache.pivot.util.*;
 import org.apache.pivot.wtk.*;
 
 import stri.java_connect.client.ClientAnnuaire;
 import stri.java_connect.modele.Utilisateur;
 
-public class Menu extends Window implements Application, Bindable
+public class MenuPrincipal extends Window implements Application, Bindable
 {
     private ClientAnnuaire client;
     private Utilisateur utilisateur;
-
-	private Window window;
+    
+    private Display display;
+    private Window window;
+    
 	@BXML
 	private PushButton btConnexion;
 	@BXML
@@ -31,7 +35,7 @@ public class Menu extends Window implements Application, Bindable
 	@BXML
 	private BoxPane btBox;
 
-	public Menu()
+	public MenuPrincipal()
 	{
 		//client = new ClientAnnuaire();
 		utilisateur = null;
@@ -39,7 +43,7 @@ public class Menu extends Window implements Application, Bindable
 
 	public void initialize(final Map<String, Object> namespace, final URL location, final Resources resources)
 	{
-		btConnexion.getButtonPressListeners().add(connexionListener);
+		//btConnexion.getButtonPressListeners().add(connexionListener);
 		btInscription.getButtonPressListeners().add(inscriptionListener);
 		btListeProfil.getButtonPressListeners().add(listeProfilListener);
 		btModifProfil.getButtonPressListeners().add(modifProfilListener);
@@ -54,8 +58,9 @@ public class Menu extends Window implements Application, Bindable
 
 	public void startup(final Display display, final Map<String, String> properties) throws Exception
 	{
+		this.display = display;
 		BXMLSerializer bxmlSerializer = new BXMLSerializer();
-		window = (Window) bxmlSerializer.readObject(Menu.class, "/menu.bxml");
+		window = (Window) bxmlSerializer.readObject(MenuPrincipal.class, "/menuPrincipal.bxml");
 		window.open(display);
 	}
 
@@ -63,9 +68,17 @@ public class Menu extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			//
 			// traitement connexion
-			Alert.alert(MessageType.INFO, "Connexion", Menu.this);
+			BXMLSerializer bxmlSerializer = new BXMLSerializer();
+			try
+			{
+				((Window)bxmlSerializer.readObject(Connexion.class, "/connexion.bxml")).setVisible(true);
+			}
+			catch (Exception e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
 			// connecte
 			btConnexion.setVisible(false);
 			btInscription.setVisible(false);
@@ -79,7 +92,7 @@ public class Menu extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Inscription", Menu.this);
+			Alert.alert(MessageType.INFO, "Inscription", MenuPrincipal.this);
 		}
 	};
 
@@ -87,7 +100,7 @@ public class Menu extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Liste profils", Menu.this);
+			Alert.alert(MessageType.INFO, "Liste profils", MenuPrincipal.this);
 		}
 	};
 
@@ -95,7 +108,7 @@ public class Menu extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Modification profil", Menu.this);
+			Alert.alert(MessageType.INFO, "Modification profil", MenuPrincipal.this);
 		}
 	};
 
@@ -103,7 +116,7 @@ public class Menu extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Messagerie Mail", Menu.this);
+			Alert.alert(MessageType.INFO, "Messagerie Mail", MenuPrincipal.this);
 		}
 	};
 
@@ -111,7 +124,7 @@ public class Menu extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Messagerie peer to peer", Menu.this);
+			Alert.alert(MessageType.INFO, "Messagerie peer to peer", MenuPrincipal.this);
 		}
 	};
 
@@ -119,6 +132,12 @@ public class Menu extends Window implements Application, Bindable
 	{
 		this.close();
 		return false;
+	}
+	
+	public Window load(String fileName) throws SerializationException, IOException
+	{
+		BXMLSerializer bxmlSerializer = new BXMLSerializer();
+		return (Window)bxmlSerializer.readObject(MenuPrincipal.class, fileName);
 	}
 
 	public void suspend() throws Exception

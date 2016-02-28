@@ -7,28 +7,25 @@ import org.apache.pivot.collections.*;
 import org.apache.pivot.util.*;
 import org.apache.pivot.wtk.*;
 
-public class Connexion extends Window implements Application, Bindable
+public class Connexion extends Dialog implements Bindable
 {
 	private Window window;
-			
+	@BXML
 	private BoxPane idConnexionBoxPane;
+	@BXML
 	private TextInput mailTextInput;
+	@BXML
 	private TextInput mdpTextInput;
-		        
+	@BXML
     private PushButton submitButton;
+	@BXML
     private PushButton retourMenuButton;
+	@BXML
     private Label errorLabel;
 
 	public Connexion()
 	{
 		//
-	}
-
-	public void startup(final Display display, final Map<String, String> properties) throws Exception
-	{
-		BXMLSerializer bxmlSerializer = new BXMLSerializer();
-		window = (Window) bxmlSerializer.readObject(Connexion.class, "/connexion.bxml");
-		window.open(display);
 	}
 
     public void initialize(final Map<String, Object> namespace, final URL location, final Resources resources)
@@ -58,6 +55,7 @@ public class Connexion extends Window implements Application, Bindable
                 String mdp = mdpTextInput.getText();
 
                 Form.Flag flag = null;
+                
                 // Vérification que tous les champs sont remplis
                 if ((mail.length() == 0) || (mdp.length() == 0))
                 {
@@ -76,24 +74,4 @@ public class Connexion extends Window implements Application, Bindable
             }
         });
     }
-    
-	
-	
-	 
-	public boolean shutdown(final boolean optional) throws Exception
-	{
-		this.close();
-		return false;
-	}
-	
-
-	public void suspend() throws Exception
-	{
-		//
-	}
- 
-	public void resume() throws Exception
-	{
-		//
-	}
 }

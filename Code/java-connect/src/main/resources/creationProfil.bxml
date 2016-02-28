@@ -1,4 +1,7 @@
-<myApp:CreationProfil title="CreationProfil" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 
+<myApp:CreationProfil title="CreationProfil" maximized="true"
+	xmlns:bxml="http://pivot.apache.org/bxml"
+	xmlns:myApp="stri.java_connect.ihm"
+	xmlns="org.apache.pivot.wtk"> 
 	<Border styles="{padding:6}">
         <TablePane>
             <columns>

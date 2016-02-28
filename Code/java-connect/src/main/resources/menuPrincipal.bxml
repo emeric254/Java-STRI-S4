@@ -1,0 +1,69 @@
+<myApp:MenuPrincipal bxml:id="menuPrincipal" title="Java connect !" maximized="true"
+	xmlns:bxml="http://pivot.apache.org/bxml"
+	xmlns:myApp="stri.java_connect.ihm"
+	xmlns:content="org.apache.pivot.wtk.content"
+	xmlns="org.apache.pivot.wtk">
+	
+	<bxml:define>
+		<bxml:include bxml:id="connexion" src="connexion.bxml"/>
+	</bxml:define>
+
+	<Border styles="{padding:6}">
+		<TablePane styles="{horizontalSpacing:10, verticalSpacing:10}">
+			<columns>
+				<TablePane.Column width="1*"/>
+			</columns>
+			
+			<TablePane.Row>
+				<Label text="Java Connect !" styles="{font:{size:14, bold:true}, horizontalAlignment:'center'}"/>
+			</TablePane.Row>
+			
+			<TablePane.Row height="-1">
+				<Separator/>
+			</TablePane.Row>
+			
+			<TablePane.Row>
+				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+					<PushButton bxml:id="btConnexion" buttonData="Connexion">
+						<buttonPressListeners>
+							function buttonPressed(button)
+							{
+								connexion.open(menuPrincipal, null);
+							}
+						</buttonPressListeners>
+					</PushButton>
+				</BoxPane>
+			</TablePane.Row>
+			
+			<TablePane.Row>
+				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+					<PushButton bxml:id="btInscription" buttonData="Inscription" />
+				</BoxPane>
+			</TablePane.Row>                    
+			
+			<TablePane.Row>
+				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+					<PushButton bxml:id="btListeProfil" buttonData="Liste des profils"/>        
+				</BoxPane>
+			</TablePane.Row>                  
+			
+			<TablePane.Row>
+				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+					<PushButton bxml:id="btModifProfil" buttonData="Modifier votre profil"/>           
+				</BoxPane>
+			</TablePane.Row>                    
+
+			<TablePane.Row>
+				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+					<PushButton bxml:id="btMessagerieEmail" buttonData="Messagerie par mail"/>           
+				</BoxPane>
+			</TablePane.Row>  
+
+			<TablePane.Row>
+				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+					<PushButton bxml:id="btMessagerieP2P" buttonData="Messagerie peer to peer"/>           
+				</BoxPane>
+			</TablePane.Row>
+		</TablePane>
+	</Border>
+</myApp:MenuPrincipal>
