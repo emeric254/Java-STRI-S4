@@ -5,6 +5,8 @@ package stri.java_connect.protocol;
 
 import java.util.Date;
 
+import stri.java_connect.utils.CourrielValidateur;
+
 /**
  * @author emeric
  *
@@ -36,7 +38,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 * @param courriel
 	 * @return
 	 */
-	public static String requeteDetailsUtilisateurConnecte(String courriel)
+	public static String requeteConsulterDetailsUtilisateurConnecte(String courriel)
 	{
 		return consulterMethod + utilisateursURI + "/" + courriel;
 	}
@@ -76,7 +78,77 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	//
+	// validateur
+
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean validerRequeteEnvoiMessageDiffere(String requete)
+	{
+		if(ControlleurProtocole.requeteURI(requete).startsWith(messagerieURI + "/"))
+			return CourrielValidateur.valider(ControlleurProtocole.requeteURI(requete).replace(messagerieURI + "/", ""));
+		return false;
+	}
+
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean validerRequeteConsulterListeUtilisateurConnectes(String requete)
+	{
+		return ControlleurProtocole.requeteURI(requete).equals(utilisateursURI);
+	}
 	
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean validerRequeteConsulterDetailsUtilisateurConnecte(String requete)
+	{
+		if(ControlleurProtocole.requeteURI(requete).startsWith(utilisateursURI + "/"))
+			return CourrielValidateur.valider(ControlleurProtocole.requeteURI(requete).replace(utilisateursURI + "/", ""));
+		return false;
+	}
+
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean validerRequeteConsulterListeMessagesManques(String requete)
+	{
+		return ControlleurProtocole.requeteURI(requete).equals(messagerieURI);
+	}
+
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean validerRequeteConsulterDetailsMessagesManque(String requete)
+	{
+		return ControlleurProtocole.requeteURI(requete).startsWith(messagerieURI + "/");
+	}
+
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean validerRequeteSupprimerListeMessagesManques(String requete)
+	{
+		return ControlleurProtocole.requeteURI(requete).equals(messagerieURI);
+	}
+
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean validerRequeteSupprimerMessageManque(String requete)
+	{
+		return ControlleurProtocole.requeteURI(requete).startsWith(messagerieURI);
+	}
+
+	//
+
 	/**
 	 * @param msg
 	 * @return

@@ -25,9 +25,9 @@ public class ProtocoleMessagerieTest
 	}
 
 	@Test
-	public void testRequeteDetailsUtilisateurConnecte()
+	public void testRequeteConsulterDetailsUtilisateurConnecte()
 	{
-		assertEquals("CONSULTER /utilisateurs/" + idutilisateur, ProtocoleMessagerie.requeteDetailsUtilisateurConnecte(idutilisateur));
+		assertEquals("CONSULTER /utilisateurs/" + idutilisateur, ProtocoleMessagerie.requeteConsulterDetailsUtilisateurConnecte(idutilisateur));
 	}
 
 	@Test

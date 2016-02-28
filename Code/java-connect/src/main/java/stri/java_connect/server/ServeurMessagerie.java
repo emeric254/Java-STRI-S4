@@ -3,6 +3,7 @@
  */
 package stri.java_connect.server;
 
+import stri.java_connect.modele.AnnuaireMessagerie;
 import stri.java_connect.protocol.ControlleurProtocoleMessagerie;
 
 /**
@@ -39,6 +40,6 @@ public class ServeurMessagerie
 	 */
 	public void start()
 	{
-		new Serveur(new ControlleurProtocoleMessagerie(), port);
+		new Serveur(new ControlleurProtocoleMessagerie(new AnnuaireMessagerie()), port);
     }
 }
