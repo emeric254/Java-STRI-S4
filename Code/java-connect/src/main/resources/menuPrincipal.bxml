@@ -45,7 +45,13 @@
 				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
 					<PushButton bxml:id="btListeProfil" buttonData="Liste des profils"/>        
 				</BoxPane>
-			</TablePane.Row>                  
+			</TablePane.Row>   
+			 
+            <TablePane.Row>
+                <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                    <PushButton bxml:id="btRechercherProfil" buttonData="Recherche d'un profil"/>        
+                </BoxPane>
+            </TablePane.Row>                 
 			
 			<TablePane.Row>
 				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
@@ -64,6 +70,12 @@
 					<PushButton bxml:id="btMessagerieP2P" buttonData="Messagerie peer to peer"/>           
 				</BoxPane>
 			</TablePane.Row>
+                    
+            <TablePane.Row>
+                <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                    <PushButton bxml:id="btQuitter" buttonData="Fermer la fenêtre"/>           
+                </BoxPane>
+            </TablePane.Row>
 		</TablePane>
 	</Border>
 </myApp:MenuPrincipal>
