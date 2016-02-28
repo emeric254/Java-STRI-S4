@@ -10,28 +10,43 @@ import org.apache.pivot.wtk.*;
 public class CreationProfil extends Window implements Application, Bindable
 {
 	private Window window;
-
+	@BXML
 	private BoxPane idConnexionBoxPane;
+	@BXML
     private TextInput mailTextInput;
+	@BXML
     private TextInput mdpTextInput;
-    
+	@BXML    
 	private BoxPane nameBoxPane;
+	@BXML
     private TextInput prenomTextInput;
+	@BXML
     private TextInput nomTextInput;
-    
+	@BXML
     private BoxPane addressBoxPane;
+	@BXML
     private TextInput rueTextInput;
+	@BXML
     private TextInput villeTextInput;
+	@BXML
     private TextInput codePostalTextInput;
-    
-    private BoxPane telephoneBoxPane;
+	@BXML
+	private BoxPane telephoneBoxPane;
+	@BXML
     private TextInput numTelTextInput;
-    
+	@BXML
+	private BoxPane anneeDiplomationBoxPane;
+	@BXML
+    private TextInput anneeDiplomationTextInput;
+	@BXML    
     private BoxPane competencesBoxPane;
+	@BXML
     private TextInput competencesTextInput;
-    
+	@BXML
     private PushButton submitButton;
+	@BXML
     private PushButton retourMenuButton;
+	@BXML
     private Label errorLabel;
 
 	public CreationProfil()
@@ -64,6 +79,9 @@ public class CreationProfil extends Window implements Application, Bindable
         // Saisie numéro de téléphone
         telephoneBoxPane = (BoxPane)namespace.get("telephoneBoxPane");
         numTelTextInput = (TextInput)namespace.get("numTelTextInput");
+        // Saisie Année de diplomation
+        anneeDiplomationBoxPane = (BoxPane)namespace.get("annneeDipomationBoxPane");
+        anneeDiplomationTextInput = (TextInput)namespace.get("anneeDiplomationTextInput");
         // Saisie des compétences
         competencesBoxPane = (BoxPane)namespace.get("competencesBoxPane");
         competencesTextInput = (TextInput)namespace.get("competencesTextInput");
@@ -76,7 +94,7 @@ public class CreationProfil extends Window implements Application, Bindable
         {
         	public void buttonPressed(Button button)
         	{
-        		DesktopApplicationContext.replaceSplashScreen(getDisplay());
+        		
         	}
         });
         
@@ -100,12 +118,17 @@ public class CreationProfil extends Window implements Application, Bindable
                     flag = new Form.Flag(MessageType.ERROR, "Obligatoire");
                 }
 
+                Form.setFlag(idConnexionBoxPane, flag);
                 Form.setFlag(nameBoxPane, flag);
+                Form.setFlag(addressBoxPane, flag);
+                Form.setFlag(telephoneBoxPane, flag);
+                Form.setFlag(competencesBoxPane, flag);
+                
 
                 if (flag == null)
                 {
                     errorLabel.setText("");
-                    //Prompt.prompt("Pretending to submit...", Forms.this);
+                    Prompt.prompt("Pretending to submit...", CreationProfil.this);
                 }
                 else
                 {
@@ -124,15 +147,6 @@ public class CreationProfil extends Window implements Application, Bindable
 		return false;
 	}
 	
-	/*
-	private final ButtonPressListener messagerieP2P = new ButtonPressListener()
-	{
-		public void buttonPressed(final Button button)
-		{
-			Alert.alert(MessageType.INFO, "Messagerie peer to peerl", Menu.this);
-		}
-	};
-	*/
 	
 	public void suspend() throws Exception
 	{

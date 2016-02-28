@@ -10,8 +10,7 @@
 		<bxml:include bxml:id="recherche" src="recherche.bxml"/>
 		<bxml:include bxml:id="modifier" src="modifierProfil.bxml"/>
 		<bxml:include bxml:id="messagerie" src="messagerie.bxml"/>
-		<bxml:include bxml:id="conversation" src="conversation.bxml"/>
-		
+		<bxml:include bxml:id="conversation" src="conversation.bxml"/>	
 	</bxml:define>
 	
 	

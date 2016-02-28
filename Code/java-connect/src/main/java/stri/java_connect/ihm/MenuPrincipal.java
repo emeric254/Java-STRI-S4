@@ -102,7 +102,7 @@ public class MenuPrincipal extends Window implements Application, Bindable
 			BXMLSerializer bxmlSerializer = new BXMLSerializer();
 			try
 			{
-				((Window)bxmlSerializer.readObject(Connexion.class, "/creationProfil.bxml")).setVisible(true);
+				((Window)bxmlSerializer.readObject(CreationProfil.class, "/creationProfil.bxml")).setVisible(true);
 			}
 			catch (Exception e)
 			{

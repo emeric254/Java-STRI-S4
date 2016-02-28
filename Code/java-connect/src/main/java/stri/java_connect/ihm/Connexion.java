@@ -28,6 +28,13 @@ public class Connexion extends Dialog implements Bindable
 		//
 	}
 
+	public void startup(final Display display, final Map<String, String> properties) throws Exception
+	{
+		BXMLSerializer bxmlSerializer = new BXMLSerializer();
+		window = (Window) bxmlSerializer.readObject(Connexion.class, "/connexion.bxml");
+		window.open(display);
+	}
+	
     public void initialize(final Map<String, Object> namespace, final URL location, final Resources resources)
 	{
         // Saisie id/mdp 
@@ -83,7 +90,7 @@ public class Connexion extends Dialog implements Bindable
     }
 
 
-	/*private final ButtonPressListener quitter = new ButtonPressListener() {
+	private final ButtonPressListener quitter = new ButtonPressListener() {
 		
 		public void buttonPressed(final Button button) 
 		{
@@ -95,7 +102,7 @@ public class Connexion extends Dialog implements Bindable
 	{
 		this.close();
 		return false;
-	} */
+	}
     
 
 }
