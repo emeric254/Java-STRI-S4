@@ -14,7 +14,8 @@ public class ControlleurProtocoleMessagerieDirecte extends ControlleurProtocole
 	@Override
 	public String traiterReponse(String reponse)
 	{
-		// TODO Auto-generated method stub
+		if(ProtocoleMessagerie.isOk(reponse))
+			return ProtocoleMessagerie.extraireDonnees(reponse);
 		return null;
 	}
 

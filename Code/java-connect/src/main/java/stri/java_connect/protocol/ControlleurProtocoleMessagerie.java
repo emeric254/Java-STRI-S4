@@ -92,6 +92,8 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 	@Override
 	public String traiterReponse(String reponse)
 	{
+		if(ProtocoleMessagerie.isOk(reponse))
+			return ProtocoleMessagerie.extraireDonnees(reponse);
 		return null;
 	}
 
