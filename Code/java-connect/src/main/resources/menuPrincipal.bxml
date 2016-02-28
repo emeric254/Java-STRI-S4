@@ -5,7 +5,16 @@
 	
 	<bxml:define>
 		<bxml:include bxml:id="connexion" src="connexion.bxml"/>
+		<bxml:include bxml:id="inscription" src="creationProfil.bxml"/>
+		<bxml:include bxml:id="liste" src="consultListeProfil.bxml"/>
+		<bxml:include bxml:id="recherche" src="recherche.bxml"/>
+		<bxml:include bxml:id="modifier" src="modifierProfil.bxml"/>
+		<bxml:include bxml:id="messagerie" src="messagerie.bxml"/>
+		<bxml:include bxml:id="conversation" src="conversation.bxml"/>
+		
 	</bxml:define>
+	
+	
 
 	<Border styles="{padding:6}">
 		<TablePane styles="{horizontalSpacing:10, verticalSpacing:10}">
@@ -37,37 +46,85 @@
 			
 			<TablePane.Row>
 				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
-					<PushButton bxml:id="btInscription" buttonData="Inscription" />
+					<PushButton bxml:id="btInscription" buttonData="Inscription" >
+						<buttonPressListeners>
+							function buttonPressed(button)
+							{
+								inscription.open(menuPrincipal);
+								inscription.setLocation(0,0);
+							}
+						</buttonPressListeners>
+					</PushButton>					
 				</BoxPane>
 			</TablePane.Row>                    
 			
 			<TablePane.Row>
 				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
-					<PushButton bxml:id="btListeProfil" buttonData="Liste des profils"/>        
+					<PushButton bxml:id="btListeProfil" buttonData="Liste des profils">
+						<buttonPressListeners>
+							function buttonPressed(button)
+							{
+								liste.open(menuPrincipal);
+								liste.setLocation(0,0);
+							}
+						</buttonPressListeners>
+					</PushButton>					        
 				</BoxPane>
 			</TablePane.Row>   
 			 
             <TablePane.Row>
                 <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
-                    <PushButton bxml:id="btRechercherProfil" buttonData="Recherche d'un profil"/>        
+                    <PushButton bxml:id="btRechercherProfil" buttonData="Recherche d'un profil">  
+						<buttonPressListeners>
+							function buttonPressed(button)
+							{
+								recherche.open(menuPrincipal);
+								recherche.setLocation(0,0);
+							}
+						</buttonPressListeners>
+					</PushButton>                          
                 </BoxPane>
             </TablePane.Row>                 
 			
 			<TablePane.Row>
 				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
-					<PushButton bxml:id="btModifProfil" buttonData="Modifier votre profil"/>           
+					<PushButton bxml:id="btModifProfil" buttonData="Modifier votre profil">
+						<buttonPressListeners>
+							function buttonPressed(button)
+							{
+								modifier.open(menuPrincipal);
+								modifier.setLocation(0,0);
+							}
+						</buttonPressListeners>
+					</PushButton>					           
 				</BoxPane>
 			</TablePane.Row>                    
 
 			<TablePane.Row>
 				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
-					<PushButton bxml:id="btMessagerieEmail" buttonData="Messagerie par mail"/>           
+					<PushButton bxml:id="btMessagerieEmail" buttonData="Messagerie par mail"> 
+						<buttonPressListeners>
+							function buttonPressed(button)
+							{
+								messagerie.open(menuPrincipal);
+								messagerie.setLocation(0,0);
+							}
+						</buttonPressListeners>
+					</PushButton>					          
 				</BoxPane>
 			</TablePane.Row>  
 
 			<TablePane.Row>
 				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
-					<PushButton bxml:id="btMessagerieP2P" buttonData="Messagerie peer to peer"/>           
+					<PushButton bxml:id="btMessagerieP2P" buttonData="Messagerie peer to peer">
+						<buttonPressListeners>
+							function buttonPressed(button)
+							{
+								conversation.open(menuPrincipal);
+								conversation.setLocation(0,0);
+							}
+						</buttonPressListeners>
+					</PushButton>					           
 				</BoxPane>
 			</TablePane.Row>
                     

@@ -98,7 +98,23 @@ public class MenuPrincipal extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Inscription", MenuPrincipal.this);
+			// traitement inscription
+			BXMLSerializer bxmlSerializer = new BXMLSerializer();
+			try
+			{
+				((Window)bxmlSerializer.readObject(Connexion.class, "/creationProfil.bxml")).setVisible(true);
+			}
+			catch (Exception e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
+			// connecte
+			btConnexion.setVisible(false);
+			btInscription.setVisible(false);
+			btModifProfil.setVisible(true);
+			btMessagerieEmail.setVisible(true);
+			btMessagerieP2P.setVisible(true);
 		}
 	};
 
@@ -106,7 +122,7 @@ public class MenuPrincipal extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Liste profils", MenuPrincipal.this);
+			//Alert.alert(MessageType.INFO, "Liste profils", MenuPrincipal.this);
 		}
 	};
 	
@@ -114,7 +130,7 @@ public class MenuPrincipal extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Recherche d'un profil", MenuPrincipal.this);
+			//Alert.alert(MessageType.INFO, "Recherche d'un profil", MenuPrincipal.this);
 		}
 	};
 
@@ -122,7 +138,7 @@ public class MenuPrincipal extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Modification profil", MenuPrincipal.this);
+			//Alert.alert(MessageType.INFO, "Modification profil", MenuPrincipal.this);
 		}
 	};
 
@@ -130,7 +146,7 @@ public class MenuPrincipal extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Messagerie Mail", MenuPrincipal.this);
+			//Alert.alert(MessageType.INFO, "Messagerie Mail", MenuPrincipal.this);
 		}
 	};
 
@@ -138,7 +154,7 @@ public class MenuPrincipal extends Window implements Application, Bindable
 	{
 		public void buttonPressed(final Button button)
 		{
-			Alert.alert(MessageType.INFO, "Messagerie peer to peer", MenuPrincipal.this);
+			//Alert.alert(MessageType.INFO, "Messagerie peer to peer", MenuPrincipal.this);
 		}
 	};
 
