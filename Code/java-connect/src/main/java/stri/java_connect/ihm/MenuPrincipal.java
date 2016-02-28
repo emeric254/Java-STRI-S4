@@ -146,10 +146,11 @@ public class MenuPrincipal extends Window implements Application, Bindable
 		
 		public void buttonPressed(final Button button) 
 		{
-			Alert.alert(MessageType.INFO, "Fermeture de la page", MenuPrincipal.this);	
+			shutdown(false);
 		}
 	};
-	public boolean shutdown(final boolean optional) throws Exception
+	
+	public boolean shutdown(final boolean optional)
 	{
 		this.close();
 		return false;

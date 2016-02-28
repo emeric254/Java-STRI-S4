@@ -1,7 +1,6 @@
 <myApp:MenuPrincipal bxml:id="menuPrincipal" title="Java connect !" maximized="true"
 	xmlns:bxml="http://pivot.apache.org/bxml"
 	xmlns:myApp="stri.java_connect.ihm"
-	xmlns:content="org.apache.pivot.wtk.content"
 	xmlns="org.apache.pivot.wtk">
 	
 	<bxml:define>
@@ -28,7 +27,8 @@
 						<buttonPressListeners>
 							function buttonPressed(button)
 							{
-								connexion.open(menuPrincipal, null);
+								connexion.open(menuPrincipal);
+								connexion.setLocation(0,0);
 							}
 						</buttonPressListeners>
 					</PushButton>
