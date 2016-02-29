@@ -9,9 +9,11 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 {
 	private AnnuaireMessagerie annuaire;
 	private Utilisateur utilisateur;
+	private Client cl;
 
 	public ControlleurProtocoleMessagerie(AnnuaireMessagerie pAnnuaire)
 	{
+		cl = new Client(12345);
 		utilisateur = null;
 		annuaire = pAnnuaire;
 	}
@@ -24,8 +26,6 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 		{
 			if (utilisateur == null && ProtocoleAnnuaire.validerRequeteConnexion(requete))
 			{
-				// TODO en faire une fonction
-				Client cl = new Client(12345);
 				try
 				{
 					String temp = cl.communiquer(requete);
@@ -41,7 +41,6 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 				{
 					reponse = ProtocoleGenerique.erreurServeur();
 				}
-				cl.fermer();
 			}
 			else
 				reponse = ProtocoleGenerique.erreurRequete();
@@ -92,8 +91,6 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 				else if (ProtocoleMessagerie.validerRequeteEnvoiMessageDiffere(requete))
 				{
 					String courriel = ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", "");
-					// TODO en faire une fonction
-					Client cl = new Client(12345);
 					try
 					{
 						String temp = cl.communiquer(ProtocoleAnnuaire.requeteConsulterProfil(courriel));
@@ -108,7 +105,6 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 					{
 						reponse = ProtocoleGenerique.erreurServeur();
 					}
-					cl.fermer();
 				}
 			}
 			else if (ProtocoleMessagerie.isRequeteSuppression(requete))
