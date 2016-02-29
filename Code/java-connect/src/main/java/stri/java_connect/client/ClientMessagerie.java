@@ -46,9 +46,9 @@ public class ClientMessagerie
 	}
 	
 	/**
-	 * Inscrire un utilisateur
+	 * Inscrire un utilisateur sur le serveur
 	 * 
-	 * @param u l'utilisateur a inscrire
+	 * @param courriel de l'utilisateur, adresse et port du serveur
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */
@@ -84,7 +84,7 @@ public class ClientMessagerie
 	}
 	
 	/**
-	 * Consulter la liste des profils
+	 * Envoi de message differe
 	 * 
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
@@ -96,7 +96,7 @@ public class ClientMessagerie
 	}
 	
 	/**
-	 * Consulter un profil
+	 * Consulter la liste des utilisateurs connectes
 	 * 
 	 * @param courriel le courriel du compte a consulter
 	 * @return la reponse a cette requete
@@ -108,9 +108,9 @@ public class ClientMessagerie
 	}
 	
 	/**
-	 * Mettre a jour les details d'un objet/compte Utilisateur
+	 * Consulter le details des utilisateurs connectes
 	 * 
-	 * @param utilisateur l'objet Utilisateur mis a jour
+	 * @param courriel le courriel du compte a consulter
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */
@@ -120,9 +120,9 @@ public class ClientMessagerie
 	}
 	
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * Consulter liste des messages manques
 	 * 
-	 * @param courriel le courriel du compte a supprimer
+	 * @param courriel le courriel du compte a consulter
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */
@@ -132,7 +132,7 @@ public class ClientMessagerie
 	}
 
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * Consulter le details des messages manques
 	 * 
 	 * @param courriel le courriel du compte a supprimer
 	 * @return la reponse a cette requete
@@ -145,7 +145,7 @@ public class ClientMessagerie
 
 	
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * Supprimer liste des messages manques
 	 * 
 	 * @param courriel le courriel du compte a supprimer
 	 * @return la reponse a cette requete
@@ -158,7 +158,7 @@ public class ClientMessagerie
 
 	
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * Supprimer les messages manques
 	 * 
 	 * @param courriel le courriel du compte a supprimer
 	 * @return la reponse a cette requete
@@ -170,7 +170,7 @@ public class ClientMessagerie
 	}	
 	
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * Valide la requete d'envoi de message differe
 	 * 
 	 * @param courriel le courriel du compte a supprimer
 	 * @return la reponse a cette requete
