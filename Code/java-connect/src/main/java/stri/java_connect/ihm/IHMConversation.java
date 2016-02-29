@@ -33,7 +33,6 @@ public class IHMConversation {
 	private void MessagerieDirecte()
 	{
 		
-		
 		//ouverture d'une fenêtre de conversation 
 		//String[] args = {nom,mail};
 		//DesktopApplicationContext.main(Conversation.class, args);
@@ -51,6 +50,7 @@ Filer message dans clientMessagerie
 	private void envoyerMessage(String Message)
 	{
 		///// Faire appel à la fonction qui envoie le message
+		emettre...
 	}
 	
 	/**
