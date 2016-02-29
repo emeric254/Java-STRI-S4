@@ -15,7 +15,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 {
 	public final static String utilisateursURI = "/utilisateurs";
 	public final static String messagerieURI = "/messagerie";
-	
+
 	/**
 	 * @param idutilisateur
 	 * @param msg
@@ -25,7 +25,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	{
 		return inscrireMethod + messagerieURI + "/" + idutilisateur + " ;" + msg;
 	}
-	
+
 	/**
 	 * @param idutilisateur
 	 * @param details
@@ -35,7 +35,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	{
 		return inscrireMethod + utilisateursURI + "/" + idutilisateur + " ;" + details;
 	}
-	
+
 	/**
 	 * @return
 	 */

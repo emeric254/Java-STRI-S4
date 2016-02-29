@@ -17,7 +17,7 @@ public class ClientAnnuaire
 {
 	private final static int portDefaut = 12345;
 	private Client client;
-	
+
 	/**
 	 * Creation d'un objet ClientAnnuaire sur le port par defaut
 	 * 
@@ -26,7 +26,7 @@ public class ClientAnnuaire
 	{
 		this(portDefaut);
 	}
-	
+
 	/**
 	 * Creation d'un objet ClientAnnuaire sur un port fournit
 	 * 
@@ -36,7 +36,7 @@ public class ClientAnnuaire
 	{
 		client = new Client(pPort);
 	}
-	
+
 	/**
 	 * Inscrire un utilisateur
 	 * 
@@ -48,7 +48,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteInscrire(u.toString()));
 	}
-	
+
 	/**
 	 * Connecter a un compte utilisateur
 	 * 
@@ -61,7 +61,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteConnexion(courriel, mdp));
 	}
-	
+
 	/**
 	 * Connecter a un compte utilisateur avec mot de passe qui sera envoye sous forme de hash MD5 
 	 * 
@@ -74,7 +74,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteConnexionHashMD5(courriel,MD5Hasher.hashString(mdp)));
 	}
-	
+
 	/**
 	 * Consulter la liste des profils
 	 * 
@@ -86,7 +86,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteConsulterProfils());
 	}
-	
+
 	/**
 	 * Consulter un profil
 	 * 
@@ -98,7 +98,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteConsulterProfil(courriel));
 	}
-	
+
 	/**
 	 * Mettre a jour les details d'un objet/compte Utilisateur
 	 * 
@@ -110,7 +110,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteModifierProfil(utilisateur.getCourriel(), utilisateur.toString()));
 	}
-	
+
 	/**
 	 * Supprimer un compte/objet Utilisateur
 	 * 
@@ -122,7 +122,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteSuppressionProfil(courriel));
 	}
-	
+
 	/**
 	 * Se deconnecter du serveur.
 	 * 
