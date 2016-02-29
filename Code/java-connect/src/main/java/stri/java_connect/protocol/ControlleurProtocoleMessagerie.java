@@ -19,13 +19,35 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 	{
 		String reponse = ProtocoleMessagerie.erreurServeur();
 		
-		if (utilisateur != null) // il faut etre connecte !
+		if (ProtocoleMessagerie.isRequeteConnexion(requete))
 		{
-			if (ProtocoleMessagerie.isRequeteConnexion(requete))
+			if (utilisateur == null && ProtocoleMessagerie.validerReponseConnexion(requete))
 			{
-				reponse = ProtocoleGenerique.ok();
+				// TODO en faire une fonction
+				Client cl = new Client("12345");
+				try
+				{
+					String temp = c.communiquer(requete);
+					if (ProtocoleGenerique.validerReponseConnexion(temp))
+					{
+						utilisateur = new Utilisateur();
+						utilisateur.fromJSONString(ProtocoleGenerique.extraireDonnees(temp));
+					}
+					else
+						reponse = temp;
+				}
+				catch (Exception e)
+				{
+					reponse = ProtocoleGenerique.erreurServeur();
+				}
+				cl.fermer();
 			}
-			else if (ProtocoleMessagerie.isRequeteConsulter(requete))
+			else
+				reponse = ProtocoleGenerique.erreurRequete();
+		}
+		else if (utilisateur != null) // il faut etre connecte !
+		{
+			if (ProtocoleMessagerie.isRequeteConsulter(requete))
 			{
 				if (ProtocoleMessagerie.validerRequeteConsulterDetailsMessagesManque(requete))
 				{
@@ -68,10 +90,24 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 				}
 				else if (ProtocoleMessagerie.validerRequeteEnvoiMessageDiffere())
 				{
-					//
-					// TODO verification existence utilisateur !
-					//
-					annuaire.ajoutMessage(ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", ""), utilisateur.getCourriel(), ControlleurProtocole.requeteCorps(requete)); // TODO a verifier !
+					String courriel = ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", "");
+					// TODO en faire une fonction
+					Client cl = new Client("12345");
+					try
+					{
+						String temp = c.communiquer(ProtocoleAnnuaire.requeteConsulterProfil(courriel));
+						if (ControlleurProtocole.reponseCode(temp) == 0)
+						{
+							annuaire.ajoutMessage(courriel, utilisateur.getCourriel(), ControlleurProtocole.requeteCorps(requete)); // TODO a verifier !
+						}
+						else
+							reponse = ProtocoleGenerique.erreurRequete();
+					}
+					catch (Exception e)
+					{
+						reponse = ProtocoleGenerique.erreurServeur();
+					}
+					cl.fermer();
 				}
 			}
 			else if (ProtocoleMessagerie.isRequeteSuppression(requete))
@@ -101,22 +137,6 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 		if(ProtocoleMessagerie.isOk(reponse))
 			return ProtocoleMessagerie.extraireDonnees(reponse);
 		return null;
-	}
-
-	public boolean isRequeteConnexion(String requete)
-	{
-		return utilisateur == null && ProtocoleMessagerie.isRequeteConnexion(requete);
-	}
-
-	public boolean validerReponseConnexion(String reponse)
-	{
-		if (ProtocoleGenerique.validerReponseConnexion(reponse))
-		{
-			utilisateur = new Utilisateur();
-			utilisateur.fromJSONString(ProtocoleGenerique.extraireDonnees(reponse));
-			return true;
-		}
-		return false;
 	}
 
 	public void UtilisateurDeconnecte()
