@@ -59,8 +59,8 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 			}
 			else if (ProtocoleMessagerie.isRequeteInscrire(requete))
 			{
-				// TODO
-				reponse = ProtocoleMessagerie.erreurImplementionManquante();
+				// TODO verification existence utilisateur !
+				annuaire.ajoutMessage(ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", ""), utilisateur.getCourriel(), ControlleurProtocole.requeteCorps(requete)); // TODO a verifier !
 			}
 			else if (ProtocoleMessagerie.isRequeteSuppression(requete))
 			{
@@ -70,15 +70,7 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 				}
 				else if (ProtocoleMessagerie.validerRequeteSupprimerMessageManque(requete))
 				{
-					// TODO
-					reponse = ProtocoleMessagerie.erreurImplementionManquante();
-					//
-					/*
-					if(utilisateur != null)
-						annuaire.supprimerMessagesUtilisateur(utilisateur.getCourriel());
-					else
-						reponse = ProtocoleMessagerie.erreurInterdit();
-					*/
+					annuaire.supprimerMessageUtilisateur(utilisateur.getCourriel(), ProtocoleMessagerie.messagerieURI + "/", "");
 				}
 				else
 					reponse = ProtocoleMessagerie.erreurRequete();
@@ -97,6 +89,12 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 		if(ProtocoleMessagerie.isOk(reponse))
 			return ProtocoleMessagerie.extraireDonnees(reponse);
 		return null;
+	}
+	
+	public void UtilisateurDeconnecte()
+	{
+		annuaire.supprimerUtilisateur(utilisateur.getCourriel());
+		utilisateur = null;
 	}
 
 	@Override

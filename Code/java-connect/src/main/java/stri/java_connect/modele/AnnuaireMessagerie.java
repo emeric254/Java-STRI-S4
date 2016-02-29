@@ -40,13 +40,17 @@ public class AnnuaireMessagerie
 	
 	public String existeUtilisateur(String courriel)
 	{
-		// TODO a verifier
-		return annuaire.contains(courriel);
+		return annuaire.contains(courriel); // TODO a verifier
 	}
 	
 	public String getDetailsUtilisateur(String courriel)
 	{
 		return annuaire.get(courriel);
+	}
+	
+	public synchronized String supprimerUtilisateur(String courriel)
+	{
+		return annuaire.remove(courriel);
 	}
 
 	public synchronized void setAnnuaire(HashMap<String, String> annuaire)
@@ -64,7 +68,7 @@ public class AnnuaireMessagerie
 		annuaire.remove(courriel);
 	}
 	
-	//---
+	// --- Messages
 	
 	public HashMap<String, Message[]> getMessages()
 	{
@@ -74,6 +78,13 @@ public class AnnuaireMessagerie
 	public synchronized void setMessages(HashMap<String, Message[]> messages)
 	{
 		this.messages = messages;
+	}
+
+	public synchronized void ajoutMessage(String courrielDestinataire, String courrielAuteur String texte)
+	{
+		Messages[] temp = getMessagesUtilisateur(courrielDestinataire);
+		temp.add(new Message(courrielAuteur, texte)); // TODO a verifier
+		// messages . put temp ?? necessaire ??
 	}
 
 	public Message[] getMessagesUtilisateur(String courriel)
@@ -116,5 +127,21 @@ public class AnnuaireMessagerie
 	public synchronized void supprimerMessagesUtilisateur(String courriel)
 	{
 		messages.remove(courriel);
+	}
+	
+	public synchronized void supprimerMessageUtilisateur(String courriel, String idmsg)
+	{
+		Messages[] temp = getMessagesUtilisateur(courriel);
+		try
+		{
+			Long timestamp = Long.ParseLong(idmsg)
+			for (Message msg : temp)
+				if (msg.getTimestamp == timestamp)
+				{
+					temp.remove(msg); // TODO a verifier
+					break;
+				}
+		}
+		catch (Exception e) { } // TODO exception a specialisee !
 	}
 }

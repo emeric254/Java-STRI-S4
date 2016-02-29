@@ -23,7 +23,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static String requeteEnvoiMessageDiffere(String idutilisateur, String msg)
 	{
-		return inscrireMethod + messagerieURI + "/" + idutilisateur + " " + msg;
+		return inscrireMethod + messagerieURI + "/" + idutilisateur + " ;" + msg;
 	}
 	
 	/**
