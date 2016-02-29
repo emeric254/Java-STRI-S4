@@ -22,7 +22,6 @@ public class ClientMessagerieDirecteHandler extends Thread
     private ControlleurProtocole protocolServer;
     private boolean fini;
     private String entree; // requete
-    private String sortie; // reponse
 
 	public ClientMessagerieDirecteHandler(Socket pSocketService, ControlleurProtocole pProtocolServer)
 	{
@@ -39,7 +38,6 @@ public class ClientMessagerieDirecteHandler extends Thread
         }
 		fini = false;
 		entree = null;
-		sortie = null;
 	}
 
     public void recevoir()
