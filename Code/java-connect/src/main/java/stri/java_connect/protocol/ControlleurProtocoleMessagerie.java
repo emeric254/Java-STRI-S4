@@ -20,7 +20,6 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 	public String traiterRequete(String requete)
 	{
 		String reponse = ProtocoleMessagerie.erreurServeur();
-		
 		if (ProtocoleMessagerie.isRequeteConnexion(requete))
 		{
 			if (utilisateur == null && ProtocoleAnnuaire.validerRequeteConnexion(requete))
@@ -141,7 +140,7 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 		return null;
 	}
 
-	public void DeconnexionUtilisateur() // TODo hack this !
+	public void deconnexionUtilisateur() // TODo hack this !
 	{
 		annuaire.supprimerUtilisateur(utilisateur.getCourriel());
 		utilisateur = null;
