@@ -236,7 +236,7 @@ public abstract class ProtocoleGenerique
 	{
 		return ControlleurProtocole.requeteMethode(requete).equals("INSCRIRE");
 	}
-	
+
 	/**
 	 * Tester si la requete est une requete de modification
 	 * 
@@ -247,7 +247,7 @@ public abstract class ProtocoleGenerique
 	{
 		return ControlleurProtocole.requeteMethode(requete).equals("MODIFIER");
 	}
-	
+
 	/**
 	 * Tester si la requete est une requete de suppression
 	 * 
