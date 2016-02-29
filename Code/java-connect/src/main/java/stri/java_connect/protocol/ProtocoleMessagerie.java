@@ -148,6 +148,15 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	//
+	
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static String extraireIdMessageManqueURI(String requete)
+	{
+		return requete.replace(messagerieURI + "/", "");
+	}
 
 	/**
 	 * @param msg

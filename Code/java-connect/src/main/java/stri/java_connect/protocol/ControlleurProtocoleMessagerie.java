@@ -26,31 +26,33 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 			//
 			reponse = ProtocoleMessagerie.erreurImplementionManquante();
 		}
-		else if (utilisateur != null)
+		else if (utilisateur != null) // il faut etre connecte !
 		{
 			if (ProtocoleMessagerie.isRequeteConsulter(requete))
 			{
 				if (ProtocoleMessagerie.validerRequeteConsulterDetailsMessagesManque(requete))
 				{
-					//
-					// TODO 
-					//
+					Message msg = ProtocoleMessagerie.getMessageUtilisateur(utilisateur.getCourriel(), ProtocoleMessagerie.extraireIdMessageManqueURI(requete));
+					if (msg != null)
+						reponse = ProtocoleMessagerie.ok(msg.toString()); // TODO a verifier
+					else
+						reponse = ProtocoleMessagerie.erreurRequete();
 				}
 				else if (ProtocoleMessagerie.validerRequeteConsulterListeMessagesManques(requete))
 				{
-					// TODO 
-					reponse = ProtocoleMessagerie.ok(annuaire.getMessagesUtilisateur(utilisateur.getCourriel()).toString());
+					reponse = ProtocoleMessagerie.ok(annuaire.getMessagesUtilisateurJsonString(utilisateur.getCourriel())); // TODO a verifier
 				}
 				else if (ProtocoleMessagerie.validerRequeteConsulterListeUtilisateurConnectes(requete))
-				{
-					// TODO 
-					reponse = ProtocoleMessagerie.ok(annuaire.getAnnuaire().keySet().toString());
+				{ 
+					reponse = ProtocoleMessagerie.ok(annuaire.getAnnuaire().keySet().toString()); // TODO a verifier
 				}
 				else if (ProtocoleMessagerie.validerRequeteConsulterDetailsUtilisateurConnecte(requete))
 				{
-					//
-					// TODO 
-					//
+					String courriel = ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", "");
+					if (annuaire.existeUtilisateur(courriel))
+						reponse = ProtocoleMessagerie.ok("'" + annuaire.getDetailsUtilisateur(courriel) + "'"); // TODO a verifier
+					else
+						reponse = ProtocoleMessagerie.erreurRequete();
 				}
 				else
 					reponse = ProtocoleMessagerie.erreurRequete();

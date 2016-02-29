@@ -83,4 +83,11 @@ public class Message
 	{
 		this.timestamp = timestamp;
 	}
+
+	//@Overide
+	// TODO verification a faire
+	public String toString()
+	{
+		return "{ 'auteur' : '" + auteur + "' , 'timestamp' : '" + new String(timestamp) + "' , 'contenu' : '" + contenu + "' }";
+	}
 }

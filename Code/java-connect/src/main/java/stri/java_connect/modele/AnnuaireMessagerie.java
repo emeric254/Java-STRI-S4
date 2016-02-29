@@ -25,6 +25,29 @@ public class AnnuaireMessagerie
 	{
 		return annuaire;
 	}
+	
+	public String getUtilisateurs()
+	{
+		String temp = " { 'liste' : [";
+		for (String courriel : annuaire.getKeys())
+			temp += "'" + courriel + "',";
+		// TODO a verifier
+		if (temp.endWith(","))
+			temp = temp.substring(0, temp.size()-1);
+		temps += "] }";
+		return temp;
+	}
+	
+	public String existeUtilisateur(String courriel)
+	{
+		// TODO a verifier
+		return annuaire.contains(courriel);
+	}
+	
+	public String getDetailsUtilisateur(String courriel)
+	{
+		return annuaire.get(courriel);
+	}
 
 	public synchronized void setAnnuaire(HashMap<String, String> annuaire)
 	{
@@ -56,6 +79,38 @@ public class AnnuaireMessagerie
 	public Message[] getMessagesUtilisateur(String courriel)
 	{
 		return messages.get(courriel);
+	}
+
+	public String getMessagesUtilisateurJsonString(String courriel)
+	{
+		Message[] messages = messages.get(courriel);
+		String temp = "{ 'liste' : [";
+		for (Message msg : messages)
+			temp += msg.toString() + ",";
+		// TODO a verifier
+		if (temp.endWith(","))
+			temp = temp.substring(0, temp.size()-1);
+		temp += "] }";
+		return temp;
+	}
+
+	public Message getMessageUtilisateur(String courriel, String timestamp)
+	{
+		try
+		{
+			return getMessageUtilisateur(courriel, Long.parseLong(timestamp));
+		}
+		catch (Exception e) { } // TODO exception a specialisee !
+		return null;
+	}
+
+	public Message getMessageUtilisateur(String courriel, Long timestamp)
+	{
+		Messages[] temp = getMessagesUtilisateur(courriel);
+		for (Message msg : temp)
+			if (msg.getTimestamp == timestamp)
+				return msg;
+		return null;
 	}
 	
 	public synchronized void supprimerMessagesUtilisateur(String courriel)
