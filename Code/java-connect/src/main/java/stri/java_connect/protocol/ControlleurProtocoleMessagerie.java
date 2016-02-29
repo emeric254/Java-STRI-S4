@@ -139,7 +139,7 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 		return null;
 	}
 
-	public void UtilisateurDeconnecte()
+	public void DeconnexionUtilisateur() // TODo hack this !
 	{
 		annuaire.supprimerUtilisateur(utilisateur.getCourriel());
 		utilisateur = null;
