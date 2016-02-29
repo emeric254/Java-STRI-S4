@@ -27,6 +27,16 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
+	 * @param idutilisateur
+	 * @param details
+	 * @return
+	 */
+	public static String requeteEnvoiMessageDiffere(String idutilisateur, String details)
+	{
+		return inscrireMethod + utilisateursURI + "/" + idutilisateur + " ;" + details;
+	}
+	
+	/**
 	 * @return
 	 */
 	public static String requeteConsulterListeUtilisateurConnectes()
@@ -88,6 +98,17 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	{
 		if(ControlleurProtocole.requeteURI(requete).startsWith(messagerieURI + "/"))
 			return CourrielValidateur.valider(ControlleurProtocole.requeteURI(requete).replace(messagerieURI + "/", ""));
+		return false;
+	}
+
+	/**
+	 * @param requete
+	 * @return
+	 */
+	public static boolean validerRequeteInscrireUtilisateur(String requete)
+	{
+		if(ControlleurProtocole.requeteURI(requete).startsWith(utilisateursURI + "/"))
+			return CourrielValidateur.valider(ControlleurProtocole.requeteURI(requete).replace(utilisateursURI + "/", ""));
 		return false;
 	}
 

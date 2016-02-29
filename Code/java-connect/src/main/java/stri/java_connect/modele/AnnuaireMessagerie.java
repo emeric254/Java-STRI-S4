@@ -31,9 +31,8 @@ public class AnnuaireMessagerie
 		String temp = " { 'liste' : [";
 		for (String courriel : annuaire.getKeys())
 			temp += "'" + courriel + "',";
-		// TODO a verifier
-		if (temp.endWith(","))
-			temp = temp.substring(0, temp.size()-1);
+		if (temp.endWith(",")) // TODO a verifier
+			temp = temp.substring(0, temp.size()-1); // TODO a verifier
 		temps += "] }";
 		return temp;
 	}
@@ -98,9 +97,8 @@ public class AnnuaireMessagerie
 		String temp = "{ 'liste' : [";
 		for (Message msg : messages)
 			temp += msg.toString() + ",";
-		// TODO a verifier
-		if (temp.endWith(","))
-			temp = temp.substring(0, temp.size()-1);
+		if (temp.endWith(",")) // TODO a verifier
+			temp = temp.substring(0, temp.size()-1); // TODO a verifier
 		temp += "] }";
 		return temp;
 	}

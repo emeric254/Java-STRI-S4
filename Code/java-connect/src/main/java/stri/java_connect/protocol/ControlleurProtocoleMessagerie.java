@@ -19,16 +19,13 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 	{
 		String reponse = ProtocoleMessagerie.erreurServeur();
 		
-		if (ProtocoleMessagerie.isRequeteConnexion(requete))
+		if (utilisateur != null) // il faut etre connecte !
 		{
-			//
-			// TODO se connecter a l'autre serveur
-			//
-			reponse = ProtocoleMessagerie.erreurImplementionManquante();
-		}
-		else if (utilisateur != null) // il faut etre connecte !
-		{
-			if (ProtocoleMessagerie.isRequeteConsulter(requete))
+			if (ProtocoleMessagerie.isRequeteConnexion(requete))
+			{
+				reponse = ProtocoleGenerique.ok();
+			}
+			else if (ProtocoleMessagerie.isRequeteConsulter(requete))
 			{
 				if (ProtocoleMessagerie.validerRequeteConsulterDetailsMessagesManque(requete))
 				{
@@ -59,8 +56,23 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 			}
 			else if (ProtocoleMessagerie.isRequeteInscrire(requete))
 			{
-				// TODO verification existence utilisateur !
-				annuaire.ajoutMessage(ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", ""), utilisateur.getCourriel(), ControlleurProtocole.requeteCorps(requete)); // TODO a verifier !
+				if (ProtocoleMessagerie.validerRequeteInscrireUtilisateur(requete))
+				{
+					if (utilisateur.getCourriel() == ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", ""))
+					{
+						annuaire.ajoutUtilisateur(utilisateur.getCourriel(), ControlleurProtocole.extraireDonnees(requete));
+						reponse = ProtocoleGenerique.ok();
+					}
+					else
+						reponse = ProtocoleGenerique.erreurInterdit();
+				}
+				else if (ProtocoleMessagerie.validerRequeteEnvoiMessageDiffere())
+				{
+					//
+					// TODO verification existence utilisateur !
+					//
+					annuaire.ajoutMessage(ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", ""), utilisateur.getCourriel(), ControlleurProtocole.requeteCorps(requete)); // TODO a verifier !
+				}
 			}
 			else if (ProtocoleMessagerie.isRequeteSuppression(requete))
 			{
@@ -90,7 +102,23 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 			return ProtocoleMessagerie.extraireDonnees(reponse);
 		return null;
 	}
-	
+
+	public boolean isRequeteConnexion(String requete)
+	{
+		return utilisateur == null && ProtocoleMessagerie.isRequeteConnexion(requete);
+	}
+
+	public boolean validerReponseConnexion(String reponse)
+	{
+		if (ProtocoleGenerique.validerReponseConnexion(reponse))
+		{
+			utilisateur = new Utilisateur();
+			utilisateur.fromJSONString(ProtocoleGenerique.extraireDonnees(reponse));
+			return true;
+		}
+		return false;
+	}
+
 	public void UtilisateurDeconnecte()
 	{
 		annuaire.supprimerUtilisateur(utilisateur.getCourriel());
