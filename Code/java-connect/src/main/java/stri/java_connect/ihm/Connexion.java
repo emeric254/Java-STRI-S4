@@ -67,7 +67,8 @@ public class Connexion extends Dialog implements Bindable
         	{
                 String mail = mailTextInput.getText();
                 String mdp = mdpTextInput.getText();
-
+                String reponse = "";
+                
                 Form.Flag flag = null;
                 
                 // Vérification que tous les champs sont remplis
@@ -79,11 +80,15 @@ public class Connexion extends Dialog implements Bindable
                 if (flag == null)
                 {
                     errorLabel.setText("");
-                    //Prompt.prompt("Pretending to submit...", Forms.this);
+                    //Prompt.prompt("Pretending to submit...", Connexion.this);
+                    // Traitement de la connexion
+                    reponse =   
+                    		getClient().connexion(mail,mdp);
+                    
                 }
                 else
                 {
-                    errorLabel.setText("Some required information is missing.");
+                    errorLabel.setText("Certaines informations sont manquantes.");
                 }
             }
         });

@@ -187,4 +187,14 @@ public class MenuPrincipal extends Window implements Application, Bindable
 	{
 		//
 	}
+	
+	public ClientAnnuaire getClient()
+	{
+		return this.client;
+	}
+	
+	public Utilisateur getUtilisateur()
+	{
+		return this.utilisateur;
+	}
 }
