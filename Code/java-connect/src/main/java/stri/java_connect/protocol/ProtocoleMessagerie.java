@@ -13,8 +13,8 @@ import stri.java_connect.utils.CourrielValidateur;
  */
 public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 {
-	private final static String utilisateursURI = "/utilisateurs";
-	private final static String messagerieURI = "/messagerie";
+	public final static String utilisateursURI = "/utilisateurs";
+	public final static String messagerieURI = "/messagerie";
 	
 	/**
 	 * @param idutilisateur
@@ -31,7 +31,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 * @param details
 	 * @return
 	 */
-	public static String requeteEnvoiMessageDiffere(String idutilisateur, String details)
+	public static String requeteInscrireUtilisateur(String idutilisateur, String details)
 	{
 		return inscrireMethod + utilisateursURI + "/" + idutilisateur + " ;" + details;
 	}

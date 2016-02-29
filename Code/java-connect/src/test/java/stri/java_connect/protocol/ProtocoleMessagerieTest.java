@@ -15,7 +15,7 @@ public class ProtocoleMessagerieTest
 	@Test
 	public void testRequeteEnvoiMessageDiffere()
 	{
-		assertEquals("INSCRIRE /messagerie/" + idutilisateur + " " + msg, ProtocoleMessagerie.requeteEnvoiMessageDiffere(idutilisateur, msg));
+		assertEquals("INSCRIRE /messagerie/" + idutilisateur + " ;" + msg, ProtocoleMessagerie.requeteEnvoiMessageDiffere(idutilisateur, msg));
 	}
 
 	@Test

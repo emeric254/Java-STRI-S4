@@ -14,10 +14,10 @@ import stri.java_connect.utils.MD5Hasher;
  */
 public abstract class ProtocoleGenerique
 {
-	protected final static String consulterMethod = "CONSULTER ";
-	protected final static String supprimerMethod = "SUPPRIMER ";
-	protected final static String inscrireMethod = "INSCRIRE ";
-	protected final static String modifierMethod = "MODIFIER ";
+	public final static String consulterMethod = "CONSULTER ";
+	public final static String supprimerMethod = "SUPPRIMER ";
+	public final static String inscrireMethod = "INSCRIRE ";
+	public final static String modifierMethod = "MODIFIER ";
 	
 	protected final static String code = "{\"code\" : ";
 	protected final static String data =  ", \"data\" : \"";

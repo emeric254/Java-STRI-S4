@@ -88,6 +88,6 @@ public class Message
 	// TODO verification a faire
 	public String toString()
 	{
-		return "{ 'auteur' : '" + auteur + "' , 'timestamp' : '" + new String(timestamp) + "' , 'contenu' : '" + contenu + "' }";
+		return "{ 'auteur' : '" + auteur + "' , 'timestamp' : '" + timestamp + "' , 'contenu' : '" + contenu + "' }";
 	}
 }

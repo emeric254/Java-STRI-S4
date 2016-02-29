@@ -3,6 +3,7 @@
  */
 package stri.java_connect.modele;
 
+import java.util.ArrayDeque;
 import java.util.HashMap;
 
 /**
@@ -13,12 +14,12 @@ public class AnnuaireMessagerie
 {
 	private HashMap<String, String> annuaire;
 	
-	private HashMap<String, Message[]> messages;
+	private HashMap<String, ArrayDeque<Message>> messages;
 
 	public AnnuaireMessagerie()
 	{
 		annuaire = new HashMap<String, String>();
-		messages = new HashMap<String, Message[]>();
+		messages = new HashMap<String, ArrayDeque<Message>>();
 	}
 
 	public HashMap<String, String> getAnnuaire()
@@ -29,17 +30,17 @@ public class AnnuaireMessagerie
 	public String getUtilisateurs()
 	{
 		String temp = " { 'liste' : [";
-		for (String courriel : annuaire.getKeys())
+		for (String courriel : annuaire.keySet())
 			temp += "'" + courriel + "',";
-		if (temp.endWith(",")) // TODO a verifier
-			temp = temp.substring(0, temp.size()-1); // TODO a verifier
-		temps += "] }";
+		if (temp.endsWith(",")) // TODO a verifier
+			temp = temp.substring(0, temp.length()-1); // TODO a verifier
+		temp += "] }";
 		return temp;
 	}
 	
-	public String existeUtilisateur(String courriel)
+	public boolean existeUtilisateur(String courriel)
 	{
-		return annuaire.contains(courriel); // TODO a verifier
+		return annuaire.keySet().contains(courriel);
 	}
 	
 	public String getDetailsUtilisateur(String courriel)
@@ -69,36 +70,36 @@ public class AnnuaireMessagerie
 	
 	// --- Messages
 	
-	public HashMap<String, Message[]> getMessages()
+	public HashMap<String, ArrayDeque<Message>> getMessages()
 	{
 		return messages;
 	}
 
-	public synchronized void setMessages(HashMap<String, Message[]> messages)
+	public synchronized void setMessages(HashMap<String, ArrayDeque<Message>> messages)
 	{
 		this.messages = messages;
 	}
 
-	public synchronized void ajoutMessage(String courrielDestinataire, String courrielAuteur String texte)
+	public synchronized void ajoutMessage(String courrielDestinataire, String courrielAuteur, String texte)
 	{
-		Messages[] temp = getMessagesUtilisateur(courrielDestinataire);
+		ArrayDeque<Message> temp = getMessagesUtilisateur(courrielDestinataire);
 		temp.add(new Message(courrielAuteur, texte)); // TODO a verifier
 		// messages . put temp ?? necessaire ??
 	}
 
-	public Message[] getMessagesUtilisateur(String courriel)
+	public ArrayDeque<Message> getMessagesUtilisateur(String courriel)
 	{
 		return messages.get(courriel);
 	}
 
 	public String getMessagesUtilisateurJsonString(String courriel)
 	{
-		Message[] messages = messages.get(courriel);
+		ArrayDeque<Message> liste = messages.get(courriel);
 		String temp = "{ 'liste' : [";
-		for (Message msg : messages)
+		for (Message msg : liste)
 			temp += msg.toString() + ",";
-		if (temp.endWith(",")) // TODO a verifier
-			temp = temp.substring(0, temp.size()-1); // TODO a verifier
+		if (temp.endsWith(",")) // TODO a verifier
+			temp = temp.substring(0, temp.length()-1); // TODO a verifier
 		temp += "] }";
 		return temp;
 	}
@@ -115,9 +116,9 @@ public class AnnuaireMessagerie
 
 	public Message getMessageUtilisateur(String courriel, Long timestamp)
 	{
-		Messages[] temp = getMessagesUtilisateur(courriel);
+		ArrayDeque<Message> temp = getMessagesUtilisateur(courriel);
 		for (Message msg : temp)
-			if (msg.getTimestamp == timestamp)
+			if (msg.getTimestamp() == timestamp)
 				return msg;
 		return null;
 	}
@@ -129,12 +130,12 @@ public class AnnuaireMessagerie
 	
 	public synchronized void supprimerMessageUtilisateur(String courriel, String idmsg)
 	{
-		Messages[] temp = getMessagesUtilisateur(courriel);
+		ArrayDeque<Message> temp = getMessagesUtilisateur(courriel);
 		try
 		{
-			Long timestamp = Long.ParseLong(idmsg)
+			Long timestamp = Long.parseLong(idmsg);
 			for (Message msg : temp)
-				if (msg.getTimestamp == timestamp)
+				if (msg.getTimestamp() == timestamp)
 				{
 					temp.remove(msg); // TODO a verifier
 					break;

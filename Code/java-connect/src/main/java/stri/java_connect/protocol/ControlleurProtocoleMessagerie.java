@@ -1,13 +1,15 @@
 package stri.java_connect.protocol;
 
+import stri.java_connect.client.Client;
 import stri.java_connect.modele.AnnuaireMessagerie;
+import stri.java_connect.modele.Message;
 import stri.java_connect.modele.Utilisateur;
 
 public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 {
 	private AnnuaireMessagerie annuaire;
 	private Utilisateur utilisateur;
-	
+
 	public ControlleurProtocoleMessagerie(AnnuaireMessagerie pAnnuaire)
 	{
 		utilisateur = null;
@@ -21,14 +23,14 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 		
 		if (ProtocoleMessagerie.isRequeteConnexion(requete))
 		{
-			if (utilisateur == null && ProtocoleMessagerie.validerReponseConnexion(requete))
+			if (utilisateur == null && ProtocoleAnnuaire.validerRequeteConnexion(requete))
 			{
 				// TODO en faire une fonction
-				Client cl = new Client("12345");
+				Client cl = new Client(12345);
 				try
 				{
-					String temp = c.communiquer(requete);
-					if (ProtocoleGenerique.validerReponseConnexion(temp))
+					String temp = cl.communiquer(requete);
+					if (ProtocoleGenerique.isOk(temp))
 					{
 						utilisateur = new Utilisateur();
 						utilisateur.fromJSONString(ProtocoleGenerique.extraireDonnees(temp));
@@ -51,7 +53,7 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 			{
 				if (ProtocoleMessagerie.validerRequeteConsulterDetailsMessagesManque(requete))
 				{
-					Message msg = ProtocoleMessagerie.getMessageUtilisateur(utilisateur.getCourriel(), ProtocoleMessagerie.extraireIdMessageManqueURI(requete));
+					Message msg = annuaire.getMessageUtilisateur(utilisateur.getCourriel(), ProtocoleMessagerie.extraireIdMessageManqueURI(requete));
 					if (msg != null)
 						reponse = ProtocoleMessagerie.ok(msg.toString()); // TODO a verifier
 					else
@@ -82,20 +84,20 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 				{
 					if (utilisateur.getCourriel() == ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", ""))
 					{
-						annuaire.ajoutUtilisateur(utilisateur.getCourriel(), ControlleurProtocole.extraireDonnees(requete));
+						annuaire.ajoutUtilisateur(utilisateur.getCourriel(), ProtocoleGenerique.extraireDonnees(requete));
 						reponse = ProtocoleGenerique.ok();
 					}
 					else
 						reponse = ProtocoleGenerique.erreurInterdit();
 				}
-				else if (ProtocoleMessagerie.validerRequeteEnvoiMessageDiffere())
+				else if (ProtocoleMessagerie.validerRequeteEnvoiMessageDiffere(requete))
 				{
 					String courriel = ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", "");
 					// TODO en faire une fonction
-					Client cl = new Client("12345");
+					Client cl = new Client(12345);
 					try
 					{
-						String temp = c.communiquer(ProtocoleAnnuaire.requeteConsulterProfil(courriel));
+						String temp = cl.communiquer(ProtocoleAnnuaire.requeteConsulterProfil(courriel));
 						if (ControlleurProtocole.reponseCode(temp) == 0)
 						{
 							annuaire.ajoutMessage(courriel, utilisateur.getCourriel(), ControlleurProtocole.requeteCorps(requete)); // TODO a verifier !
@@ -118,7 +120,7 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 				}
 				else if (ProtocoleMessagerie.validerRequeteSupprimerMessageManque(requete))
 				{
-					annuaire.supprimerMessageUtilisateur(utilisateur.getCourriel(), ProtocoleMessagerie.messagerieURI + "/", "");
+					annuaire.supprimerMessageUtilisateur(utilisateur.getCourriel(), ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.messagerieURI + "/", ""));
 				}
 				else
 					reponse = ProtocoleMessagerie.erreurRequete();
