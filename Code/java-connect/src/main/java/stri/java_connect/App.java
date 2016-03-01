@@ -25,7 +25,9 @@ public class App
     {
         System.out.println( "Hello World!" );
         //
-		DesktopApplicationContext.main(MenuPrincipal.class, args);
+		//DesktopApplicationContext.main(MenuPrincipal.class, args);
+        
+        
     }
     
     /**
