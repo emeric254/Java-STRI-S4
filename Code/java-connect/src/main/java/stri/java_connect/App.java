@@ -44,11 +44,11 @@ public class App
         ClientMessagerie indirect = new ClientMessagerie(23456);
         try {
 			indirect.connexion("remi.barbaste@univ-tlse3.fr", "remimdp");
-        indirect.inscription("remi.barbaste@univ-tlse3.fr", "127.0.0.1", 23456);
-        indirect.envoiMessageDiffere("emeric.tosi@univ-tlse3.fr", "il faut pas dormir la nuit");
-        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
-        System.out.println("details de l'utilisateur remi qui est connecte : " + indirect.consulterDetailsUtilisateurConnecte("remi.barbaste@univ-tlse3.fr"));
-        System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
+	        indirect.inscription("remi.barbaste@univ-tlse3.fr", "127.0.0.1", 23456);
+	        indirect.envoiMessageDiffere("emeric.tosi@univ-tlse3.fr", "il faut pas dormir la nuit");
+	        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
+	        System.out.println("details de l'utilisateur remi qui est connecte : " + indirect.consulterDetailsUtilisateurConnecte("remi.barbaste@univ-tlse3.fr"));
+	        System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -57,9 +57,9 @@ public class App
         System.out.println("\n connexion sur emeric");
         indirect = new ClientMessagerie(23456);
         try {
-        indirect.connexion("emeric.tosi@univ-tlse3.fr", "emericmdp");
-        indirect.inscription("emeric.tosi@univ-tlse3.fr", "127.0.0.1", 23457);
-        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
+	        indirect.connexion("emeric.tosi@univ-tlse3.fr", "emericmdp");
+	        indirect.inscription("emeric.tosi@univ-tlse3.fr", "127.0.0.1", 23457);
+	        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
 			System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -67,8 +67,6 @@ public class App
 		}
         indirect.deconnexion();
         //
-
-		//
     }
 
     /**

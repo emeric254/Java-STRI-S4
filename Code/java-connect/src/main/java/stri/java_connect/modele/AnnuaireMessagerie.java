@@ -83,8 +83,10 @@ public class AnnuaireMessagerie
 	public synchronized void ajoutMessage(String courrielDestinataire, String courrielAuteur, String texte)
 	{
 		ArrayDeque<Message> temp = getMessagesUtilisateur(courrielDestinataire);
-		temp.add(new Message(courrielAuteur, texte)); // TODO a verifier
-		// messages . put temp ?? necessaire ??
+		if (temp == null)
+			temp = new ArrayDeque<Message>();
+		temp.add(new Message(courrielAuteur, texte));
+		messages.put(courrielDestinataire, temp);
 	}
 
 	public ArrayDeque<Message> getMessagesUtilisateur(String courriel)

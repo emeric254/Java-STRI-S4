@@ -81,9 +81,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	/**
 	 * @return
 	 */
-	public static String requeteDeconexion(String courriel)
+	public static String requeteDeconexion()
 	{
-		return supprimerMethod + utilisateursURI + "/" + courriel;
+		return supprimerMethod + utilisateursURI;
 	}
 	
 	/**
@@ -114,9 +114,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	 */
 	public static boolean validerRequeteDeconexion(String requete)
 	{
-		if (ControlleurProtocole.requeteURI(requete).startsWith(utilisateursURI + "/"))
-			return CourrielValidateur.valider(ControlleurProtocole.requeteURI(requete).replace(utilisateursURI + "/", ""));
-		return false;
+		return ControlleurProtocole.requeteURI(requete).startsWith(utilisateursURI);
 	}
 
 	/**
@@ -232,7 +230,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	{
 		return requete.substring(8).split(" ",2)[1];
 	}
-	
+
 	/**
 	 * @param requete
 	 * @return

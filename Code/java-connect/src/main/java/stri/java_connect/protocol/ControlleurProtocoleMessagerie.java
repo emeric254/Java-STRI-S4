@@ -84,7 +84,6 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 			{
 				if (ProtocoleMessagerie.validerRequeteInscrireUtilisateur(requete))
 				{
-					System.err.println("debug " + ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", ""));
 					//
 					if (utilisateur.getCourriel().equals(ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", "")))
 					{
@@ -126,7 +125,8 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 				}
 				else if (ProtocoleMessagerie.validerRequeteDeconexion(requete))
 				{
-					//
+					deconnexionUtilisateur();
+					reponse = ProtocoleMessagerie.ok();
 				}
 				else
 					reponse = ProtocoleMessagerie.erreurRequete();

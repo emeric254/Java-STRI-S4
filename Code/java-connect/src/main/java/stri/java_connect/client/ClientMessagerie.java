@@ -251,6 +251,10 @@ public class ClientMessagerie
 	 */
 	public void deconnexion()
 	{
+		try
+		{
+			client.communiquer(ProtocoleMessagerie.requeteDeconexion());
+		} catch (IOException e) { }
 		client.fermer();
 	}
 }
