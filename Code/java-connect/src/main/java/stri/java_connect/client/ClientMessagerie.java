@@ -38,17 +38,19 @@ public class ClientMessagerie
 	/**
 	 * Creation d'un objet ClientMessagerie sur un port fournit
 	 * 
-	 * @param pPort le port sur lequel demarer
+	 * @param pPort le port sur lequel demarrer
 	 */
 	public ClientMessagerie(int pPort)
 	{
 		client = new Client(pPort);
 	}
 	
+
 	/**
-	 * Inscrire un utilisateur sur le serveur
-	 * 
-	 * @param courriel de l'utilisateur, adresse et port du serveur
+	 *  Inscrire un utilisateur sur le serveur
+	 * @param courriel de l'utilisateur
+	 * @param adresse du serveur
+	 * @param port du serveur
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */
@@ -85,11 +87,13 @@ public class ClientMessagerie
 	
 	/**
 	 * Envoi de message differe
-	 * 
+	 * @param courriel le mail de l'utilisateur
+	 * @param msg message envoye
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 * 
 	 */
+
 	public String envoiMessageDiffere(String courriel, String msg) throws IOException
 	{
 		return client.communiquer(ProtocoleMessagerie.requeteEnvoiMessageDiffere(courriel, msg));
@@ -97,7 +101,6 @@ public class ClientMessagerie
 
 	/**
 	 * Consulter la liste des utilisateurs connectes
-	 * 
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */
@@ -120,7 +123,6 @@ public class ClientMessagerie
 	
 	/**
 	 * Consulter liste des messages manques
-	 * 
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */
@@ -131,8 +133,7 @@ public class ClientMessagerie
 
 	/**
 	 * Consulter le details des messages manques
-	 * 
-	 * @param courriel le courriel du compte a supprimer
+	 * @param idms l'id du message
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */
@@ -144,8 +145,6 @@ public class ClientMessagerie
 	
 	/**
 	 * Supprimer liste des messages manques
-	 * 
-	 * @param courriel le courriel du compte a supprimer
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */	
@@ -158,7 +157,7 @@ public class ClientMessagerie
 	/**
 	 * Supprimer les messages manques
 	 * 
-	 * @param courriel le courriel du compte a supprimer
+	 * @param idms l'id du message
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */	
@@ -168,9 +167,9 @@ public class ClientMessagerie
 	}
 	
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * L'id du message manque
 	 * 
-	 * @param courriel le courriel du compte a supprimer
+	 * @param requete 
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */	
@@ -181,9 +180,8 @@ public class ClientMessagerie
 
 	
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * Faire une demande de message direct
 	 * 
-	 * @param courriel le courriel du compte a supprimer
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */	
@@ -194,9 +192,9 @@ public class ClientMessagerie
 	
 	
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * Defini que le message est direct
 	 * 
-	 * @param courriel le courriel du compte a supprimer
+	 * @param requete la requete demandee
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */	
@@ -207,9 +205,9 @@ public class ClientMessagerie
 	
 	
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * Date du message
 	 * 
-	 * @param courriel le courriel du compte a supprimer
+	 * @param requete
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */	
@@ -220,7 +218,7 @@ public class ClientMessagerie
 	
 	
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * Recuperer le message direct
 	 * 
 	 * @param courriel le courriel du compte a supprimer
 	 * @return la reponse a cette requete
@@ -233,7 +231,7 @@ public class ClientMessagerie
 		
 	
 	/**
-	 * Supprimer un compte/objet Utilisateur
+	 * Recuperer la date du message direct
 	 * 
 	 * @param courriel le courriel du compte a supprimer
 	 * @return la reponse a cette requete
