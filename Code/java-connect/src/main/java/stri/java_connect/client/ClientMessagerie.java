@@ -54,7 +54,7 @@ public class ClientMessagerie
 	 */
 	public String inscription(String courriel, String adresse, int port) throws IOException //sinscrire au serv param string address int port
 	{
-		return client.communiquer(ProtocoleMessagerie.requeteInscrireUtilisateur(courriel, adresse, port)); //faut 2 argu mais je sais pas comment du coup x)
+		return client.communiquer(ProtocoleMessagerie.requeteInscrireUtilisateur(courriel, adresse + port));
 	}
 	
 	/**
