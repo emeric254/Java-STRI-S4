@@ -59,4 +59,12 @@ public class ClientMessagerieDirecte extends Thread
             }
         }
 	}
+
+	// TODO
+	//~ public static void emettreMsg(int port, String msg)
+	//~ {
+		//~ Client cl = new Client(port);
+		//~ cl.communiquer(msg);
+		//~ cl.fermer();
+	//~ }
 }
