@@ -1,77 +1,73 @@
 package stri.java_connect;
 
+import java.io.*;
+import java.net.*;
 import org.apache.pivot.wtk.DesktopApplicationContext;
 
+import stri.java_connect.client.*;
+import stri.java_connect.modele.*;
+import stri.java_connect.protocol.*;
 import stri.java_connect.ihm.*;
-
-import java.io.IOException;
-
-import stri.java_connect.client.Client;
-import stri.java_connect.client.ClientAnnuaire;
-import stri.java_connect.client.ClientMessagerie;
-import stri.java_connect.client.ClientMessagerieDirecte;
-import stri.java_connect.modele.Utilisateur;
-import stri.java_connect.protocol.ProtocoleAnnuaire;
 
 /**
  * @author emeric, remi, thomas
  *
  */
-public class App 
+public class App
 {
     /**
      * Main App.java
-     * 
+     *
      * @param args arguments de lancement
      */
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-        
-        try {
-			initAnnuaire();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        /*
+
+        try
+        {
+            initAnnuaire();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         //
-		//DesktopApplicationContext.main(MenuPrincipal.class, args);
-		//
-		//
-        System.out.println( "Test msg indirect" );
-        System.out.println("\n connexion sur remi");
-        ClientMessagerie indirect = new ClientMessagerie(23456);
-        try {
-			indirect.connexion("remi.barbaste@univ-tlse3.fr", "remimdp");
-	        indirect.inscription("remi.barbaste@univ-tlse3.fr", "127.0.0.1", 23456);
-	        indirect.envoiMessageDiffere("emeric.tosi@univ-tlse3.fr", "il faut pas dormir la nuit");
-	        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
-	        System.out.println("details de l'utilisateur remi qui est connecte : " + indirect.consulterDetailsUtilisateurConnecte("remi.barbaste@univ-tlse3.fr"));
-	        System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-        indirect.deconnexion();
-        System.out.println("\n connexion sur emeric");
-        indirect = new ClientMessagerie(23456);
-        try {
-	        indirect.connexion("emeric.tosi@univ-tlse3.fr", "emericmdp");
-	        indirect.inscription("emeric.tosi@univ-tlse3.fr", "127.0.0.1", 23457);
-	        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
-			System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        indirect.deconnexion();
-        //*/
+        //DesktopApplicationContext.main(MenuPrincipal.class, args);
+        //
+        //
+        System.out.println("test msg direct");
+        try
+        {
+            ClientMessagerieDirecte client2 = new ClientMessagerieDirecte(12346);
+            client2.start();
+            ClientMessagerieDirecte client1 = new ClientMessagerieDirecte(12345);
+            client1.start();
+            //
+            client1.emettreMsg("127.0.0.1:12345", "test1");
+            client2.emettreMsg("127.0.0.1:12345", "rgechjgbrweyabuyewagu");
+            client2.emettreMsg("127.0.0.1:12346", "rgechjg41544984789brweyabuyewagu");
+            client1.emettreMsg("127.0.0.1:12346", "testttttttttttttttt");
+            //
+            for (int i = 0 ; i< 200000; i++); // pour attendre les envois / reception des threads
+            //
+            client1.deconnexion();
+            client2.deconnexion();
+        }
+        catch (SocketException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        //
+        //indirect.deconnexion();
+        //
     }
 
     /**
      * Initialiser l'annuaire du serveur
-     * 
+     *
      * @throws IOException exception si la communication echoue
      */
     private static void initAnnuaire() throws IOException
@@ -88,7 +84,7 @@ public class App
         String reponse = client.inscription(utilisateur);
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
-       
+
         client = new ClientAnnuaire();
         utilisateur = new Utilisateur();
         utilisateur.setCourriel("emeric.tosi@univ-tlse3.fr");
@@ -102,7 +98,7 @@ public class App
         reponse = client.inscription(utilisateur);
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
-       
+
         client = new ClientAnnuaire();
         utilisateur = new Utilisateur();
         utilisateur.setCourriel("thomas.maury@univ-tlse3.fr");

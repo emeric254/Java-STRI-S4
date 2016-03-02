@@ -3,10 +3,13 @@
  */
 package stri.java_connect.client;
 
-import java.net.ServerSocket;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetSocketAddress;
+import java.net.SocketException;
 
-import stri.java_connect.protocol.ControlleurProtocole;
-import stri.java_connect.protocol.ControlleurProtocoleMessagerie;
+import stri.java_connect.protocol.ProtocoleMessagerie;
 
 /**
  * @author emeric
@@ -15,57 +18,70 @@ import stri.java_connect.protocol.ControlleurProtocoleMessagerie;
 public class ClientMessagerieDirecte extends Thread
 {
 	private final static int portDefaut = 12347;
+	private final static int bufferSize = 4096;
 
-	private ControlleurProtocole protoclecontrolleur;
 	private int port;
+    DatagramSocket socket;
+    byte[] temp = new byte[bufferSize];
+    boolean fini = false;
 
-    public ClientMessagerieDirecte()
+    public ClientMessagerieDirecte() throws SocketException
     {
     	this(portDefaut);
     }
 
-	public ClientMessagerieDirecte(int pPort)
+	public ClientMessagerieDirecte(int pPort) throws SocketException
 	{
 		port = pPort;
-		protoclecontrolleur = new ControlleurProtocoleMessagerie(null);
+		socket = new DatagramSocket(port);
 	}
 
 	@Override
 	public void run()
 	{
-    	ServerSocket socketEcoute = null;
-        try
-        {
-            socketEcoute= new ServerSocket(port);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        System.out.println("En attente de conversation sur le port " + port);
-        System.out.println(socketEcoute);
-
-        while(true)
-        {
-            System.out.println("mise en attente d'une nouvelle conversation");
-            try
-            {
-                new ClientMessagerieDirecteHandler(socketEcoute.accept(), protoclecontrolleur.clone()).start();
-                System.out.println("lancement d'un nouveau ClientMessagerieDirecteHandler reussi");
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
+		while (!socket.isClosed() && !fini)
+		{
+			DatagramPacket pac = new DatagramPacket(temp, bufferSize);
+			try
+			{
+				socket.receive(pac);
+				System.out.println(ProtocoleMessagerie.extraireMessageMessageDirect(new String(pac.getData())));
+			}
+			catch (IOException e)
+			{
+				System.err.println("erreur reception");
+			}
+			temp = new byte[bufferSize];
+		}
 	}
 
 	// TODO
-	//~ public static void emettreMsg(int port, String msg)
-	//~ {
-		//~ Client cl = new Client(port);
-		//~ cl.communiquer(msg);
-		//~ cl.fermer();
-	//~ }
+	public void emettreMsg(String addrport, String msg)
+	{
+		String addr = addrport.split(":")[0];
+		int port = Integer.parseInt(addrport.split(":")[1]);
+		emettreMsg(addr, port, msg);
+	}
+
+	// TODO
+	public void emettreMsg(String addr, int port, String msg)
+	{
+		msg = ProtocoleMessagerie.requeteMessageDirect(msg);
+		byte[] buf = msg.getBytes();
+		DatagramPacket pac = new DatagramPacket(buf, buf.length, new InetSocketAddress(addr, port));
+		try
+		{
+			socket.send(pac);
+		}
+		catch (IOException e)
+		{
+			System.err.println("echec de l'envoi @ " + addr + ":" + port + " du message : " + msg);
+		}
+	}
+	
+	public void deconnexion()
+	{
+		socket.close();
+		fini = true;
+	}
 }
