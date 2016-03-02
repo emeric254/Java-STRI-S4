@@ -1,15 +1,15 @@
-<myApp:CreationProfil title="Java connect !" maximized="true"
-	xmlns:bxml="http://pivot.apache.org/bxml"
-	xmlns:myApp="stri.java_connect.ihm"
+<myApp:ModifierProfil title="Java Connect !" maximized="true"  
+	xmlns:bxml="http://pivot.apache.org/bxml" 
+	xmlns:myApp="stri.java_connect.ihm" 
 	xmlns="org.apache.pivot.wtk"> 
-	
+			
 	<Border styles="{padding:6}">
         <TablePane>
             <columns>
                 <TablePane.Column width="1*"/>
             </columns>
              <TablePane.Row>
-           		 <Label text="Creation de votre profil"/>
+           		 <Label text="Modification de votre profil"/>
             </TablePane.Row>
 
             <TablePane.Row height="1*">
@@ -17,7 +17,7 @@
                     <Form.Section heading="Général">
                         <BoxPane bxml:id="idConnexionBoxPane" Form.label="connexion">
                             <TextInput bxml:id="mailTextInput" prompt="mail"/>
-                            <TextInput password="true" bxml:id="mdpTextInput" prompt="password"/>
+                            <TextInput bxml:id="mdpTextInput" prompt="password"/>
                         </BoxPane>
                         <BoxPane bxml:id="nameBoxPane" Form.label="Nom">
                             <TextInput bxml:id="prenomTextInput" prompt="prenom"/>
@@ -37,16 +37,10 @@
                         <TextInput bxml:id="numTelTextInput" prompt="Numéro de téléphone"/>
                     </Form.Section>
                     
-                    <Form.Section heading="Année diplomation">
-                   		<BoxPane bxml:id="anneDiplomationBoxPane"  orientation="vertical">
-                        	<TextInput bxml:id="anneeDiplomationTextInput" prompt=""/>
-                        </BoxPane>	
-                    </Form.Section>
-                    
                     <Form.Section heading="Compétences">
                     	<Label text="Séparez les compétences par des points virgules(;)"/>
                         <BoxPane bxml:id="competencesBoxPane">
-                            <TextInput bxml:id="competencesTextInput" prompt="" textSize="40" />
+                            <TextInput bxml:id="competencesTextInput" prompt=""/>
                         </BoxPane>
                     </Form.Section>
                     
@@ -79,4 +73,4 @@
             </TablePane.Row>
         </TablePane>
     </Border>
-</myApp:CreationProfil>
+</myApp:ModifierProfil>

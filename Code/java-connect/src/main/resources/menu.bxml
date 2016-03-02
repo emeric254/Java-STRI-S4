@@ -1,49 +1,72 @@
-<myApp:Menu title="Java Connect !" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 
-	<Form>
-  		<Form.Section>
-			<Label text="Java Connect !"/>
-			<PushButton bxml:id="btConnexion" buttonData="Connexion"/>
-			<PushButton bxml:id="btInscription" buttonData="Inscription"/>
-			<PushButton bxml:id="btListeProfil" buttonData="Liste des profils"/>
-			<PushButton bxml:id="btModifProfil" buttonData="Modifier votre profil"/>
-			<PushButton bxml:id="btMessagerieEmail" buttonData="Messagerie par mail"/>
-			<PushButton bxml:id="btMessagerieP2P" buttonData="Messagerie peer to peer"/>
+<myApp:Menu title="Java Connect !" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml" xmlns:myApp="stri.java_connect.ihm" xmlns="org.apache.pivot.wtk"> 		
+	<Border styles="{padding:6}">
+		<TablePane styles="{horizontalSpacing:10, verticalSpacing:10}">
+			<columns>
+				<TablePane.Column width="1*"/>
+			</columns>
 			
-			<TablePane styles="{padding:8, horizontalSpacing:6, verticalSpacing:6}">
-        		<columns>
-            		<TablePane.Column width="1*" />
-        		</columns>
+			<TablePane.Row>
+				<Label text="Java Connect !" styles="{font:{size:14, bold:true}, horizontalAlignment:'center'}"/>
+			</TablePane.Row>
 			
-				<TablePane.Row height="-1">
-            		<Label text="blblblb"
-                	styles="{font:{size:14, bold:true}, verticalAlignment:'center'}" />
-        		</TablePane.Row>
-        	
-        	
-        	    <TablePane.Row height="1*">
-            		<SplitPane splitRatio="0.4">
-                		<left>
-                    		<Label text="test gauche"
-                    		styles="{font:{size:14, bold:true}, verticalAlignment:'center'}" />
-                		</left>
- 
-                		<right>
-                   			<Border styles="{padding:6, color:10}">
-                       			<Label text="test gauche"
-                    		styles="{font:{size:14, bold:true}, verticalAlignment:'center'}" />
-                    		</Border>
-                		</right>
-            		</SplitPane>
-        		</TablePane.Row>
- 
-        		<TablePane.Row height="-1">
-            		<BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'center'}">
-                			<Label text="%symbol" styles="{font:{bold:true}}" />
-                			<TextInput bxml:id="symbolTextInput" textSize="10"
-                    			maximumLength="8" />
-                    </BoxPane>
-                </TablePane.Row>
-        	</TablePane>
-		</Form.Section>
-	</Form>
+			<TablePane.Row height="-1">
+				<Separator/>
+			</TablePane.Row>
+			
+			<TablePane.Row>
+				<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+					<PushButton bxml:id="btConnexion" buttonData="Connexion" />
+				</BoxPane>
+			</TablePane.Row>
+                    
+                    
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btInscription" buttonData="Inscription" />
+                        </BoxPane>
+                    </TablePane.Row>                    
+                    
+                    
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btListeProfil" buttonData="Liste des profils"/>        
+                        </BoxPane>
+                    </TablePane.Row>                    
+                    
+                    
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btRechercherProfil" buttonData="Recherche d'un profil"/>        
+                        </BoxPane>
+                    </TablePane.Row>                     
+                   
+                   
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btModifProfil" buttonData="Modifier votre profil"/>           
+                        </BoxPane>
+                    </TablePane.Row>                    
+                
+                
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btMessagerieEmail" buttonData="Messagerie par mail"/>           
+                        </BoxPane>
+                    </TablePane.Row>  
+                    
+                    
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btMessagerieP2P" buttonData="Messagerie peer to peer"/>           
+                        </BoxPane>
+                    </TablePane.Row>
+                    
+                    
+                    <TablePane.Row>
+                        <BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+                            <PushButton bxml:id="btQuitter" buttonData="Fermer la fenêtre"/>           
+                        </BoxPane>
+                    </TablePane.Row>
+                </TablePane>
+    </Border>
 </myApp:Menu>

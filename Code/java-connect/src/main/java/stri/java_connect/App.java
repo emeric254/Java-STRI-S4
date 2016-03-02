@@ -24,22 +24,10 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-
-		DesktopApplicationContext.main(ConsultListeProfil.class, args);
-
-        System.out.println( "Init annuaire utilisateurs" );
         //
-        try
-        {
-			initAnnuaire();
-		}
-        catch (IOException e)
-        {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        //
-        System.out.println("END");
+		//DesktopApplicationContext.main(MenuPrincipal.class, args);
+        
+        
     }
     
     /**
@@ -57,7 +45,7 @@ public class App
         utilisateur.setNom("Remi BARBASTE");
         utilisateur.setTelephone("0123456798");
         utilisateur.setDateDiplome(Long.parseLong("2015"));
-        utilisateur.addCompetence("Mthématiques");
+        utilisateur.addCompetence("Mathématiques");
         String reponse = client.inscription(utilisateur);
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
