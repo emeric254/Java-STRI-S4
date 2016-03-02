@@ -79,6 +79,14 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
+	 * @return
+	 */
+	public static String requeteDeconexion(String courriel)
+	{
+		return supprimerMethod + utilisateursURI + "/" + courriel;
+	}
+	
+	/**
 	 * @param idmsg
 	 * @return
 	 */
@@ -98,6 +106,16 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	{
 		if(ControlleurProtocole.requeteURI(requete).startsWith(messagerieURI + "/"))
 			return CourrielValidateur.valider(ControlleurProtocole.requeteURI(requete).replace(messagerieURI + "/", ""));
+		return false;
+	}
+	
+	/**
+	 * @return
+	 */
+	public static boolean validerRequeteDeconexion(String requete)
+	{
+		if (ControlleurProtocole.requeteURI(requete).startsWith(utilisateursURI + "/"))
+			return CourrielValidateur.valider(ControlleurProtocole.requeteURI(requete).replace(utilisateursURI + "/", ""));
 		return false;
 	}
 

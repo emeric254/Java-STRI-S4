@@ -28,17 +28,21 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 			{
 				try
 				{
+					System.out.println("debug " + requete);
 					String temp = cl.communiquer(requete);
 					if (ProtocoleGenerique.isOk(temp))
 					{
 						utilisateur = new Utilisateur();
-						utilisateur.fromJSONString(ProtocoleGenerique.extraireDonnees(temp));
+						utilisateur.fromJSONString(ProtocoleGenerique.extraireJSONObject(temp).toString());
+						//
+						reponse = ProtocoleGenerique.ok();
 					}
 					else
 						reponse = temp;
 				}
 				catch (Exception e)
 				{
+					utilisateur = null;
 					reponse = ProtocoleGenerique.erreurServeur();
 				}
 			}
@@ -80,9 +84,11 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 			{
 				if (ProtocoleMessagerie.validerRequeteInscrireUtilisateur(requete))
 				{
-					if (utilisateur.getCourriel() == ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", ""))
+					System.err.println("debug " + ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", ""));
+					//
+					if (utilisateur.getCourriel().equals(ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", "")))
 					{
-						annuaire.ajoutUtilisateur(utilisateur.getCourriel(), ProtocoleGenerique.extraireDonnees(requete));
+						annuaire.ajoutUtilisateur(utilisateur.getCourriel(), ControlleurProtocole.requeteCorps(requete));
 						reponse = ProtocoleGenerique.ok();
 					}
 					else
@@ -90,13 +96,14 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 				}
 				else if (ProtocoleMessagerie.validerRequeteEnvoiMessageDiffere(requete))
 				{
-					String courriel = ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.utilisateursURI + "/", "");
+					String courriel = ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.messagerieURI + "/", "");
 					try
 					{
 						String temp = cl.communiquer(ProtocoleAnnuaire.requeteConsulterProfil(courriel));
 						if (ControlleurProtocole.reponseCode(temp) == 0)
 						{
 							annuaire.ajoutMessage(courriel, utilisateur.getCourriel(), ControlleurProtocole.requeteCorps(requete)); // TODO a verifier !
+							reponse = ProtocoleGenerique.ok();
 						}
 						else
 							reponse = ProtocoleGenerique.erreurRequete();
@@ -116,6 +123,10 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 				else if (ProtocoleMessagerie.validerRequeteSupprimerMessageManque(requete))
 				{
 					annuaire.supprimerMessageUtilisateur(utilisateur.getCourriel(), ControlleurProtocole.requeteURI(requete).replace(ProtocoleMessagerie.messagerieURI + "/", ""));
+				}
+				else if (ProtocoleMessagerie.validerRequeteDeconexion(requete))
+				{
+					//
 				}
 				else
 					reponse = ProtocoleMessagerie.erreurRequete();

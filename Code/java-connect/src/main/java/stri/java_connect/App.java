@@ -27,16 +27,24 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
+        /*
+        try {
+			initAnnuaire();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        */
         //
 		//DesktopApplicationContext.main(MenuPrincipal.class, args);
 		//
 		//
         System.out.println( "Test msg indirect" );
         System.out.println("\n connexion sur remi");
-        ClientMessagerie indirect = new ClientMessagerie();
+        ClientMessagerie indirect = new ClientMessagerie(23456);
         try {
 			indirect.connexion("remi.barbaste@univ-tlse3.fr", "remimdp");
-        indirect.inscription("remi.barbaste@univ-tlse3.fr", "127.0.0.1", 12347);
+        indirect.inscription("remi.barbaste@univ-tlse3.fr", "127.0.0.1", 23456);
         indirect.envoiMessageDiffere("emeric.tosi@univ-tlse3.fr", "il faut pas dormir la nuit");
         System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
         System.out.println("details de l'utilisateur remi qui est connecte : " + indirect.consulterDetailsUtilisateurConnecte("remi.barbaste@univ-tlse3.fr"));
@@ -47,10 +55,10 @@ public class App
 		}
         indirect.deconnexion();
         System.out.println("\n connexion sur emeric");
-        indirect = new ClientMessagerie();
+        indirect = new ClientMessagerie(23456);
         try {
         indirect.connexion("emeric.tosi@univ-tlse3.fr", "emericmdp");
-        indirect.inscription("emeric.tosi@univ-tlse3.fr", "127.0.0.1", 12347);
+        indirect.inscription("emeric.tosi@univ-tlse3.fr", "127.0.0.1", 23457);
         System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
 			System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
 		} catch (IOException e1) {
@@ -59,18 +67,7 @@ public class App
 		}
         indirect.deconnexion();
         //
-        System.out.println( "Test msg direct" );
-        ClientMessagerieDirecte direct = new ClientMessagerieDirecte();
-        direct.start();
-        // TODO pour test :
-		Client cltest = new Client(12347);
-		try {
-			cltest.communiquer("ceci est un test de message direct");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		cltest.fermer();
+
 		//
     }
 

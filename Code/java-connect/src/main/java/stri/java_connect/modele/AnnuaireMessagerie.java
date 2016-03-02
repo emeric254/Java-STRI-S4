@@ -96,8 +96,9 @@ public class AnnuaireMessagerie
 	{
 		ArrayDeque<Message> liste = messages.get(courriel);
 		String temp = "{ 'liste' : [";
-		for (Message msg : liste)
-			temp += msg.toString() + ",";
+		if (liste != null)
+			for (Message msg : liste)
+				temp += msg.toString() + ",";
 		if (temp.endsWith(",")) // TODO a verifier
 			temp = temp.substring(0, temp.length()-1); // TODO a verifier
 		temp += "] }";

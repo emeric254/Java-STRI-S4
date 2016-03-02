@@ -14,7 +14,6 @@ package stri.java_connect.client;
 import java.io.IOException;
 import java.util.Date;
 
-import stri.java_connect.modele.Utilisateur;
 import stri.java_connect.protocol.ProtocoleMessagerie;
 import stri.java_connect.utils.MD5Hasher;
 
@@ -55,9 +54,9 @@ public class ClientMessagerie
 	 */
 	public String inscription(String courriel, String adresse, int port) throws IOException //sinscrire au serv param string address int port
 	{
-		return client.communiquer(ProtocoleMessagerie.requeteInscrireUtilisateur(courriel, adresse + port));
+		return client.communiquer(ProtocoleMessagerie.requeteInscrireUtilisateur(courriel, adresse + ":" + port));
 	}
-	
+
 	/**
 	 * Connecter a un compte utilisateur
 	 * 
@@ -70,7 +69,7 @@ public class ClientMessagerie
 	{
 		return client.communiquer(ProtocoleMessagerie.requeteConnexion(courriel, mdp));
 	}
-	
+
 	/**
 	 * Connecter a un compte utilisateur avec mot de passe qui sera envoye sous forme de hash MD5 
 	 * 

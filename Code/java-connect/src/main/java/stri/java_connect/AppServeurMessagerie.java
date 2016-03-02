@@ -4,8 +4,7 @@ import stri.java_connect.server.ServeurMessagerie;
 
 public class AppServeurMessagerie 
 {
-	private final static int portDefaut = 12340;
-
+	private final static int portDefaut = 23456;
     /**
      * Main AppServeurMessagerie.java
      * 
@@ -25,7 +24,7 @@ public class AppServeurMessagerie
         System.out.println( "Lancement du serveur de messagerie sur le port " + port);
         //
         //lancer le serveur
-        new ServeurMessagerie(port);
+        new ServeurMessagerie(port).start();
         //
         System.out.println("Fin");
 	}
