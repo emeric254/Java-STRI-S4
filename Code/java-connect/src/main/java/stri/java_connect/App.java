@@ -27,14 +27,14 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-        /*
+        
         try {
 			initAnnuaire();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        */
+        /*
         //
 		//DesktopApplicationContext.main(MenuPrincipal.class, args);
 		//
@@ -66,7 +66,7 @@ public class App
 			e1.printStackTrace();
 		}
         indirect.deconnexion();
-        //
+        //*/
     }
 
     /**

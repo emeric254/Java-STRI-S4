@@ -148,16 +148,16 @@ public class IHM
 		do
         {
             temp = IHMUtilitaires.saisie("Entrez l'adresse mail du destinataire :");
-            try {
-				if (!CourrielValidateur.valider(temp) || !ProtocoleAnnuaire.isOk(client.consulterProfil(temp)))
+          //  try {
+				if (!CourrielValidateur.valider(temp) /*|| !ProtocoleAnnuaire.isOk(client.consulterProfil(temp))*/)
 				{
 					valide = "n";
 					System.out.println("/!\\ mail incorrect ! Recommencez.");
 				}
-			} catch (IOException e) {
+			//} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				//e.printStackTrace();
+			//}
         } while (!valide.equals("o"));
 		mail = temp;
 		
@@ -171,7 +171,7 @@ public class IHM
 	        indirect.envoiMessageDiffere(mail, message);
 	        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
 	        //System.out.println("details de l'utilisateur remi qui est connecte : " + indirect.consulterDetailsUtilisateurConnecte(utilisateur.getCourriel()));
-	        System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
+	       // System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -179,6 +179,26 @@ public class IHM
         indirect.deconnexion();
 	}
 	
+	/**
+	 * Afficher les message reçus en mode différé
+	 * 
+	 */
+	private void messagerieAfficherMailAttente()
+	{
+		IHMUtilitaires.cleanTerminal();
+		System.out.println(" = = = Messages reçus = = = ");
+		ClientMessagerie indirect = new ClientMessagerie(23456);
+        try {
+			indirect.connexion(utilisateur.getCourriel(), utilisateur.getMotDePasse());
+	        indirect.inscription(utilisateur.getCourriel(), "127.0.0.1", 23456);
+	        System.out.println(indirect.consulterListeMessagesManques().replace("{", "\n{"));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+        indirect.deconnexion();
+
+	}
 	/**
 	 * Afficher la menu de messagerie (directe ou indirecte)
 	 * 
@@ -194,6 +214,7 @@ public class IHM
 			//
 			System.out.println("\n =>  1 - Messagerie directe.");
 			System.out.println("\n =>  2 - Messagerie indirecte.");
+			System.out.println("\n =>  3 - Afficher les messages en attente.");
             System.out.println("\n =>  0 - Quitter.");
 			
 
@@ -209,6 +230,10 @@ public class IHM
             {
                 messagerieIndirecte();
             }
+	        else if ("3".equals(choix))
+	        {
+	        	messagerieAfficherMailAttente();
+	        }
 	        else
 	        {
 	        	System.out.println("Veuillez choisir quelque chose de valide !");
