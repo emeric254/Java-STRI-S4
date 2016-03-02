@@ -10,6 +10,7 @@ import org.apache.pivot.wtk.DesktopApplicationContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import stri.java_connect.client.ClientAnnuaire;
+import stri.java_connect.client.ClientMessagerie;
 import stri.java_connect.modele.Utilisateur;
 import stri.java_connect.protocol.ProtocoleAnnuaire;
 import stri.java_connect.utils.CourrielValidateur;
@@ -163,12 +164,19 @@ public class IHM
 		// Récupération du message
 		message = IHMUtilitaires.saisie("Entrez le message à envoyer :"); 
 		
-		/********************************************************************************
-		 * ******************************************************************************
-		 *   Faire quand thomas aura avancé l'appel à la fonction qui envoie le maiml ***
-		 *   ****************************************************************************
-		 *   ****************************************************************************
-		 */
+		ClientMessagerie indirect = new ClientMessagerie(23456);
+        try {
+			indirect.connexion(utilisateur.getCourriel(), utilisateur.getMotDePasse());
+	        indirect.inscription(utilisateur.getCourriel(), "127.0.0.1", 23456);
+	        indirect.envoiMessageDiffere(mail, message);
+	        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
+	        //System.out.println("details de l'utilisateur remi qui est connecte : " + indirect.consulterDetailsUtilisateurConnecte(utilisateur.getCourriel()));
+	        System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+        indirect.deconnexion();
 	}
 	
 	/**
