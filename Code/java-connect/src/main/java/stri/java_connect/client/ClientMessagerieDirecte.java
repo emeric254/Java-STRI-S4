@@ -13,7 +13,7 @@ import stri.java_connect.protocol.ControlleurProtocole;
  */
 public class ClientMessagerieDirecte extends Thread
 {
-	private final static int portDefaut = 12345;
+	private final static int portDefaut = 12347;
 
 	private ControlleurProtocole protoclecontrolleur;
 	private int port;

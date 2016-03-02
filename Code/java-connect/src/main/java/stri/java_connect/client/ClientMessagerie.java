@@ -23,7 +23,7 @@ import stri.java_connect.utils.MD5Hasher;
  */
 public class ClientMessagerie
 {
-	private final static int portDefaut = 12345;
+	private final static int portDefaut = 12340;
 	private Client client;
 	
 	/**

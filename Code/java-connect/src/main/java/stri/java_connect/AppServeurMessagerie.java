@@ -2,7 +2,7 @@ package stri.java_connect;
 
 public class AppServeurMessagerie 
 {
-	private final static int portDefaut = 12345;
+	private final static int portDefaut = 12340;
 
     /**
      * Main AppServeurMessagerie.java
@@ -22,10 +22,8 @@ public class AppServeurMessagerie
 		}
         System.out.println( "Lancement du serveur de messagerie sur le port " + port);
         //
-        // lien vers appServeur
-        //
-        //lancer le controleur
-        
+        //lancer le serveur
+        new ServeurMessagerie(port);
         //
         System.out.println("Fin");
 	}
