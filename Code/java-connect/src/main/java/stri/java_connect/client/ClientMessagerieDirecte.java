@@ -6,6 +6,7 @@ package stri.java_connect.client;
 import java.net.ServerSocket;
 
 import stri.java_connect.protocol.ControlleurProtocole;
+import stri.java_connect.protocol.ControlleurProtocoleMessagerie;
 
 /**
  * @author emeric

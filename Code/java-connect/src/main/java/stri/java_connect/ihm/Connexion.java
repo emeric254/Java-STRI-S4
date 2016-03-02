@@ -82,8 +82,7 @@ public class Connexion extends Dialog implements Bindable
                     errorLabel.setText("");
                     //Prompt.prompt("Pretending to submit...", Connexion.this);
                     // Traitement de la connexion
-                    reponse =   
-                    		getClient().connexion(mail,mdp);
+                    // reponse =  getClient().connexion(mail,mdp);
                     
                 }
                 else

@@ -1,5 +1,7 @@
 package stri.java_connect;
 
+import stri.java_connect.server.ServeurMessagerie;
+
 public class AppServeurMessagerie 
 {
 	private final static int portDefaut = 12340;

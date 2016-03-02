@@ -12,6 +12,7 @@
 package stri.java_connect.client;
 
 import java.io.IOException;
+import java.util.Date;
 
 import stri.java_connect.modele.Utilisateur;
 import stri.java_connect.protocol.ProtocoleMessagerie;
@@ -165,96 +166,7 @@ public class ClientMessagerie
 	public String supprimerMessageManque(String idmsg) throws IOException
 	{
 		return client.communiquer(ProtocoleMessagerie.requeteSupprimerMessageManque(idmsg));
-	}	
-	
-	/**
-	 * Valide la requete d'envoi de message differe
-	 * 
-	 * @param courriel le courriel du compte a supprimer
-	 * @return la reponse a cette requete
-	 * @throws IOException l'exception si la communication echoue
-	 */	
-	public String requeteEnvoiMessageDiffere(String requete) throws IOException
-	{
-		return client.communiquer(ProtocoleMessagerie.validerRequeteEnvoiMessageDiffere(requete));
 	}
-	
-	/**
-	 * Supprimer un compte/objet Utilisateur
-	 * 
-	 * @param courriel le courriel du compte a supprimer
-	 * @return la reponse a cette requete
-	 * @throws IOException l'exception si la communication echoue
-	 */	
-	public String requeteInscrireUtilisateur(String requete) throws IOException
-	{
-		return client.communiquer(ProtocoleMessagerie.validerRequeteInscrireUtilisateur(requete));
-	}
-	
-	/**
-	 * Supprimer un compte/objet Utilisateur
-	 * 
-	 * @param courriel le courriel du compte a supprimer
-	 * @return la reponse a cette requete
-	 * @throws IOException l'exception si la communication echoue
-	 */	
-	public String requeteConsulterListeUtilisateurConnectes(String requete) throws IOException
-	{
-		return client.communiquer(ProtocoleMessagerie.validerRequeteConsulterListeUtilisateurConnectes(requete));
-	}
-
-	
-	/**
-	 * Supprimer un compte/objet Utilisateur
-	 * 
-	 * @param courriel le courriel du compte a supprimer
-	 * @return la reponse a cette requete
-	 * @throws IOException l'exception si la communication echoue
-	 */	
-	public String requeteConsulterDetailsUtilisateurConnecte(String requete) throws IOException
-	{
-		return client.communiquer(ProtocoleMessagerie.validerRequeteConsulterDetailsUtilisateurConnecte(requete));
-	}
-	
-	
-	/**
-	 * Supprimer un compte/objet Utilisateur
-	 * 
-	 * @param courriel le courriel du compte a supprimer
-	 * @return la reponse a cette requete
-	 * @throws IOException l'exception si la communication echoue
-	 */	
-	public String requeteConsulterListeMessagesManques(String requete) throws IOException
-	{
-		return client.communiquer(ProtocoleMessagerie.validerRequeteConsulterDetailsUtilisateurConnecte(requete));
-	}	
-
-	
-	/**
-	 * Supprimer un compte/objet Utilisateur
-	 * 
-	 * @param courriel le courriel du compte a supprimer
-	 * @return la reponse a cette requete
-	 * @throws IOException l'exception si la communication echoue
-	 */	
-	public String requeteConsulterDetailsMessagesManque(String requete) throws IOException
-	{
-		return client.communiquer(ProtocoleMessagerie.validerRequeteConsulterDetailsMessagesManque(requete));
-	}	
-	
-
-	
-	/**
-	 * Supprimer un compte/objet Utilisateur
-	 * 
-	 * @param courriel le courriel du compte a supprimer
-	 * @return la reponse a cette requete
-	 * @throws IOException l'exception si la communication echoue
-	 */	
-	public String requeteSupprimerMessageManque(String requete) throws IOException
-	{
-		return client.communiquer(ProtocoleMessagerie.validerRequeteSupprimerMessageManque(requete));
-	}	
 	
 	/**
 	 * Supprimer un compte/objet Utilisateur
@@ -265,7 +177,7 @@ public class ClientMessagerie
 	 */	
 	public String idMessageManqueURI(String requete) throws IOException
 	{
-		return client.communiquer(ProtocoleMessagerie.extraireIdMessageManqueURI(requete));
+		return ProtocoleMessagerie.extraireIdMessageManqueURI(requete);
 	}	
 
 	
@@ -279,19 +191,6 @@ public class ClientMessagerie
 	public String requeteMessageDirect(String requete) throws IOException
 	{
 		return client.communiquer(ProtocoleMessagerie.requeteMessageDirect(requete));
-	}	
-	
-	
-	/**
-	 * Supprimer un compte/objet Utilisateur
-	 * 
-	 * @param courriel le courriel du compte a supprimer
-	 * @return la reponse a cette requete
-	 * @throws IOException l'exception si la communication echoue
-	 */	
-	public String requeteSupprimerListeMessagesManques(String requete) throws IOException
-	{
-		return client.communiquer(ProtocoleMessagerie.validerRequeteSupprimerListeMessagesManques(requete));
 	}
 	
 	
@@ -302,9 +201,9 @@ public class ClientMessagerie
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */	
-	public String isMessageDirect(String requete) throws IOException
+	public boolean isMessageDirect(String requete) throws IOException
 	{
-		return client.communiquer(ProtocoleMessagerie.isMessageDirect(requete));
+		return ProtocoleMessagerie.isMessageDirect(requete);
 	}	
 	
 	
@@ -317,7 +216,7 @@ public class ClientMessagerie
 	 */	
 	public String extraireTimestampMessageDirect(String requete) throws IOException
 	{
-		return client.communiquer(ProtocoleMessagerie.extraireTimestampMessageDirect(requete));
+		return ProtocoleMessagerie.extraireTimestampMessageDirect(requete);
 	}	
 	
 	
@@ -330,7 +229,7 @@ public class ClientMessagerie
 	 */	
 	public String extraireMessageMessageDirect(String requete) throws IOException
 	{
-		return client.communiquer(ProtocoleMessagerie.extraireMessageMessageDirect(requete));
+		return ProtocoleMessagerie.extraireMessageMessageDirect(requete);
 	}	
 		
 	
@@ -341,23 +240,10 @@ public class ClientMessagerie
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */	
-	public String extraireDateMessageDirect(String requete) throws IOException
+	public Date extraireDateMessageDirect(String requete) throws IOException
 	{
-		return client.communiquer(ProtocoleMessagerie.extraireDateMessageDirect(requete));
-	}	
-		
-	
-	/**
-	 * Supprimer un compte/objet Utilisateur
-	 * 
-	 * @param courriel le courriel du compte a supprimer
-	 * @return la reponse a cette requete
-	 * @throws IOException l'exception si la communication echoue
-	 */	
-	public String extraireDateMessageDirect(String requete) throws IOException
-	{
-		return client.communiquer(ProtocoleMessagerie.extraireDateMessageDirect(requete));
-	}	
+		return ProtocoleMessagerie.extraireDateMessageDirect(requete);
+	}
 
 	
 	/**

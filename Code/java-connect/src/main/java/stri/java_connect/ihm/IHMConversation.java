@@ -50,7 +50,7 @@ Filer message dans clientMessagerie
 	private void envoyerMessage(String Message)
 	{
 		///// Faire appel à la fonction qui envoie le message
-		emettre...
+		// TODO emettre...
 	}
 	
 	/**
@@ -59,6 +59,8 @@ Filer message dans clientMessagerie
 	private String recevoirMessage()
 	{
 		//retourne le message recu pour  ensuite l'afficher 
+		// TODO recevoir
 		//return String
+		return null;
 	}
 }
