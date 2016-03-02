@@ -26,10 +26,36 @@ public class App
         System.out.println( "Hello World!" );
         //
 		//DesktopApplicationContext.main(MenuPrincipal.class, args);
-        
-        
+		//
+		//
+        System.out.println( "Test msg indirect" );
+        System.out.println("\n connexion sur remi");
+        ClientMessagerie indirect = new ClientMessagerie();
+        indirect.connexion("remi.barbaste@univ-tlse3.fr", "remimdp");
+        indirect.inscription("remi.barbaste@univ-tlse3.fr", "127.0.0.1", 12347);
+        indirect.envoiMessageDiffere("emeric.tosi@univ-tlse3.fr", "il faut pas dormir la nuit");
+        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
+        System.out.println("details de l'utilisateur remi qui est connecte : " + indirect.consulterDetailsUtilisateurConnecte("remi.barbaste@univ-tlse3.fr"));
+        System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
+        indirect.deconnexion();
+        System.out.println("\n connexion sur emeric");
+        indirect = new ClientMessagerie();
+        indirect.connexion("emeric.tosi@univ-tlse3.fr", "emericmdp");
+        indirect.inscription("emeric.tosi@univ-tlse3.fr", "127.0.0.1", 12347);
+        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
+        System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
+        indirect.deconnexion();
+        //
+        System.out.println( "Test msg direct" );
+        ClientMessagerieDirecte direct = new ClientMessagerieDirecte();
+        direct.start();
+        // TODO pour test :
+		Client cltest = new Client(12347);
+		cltest.communiquer("ceci est un test de message direct");
+		cltest.fermer();
+		//
     }
-    
+
     /**
      * Initialiser l'annuaire du serveur
      * 

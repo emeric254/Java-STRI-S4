@@ -90,19 +90,18 @@ public class ClientMessagerie
 	 * @throws IOException l'exception si la communication echoue
 	 * 
 	 */
-	public String envoiMessageDiffere(String courriel, String mdp) throws IOException
+	public String envoiMessageDiffere(String courriel, String msg) throws IOException
 	{
-		return client.communiquer(ProtocoleMessagerie.requeteEnvoiMessageDiffere(courriel, mdp));
+		return client.communiquer(ProtocoleMessagerie.requeteEnvoiMessageDiffere(courriel, msg));
 	}
-	
+
 	/**
 	 * Consulter la liste des utilisateurs connectes
 	 * 
-	 * @param courriel le courriel du compte a consulter
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */
-	public String consulterListeUtilisateurConnectes(String courriel) throws IOException
+	public String consulterListeUtilisateurConnectes() throws IOException
 	{
 		return client.communiquer(ProtocoleMessagerie.requeteConsulterListeUtilisateurConnectes());
 	}
@@ -122,11 +121,10 @@ public class ClientMessagerie
 	/**
 	 * Consulter liste des messages manques
 	 * 
-	 * @param courriel le courriel du compte a consulter
 	 * @return la reponse a cette requete
 	 * @throws IOException l'exception si la communication echoue
 	 */
-	public String consulterListeMessagesManques(String courriel) throws IOException
+	public String consulterListeMessagesManques() throws IOException
 	{
 		return client.communiquer(ProtocoleMessagerie.requeteConsulterListeMessagesManques());
 	}

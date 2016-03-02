@@ -18,15 +18,15 @@ public class ClientMessagerieDirecte extends Thread
 	private ControlleurProtocole protoclecontrolleur;
 	private int port;
 
-    public ClientMessagerieDirecte(ControlleurProtocole pProtocolServer)
+    public ClientMessagerieDirecte()
     {
-    	this(pProtocolServer, portDefaut);
+    	this(portDefaut);
     }
 
-	public ClientMessagerieDirecte(ControlleurProtocole pProtocolServer, int pPort)
+	public ClientMessagerieDirecte(int pPort)
 	{
 		port = pPort;
-		protoclecontrolleur = pProtocolServer;
+		protoclecontrolleur = new ControlleurProtocoleMessagerie(null);
 	}
 
 	@Override
