@@ -6,7 +6,7 @@ package stri.java_connect.ihm;
 import java.io.IOException;
 import java.util.Calendar;
 
-import org.apache.pivot.wtk.DesktopApplicationContext;
+//import org.apache.pivot.wtk.DesktopApplicationContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import stri.java_connect.client.ClientAnnuaire;
@@ -158,7 +158,7 @@ public class IHM
 				// TODO Auto-generated catch block
 				//e.printStackTrace();
 			//}
-        } while (!valide.equals("o"));
+        } while (!"o".equals(valide));
 		mail = temp;
 		
 		// Récupération du message
@@ -224,7 +224,7 @@ public class IHM
 
 	        if ("1".equals(choix))
 	        {
-	           	
+	      		new IHMConversation(utilisateur.getNom()).messagerieDirecte();
 	        }
 	        else if ("2".equals(choix))
             {
