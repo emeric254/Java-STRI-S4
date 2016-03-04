@@ -2,7 +2,7 @@ package stri.java_connect.ihm;
 
 import java.net.SocketException;
 
-import org.apache.pivot.wtk.DesktopApplicationContext;
+//import org.apache.pivot.wtk.DesktopApplicationContext;
 
 import stri.java_connect.client.ClientMessagerieDirecte;
 import stri.java_connect.utils.IHMUtilitaires;
@@ -21,7 +21,7 @@ public class IHMConversation
 	 * Lancer une conversation en P2P
 	 * 
 	 */
-	private void MessagerieDirecte()
+	private void messagerieDirecte()
 	{
 		//ouverture d'une fenêtre de conversation 
 		//String[] args = {nom,mail};
@@ -57,12 +57,12 @@ public class IHMConversation
 			{
 				System.out.println();
 				temp = IHMUtilitaires.saisie("Entrez votre message ou <!q> pour quitter : ");
-				if (!temp.equals("!q"))
+				if (!"!q".equals(temp))
 				{
 					String addrport = IHMUtilitaires.saisie("Entrez <ipv4:port> : ");
 					cldirect.emettreMsg(addrport, nom + "@[" + addrport + "] : " + temp);
 				}
-			} while (!temp.equals("!q"));
+			} while (!"!q".equals(temp));
 		}
 	}
 }
