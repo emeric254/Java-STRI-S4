@@ -2,7 +2,7 @@ package stri.java_connect;
 
 import java.io.*;
 import java.net.*;
-import org.apache.pivot.wtk.DesktopApplicationContext;
+//import org.apache.pivot.wtk.DesktopApplicationContext;
 
 import stri.java_connect.client.*;
 import stri.java_connect.modele.*;
