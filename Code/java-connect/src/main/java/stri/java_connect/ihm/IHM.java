@@ -5,9 +5,12 @@ package stri.java_connect.ihm;
 
 import java.io.IOException;
 import java.util.Calendar;
+
+//import org.apache.pivot.wtk.DesktopApplicationContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import stri.java_connect.client.ClientAnnuaire;
+import stri.java_connect.client.ClientMessagerie;
 import stri.java_connect.modele.Utilisateur;
 import stri.java_connect.protocol.ProtocoleAnnuaire;
 import stri.java_connect.utils.CourrielValidateur;
@@ -129,7 +132,116 @@ public class IHM
 			System.out.println("Erreur dans l'affichage d'un element");
 		}
 	}
+	
+	/**
+	 * Envoie d'un message en mode hors ligne
+	 * 
+	 */
+	private void messagerieIndirecte()
+	{
+		String mail = "";
+		String message = "";
+		String temp = "";
+		String valide = "o";
+        
+		//Récupération du mail
+		do
+        {
+            temp = IHMUtilitaires.saisie("Entrez l'adresse mail du destinataire :");
+          //  try {
+				if (!CourrielValidateur.valider(temp) /*|| !ProtocoleAnnuaire.isOk(client.consulterProfil(temp))*/)
+				{
+					valide = "n";
+					System.out.println("/!\\ mail incorrect ! Recommencez.");
+				}
+			//} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			//}
+        } while (!"o".equals(valide));
+		mail = temp;
+		
+		// Récupération du message
+		message = IHMUtilitaires.saisie("Entrez le message à envoyer :"); 
+		
+		ClientMessagerie indirect = new ClientMessagerie(23456);
+        try {
+			indirect.connexion(utilisateur.getCourriel(), utilisateur.getMotDePasse());
+	        indirect.inscription(utilisateur.getCourriel(), "127.0.0.1", 23456);
+	        indirect.envoiMessageDiffere(mail, message);
+	        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
+	        //System.out.println("details de l'utilisateur remi qui est connecte : " + indirect.consulterDetailsUtilisateurConnecte(utilisateur.getCourriel()));
+	       // System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+        indirect.deconnexion();
+	}
+	
+	/**
+	 * Afficher les message reçus en mode différé
+	 * 
+	 */
+	private void messagerieAfficherMailAttente()
+	{
+		IHMUtilitaires.cleanTerminal();
+		System.out.println(" = = = Messages reçus = = = ");
+		ClientMessagerie indirect = new ClientMessagerie(23456);
+        try {
+			indirect.connexion(utilisateur.getCourriel(), utilisateur.getMotDePasse());
+	        indirect.inscription(utilisateur.getCourriel(), "127.0.0.1", 23456);
+	        System.out.println(indirect.consulterListeMessagesManques().replace("{", "\n{"));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+        indirect.deconnexion();
 
+	}
+	/**
+	 * Afficher la menu de messagerie (directe ou indirecte)
+	 * 
+	 */
+	private void afficherMenuMessagerie()
+	{
+		String choix = "";
+		IHMUtilitaires.cleanTerminal();
+		do
+		{
+			System.out.println(" = = = Menu messagerie (vous etes connecté) = = = ");
+			System.out.println("Bonjour " + utilisateur.getNom() + "\n Saisissez votre choix :");
+			//
+			System.out.println("\n =>  1 - Messagerie directe.");
+			System.out.println("\n =>  2 - Messagerie indirecte.");
+			System.out.println("\n =>  3 - Afficher les messages en attente.");
+            System.out.println("\n =>  0 - Quitter.");
+			
+
+            choix = IHMUtilitaires.saisie();
+
+            IHMUtilitaires.cleanTerminal();
+
+	        if ("1".equals(choix))
+	        {
+	      		new IHMConversation(utilisateur.getNom()).messagerieDirecte();
+	        }
+	        else if ("2".equals(choix))
+            {
+                messagerieIndirecte();
+            }
+	        else if ("3".equals(choix))
+	        {
+	        	messagerieAfficherMailAttente();
+	        }
+	        else
+	        {
+	        	System.out.println("Veuillez choisir quelque chose de valide !");
+	        }
+        } while (! "0".equals(choix));
+	}
+	
+	
 	/**
 	 * Menu principal une fois connecte
 	 * 
@@ -149,7 +261,7 @@ public class IHM
             System.out.println("\n =>  4 - Consulter les détails d'un étudiant.");
             System.out.println("\n =>  5 - Chercher un étudiant.");
             System.out.println("\n =>  6 - Suppression de votre profil.");
-            //System.out.println("\n =>  7 - Messagerie.");
+            System.out.println("\n =>  7 - Messagerie.");
             System.out.println("\n =>  0 - Quitter.");
 
 	        choix = IHMUtilitaires.saisie();
@@ -201,6 +313,11 @@ public class IHM
 	        	{
 	            	System.err.println("Erreur fatale lors de la suppression de votre profil !");
 				}
+	        }
+	        else if ("7".equals(choix))
+	        {
+	        	choix="0";
+	        	afficherMenuMessagerie();
 	        }
 	        else if ("0".equals(choix))
 	        {

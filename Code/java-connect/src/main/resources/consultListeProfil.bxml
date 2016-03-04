@@ -1,0 +1,14 @@
+<myApp:ConsultListeProfil title="Java connect !" maximized="true"
+	xmlns:bxml="http://pivot.apache.org/bxml" 
+	xmlns:myApp="stri.java_connect.ihm" 
+	xmlns="org.apache.pivot.wtk"> 
+	
+	<Form>
+  		<Form.Section>
+			<Label text="Liste des profils"/>
+			<ListView bxml:id="listeProfil"/>
+			
+			<PushButton bxml:id="btRetour" buttonData="Retour"/>
+		</Form.Section>
+	</Form>
+</myApp:ConsultListeProfil>
