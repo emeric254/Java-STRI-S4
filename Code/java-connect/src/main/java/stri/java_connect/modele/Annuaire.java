@@ -86,6 +86,10 @@ public class Annuaire
 		annuaire.remove(courriel);
 	}
 	
+	/**
+	 * Suppression de l'utilisateur
+	 * @param u l'utilisateur
+	 */
 	public synchronized void suppresionUtilisateur(Utilisateur u)
 	{
 		suppresionUtilisateur(u.getCourriel());
