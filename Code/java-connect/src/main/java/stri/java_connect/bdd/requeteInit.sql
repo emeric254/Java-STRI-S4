@@ -1,6 +1,10 @@
 /* Suppression des tables existantes */
 
 drop table if exists utilisateur;
+drop table if exists competence;
+drop table if exists posseder;
+drop table if exists envoyerMessage;
+drop table if exists aimer;
 
 create table utlisateur (courriel string primary key not null,
                         motDePasse string not null,
