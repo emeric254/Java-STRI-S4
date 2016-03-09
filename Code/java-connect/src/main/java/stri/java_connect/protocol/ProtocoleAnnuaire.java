@@ -13,6 +13,7 @@ import stri.java_connect.utils.JSONValidateur;
 public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 {
 	private final static String profilsURI = "/profils";
+	private final static String competencesURI = "/compete";
 	
 	//-------------------------------------------------------------------------
 	// constructeurs de requete
@@ -44,9 +45,20 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	 * @param utilisateurJson le profil utilisateur a inscrire
 	 * @return la requete
 	 */
-	public static String requeteInscrire(String utilisateurJson)
+	public static String requeteInscrireProfil(String utilisateurJson)
 	{
-		return inscrireMethod + ";" + utilisateurJson;
+		return inscrireMethod + profilsURI + " ;" + utilisateurJson;
+	}
+
+	/**
+	 * Requete d'inscription d'un profil utilisateur
+	 * 
+	 * @param utilisateurJson le profil utilisateur a inscrire
+	 * @return la requete
+	 */
+	public static String requeteInscrireLike(String utilisateurJson, String competence)
+	{
+		return inscrireMethod + profilsURI + competencesURI + "/" + competence + " ; ";
 	}
 
 	/**
@@ -131,15 +143,28 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	}
 	
 	/**
-	 * Valider la requete de'inscription
+	 * Valider la requete de l'inscription d'un profil
 	 * 
 	 * @param requete la requete a valider
 	 * @return true si c'est une requete d'inscription valide, false sinon
 	 */
-	public static boolean validerRequeteInscrire(String requete)
+	public static boolean validerRequeteInscrireProfil(String requete)
 	{
 		// TODO valider modele aussi ?
-		return JSONValidateur.valider(ControlleurProtocole.requeteCorps(requete));
+		return ControlleurProtocole.requeteURI(requete).equals(profilsURI) &&
+				JSONValidateur.valider(ControlleurProtocole.requeteCorps(requete));
+	}
+	
+	/**
+	 * Valider la requete de l'inscription d'un like
+	 * 
+	 * @param requete la requete a valider
+	 * @return true si c'est une requete d'inscription valide, false sinon
+	 */
+	public static boolean validerRequeteInscrireLike(String requete)
+	{
+		return ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + competencesURI + "/" ) &&
+				JSONValidateur.valider(ControlleurProtocole.requeteCorps(requete));
 	}
 	
 	/**

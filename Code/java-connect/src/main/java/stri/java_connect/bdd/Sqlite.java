@@ -3,6 +3,10 @@ package stri.java_connect.bdd;
 import java.io.File;
 import java.sql.*;
 
+/**
+ * @author thomas
+ *
+ */
 public class Sqlite
 {
 	private String nomBDD;

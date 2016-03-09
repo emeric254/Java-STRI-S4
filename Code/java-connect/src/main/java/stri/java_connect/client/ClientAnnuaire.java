@@ -46,7 +46,7 @@ public class ClientAnnuaire
 	 */
 	public String inscription(Utilisateur u) throws IOException
 	{
-		return client.communiquer(ProtocoleAnnuaire.requeteInscrire(u.toString()));
+		return client.communiquer(ProtocoleAnnuaire.requeteInscrireProfil(u.toString()));
 	}
 
 	/**
