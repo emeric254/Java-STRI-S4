@@ -7,6 +7,10 @@ import org.apache.pivot.collections.*;
 import org.apache.pivot.util.*;
 import org.apache.pivot.wtk.*;
 
+/**
+ * @author emeric
+ *
+ */
 public class AffichageProfil extends Window implements Application, Bindable
 {
 	private Window window;
@@ -35,6 +39,9 @@ public class AffichageProfil extends Window implements Application, Bindable
     private PushButton cancelButton;
     private Label errorLabel;
     
+   	/**
+   	 * 
+   	 */
    	public AffichageProfil()
    	{
    		//

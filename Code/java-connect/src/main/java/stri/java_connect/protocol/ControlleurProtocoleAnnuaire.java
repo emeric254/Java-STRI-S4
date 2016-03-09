@@ -16,7 +16,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 	private Annuaire annuaire;
 	
 	/**
-	 * Creation du controlleur de protocole Annuaire
+	 * Creation du controleur de protocole Annuaire
 	 * 
 	 * @param a un objet Annuaire deja existant
 	 */
