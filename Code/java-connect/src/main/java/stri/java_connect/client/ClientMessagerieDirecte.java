@@ -12,7 +12,7 @@ import java.net.SocketException;
 import stri.java_connect.protocol.ProtocoleMessagerie;
 
 /**
- * @author emeric
+ * @author emeric, thomas
  *
  */
 public class ClientMessagerieDirecte extends Thread
@@ -24,16 +24,28 @@ public class ClientMessagerieDirecte extends Thread
 	private byte[] temp = new byte[bufferSize];
 	private boolean fini = false;
 
+	/**
+	 * Creation d'un socket sur le port par defaut
+	 * @throws SocketException si le socket ne peut pas s'ouvrir
+	 */
 	public ClientMessagerieDirecte() throws SocketException
 	{
 		this(portDefaut);
 	}
 
+	/**
+	 * Creation d'un objet ClientMessagerieDirecte sur un port fournit
+	 * @param pPort
+	 * @throws SocketException
+	 */
 	public ClientMessagerieDirecte(int pPort) throws SocketException
 	{
 		socket = new DatagramSocket(pPort);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run()
 	{
@@ -53,7 +65,12 @@ public class ClientMessagerieDirecte extends Thread
 		}
 	}
 
-	// TODO
+
+	/**
+	 * Permet l'envoi des messages avec l'adresse et le port sur une variable
+	 * @param addrport
+	 * @param msg
+	 */
 	public void emettreMsg(String addrport, String msg)
 	{
 		String addr = addrport.split(":")[0];
@@ -62,6 +79,12 @@ public class ClientMessagerieDirecte extends Thread
 	}
 
 	// TODO
+	/**
+	 * Permet l'envoi des messages avec l'adresse et le port separe
+	 * @param addr
+	 * @param port
+	 * @param msg
+	 */
 	public void emettreMsg(String addr, int port, String msg)
 	{
 		String msgenvoi = ProtocoleMessagerie.requeteMessageDirect(msg);
@@ -83,6 +106,9 @@ public class ClientMessagerieDirecte extends Thread
 		}
 	}
 	
+	/**
+	 * Deconnexion, fermeture du socket
+	 */
 	public void deconnexion()
 	{
 		socket.close();

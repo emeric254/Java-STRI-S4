@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package stri.java_connect.client;
 
 import java.io.*;

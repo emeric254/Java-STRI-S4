@@ -1,14 +1,4 @@
-	
-	//appeler classe client fonction lancer serv écoute
-	//thread serv thread com autres gens initier co qui call classe client normale pour init vers classe messagerie
-	//serv écoute dans client messagerie
-	//au lieu de co affi, utiliser truc message indirecte
-	//connexion, requete envoi mess, requete inscrire user (se co au server) apparaitre co dans annuaire serv, requete mess différé envoi message
-	// idutilisateur socket + port
 
-/**
- * 
- */
 package stri.java_connect.client;
 
 import java.io.IOException;
