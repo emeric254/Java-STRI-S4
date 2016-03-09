@@ -224,7 +224,7 @@ public class IHM
 
 	        if ("1".equals(choix))
 	        {
-	      		new IHMConversation(utilisateur.getNom()).messagerieDirecte();
+	      		new IHMConversation(utilisateur.getNom());
 	        }
 	        else if ("2".equals(choix))
             {

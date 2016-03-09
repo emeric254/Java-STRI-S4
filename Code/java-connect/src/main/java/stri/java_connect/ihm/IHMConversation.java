@@ -15,6 +15,7 @@ public class IHMConversation
 	{
 		super();
 		this.nom = nomSource;
+		messagerieDirecte();
 	}
 
 	/**
