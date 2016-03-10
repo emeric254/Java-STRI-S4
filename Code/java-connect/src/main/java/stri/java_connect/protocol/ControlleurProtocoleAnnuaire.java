@@ -107,7 +107,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 	{
 		String reponse = ProtocoleAnnuaire.erreurServeur();
 
-		if (ProtocoleAnnuaire.validerRequeteInscrire(requete))
+		if (ProtocoleAnnuaire.validerRequeteInscrireProfil(requete))
 		{
 			Utilisateur u = new Utilisateur();
 			u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
@@ -116,18 +116,18 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 			{
 				reponse = ProtocoleAnnuaire.erreurInterdit();
 			}
-			/*
-			// TODO inscrire like sur une competence d'un utilisateur
-			else if (ProtocoleAnnuaire.validerRequeteInscrireLike(requete))
-			{
-			}
-			*/
 			else
 			{
 				annuaire.ajoutUtilisateur(utilisateur = u);
 				reponse = ProtocoleAnnuaire.ok(utilisateur.toString());
 			}
 		}
+		/*
+		// TODO inscrire like sur une competence d'un utilisateur
+		else if (ProtocoleAnnuaire.validerRequeteInscrireLike(requete))
+		{
+		}
+		*/
 		else
 			reponse = ProtocoleAnnuaire.erreurRequete();
 		

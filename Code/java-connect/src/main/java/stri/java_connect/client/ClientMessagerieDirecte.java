@@ -11,6 +11,7 @@ import java.net.SocketException;
 
 import stri.java_connect.protocol.ProtocoleMessagerie;
 
+
 /**
  * @author emeric, thomas
  *
@@ -90,12 +91,7 @@ public class ClientMessagerieDirecte extends Thread
 		String msgenvoi = ProtocoleMessagerie.requeteMessageDirect(msg);
 		byte[] buf = msgenvoi.getBytes();
 		DatagramPacket pac = null;
-		try {
-			pac = new DatagramPacket(buf, buf.length, new InetSocketAddress(addr, port));
-		} catch (SocketException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		pac = new DatagramPacket(buf, buf.length, new InetSocketAddress(addr, port));
 		try
 		{
 			socket.send(pac);
