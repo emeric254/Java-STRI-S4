@@ -7,75 +7,78 @@ import org.junit.Test;
 
 public class ClientAnnuaireTest
 {
-
+	private static String failed = "Not yet implemented";
+	
 	@Ignore
 	@Test
 	public void testClientAnnuaire()
 	{
-		fail("Not yet implemented");
+		ClientAnnuaire c = new ClientAnnuaire();
+		assertNotNull(c);
+		// TODO continuer ce cas
 	}
 
 	@Ignore
 	@Test
 	public void testClientAnnuaireInt()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 	@Ignore
 	@Test
 	public void testInscription()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 	@Ignore
 	@Test
 	public void testConnexion()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 	@Ignore
 	@Test
 	public void testConnexionMD5()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 	@Ignore
 	@Test
 	public void testConsulterProfils()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 	@Ignore
 	@Test
 	public void testConsulterProfil()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 	@Ignore
 	@Test
 	public void testModificationProfil()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 	@Ignore
 	@Test
 	public void testSuppressionProfil()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 	@Ignore
 	@Test
 	public void testDeconnexion()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 }

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class ClientTest
 {
+	private static String failed = "Not yet implemented";
 
 	@Ignore
 	@Test
@@ -21,14 +22,14 @@ public class ClientTest
 	@Test
 	public void testCommuniquer()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 	@Ignore
 	@Test
 	public void testFermer()
 	{
-		fail("Not yet implemented");
+		fail(failed);
 	}
 
 }
