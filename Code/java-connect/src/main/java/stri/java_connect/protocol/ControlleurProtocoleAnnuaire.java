@@ -26,6 +26,204 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		annuaire = a;
 	}
 
+	
+	/**
+	 * Traiter une requete de connexion
+	 * 
+	 * @param requete
+	 * @return
+	 */
+	public String traiterRequeteConnexion(String requete)
+	{
+		String reponse = ProtocoleAnnuaire.erreurServeur();
+
+		if (ProtocoleAnnuaire.validerRequeteConnexion(requete))
+		{
+			String identifiants = ControlleurProtocole.requeteURI(requete);
+			String courriel = identifiants.split(":")[0];
+			
+			if (annuaire.existeUtilisateur(courriel) && utilisateur == null)
+			{
+				utilisateur = annuaire.getUtilisateur(courriel);
+				if (utilisateur.getMotDePasse().equals(identifiants.substring(courriel.length()+1)))
+				{
+					reponse = ProtocoleAnnuaire.ok(utilisateur.toString());
+				}
+				else
+				{
+					utilisateur = null;
+					reponse = ProtocoleAnnuaire.erreurInterdit();
+				}
+			}
+			else
+			{
+				utilisateur = null;
+				reponse = ProtocoleAnnuaire.erreurInterdit();
+			}
+		}
+		else
+			reponse = ProtocoleAnnuaire.erreurRequete();
+		
+		return reponse;
+	}
+	
+	/**
+	 * Traiter une requete de consultation
+	 * 
+	 * @param requete
+	 * @return
+	 */
+	public String traiterRequeteConsulter(String requete)
+	{
+		String reponse = ProtocoleAnnuaire.erreurServeur();
+
+		if (ProtocoleAnnuaire.validerRequeteConsulterProfils(requete))
+		{
+			if (utilisateur != null)
+				reponse = ProtocoleAnnuaire.ok(annuaire.getArraySecuriseTousUtilisateursUtilisateur().toString());
+			else
+				reponse = ProtocoleAnnuaire.ok(annuaire.getArraySecuriseTousUtilisateursAnonyme().toString());
+		}
+		else if (ProtocoleAnnuaire.validerRequeteConsulterProfil(requete))
+		{
+			// TODO remplacer ça par fonction dans ProtocoleAnnuaire :
+			String courriel = ControlleurProtocole.requeteURI(requete).replace("/profils/", "");
+			
+			if (annuaire.existeUtilisateur(courriel))
+			{
+				Utilisateur temp = annuaire.getUtilisateur(courriel);
+				
+				if(utilisateur != null)
+					reponse = ProtocoleAnnuaire.ok(temp.toStringUtilisateur());
+				else
+					reponse = ProtocoleAnnuaire.ok(temp.toStringAnonyme());
+			}
+			else
+				reponse = ProtocoleAnnuaire.erreurRequete();
+		}
+		else
+			reponse = ProtocoleAnnuaire.erreurRequete();
+		
+		return reponse;
+	}
+	
+	/**
+	 * Traiter une requete d'inscription
+	 * 
+	 * @param requete
+	 * @return
+	 */
+	public String traiterRequeteInscrire(String requete)
+	{
+		String reponse = ProtocoleAnnuaire.erreurServeur();
+
+		if (ProtocoleAnnuaire.validerRequeteInscrire(requete))
+		{
+			Utilisateur u = new Utilisateur();
+			u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
+			
+			if(annuaire.existeUtilisateur(u.getCourriel()) || utilisateur != null)
+			{
+				reponse = ProtocoleAnnuaire.erreurInterdit();
+			}
+			else
+			{
+				annuaire.ajoutUtilisateur(utilisateur = u);
+				reponse = ProtocoleAnnuaire.ok(utilisateur.toString());
+			}
+		}
+		else
+			reponse = ProtocoleAnnuaire.erreurRequete();
+		
+		return reponse;
+	}
+	
+	/**
+	 * Traiter une requete de modification
+	 * 
+	 * @param requete
+	 * @return
+	 */
+	public String traiterRequeteModification(String requete)
+	{
+		String reponse = ProtocoleAnnuaire.erreurServeur();
+
+		if (utilisateur == null)
+			reponse = ProtocoleAnnuaire.erreurInterdit();
+		else if (ProtocoleAnnuaire.validerRequeteModifierProfil(requete))
+		{
+			Utilisateur u = new Utilisateur();
+			u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
+			
+			if (annuaire.existeUtilisateur(u.getCourriel()))
+			{
+				Utilisateur temp = annuaire.getUtilisateur(u.getCourriel());
+				
+				if ( ( utilisateur.getPrivilege().equals("utilisateur") 
+						&& temp.getCourriel().equals(utilisateur.getCourriel())
+						&& temp.getMotDePasse().equals(utilisateur.getMotDePasse()) )
+					|| utilisateur.getPrivilege().equals("administrateur") )
+				{
+					if (utilisateur.getCourriel().equals(u.getCourriel()))
+						utilisateur = u;
+					annuaire.ajoutUtilisateur(u);
+					reponse = ProtocoleAnnuaire.ok(u.toString());
+				}
+				else
+					reponse = ProtocoleAnnuaire.erreurInterdit();
+			}
+			else
+				reponse = ProtocoleAnnuaire.erreurRequete();
+		}
+		else
+			reponse = ProtocoleAnnuaire.erreurRequete();
+		
+		return reponse;
+	}
+	
+	/**
+	 * Traiter une requete de suppression
+	 * 
+	 * @param requete
+	 * @return
+	 */
+	public String traiterRequeteSuppression(String requete)
+	{
+		String reponse = ProtocoleAnnuaire.erreurServeur();
+
+		if (utilisateur == null)
+			reponse = ProtocoleAnnuaire.erreurInterdit();
+		else if (ProtocoleAnnuaire.validerRequeteSuppressionProfil(requete))
+		{
+			// TODO remplacer ca pars fonction dans ProtocoleAnnuaire :
+			String courriel = ControlleurProtocole.requeteURI(requete).replace("/profils/", "");
+			
+			if (annuaire.existeUtilisateur(courriel))
+			{
+				if (utilisateur.getCourriel().equals(courriel))
+				{
+					annuaire.suppresionUtilisateur(courriel);
+					utilisateur = null;
+					reponse = ProtocoleAnnuaire.erreurDeconnexion();
+				}
+				else if (utilisateur.getPrivilege().equals("administrateur"))
+				{
+					annuaire.suppresionUtilisateur(courriel);
+					reponse = ProtocoleAnnuaire.ok();
+				}
+				else
+					reponse = ProtocoleAnnuaire.erreurInterdit();
+			}
+			else
+				reponse = ProtocoleAnnuaire.erreurRequete();
+		}
+		else
+			reponse = ProtocoleAnnuaire.erreurRequete();
+		
+		return reponse;
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see stri.java_connect.protocol.ControlleurProtocole#traiterRequete(java.lang.String)
 	 */
@@ -36,144 +234,23 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		
 		if (ProtocoleAnnuaire.isRequeteConnexion(requete))
 		{
-			if (ProtocoleAnnuaire.validerRequeteConnexion(requete))
-			{
-				String identifiants = ControlleurProtocole.requeteURI(requete);
-				String courriel = identifiants.split(":")[0];
-				
-				if (annuaire.existeUtilisateur(courriel) && utilisateur == null)
-				{
-					utilisateur = annuaire.getUtilisateur(courriel);
-					if (utilisateur.getMotDePasse().equals(identifiants.substring(courriel.length()+1)))
-					{
-						reponse = ProtocoleAnnuaire.ok(utilisateur.toString());
-					}
-					else
-					{
-						utilisateur = null;
-						reponse = ProtocoleAnnuaire.erreurInterdit();
-					}
-				}
-				else
-				{
-					utilisateur = null;
-					reponse = ProtocoleAnnuaire.erreurInterdit();
-				}
-			}
-			else
-				reponse = ProtocoleAnnuaire.erreurRequete();
+			reponse = traiterRequeteConnexion(requete);
 		}
 		else if (ProtocoleAnnuaire.isRequeteConsulter(requete))
 		{
-			if (ProtocoleAnnuaire.validerRequeteConsulterProfils(requete))
-			{
-				if (utilisateur != null)
-					reponse = ProtocoleAnnuaire.ok(annuaire.getArraySecuriseTousUtilisateursUtilisateur().toString());
-				else
-					reponse = ProtocoleAnnuaire.ok(annuaire.getArraySecuriseTousUtilisateursAnonyme().toString());
-			}
-			else if (ProtocoleAnnuaire.validerRequeteConsulterProfil(requete))
-			{
-				// TODO remplacer ça par fonction dans ProtocoleAnnuaire :
-				String courriel = ControlleurProtocole.requeteURI(requete).replace("/profils/", "");
-				
-				if (annuaire.existeUtilisateur(courriel))
-				{
-					Utilisateur temp = annuaire.getUtilisateur(courriel);
-					
-					if(utilisateur != null)
-						reponse = ProtocoleAnnuaire.ok(temp.toStringUtilisateur());
-					else
-						reponse = ProtocoleAnnuaire.ok(temp.toStringAnonyme());
-				}
-				else
-					reponse = ProtocoleAnnuaire.erreurRequete();
-			}
-			else
-				reponse = ProtocoleAnnuaire.erreurRequete();
+			reponse = traiterRequeteConsulter(requete);
 		}
 		else if (ProtocoleAnnuaire.isRequeteInscrire(requete))
 		{
-			if (ProtocoleAnnuaire.validerRequeteInscrire(requete))
-			{
-				Utilisateur u = new Utilisateur();
-				u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
-				
-				if(annuaire.existeUtilisateur(u.getCourriel()) || utilisateur != null)
-				{
-					reponse = ProtocoleAnnuaire.erreurInterdit();
-				}
-				else
-				{
-					annuaire.ajoutUtilisateur(utilisateur = u);
-					reponse = ProtocoleAnnuaire.ok(utilisateur.toString());
-				}
-			}
-			else
-				reponse = ProtocoleAnnuaire.erreurRequete();
+			reponse = traiterRequeteInscrire(requete);
 		}
 		else if (ProtocoleAnnuaire.isRequeteModifier(requete))
 		{
-			if (utilisateur == null)
-				reponse = ProtocoleAnnuaire.erreurInterdit();
-			else if (ProtocoleAnnuaire.validerRequeteModifierProfil(requete))
-			{
-				Utilisateur u = new Utilisateur();
-				u.fromJSONString(ControlleurProtocole.requeteCorps(requete));
-				
-				if (annuaire.existeUtilisateur(u.getCourriel()))
-				{
-					Utilisateur temp = annuaire.getUtilisateur(u.getCourriel());
-					
-					if ( ( utilisateur.getPrivilege().equals("utilisateur") 
-							&& temp.getCourriel().equals(utilisateur.getCourriel())
-							&& temp.getMotDePasse().equals(utilisateur.getMotDePasse()) )
-						|| utilisateur.getPrivilege().equals("administrateur") )
-					{
-						if (utilisateur.getCourriel().equals(u.getCourriel()))
-							utilisateur = u;
-						annuaire.ajoutUtilisateur(u);
-						reponse = ProtocoleAnnuaire.ok(u.toString());
-					}
-					else
-						reponse = ProtocoleAnnuaire.erreurInterdit();
-				}
-				else
-					reponse = ProtocoleAnnuaire.erreurRequete();
-			}
-			else
-				reponse = ProtocoleAnnuaire.erreurRequete();
+			reponse = traiterRequeteModification(requete);
 		}
 		else if (ProtocoleAnnuaire.isRequeteSuppression(requete))
 		{
-			if (utilisateur == null)
-				reponse = ProtocoleAnnuaire.erreurInterdit();
-			else if (ProtocoleAnnuaire.validerRequeteSuppressionProfil(requete))
-			{
-				// TODO remplacer ca pars fonction dans ProtocoleAnnuaire :
-				String courriel = ControlleurProtocole.requeteURI(requete).replace("/profils/", "");
-				
-				if (annuaire.existeUtilisateur(courriel))
-				{
-					if (utilisateur.getCourriel().equals(courriel))
-					{
-						annuaire.suppresionUtilisateur(courriel);
-						utilisateur = null;
-						reponse = ProtocoleAnnuaire.erreurDeconnexion();
-					}
-					else if (utilisateur.getPrivilege().equals("administrateur"))
-					{
-						annuaire.suppresionUtilisateur(courriel);
-						reponse = ProtocoleAnnuaire.ok();
-					}
-					else
-						reponse = ProtocoleAnnuaire.erreurInterdit();
-				}
-				else
-					reponse = ProtocoleAnnuaire.erreurRequete();
-			}
-			else
-				reponse = ProtocoleAnnuaire.erreurRequete();
+			reponse = traiterRequeteSuppression(requete);
 		}
 		else
 			reponse = ProtocoleAnnuaire.erreurRequete();
