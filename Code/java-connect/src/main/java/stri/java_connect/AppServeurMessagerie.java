@@ -3,7 +3,7 @@ package stri.java_connect;
 import stri.java_connect.server.ServeurMessagerie;
 
 /**
- * @author 
+ * @author emeric, thomas
  *
  */
 public class AppServeurMessagerie 

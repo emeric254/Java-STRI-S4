@@ -11,7 +11,7 @@ import java.net.Socket;
 import stri.java_connect.protocol.ControlleurProtocole;
 
 /**
- * @author emeric
+ * @author emeric, remi
  *
  */
 public class ClientMessagerieDirecteHandler extends Thread
