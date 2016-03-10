@@ -33,7 +33,7 @@ public class ProtocoleAnnuaireTest
 	public void testRequeteInscrire()
 	{
 		String utilisateurJson = new Utilisateur().toString();
-		String requete = ProtocoleAnnuaire.requeteInscrire(utilisateurJson);
+		String requete = ProtocoleAnnuaire.requeteInscrireProfil(utilisateurJson);
 		assertEquals("INSCRIRE", ControlleurProtocole.requeteMethode(requete));
 		assertEquals("", ControlleurProtocole.requeteURI(requete));
 		assertEquals(utilisateurJson, ControlleurProtocole.requeteCorps(requete));
@@ -96,7 +96,7 @@ public class ProtocoleAnnuaireTest
 	@Test
 	public void testValiderRequeteInscrire()
 	{
-		assertTrue(ProtocoleAnnuaire.validerRequeteInscrire(ProtocoleAnnuaire.requeteInscrire(new Utilisateur().toString())));
+		assertTrue(ProtocoleAnnuaire.validerRequeteInscrireProfil(ProtocoleAnnuaire.requeteInscrireProfil(new Utilisateur().toString())));
 	}
 
 	@Test

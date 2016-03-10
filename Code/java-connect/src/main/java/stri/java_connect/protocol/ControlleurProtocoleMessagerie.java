@@ -5,12 +5,21 @@ import stri.java_connect.modele.AnnuaireMessagerie;
 import stri.java_connect.modele.Message;
 import stri.java_connect.modele.Utilisateur;
 
+/**
+ * @author emeric
+ *
+ */
 public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 {
 	private AnnuaireMessagerie annuaire;
 	private Utilisateur utilisateur;
 	private Client cl;
 
+	/**
+	 * Le controleur verifie si la requete correspond au protocole messagerie et la traite
+	 * 
+	 * @param pAnnuaire
+	 */
 	public ControlleurProtocoleMessagerie(AnnuaireMessagerie pAnnuaire)
 	{
 		cl = new Client(12345);
@@ -218,5 +227,34 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 			reponse = ProtocoleMessagerie.erreurInterdit();
 		
 		return reponse;
+	}
+
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.ControlleurProtocole#traiterReponse(java.lang.String)
+	 */
+	@Override
+	public String traiterReponse(String reponse)
+	{
+		if(ProtocoleMessagerie.isOk(reponse))
+			return ProtocoleMessagerie.extraireDonnees(reponse);
+		return null;
+	}
+
+	/**
+	 * Deconnexion de l'utilisateur sur le chat
+	 */
+	public void deconnexionUtilisateur() // TODO hack this !
+	{
+		annuaire.supprimerUtilisateur(utilisateur.getCourriel());
+		utilisateur = null;
+	}
+
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.ControlleurProtocole#clone()
+	 */
+	@Override
+	public ControlleurProtocoleMessagerie clone()
+	{
+		return new ControlleurProtocoleMessagerie(annuaire);
 	}
 }

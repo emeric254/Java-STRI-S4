@@ -19,7 +19,7 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	/**
 	 * @param idutilisateur
 	 * @param msg
-	 * @return
+	 * @return creation de la requete d'envoi de message differe
 	 */
 	public static String requeteEnvoiMessageDiffere(String idutilisateur, String msg)
 	{
@@ -27,9 +27,10 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	/**
+	 * Inscription d'un utilisateur pour la messagerie
 	 * @param idutilisateur
 	 * @param details
-	 * @return
+	 * @return requete a envoyer
 	 */
 	public static String requeteInscrireUtilisateur(String idutilisateur, String details)
 	{
@@ -37,7 +38,8 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	/**
-	 * @return
+	 * Demande de consultation des utilisateurs
+	 * @return la requete
 	 */
 	public static String requeteConsulterListeUtilisateurConnectes()
 	{
@@ -45,8 +47,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
+	 * Demande des details de l'utilisateur choisi
 	 * @param courriel
-	 * @return
+	 * @return la requete
 	 */
 	public static String requeteConsulterDetailsUtilisateurConnecte(String courriel)
 	{
@@ -54,7 +57,8 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
-	 * @return
+	 * Demande pour consulter les messages manques
+	 * @return la requete
 	 */
 	public static String requeteConsulterListeMessagesManques()
 	{
@@ -62,8 +66,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
+	 * Consulter le detail des messages manques
 	 * @param idmsg
-	 * @return
+	 * @return la requete
 	 */
 	public static String requeteConsulterDetailsMessagesManque(String idmsg)
 	{
@@ -71,7 +76,8 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
-	 * @return
+	 * Supprimer la liste des messages manques
+	 * @return la requete
 	 */
 	public static String requeteSupprimerListeMessagesManques()
 	{
@@ -79,7 +85,8 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
-	 * @return
+	 * Deconnexion du serveur
+	 * @return la requete
 	 */
 	public static String requeteDeconexion()
 	{
@@ -87,8 +94,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
+	 * Suppression des messages manques
 	 * @param idmsg
-	 * @return
+	 * @return la requete
 	 */
 	public static String requeteSupprimerMessageManque(String idmsg)
 	{
@@ -99,8 +107,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	// validateur
 
 	/**
+	 * Valide l'envoi de la requete d'envoi de message differe
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static boolean validerRequeteEnvoiMessageDiffere(String requete)
 	{
@@ -110,7 +119,8 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
-	 * @return
+	 * Valider la requete de deconnexion 
+	 * @return la requete
 	 */
 	public static boolean validerRequeteDeconexion(String requete)
 	{
@@ -118,8 +128,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	/**
+	 * Valide la requete d'inscription d'un utilisateur
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static boolean validerRequeteInscrireUtilisateur(String requete)
 	{
@@ -129,8 +140,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	/**
+	 * Valide la requete pour consulter la liste des utilisateurs connectes
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static boolean validerRequeteConsulterListeUtilisateurConnectes(String requete)
 	{
@@ -138,8 +150,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
+	 * Valide la requete pour consulter le details de l'utilisateur connecte
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static boolean validerRequeteConsulterDetailsUtilisateurConnecte(String requete)
 	{
@@ -149,8 +162,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	/**
+	 * Valide la requete pour consulter la liste des messages manques
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static boolean validerRequeteConsulterListeMessagesManques(String requete)
 	{
@@ -158,8 +172,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	/**
+	 * Valide la requete pour consulter le details des messages manque
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static boolean validerRequeteConsulterDetailsMessagesManque(String requete)
 	{
@@ -167,8 +182,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	/**
+	 * Valide la requete pour supprimer la liste des messages manques
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static boolean validerRequeteSupprimerListeMessagesManques(String requete)
 	{
@@ -176,8 +192,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	/**
+	 * Valide la requete pour supprimer le message manque
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static boolean validerRequeteSupprimerMessageManque(String requete)
 	{
@@ -187,8 +204,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	//
 	
 	/**
+	 * Permet d'extraire les messages manques
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static String extraireIdMessageManqueURI(String requete)
 	{
@@ -196,8 +214,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	/**
+	 * Recupere le message direct
 	 * @param msg
-	 * @return
+	 * @return la requete
 	 */
 	public static String requeteMessageDirect(String msg)
 	{
@@ -205,8 +224,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
+	 * Tester si la requete est un message direct
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static boolean isMessageDirect(String requete)
 	{
@@ -214,8 +234,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
+	 * Extrait l'heure du message
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static String extraireTimestampMessageDirect(String requete)
 	{
@@ -223,8 +244,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 	
 	/**
+	 * Recupere le message direct
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static String extraireMessageMessageDirect(String requete)
 	{
@@ -232,8 +254,9 @@ public abstract class ProtocoleMessagerie extends ProtocoleGenerique
 	}
 
 	/**
+	 * Recuperer la date du message direct
 	 * @param requete
-	 * @return
+	 * @return la requete
 	 */
 	public static Date extraireDateMessageDirect(String requete)
 	{

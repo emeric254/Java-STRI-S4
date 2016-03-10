@@ -6,7 +6,7 @@ package stri.java_connect.modele;
 import java.util.Date;
 
 /**
- * @author emeric
+ * @author emeric, thomas
  *
  */
 public class Message

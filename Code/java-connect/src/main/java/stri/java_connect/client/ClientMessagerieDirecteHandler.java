@@ -11,7 +11,7 @@ import java.net.Socket;
 import stri.java_connect.protocol.ControlleurProtocole;
 
 /**
- * @author emeric
+ * @author emeric, remi
  *
  */
 public class ClientMessagerieDirecteHandler extends Thread
@@ -23,6 +23,11 @@ public class ClientMessagerieDirecteHandler extends Thread
     private boolean fini;
     private String entree; // requete
 
+	/**
+	 * Traitement du client pour le chat
+	 * @param pSocketService
+	 * @param pProtocolServer
+	 */
 	public ClientMessagerieDirecteHandler(Socket pSocketService, ControlleurProtocole pProtocolServer)
 	{
         socketService = pSocketService;
@@ -40,6 +45,9 @@ public class ClientMessagerieDirecteHandler extends Thread
 		entree = null;
 	}
 
+    /**
+     * Reception du message de chat
+     */
     public void recevoir()
     {
         try
@@ -59,11 +67,19 @@ public class ClientMessagerieDirecteHandler extends Thread
         }
     }
 
+    /**
+     * Traitement de la requete qui entre
+     * @param entree
+     * @return
+     */
     public String traitement (String entree)
     {
 		return protocolServer.traiterRequete(entree);
     }
 
+    /**
+     * Fermeture du socket
+     */
     public void fermerService()
     {
         try
@@ -76,6 +92,10 @@ public class ClientMessagerieDirecteHandler extends Thread
         }
     }
 
+    /**
+     * Emission du message
+     * @param sortie
+     */
     public void emettre(String sortie)
     {
         try

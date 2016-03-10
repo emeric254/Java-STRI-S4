@@ -1,5 +1,9 @@
 package stri.java_connect.protocol;
 
+/**
+ * @author emeric
+ *
+ */
 public class ControlleurProtocoleMessagerieDirecte extends ControlleurProtocole
 {
 	@Override
@@ -10,6 +14,9 @@ public class ControlleurProtocoleMessagerieDirecte extends ControlleurProtocole
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.ControlleurProtocole#clone()
+	 */
 	@Override
 	public ControlleurProtocole clone()
 	{
