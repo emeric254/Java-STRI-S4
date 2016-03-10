@@ -26,12 +26,8 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		annuaire = a;
 	}
 
-	
-	/**
-	 * Traiter une requete de connexion
-	 * 
-	 * @param requete
-	 * @return
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.TraitementRequete#traiterRequeteConnexion(java.lang.String)
 	 */
 	public String traiterRequeteConnexion(String requete)
 	{
@@ -66,12 +62,9 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		
 		return reponse;
 	}
-	
-	/**
-	 * Traiter une requete de consultation
-	 * 
-	 * @param requete
-	 * @return
+
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.TraitementRequete#traiterRequeteConsulter(java.lang.String)
 	 */
 	public String traiterRequeteConsulter(String requete)
 	{
@@ -106,12 +99,9 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		
 		return reponse;
 	}
-	
-	/**
-	 * Traiter une requete d'inscription
-	 * 
-	 * @param requete
-	 * @return
+
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.TraitementRequete#traiterRequeteInscrire(java.lang.String)
 	 */
 	public String traiterRequeteInscrire(String requete)
 	{
@@ -137,12 +127,9 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		
 		return reponse;
 	}
-	
-	/**
-	 * Traiter une requete de modification
-	 * 
-	 * @param requete
-	 * @return
+
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.TraitementRequete#traiterRequeteModification(java.lang.String)
 	 */
 	public String traiterRequeteModification(String requete)
 	{
@@ -181,11 +168,8 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		return reponse;
 	}
 	
-	/**
-	 * Traiter une requete de suppression
-	 * 
-	 * @param requete
-	 * @return
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.TraitementRequete#traiterRequeteSuppression(java.lang.String)
 	 */
 	public String traiterRequeteSuppression(String requete)
 	{
@@ -220,40 +204,6 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		else
 			reponse = ProtocoleAnnuaire.erreurRequete();
 		
-		return reponse;
-	}
-	
-	
-	/* (non-Javadoc)
-	 * @see stri.java_connect.protocol.ControlleurProtocole#traiterRequete(java.lang.String)
-	 */
-	@Override
-	public String traiterRequete(String requete)
-	{
-		String reponse = ProtocoleAnnuaire.erreurServeur();
-		
-		if (ProtocoleAnnuaire.isRequeteConnexion(requete))
-		{
-			reponse = traiterRequeteConnexion(requete);
-		}
-		else if (ProtocoleAnnuaire.isRequeteConsulter(requete))
-		{
-			reponse = traiterRequeteConsulter(requete);
-		}
-		else if (ProtocoleAnnuaire.isRequeteInscrire(requete))
-		{
-			reponse = traiterRequeteInscrire(requete);
-		}
-		else if (ProtocoleAnnuaire.isRequeteModifier(requete))
-		{
-			reponse = traiterRequeteModification(requete);
-		}
-		else if (ProtocoleAnnuaire.isRequeteSuppression(requete))
-		{
-			reponse = traiterRequeteSuppression(requete);
-		}
-		else
-			reponse = ProtocoleAnnuaire.erreurRequete();
 		return reponse;
 	}
 
