@@ -20,10 +20,9 @@ public class ClientMessagerieDirecte extends Thread
 	private final static int portDefaut = 12347;
 	private final static int bufferSize = 4096;
 
-	private int port;
-    DatagramSocket socket;
-    byte[] temp = new byte[bufferSize];
-    boolean fini = false;
+    private DatagramSocket socket;
+    private byte[] temp = new byte[bufferSize];
+    private boolean fini = false;
 
     public ClientMessagerieDirecte() throws SocketException
     {
@@ -32,8 +31,7 @@ public class ClientMessagerieDirecte extends Thread
 
 	public ClientMessagerieDirecte(int pPort) throws SocketException
 	{
-		port = pPort;
-		socket = new DatagramSocket(port);
+		socket = new DatagramSocket(pPort);
 	}
 
 	@Override
@@ -66,8 +64,7 @@ public class ClientMessagerieDirecte extends Thread
 	// TODO
 	public void emettreMsg(String addr, int port, String msg)
 	{
-		msg = ProtocoleMessagerie.requeteMessageDirect(msg);
-		byte[] buf = msg.getBytes();
+		byte[] buf = ProtocoleMessagerie.requeteMessageDirect(msg).getBytes();
 		DatagramPacket pac = new DatagramPacket(buf, buf.length, new InetSocketAddress(addr, port));
 		try
 		{
