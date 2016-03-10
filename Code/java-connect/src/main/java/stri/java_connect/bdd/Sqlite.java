@@ -72,6 +72,56 @@ public class Sqlite
 	}
 	
 	/**
+	 * 
+	 */
+	public void creationTables()
+	{
+		String req = "CREATE TABLE utlisateur (courriel string primary key not null, motDePasse string NOT NULL, nom string NOT NULL, privilege string NOT NULL, telephone string NOT NULL," +
+				"dateDiplome long NOT NULL, permissionLecture string NOT NULL);";
+		executerRequete(req);
+		req = "CREATE TABLE competence (idCompetence integer auto_increment not_null," +
+				"nomCompetence string, idCompetence  primary key);";
+		executerRequete(req);
+		req = "CREATE TABLE posseder (courriel string," +
+				" idCompetence integer);";
+		executerRequete(req);
+		req = "CREATE TABLE Message (courrielSource string not null," +
+				" courrielDestinataire string not null," +
+				" dateMessage timestamp not null," +
+				" message text," +
+				" foreing key (corrielSource) references utilisateur(courriel)," +
+				" foreing key (courrielDestinataire) references utilisateur(courriel)," +
+				" primary key (courrielSource,courrielDestinataire,dateMessage)" +
+				" );";
+		executerRequete(req);
+		req = "CREATE TABLE aimer (courrielLikant string not null," +
+				" idCompetence string not null," +
+				" courrielPropCompetence string not null," +
+				" foreing key (courrielLikant) references utilisateur(courriel)," +
+				" foreing key (courrielPropCompetence) references utilisateur(courriel)," +
+				" primary key (courrielLikant,courrielPropCompetence,idCompetence)" +
+				" );";
+		executerRequete(req);
+	}
+	
+	/**
+	 * Suppression 
+	 */
+	public void suppressionTables()
+	{
+		String req = "DROP TABLE IF EXISTS Utilisateur;";
+		executerRequete(req);
+		req = "DROP TABLE IF EXISTS competence;";
+		executerRequete(req);
+		req = "DROP TABLE IF EXISTS posseder;";
+		executerRequete(req);
+		req = "DROP TABLE IF EXISTS envoyerMessage;";
+		executerRequete(req);
+		req = "DROP TABLE IF EXISTS aimer;";
+		executerRequete(req);
+	}
+	
+	/**
 	 * Fermeture de la base de donnees
 	 * 
 	 */
