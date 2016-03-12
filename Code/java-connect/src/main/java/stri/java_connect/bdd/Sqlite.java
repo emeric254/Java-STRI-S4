@@ -4,7 +4,7 @@ import java.io.File;
 import java.sql.*;
 
 /**
- * @author thomas
+ * @author Thomas, Rémi
  *
  */
 public class Sqlite
@@ -72,12 +72,17 @@ public class Sqlite
 	}
 	
 	/**
-	 * 
+	 * Création de l'ensemble des tables
 	 */
 	public void creationTables()
 	{
-		String req = "CREATE TABLE utlisateur (courriel string primary key not null, motDePasse string NOT NULL, nom string NOT NULL, privilege string NOT NULL, telephone string NOT NULL," +
-				"dateDiplome long NOT NULL, permissionLecture string NOT NULL);";
+		String req = "CREATE TABLE utlisateur (courriel string primary key not null," +
+				" motDePasse string NOT NULL," +
+				" nom string NOT NULL," +
+				" privilege string NOT NULL," +
+				" telephone string NOT NULL," +
+				"dateDiplome long NOT NULL," +
+				" permissionLecture string NOT NULL);";
 		executerRequete(req);
 		req = "CREATE TABLE competence (idCompetence integer auto_increment not_null," +
 				"nomCompetence string, idCompetence  primary key);";
@@ -105,7 +110,7 @@ public class Sqlite
 	}
 	
 	/**
-	 * Suppression 
+	 * Suppression de l'ensemble des tables
 	 */
 	public void suppressionTables()
 	{
@@ -120,6 +125,113 @@ public class Sqlite
 		req = "DROP TABLE IF EXISTS aimer;";
 		executerRequete(req);
 	}
+	
+	/**
+	 * Insertion dans la base de donnée d'un nouvel utilisateur
+	 * 
+	 * @param courriel
+	 * @param motDePasse
+	 * @param nom
+	 * @param privilege
+	 * @param telephone
+	 * @param dateDiplome
+	 * @param permissionLecture
+	 */
+	public void insertUtilisateur(String courriel, String motDePasse, String nom, String privilege, String telephone, long dateDiplome, String permissionLecture)
+	{
+		String req ="insert into Utilisateur (courriel, motDePasse, nom, privilege, telephone, dateDiplome, permissionLecture)" +
+				" values ("+courriel+","+motDePasse+","+nom+","+privilege+","+telephone+","+dateDiplome+","+permissionLecture+");";
+		executerRequete(req);
+	}
+	
+	
+	/**
+	 * Ajout d'une nouvelle compétence associée à un utilisateur
+	 * 
+	 * @param courriel
+	 * @param competence
+	 */
+	public void insertNouvelleCompetence(String courriel, String competence)
+	{
+		Boolean present = false;
+		int idCompetence =-1;
+		/* On regarde si elle existe déjà */
+		String req = "SELECT idCompetence FROM Competence WHERE nomCompetence = "+competence+";";
+		ResultSet resultSet = executerRequete(req);
+		try {
+            if (resultSet.next()) {
+                present = true;
+                idCompetence = resultSet.getInt("idCompetence");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
+		if (present) // Si la compétence existe déjà
+		{
+			req = "INSERT INTO Posseder(courriel,idCompetence) VALUES ("+courriel+","+idCompetence+");";
+			executerRequete(req);
+		}
+		else // Si la compétence est nouvelle
+		{
+			// ajout competence
+			req = "INSERT INTO Competence(nomCompetence) VALUES ("+competence+");";
+			executerRequete(req);
+			// récupération de l'id de cette nouvelle compétence
+			req = "SELECT idCompetence FROM Competence WHERE nomCompetence = "+competence+";";
+			resultSet = executerRequete(req);
+			try {
+	            if (resultSet.next()) {
+	                present = true;
+	                idCompetence = resultSet.getInt("idCompetence");
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+			req = "INSERT INTO Posseder(courriel,idCompetence) VALUES ("+courriel+","+idCompetence+");";
+			executerRequete(req);
+		}
+	}
+	
+	
+	
+
+	
+	
+	/*********************
+	 * Pour la version 2 *
+	 *********************/
+	
+	/**
+	 * Insertion d'un nouveau message
+	 * 
+	 * @param courrielSource
+	 * @param CourrielDestinataire
+	 * @param dateMessage
+	 * @param message
+	 */
+	public void insertMessage (String courrielSource, String CourrielDestinataire, Timestamp dateMessage, String message)
+	{
+		String req = "INSERT INTO Message (courrielSource, courrielDestinataire, dateMessage, message) " +
+				"VALUES ("+courrielSource+","+CourrielDestinataire+","+dateMessage+","+message+");";
+		executerRequete(req);
+	}
+	
+	
+	/**
+	 * Récupération de tous les messages reçus
+	 * 
+	 * @param courriel
+	 */
+	public void lectureMessage(String courriel)
+	{
+		String req = "SELECT * FROM Message WHERE courrielDestinataire = \""+courriel+"\";";
+		executerRequete(req);
+	}
+	
+	
+
+	
 	
 	/**
 	 * Fermeture de la base de donnees
