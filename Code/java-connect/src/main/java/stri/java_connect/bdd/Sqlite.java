@@ -264,6 +264,47 @@ public class Sqlite
 	}
 	
 
+	/*********************
+	 * Pour la version 3 *
+	 *********************/
+	
+	/**
+	 * Récupération des tous les likes associés à une utilisateur
+	 * 
+	 * @param user
+	 */
+	public void chargerLike(Utilisateur user)
+	{
+		String req = "SELECT courrielLikant,nomCompetence FROM aimer WHERE courrielPropCompetence ='" + user.getCourriel() +"';";
+		ResultSet resultSet = executerRequete(req);
+		while (resultSet.next())
+		{
+			user.addLike(resultSet.getString("nomCompetence"), resultSet.getString("courrielLikant");
+		}
+	}
+	
+	/**
+	 * Ecriture dans la base de donnée d'un nouveau like
+	 * 
+	 * @param courrielLikant
+	 * @param courrielPropCompetence
+	 * @param nomCompetence
+	 */
+	public void ajouterLike(String courrielLikant, String courrielPropCompetence, String nomCompetence)
+	{
+		String req = "INSERT INTO  aimer (courrielLikant, courrielPropCompetence, nomCompetence) VALUES ('"+courrielLikant+
+				"','"+courrielPropCompetence+"','"+nomCompetence+"');";
+		executerRequete(req);
+	}
+	
+	public void supprimerLike(String courrielLikant, String courrielPropCompetence, String nomCompetence)
+	{
+		String req = "DELETE FROM  aimer WHERE courrielikant = '"+courrielLikant+"' AND " +
+				"courrielPropCompetence ='"+courrielPropCompetence+
+				"', nomCompetence = '"+nomCompetence+"');";
+		executerRequete(req);
+	}
+	
 	
 	
 	/**
