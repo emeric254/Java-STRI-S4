@@ -13,7 +13,7 @@ import stri.java_connect.utils.JSONValidateur;
 public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 {
 	private final static String profilsURI = "/profils";
-	private final static String competencesURI = "/compete";
+	private final static String competencesURI = "/competences";
 	
 	//-------------------------------------------------------------------------
 	// constructeurs de requete
@@ -38,6 +38,18 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	{
 		return consulterMethod + profilsURI + "/" + courriel;
 	}
+	
+	/**
+	 * Requete de consultation du nombre de likes d'une competence d'un profil
+	 * 
+	 * @param courriel le courriel du profil a consulter
+	 * @param competence la competence ou consulter le nb de like
+	 * @return la requete
+	 */
+	public static String requeteConsulterLike(String courriel, String competence)
+	{
+		return consulterMethod + profilsURI + "/" + courriel + competencesURI + "/" + competence;
+	}
 
 	/**
 	 * Requete d'inscription d'un profil utilisateur
@@ -53,12 +65,13 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	/**
 	 * Requete d'inscription d'un profil utilisateur
 	 * 
-	 * @param utilisateurJson le profil utilisateur a inscrire
+	 * @param courriel le profil utilisateur ou il faut inscrire le like
+	 * @param competence la competence ou inscrire le like
 	 * @return la requete
 	 */
-	public static String requeteInscrireLike(String utilisateurJson, String competence)
+	public static String requeteInscrireLike(String courriel, String competence)
 	{
-		return inscrireMethod + profilsURI + competencesURI + "/" + competence + " ; ";
+		return inscrireMethod + profilsURI + "/" + courriel + competencesURI + "/" + competence;
 	}
 
 	/**
@@ -82,6 +95,18 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	public static String requeteSuppressionProfil(String courriel)
 	{
 		return supprimerMethod + profilsURI + "/" + courriel;
+	}
+	
+	/**
+	 * Requete de suppression d'un like sur une competence d'un profil utilisateur
+	 * 
+	 * @param courriel le courriel du profil ou supprimer le like
+	 * @param competence la competence ou supprimer le like
+	 * @return la requete
+	 */
+	public static String requeteSuppressionLike(String courriel, String competence)
+	{
+		return supprimerMethod + profilsURI + "/" + courriel + competencesURI + "/" + competence;
 	}
 
 	//-------------------------------------------------------------------------
@@ -112,7 +137,7 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Valider la requete de connexion
 	 * 
@@ -156,18 +181,6 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	}
 	
 	/**
-	 * Valider la requete de l'inscription d'un like
-	 * 
-	 * @param requete la requete a valider
-	 * @return true si c'est une requete d'inscription valide, false sinon
-	 */
-	public static boolean validerRequeteInscrireLike(String requete)
-	{
-		return ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + competencesURI + "/" ) &&
-				JSONValidateur.valider(ControlleurProtocole.requeteCorps(requete));
-	}
-	
-	/**
 	 * Valider la requete de modification de profil
 	 * 
 	 * @param requete la requete a valider
@@ -189,5 +202,25 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	public static boolean validerRequeteSuppressionProfil(String requete)
 	{
 		return ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + "/");
+	}
+	
+	/**
+	 * Valider la requete de like
+	 * 
+	 * @param requete la requete a valider
+	 * @return true si c'est une requete de like valide, false sinon
+	 */
+	public static boolean validerRequeteLike(String requete)
+	{
+		if(ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + "/"))
+		{
+			String[] temp = ControlleurProtocole.requeteURI(requete).replace(profilsURI + "/", "").split("/",2);
+			if (CourrielValidateur.valider(temp[0]) && temp[1].startsWith(competencesURI + "/"))
+			{
+				return temp[1].replace(competencesURI + "/", "").length() > 0;
+			}
+			return false;
+		}
+		return false;
 	}
 }
