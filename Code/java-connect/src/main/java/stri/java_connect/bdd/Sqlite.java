@@ -234,10 +234,10 @@ public class Sqlite
 	 * @param dateMessage
 	 * @param message
 	 */
-	public void insertMessage (String courrielSource, String CourrielDestinataire, Timestamp dateMessage, String message)
+	public void insertMessage (String courrielSource, String courrielDestinataire, Timestamp dateMessage, String message)
 	{
 		String req = "INSERT INTO Message (courrielSource, courrielDestinataire, dateMessage, message) " +
-				"VALUES ("+courrielSource+","+CourrielDestinataire+","+dateMessage+","+message+");";
+				"VALUES ("+courrielSource+","+courrielDestinataire+","+dateMessage+","+message+");";
 		executerRequete(req);
 	}
 	
@@ -251,8 +251,17 @@ public class Sqlite
 	{
 		String req = "SELECT * FROM Message WHERE courrielDestinataire = \""+courriel+"\";";
 		executerRequete(req);
+		//TODO : traiter les messages
+		
+		// Suppression des messages lues
+		
 	}
 	
+	public void supprimerMessage(String courrielSource, String courrielDestinataire, Timestamp dateMessage)
+	{
+		String req = "DELETE FROM message WHERE courrielSource = '"+courrielSource+"', courrielDestinataire ='"+courrielDestinataire+"', dateMessage = "+dateMessage+";";
+		executerRequete(req);
+	}
 	
 
 	
