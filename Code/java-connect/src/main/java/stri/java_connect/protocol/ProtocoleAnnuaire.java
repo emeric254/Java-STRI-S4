@@ -18,6 +18,9 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	//-------------------------------------------------------------------------
 	// constructeurs de requete
 	
+	// CONSULTER
+	
+	
 	/**
 	 * Requete de consultation de la liste des profils
 	 * 
@@ -38,19 +41,11 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	{
 		return consulterMethod + profilsURI + "/" + courriel;
 	}
-	
-	/**
-	 * Requete de consultation du nombre de likes d'une competence d'un profil
-	 * 
-	 * @param courriel le courriel du profil a consulter
-	 * @param competence la competence ou consulter le nb de like
-	 * @return la requete
-	 */
-	public static String requeteConsulterLike(String courriel, String competence)
-	{
-		return consulterMethod + profilsURI + "/" + courriel + competencesURI + "/" + competence;
-	}
 
+	
+	// INSCRIPTION
+	
+	
 	/**
 	 * Requete d'inscription d'un profil utilisateur
 	 * 
@@ -73,7 +68,11 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	{
 		return inscrireMethod + profilsURI + "/" + courriel + competencesURI + "/" + competence;
 	}
+	
+	
+	// MODIFICATION
 
+	
 	/**
 	 * Requete de modification d'un profil utilisateur
 	 * 
@@ -85,6 +84,10 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	{
 		return modifierMethod + profilsURI + "/" + courriel + ";"  + utilisateurJson;
 	}
+	
+	
+	// SUPPRESSION
+	
 	
 	/**
 	 * Requete de suppression d'un profil utilisateur
@@ -109,8 +112,10 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 		return supprimerMethod + profilsURI + "/" + courriel + competencesURI + "/" + competence;
 	}
 
+	
 	//-------------------------------------------------------------------------
 	// valideurs de corps requete
+	
 	
 	/**
 	 * Valider la requete de consultation de la liste des profils
