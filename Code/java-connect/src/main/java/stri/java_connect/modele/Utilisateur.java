@@ -342,13 +342,10 @@ public class Utilisateur
      */
     public int compteLike (String competence)
     {
-        if (Competences.contains(competence))
-        {
-        	if (Likes.containsKey(competence))
-        	{
-        		return Likes.get(competence).size();
-        	}
-        }
+        if (Competences.contains(competence) && Likes.containsKey(competence))
+    	{
+    		return Likes.get(competence).size();
+    	}
         return 0;
     }
 
