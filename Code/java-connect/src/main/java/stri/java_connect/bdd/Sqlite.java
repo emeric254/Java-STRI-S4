@@ -1,7 +1,11 @@
 package stri.java_connect.bdd;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.*;
+
+import stri.java_connect.client.ClientAnnuaire;
+import stri.java_connect.modele.Utilisateur;
 
 /**
  * @author Thomas, Rémi
@@ -81,15 +85,13 @@ public class Sqlite
 				" nom string NOT NULL," +
 				" privilege string NOT NULL," +
 				" telephone string NOT NULL," +
-				"dateDiplome long NOT NULL," +
+				" dateDiplome long NOT NULL," +
 				" permissionLecture string NOT NULL);";
-		executerRequete(req);
-		req = "CREATE TABLE competence (idCompetence integer auto_increment not_null," +
-				"nomCompetence string, idCompetence  primary key);";
-		executerRequete(req);
-		req = "CREATE TABLE posseder (courriel string," +
-				" idCompetence integer);";
-		executerRequete(req);
+		executerMaj(req);
+		req = "CREATE TABLE competence (nomCompetence string, courriel string," +
+				" foreign key (courriel) references utilisateur(courriel)," +
+				" primary key(competence,courriel);";
+		executerMaj(req);
 		req = "CREATE TABLE Message (courrielSource string not null," +
 				" courrielDestinataire string not null," +
 				" dateMessage timestamp not null," +
@@ -98,15 +100,16 @@ public class Sqlite
 				" foreing key (courrielDestinataire) references utilisateur(courriel)," +
 				" primary key (courrielSource,courrielDestinataire,dateMessage)" +
 				" );";
-		executerRequete(req);
+		executerMaj(req);
 		req = "CREATE TABLE aimer (courrielLikant string not null," +
-				" idCompetence string not null," +
+				" nomCompetence string not null," +
 				" courrielPropCompetence string not null," +
 				" foreing key (courrielLikant) references utilisateur(courriel)," +
 				" foreing key (courrielPropCompetence) references utilisateur(courriel)," +
+				" foreing key (nomCompetence) references competence(nomCompetence)," +
 				" primary key (courrielLikant,courrielPropCompetence,idCompetence)" +
 				" );";
-		executerRequete(req);
+		executerMaj(req);
 	}
 	
 	/**
@@ -115,15 +118,13 @@ public class Sqlite
 	public void suppressionTables()
 	{
 		String req = "DROP TABLE IF EXISTS Utilisateur;";
-		executerRequete(req);
+		executerMaj(req);
 		req = "DROP TABLE IF EXISTS competence;";
-		executerRequete(req);
-		req = "DROP TABLE IF EXISTS posseder;";
-		executerRequete(req);
+		executerMaj(req);
 		req = "DROP TABLE IF EXISTS envoyerMessage;";
-		executerRequete(req);
+		executerMaj(req);
 		req = "DROP TABLE IF EXISTS aimer;";
-		executerRequete(req);
+		executerMaj(req);
 	}
 	
 	/**
@@ -153,48 +154,71 @@ public class Sqlite
 	 */
 	public void insertNouvelleCompetence(String courriel, String competence)
 	{
-		Boolean present = false;
-		int idCompetence =-1;
-		/* On regarde si elle existe déjà */
-		String req = "SELECT idCompetence FROM Competence WHERE nomCompetence = "+competence+";";
-		ResultSet resultSet = executerRequete(req);
-		try {
-            if (resultSet.next()) {
-                present = true;
-                idCompetence = resultSet.getInt("idCompetence");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-		
-		if (present) // Si la compétence existe déjà
+		String req = "INSERT INTO Competence(nomCompetence,courriel) VALUES ("+competence+","+courriel+");";
+		executerRequete(req);
+	}
+	
+	/**
+	 * Ajout d'un nouvel utilisateur dans la base de donnée
+	 * @param user
+	 */
+	public void ajouterUtilisateur(Utilisateur user)
+	{
+		insertUtilisateur(user.getCourriel(),user.getMotDePasse(),user.getNom(),user.getPrivilege(),user.getTelephone(),user.getDateDiplome(),user.getPermissionLecture());
+		for (String competence : user.getCompetences())
 		{
-			req = "INSERT INTO Posseder(courriel,idCompetence) VALUES ("+courriel+","+idCompetence+");";
-			executerRequete(req);
-		}
-		else // Si la compétence est nouvelle
-		{
-			// ajout competence
-			req = "INSERT INTO Competence(nomCompetence) VALUES ("+competence+");";
-			executerRequete(req);
-			// récupération de l'id de cette nouvelle compétence
-			req = "SELECT idCompetence FROM Competence WHERE nomCompetence = "+competence+";";
-			resultSet = executerRequete(req);
-			try {
-	            if (resultSet.next()) {
-	                present = true;
-	                idCompetence = resultSet.getInt("idCompetence");
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-			req = "INSERT INTO Posseder(courriel,idCompetence) VALUES ("+courriel+","+idCompetence+");";
-			executerRequete(req);
+			insertNouvelleCompetence(user.getCourriel(),competence);
 		}
 	}
 	
+	/**
+	 * Chargement de l'annuaire complet
+	 * 
+	 * @return
+	 */
+	public ClientAnnuaire chargerAnnuaire()
+	{
+		ClientAnnuaire client = new ClientAnnuaire();
+		ResultSet resultSet2;
+		String req = "SELECT * from utilisateur;";
+		ResultSet resultSet = executerRequete(req);
+		try {
+            while (resultSet.next()) {
+                Utilisateur utilisateur = new Utilisateur();
+                utilisateur.setCourriel(resultSet.getString("courriel"));
+                utilisateur.setMotDePasse(resultSet.getString("motDePasse"));
+                utilisateur.setPermissionLecture(resultSet.getString("permissionLecture")); 
+                utilisateur.setNom(resultSet.getString("nom"));
+                utilisateur.setTelephone(resultSet.getString("telephone"));
+                utilisateur.setDateDiplome(resultSet.getLong("dateDiplome"));
+                // Ajout des compétences
+                req = "SELECT * FROM competence WHERE courriel = " + utilisateur.getCourriel() + ";";
+                resultSet2 = executerRequete(req);
+                while ( resultSet2.next())
+                {
+                	utilisateur.addCompetence(resultSet2.getString("nomCompetence"));
+                }	
+                client.inscription(utilisateur);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return client;
+	}
 	
-	
+	/**
+	 * Suppression d'un utilisateur
+	 * 
+	 * @param courriel
+	 */
+	public void supprimerUtilisateur(String courriel)
+	{
+		String req = "DELETE FROM Utilisateur WHERE courriel = \""+courriel+"\";";
+		executerRequete(req);
+	}
 
 	
 	
