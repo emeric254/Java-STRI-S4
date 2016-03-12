@@ -335,6 +335,23 @@ public class Utilisateur
         }
     }
 
+    /**
+     * Add a Competence
+     * 
+     * @param newVar the new Competence to add
+     */
+    public int compteLike (String competence)
+    {
+        if (Competences.contains(competence))
+        {
+        	if (Likes.containsKey(competence))
+        	{
+        		return Likes.get(competence).size();
+        	}
+        }
+        return 0;
+    }
+
 //
 // Other methods
 //
