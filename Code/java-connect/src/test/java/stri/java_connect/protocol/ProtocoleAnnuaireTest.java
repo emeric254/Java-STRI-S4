@@ -35,7 +35,7 @@ public class ProtocoleAnnuaireTest
 		String utilisateurJson = new Utilisateur().toString();
 		String requete = ProtocoleAnnuaire.requeteInscrireProfil(utilisateurJson);
 		assertEquals("INSCRIRE", ControlleurProtocole.requeteMethode(requete));
-		assertEquals("", ControlleurProtocole.requeteURI(requete));
+		assertEquals("/profils", ControlleurProtocole.requeteURI(requete));
 		assertEquals(utilisateurJson, ControlleurProtocole.requeteCorps(requete));
 	}
 

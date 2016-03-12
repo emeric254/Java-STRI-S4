@@ -49,11 +49,12 @@ public class JSONValidateurTest
 		assertTrue(JSONValidateur.valider(u));
 		u.setTelephone(mockstr);
 		assertTrue(JSONValidateur.valider(u));
-		for (int i = 0; i < 10; i++)
-		{
-			u.addCompetence(mockstr);
-			assertTrue(JSONValidateur.valider(u));
-		}
+		u.addCompetence(mockstr);
+		assertTrue(JSONValidateur.valider(u));
+		u.addLike(mockstr, mockstr);
+		u.addLike(mockstr, mockstr);
+		u.addLike(mockstr, mockstr);
+		assertTrue(JSONValidateur.valider(u));
 	}
 
 }

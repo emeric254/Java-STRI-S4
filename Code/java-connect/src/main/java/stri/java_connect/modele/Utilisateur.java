@@ -5,6 +5,7 @@ package stri.java_connect.modele;
 
 import java.util.ArrayDeque;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +26,7 @@ public class Utilisateur
     private final static String telephoneJSON = glt + "telephone" + separ;
     private final static String nomJSON = glt + "nom" + separ;
     private final static String dateDiplomeJSON = glt + "datediplome" + separ;
-    private final static String competencesJSON = glt + "competences" + glt + " : [";
+    private final static String competencesJSON = glt + "competences" + glt + " : {";
 
     private String motDePasse;
     private String nom;
@@ -35,6 +36,7 @@ public class Utilisateur
     private String permissionLecture;
     private String privilege;
     private ArrayDeque<String> Competences;
+    private HashMap<String, ArrayDeque<String>> Likes;
 
 //
 // Constructors
@@ -64,6 +66,7 @@ public class Utilisateur
         */
         privilege = "utilisateur";
         Competences = new ArrayDeque<String>();
+        Likes = new HashMap<String, ArrayDeque<String>>();
     };
 
     /**
@@ -293,6 +296,45 @@ public class Utilisateur
         Competences.add(newVar);
     }
 
+	/**
+	 * @return
+	 */
+	public HashMap<String, ArrayDeque<String>> getLikes()
+	{
+		return Likes;
+	}
+
+	/**
+	 * @param likes
+	 */
+	public void setLikes(HashMap<String, ArrayDeque<String>> likes)
+	{
+		Likes = likes;
+	}
+
+    /**
+     * Add a Competence
+     * 
+     * @param newVar the new Competence to add
+     */
+    public void addLike (String competence, String courriel)
+    {
+        if (Competences.contains(competence))
+        {
+        	ArrayDeque<String> temp;
+        	if (Likes.containsKey(competence))
+        	{
+        		temp = Likes.get(competence);
+        	}
+        	else
+        	{
+        		temp = new ArrayDeque<String>();
+        	}
+    		temp.add(courriel);
+    		Likes.put(competence, temp);
+        }
+    }
+
 //
 // Other methods
 //
@@ -325,11 +367,19 @@ public class Utilisateur
         chaine += competencesJSON;
         for(String temp : Competences)
         {
-            chaine += glt + temp + vgl;
+            chaine += glt + temp + glt + ":" + " [";
+            if (Likes.containsKey(temp))
+            {
+            	for (String courriel : Likes.get(temp))
+            		chaine += glt + courriel + vgl;
+            	if (Likes.get(temp).size() > 0)
+                    chaine = chaine.substring(0, chaine.length()-1);
+            }
+            chaine += "] ,";
         }
         if(Competences.size() > 0)
             chaine = chaine.substring(0, chaine.length()-1);
-        chaine += "] }";
+        chaine += "} }";
         return chaine;
     }
     
@@ -350,11 +400,19 @@ public class Utilisateur
             chaine += competencesJSON;
             for(String temp : Competences)
             {
-                chaine += glt + temp + vgl;
+                chaine += glt + temp + glt + ":" + " [";
+                if (Likes.containsKey(temp))
+                {
+                	for (String courriel : Likes.get(temp))
+                		chaine += glt + courriel + vgl;
+                	if (Likes.get(temp).size() > 0)
+                        chaine = chaine.substring(0, chaine.length()-1);
+                }
+                chaine += "] ,";
             }
             if(Competences.size() > 0)
                 chaine = chaine.substring(0, chaine.length()-1);
-            chaine += "]";
+            chaine += "}";
         }
         chaine += "}";
         
@@ -377,11 +435,19 @@ public class Utilisateur
         chaine += competencesJSON;
         for(String temp : Competences)
         {
-            chaine += glt + temp + vgl;
+            chaine += glt + temp + glt + ":" + " [";
+            if (Likes.containsKey(temp))
+            {
+            	for (String courriel : Likes.get(temp))
+            		chaine += glt + courriel + vgl;
+            	if (Likes.get(temp).size() > 0)
+                    chaine = chaine.substring(0, chaine.length()-1);
+            }
+            chaine += "] ,";
         }
         if(Competences.size() > 0)
             chaine = chaine.substring(0, chaine.length()-1);
-        chaine += "] }";
+        chaine += "} }";
         
         System.out.println(chaine);
         return chaine;
@@ -405,10 +471,18 @@ public class Utilisateur
         setPrivilege(JSONLoader.readStringJSONObject(details, "privilege"));
         try
         {
-        	JSONArray listeCompetences = details.getJSONArray("competences");
-	        for (Object object : listeCompetences)
+        	JSONObject listeCompetences = details.getJSONObject("competences");
+	        for (String competence : listeCompetences.keySet())
 	        {
-	            Competences.add((String) object);
+	            Competences.add((String) competence);
+	            if (Likes.containsKey(competence))
+	            {
+	            	ArrayDeque<String> liste = Likes.get(competence);
+	            	JSONArray temp = listeCompetences.getJSONArray(competence);
+	            	for (int i = 0; i < temp.length(); i++)
+	            		liste.add(temp.getString(i));
+	            	Likes.put(competence, liste);
+	            }
 	        }
         } catch (JSONException e) {}
     }
