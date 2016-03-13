@@ -269,7 +269,7 @@ public class Sqlite
 	 *********************/
 	
 	/**
-	 * Récupération des tous les likes associés à une utilisateur
+	 * Récupération des tous les likes associés à un utilisateur
 	 * 
 	 * @param user
 	 */
