@@ -5,7 +5,6 @@ package stri.java_connect.protocol;
 
 import stri.java_connect.modele.Annuaire;
 import stri.java_connect.modele.Utilisateur;
-import stri.java_connect.utils.CourrielValidateur;
 
 /**
  * @author emeric
@@ -132,6 +131,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
 				if (!cible.getLikes().containsKey(utilisateur.getCourriel()))
 						cible.addLike(competenceCible, utilisateur.getCourriel());
+				reponse = ProtocoleAnnuaire.ok();
 			}
 			else
 				reponse = ProtocoleAnnuaire.erreurRequete();
@@ -224,6 +224,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
 				if (cible.getLikes().containsKey(utilisateur.getCourriel()))
 						cible.supprimerLike(competenceCible, utilisateur.getCourriel());
+				reponse = ProtocoleAnnuaire.ok();
 			}
 			else
 				reponse = ProtocoleAnnuaire.erreurRequete();
