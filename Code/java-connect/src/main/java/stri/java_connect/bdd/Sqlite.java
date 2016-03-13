@@ -234,10 +234,10 @@ public class Sqlite
 	 * @param dateMessage
 	 * @param message
 	 */
-	public void insertMessage (String courrielSource, String CourrielDestinataire, Timestamp dateMessage, String message)
+	public void insertMessage (String courrielSource, String courrielDestinataire, Timestamp dateMessage, String message)
 	{
 		String req = "INSERT INTO Message (courrielSource, courrielDestinataire, dateMessage, message) " +
-				"VALUES ("+courrielSource+","+CourrielDestinataire+","+dateMessage+","+message+");";
+				"VALUES ("+courrielSource+","+courrielDestinataire+","+dateMessage+","+message+");";
 		executerRequete(req);
 	}
 	
@@ -251,10 +251,68 @@ public class Sqlite
 	{
 		String req = "SELECT * FROM Message WHERE courrielDestinataire = \""+courriel+"\";";
 		executerRequete(req);
+		//TODO : traiter les messages
+		
+		// Suppression des messages lues
+		
 	}
 	
+	public void supprimerMessage(String courrielSource, String courrielDestinataire, Timestamp dateMessage)
+	{
+		String req = "DELETE FROM message WHERE courrielSource = '"+courrielSource+"', courrielDestinataire ='"+courrielDestinataire+"', dateMessage = "+dateMessage+";";
+		executerRequete(req);
+	}
 	
 
+	/*********************
+	 * Pour la version 3 *
+	 *********************/
+	
+	/**
+	 * Récupération des tous les likes associés à un utilisateur
+	 * 
+	 * @param user
+	 */
+	public void chargerLike(Utilisateur user)
+	{
+		String req = "SELECT courrielLikant,nomCompetence FROM aimer WHERE courrielPropCompetence ='" + user.getCourriel() +"';";
+		ResultSet resultSet = executerRequete(req);
+		try
+		{
+			while (resultSet.next())
+			{
+				user.addLike(resultSet.getString("nomCompetence"), resultSet.getString("courrielLikant"));
+			}
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Ecriture dans la base de donnée d'un nouveau like
+	 * 
+	 * @param courrielLikant
+	 * @param courrielPropCompetence
+	 * @param nomCompetence
+	 */
+	public void ajouterLike(String courrielLikant, String courrielPropCompetence, String nomCompetence)
+	{
+		String req = "INSERT INTO  aimer (courrielLikant, courrielPropCompetence, nomCompetence) VALUES ('"+courrielLikant+
+				"','"+courrielPropCompetence+"','"+nomCompetence+"');";
+		executerRequete(req);
+	}
+	
+	public void supprimerLike(String courrielLikant, String courrielPropCompetence, String nomCompetence)
+	{
+		String req = "DELETE FROM  aimer WHERE courrielikant = '"+courrielLikant+"' AND " +
+				"courrielPropCompetence ='"+courrielPropCompetence+
+				"', nomCompetence = '"+nomCompetence+"');";
+		executerRequete(req);
+	}
+	
 	
 	
 	/**
