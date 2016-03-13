@@ -277,9 +277,17 @@ public class Sqlite
 	{
 		String req = "SELECT courrielLikant,nomCompetence FROM aimer WHERE courrielPropCompetence ='" + user.getCourriel() +"';";
 		ResultSet resultSet = executerRequete(req);
-		while (resultSet.next())
+		try
 		{
-			user.addLike(resultSet.getString("nomCompetence"), resultSet.getString("courrielLikant");
+			while (resultSet.next())
+			{
+				user.addLike(resultSet.getString("nomCompetence"), resultSet.getString("courrielLikant"));
+			}
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
