@@ -123,6 +123,18 @@ public class ClientAnnuaire
 		return client.communiquer(ProtocoleAnnuaire.requeteSuppressionProfil(courriel));
 	}
 
+
+	public String inscriptionLike(String courriel, String competence) throws IOException
+	{
+		return client.communiquer(ProtocoleAnnuaire.requeteInscrireLike(courriel, competence));
+	}
+
+
+	public String suppressionLike(String courriel, String competence) throws IOException
+	{
+		return client.communiquer(ProtocoleAnnuaire.requeteSuppressionLike(courriel, competence));
+	}
+
 	/**
 	 * Se deconnecter du serveur.
 	 * 

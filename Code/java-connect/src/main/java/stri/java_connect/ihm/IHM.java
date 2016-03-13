@@ -4,7 +4,6 @@
 package stri.java_connect.ihm;
 
 import java.io.IOException;
-import java.util.ArrayDeque;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -460,7 +459,7 @@ public class IHM
         } while (!"N".equalsIgnoreCase(temp));
 
         String reponse = client.inscription(utilisateur);
-        
+
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
     }
@@ -485,7 +484,7 @@ public class IHM
 	        utilisateur.setMotDePasse(temp);
         }
         temp = "";
-        
+
 
         temp = IHMUtilitaires.saisie("Changer de nom ? (O/N)");
         if ("O".equalsIgnoreCase(temp))
@@ -714,27 +713,35 @@ public class IHM
 				  	  	{
 				  		  	if ( (pUtilisateur.getLikes().containsKey(temp) && !pUtilisateur.getLikes().get(temp).contains(utilisateur.getCourriel())) || ( !pUtilisateur.getLikes().containsKey(temp) ))
 				  		  	{
-				  		  		System.out.println("    "+i+") " + temp);
+				  		  		System.out.println("    " + i + ") " + temp);
 				  		  		c.put(i, temp);
 					  		  	i++;
 				  		  	}
 				  	  	}
-			    		
+
 			    		//si il y a des compétences à aimer 
-			    		if (i != 1)
+			    		if (i > 1)
 			    		{
 			    			val =  Integer.parseInt(IHMUtilitaires.saisie("Saisir le numéro de la compétence à aimer :"));
 			    		}
 						
-						if (!c.containsKey(val) && i!= 1)
+						if (val < 1 || !c.containsKey(val))
 						{
 							System.out.println("Valeur incorrecte.");
 						}
-					
-					} while (!c.containsKey(val) && i != 1);
-					if (i!=1)
+					} while( i > 1 && (val < 1 || !c.containsKey(val)));
+					//
+					if (i >= 1)
 					{
-						pUtilisateur.addLike(c.get(val), utilisateur.getCourriel());
+						try
+						{
+							client.inscriptionLike(pUtilisateur.getCourriel(), c.get(val));
+						}
+						catch (IOException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 				else if ("2".equals(choix))
@@ -765,9 +772,18 @@ public class IHM
 						}
 					
 					} while (!c.containsKey(val) && i != 1);
+					//
 					if (i!=1)
 					{
-						pUtilisateur.supprimerLike(c.get(val), utilisateur.getCourriel());
+						try
+						{
+							client.suppressionLike(pUtilisateur.getCourriel(), c.get(val));
+						}
+						catch (IOException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 	    	} while (! "0".equals(choix));
