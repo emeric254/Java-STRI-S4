@@ -283,6 +283,19 @@ public class Utilisateur
      */
     public void setCompetences (ArrayDeque<String> newVar)
     {
+    	// suppression anciennes comp
+    	for (String com : Competences)
+    	{
+    		if (!newVar.contains(com))
+    			Likes.remove(com);
+    	}
+    	// ajout nouvelles comp
+    	for (String com : newVar)
+    	{
+    		if (!Competences.contains(com))
+    			Likes.put(com, new ArrayDeque<String>());
+    	}
+    	// affectation
         Competences = newVar;
     }
 
@@ -294,6 +307,7 @@ public class Utilisateur
     public void addCompetence (String newVar)
     {
         Competences.add(newVar);
+        Likes.put(newVar, new ArrayDeque<String>());
     }
 
 	/**
@@ -313,9 +327,8 @@ public class Utilisateur
 	}
 
     /**
-     * Add a Competence
-     * 
-     * @param newVar the new Competence to add
+     * @param competence
+     * @param courriel
      */
     public void addLike (String competence, String courriel)
     {
@@ -332,6 +345,32 @@ public class Utilisateur
         	}
     		temp.add(courriel);
     		Likes.put(competence, temp);
+        }
+    }
+    
+    /**
+     * @param competence
+     * @param courriel
+     */
+    public void supprimerLike (String competence, String courriel)
+    {
+        if (Competences.contains(competence))
+        {
+        	ArrayDeque<String> temp;
+        	if (Likes.containsKey(competence))
+        	{
+        		temp = Likes.get(competence);
+        	}
+        	else
+        	{
+        		temp = new ArrayDeque<String>();
+        	}
+    		temp.remove(courriel);
+    		Likes.put(competence, temp);
+        }
+        else if (Likes.containsKey(competence))
+        {
+        	Likes.remove(competence);
         }
     }
 

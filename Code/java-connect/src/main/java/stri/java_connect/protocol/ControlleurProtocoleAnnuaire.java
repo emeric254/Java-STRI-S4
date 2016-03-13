@@ -5,6 +5,7 @@ package stri.java_connect.protocol;
 
 import stri.java_connect.modele.Annuaire;
 import stri.java_connect.modele.Utilisateur;
+import stri.java_connect.utils.CourrielValidateur;
 
 /**
  * @author emeric
@@ -122,12 +123,19 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 				reponse = ProtocoleAnnuaire.ok(utilisateur.toString());
 			}
 		}
-		/*
-		// TODO inscrire like sur une competence d'un utilisateur
-		else if (ProtocoleAnnuaire.validerRequeteInscrireLike(requete))
+		else if (ProtocoleAnnuaire.validerRequeteLike(requete))
 		{
+			String courrielCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[0];
+			if(annuaire.existeUtilisateur(courrielCible))
+			{
+				String competenceCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[1].replace("competences/", "");
+				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
+				if (!cible.getLikes().containsKey(utilisateur.getCourriel()))
+						cible.addLike(competenceCible, utilisateur.getCourriel());
+			}
+			else
+				reponse = ProtocoleAnnuaire.erreurRequete();
 		}
-		*/
 		else
 			reponse = ProtocoleAnnuaire.erreurRequete();
 		
@@ -203,6 +211,19 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 				}
 				else
 					reponse = ProtocoleAnnuaire.erreurInterdit();
+			}
+			else
+				reponse = ProtocoleAnnuaire.erreurRequete();
+		}
+		else if (ProtocoleAnnuaire.validerRequeteLike(requete))
+		{
+			String courrielCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[0];
+			if(annuaire.existeUtilisateur(courrielCible))
+			{
+				String competenceCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[1].replace("competences/", "");
+				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
+				if (cible.getLikes().containsKey(utilisateur.getCourriel()))
+						cible.supprimerLike(competenceCible, utilisateur.getCourriel());
 			}
 			else
 				reponse = ProtocoleAnnuaire.erreurRequete();
