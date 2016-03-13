@@ -4,7 +4,9 @@
 package stri.java_connect.ihm;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -667,6 +669,12 @@ public class IHM
      */
     private void afficherProfilUtilisateur(Utilisateur pUtilisateur)
     {
+    	String choix = "";
+    	int val = 0;
+    	int i = 0;
+    	
+    	HashMap<Integer, String> c = new HashMap<Integer, String>();
+
     	System.out.println("Informations détaillées du profil");
     	if (pUtilisateur.getNom().length() > 0)
     		System.out.println(" > Nom : " + pUtilisateur.getNom());
@@ -681,9 +689,89 @@ public class IHM
     		System.out.println(" > Compétences : ");
 	    	for(String temp : pUtilisateur.getCompetences())
 	  	  	{
-	  		  System.out.println("    - " + temp);
+	  		  System.out.println("    - " + temp + " || nbLike : " + pUtilisateur.compteLike(temp));
 	  	  	}
 		}
+    	
+    	if (pUtilisateur.getCourriel() != utilisateur.getCourriel())
+    	{
+	    	// Choix ajout/suppression d'un like
+	    	do
+	    	{
+	    		System.out.println("\n - Tapez 1 pour liker une compétence.");
+	    		System.out.println(" - Tapez 2 pour retire un like.");
+	    		System.out.println(" - Tapez 0 pour ne rien faire.");
+	    		
+	    		choix = IHMUtilitaires.saisie();
+	            IHMUtilitaires.cleanTerminal();
+				if ("1".equals(choix))
+				{
+					do
+					{
+						i = 1;
+						// afficahge de toutes les compétences qu'il est possible d'aimer
+						for(String temp : pUtilisateur.getCompetences())
+				  	  	{
+				  		  	if ( (pUtilisateur.getLikes().containsKey(temp) && !pUtilisateur.getLikes().get(temp).contains(utilisateur.getCourriel())) || ( !pUtilisateur.getLikes().containsKey(temp) ))
+				  		  	{
+				  		  		System.out.println("    "+i+") " + temp);
+				  		  		c.put(i, temp);
+					  		  	i++;
+				  		  	}
+				  	  	}
+			    		
+			    		//si il y a des compétences à aimer 
+			    		if (i != 1)
+			    		{
+			    			val =  Integer.parseInt(IHMUtilitaires.saisie("Saisir le numéro de la compétence à aimer :"));
+			    		}
+						
+						if (!c.containsKey(val) && i!= 1)
+						{
+							System.out.println("Valeur incorrecte.");
+						}
+					
+					} while (!c.containsKey(val) && i != 1);
+					if (i!=1)
+					{
+						pUtilisateur.addLike(c.get(val), utilisateur.getCourriel());
+					}
+				}
+				else if ("2".equals(choix))
+				{
+					do
+					{
+						i = 1;
+						// affichege de toutes les compétences qu'on aime déjà
+						for(String temp : pUtilisateur.getCompetences())
+				  	  	{
+				  		  	if (pUtilisateur.getLikes().containsKey(temp) && pUtilisateur.getLikes().get(temp).contains(utilisateur.getCourriel()))
+				  		  	{
+				  		  		System.out.println("    "+i+") " + temp);
+				  		  		c.put(i, temp);
+					  		  	i++;
+				  		  	}
+				  	  	}
+			    		
+			    		//si il y a des compétences à ne plus aimer 
+			    		if (i != 1)
+			    		{
+			    			val =  Integer.parseInt(IHMUtilitaires.saisie("Saisir le numéro de la compétence à ne plus aimer :"));
+			    		}
+						
+						if (!c.containsKey(val) && i!=1)
+						{
+							System.out.println("Valeur incorrecte.");
+						}
+					
+					} while (!c.containsKey(val) && i != 1);
+					if (i!=1)
+					{
+						pUtilisateur.supprimerLike(c.get(val), utilisateur.getCourriel());
+					}
+				}
+	    	} while (! "0".equals(choix));
+    	}
     }
     
     /**
