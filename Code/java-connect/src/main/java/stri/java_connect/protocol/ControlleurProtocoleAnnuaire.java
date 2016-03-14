@@ -131,6 +131,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
 				if (!cible.getLikes().containsKey(utilisateur.getCourriel()))
 						cible.addLike(competenceCible, utilisateur.getCourriel());
+				annuaire.ajoutUtilisateur(cible);
 				reponse = ProtocoleAnnuaire.ok();
 			}
 			else
