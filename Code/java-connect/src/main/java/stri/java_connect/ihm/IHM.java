@@ -671,6 +671,7 @@ public class IHM
     private void afficherProfilUtilisateur(Utilisateur pUtilisateur)
     {
     	String choix = "";
+    	String temp1 = "";
     	int val = 0;
     	int i = 0;
     	
@@ -697,8 +698,8 @@ public class IHM
     	if (!pUtilisateur.getCourriel().equals(utilisateur.getCourriel()))
     	{
 	    	// Choix ajout/suppression d'un like
-	    	do
-	    	{
+	    //	do
+	    	//{
 	    		System.out.println("\n - Tapez 1 pour liker une compétence.");
 	    		System.out.println(" - Tapez 2 pour retire un like.");
 	    		System.out.println(" - Tapez 0 pour ne rien faire.");
@@ -745,6 +746,7 @@ public class IHM
 							e.printStackTrace();
 						}
 					}
+					
 				}
 				else if ("2".equals(choix))
 				{
@@ -788,7 +790,7 @@ public class IHM
 						}
 					}
 				}
-	    	} while (! "0".equals(choix));
+	    	//} while (! "0".equals(choix));
     	}
     }
     
