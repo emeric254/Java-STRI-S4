@@ -528,6 +528,7 @@ public class Utilisateur
 	        for (String competence : listeCompetences.keySet())
 	        {
 	            Competences.add((String) competence);
+	            Likes.put(competence, new ArrayDeque<String>());
 	            if (Likes.containsKey(competence))
 	            {
 	            	ArrayDeque<String> liste = Likes.get(competence);

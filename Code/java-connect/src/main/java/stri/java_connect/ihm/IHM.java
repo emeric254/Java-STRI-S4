@@ -172,7 +172,9 @@ public class IHM
 	        System.out.println("liste user connectes : " + indirect.consulterListeUtilisateurConnectes());
 	        //System.out.println("details de l'utilisateur remi qui est connecte : " + indirect.consulterDetailsUtilisateurConnecte(utilisateur.getCourriel()));
 	       // System.out.println("liste des messages manques : " + indirect.consulterListeMessagesManques());
-		} catch (IOException e2) {
+		}
+        catch (IOException e2)
+        {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
@@ -688,7 +690,7 @@ public class IHM
     		System.out.println(" > Compétences : ");
 	    	for(String temp : pUtilisateur.getCompetences())
 	  	  	{
-	  		  System.out.println("    - " + temp + " || nbLike : " + pUtilisateur.compteLike(temp));
+	  		  	System.out.println("    - " + temp + " || nbLike : " + pUtilisateur.compteLike(temp));
 	  	  	}
 		}
     	
