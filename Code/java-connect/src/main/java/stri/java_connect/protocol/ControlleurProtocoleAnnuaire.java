@@ -188,6 +188,20 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 
 		if (utilisateur == null)
 			reponse = ProtocoleAnnuaire.erreurInterdit();
+		else if (ProtocoleAnnuaire.validerRequeteLike(requete))
+		{
+			String courrielCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[0];
+			if(annuaire.existeUtilisateur(courrielCible))
+			{
+				String competenceCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[1].replace("competences/", "");
+				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
+				cible.supprimerLike(competenceCible, utilisateur.getCourriel());
+				annuaire.ajoutUtilisateur(cible);
+				reponse = ProtocoleAnnuaire.ok();
+			}
+			else
+				reponse = ProtocoleAnnuaire.erreurRequete();
+		}
 		else if (ProtocoleAnnuaire.validerRequeteSuppressionProfil(requete))
 		{
 			// TODO remplacer ca pars fonction dans ProtocoleAnnuaire :
@@ -208,20 +222,6 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 				}
 				else
 					reponse = ProtocoleAnnuaire.erreurInterdit();
-			}
-			else
-				reponse = ProtocoleAnnuaire.erreurRequete();
-		}
-		else if (ProtocoleAnnuaire.validerRequeteLike(requete))
-		{
-			String courrielCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[0];
-			if(annuaire.existeUtilisateur(courrielCible))
-			{
-				String competenceCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[1].replace("competences/", "");
-				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
-				cible.supprimerLike(competenceCible, utilisateur.getCourriel());
-				annuaire.ajoutUtilisateur(cible);
-				reponse = ProtocoleAnnuaire.ok();
 			}
 			else
 				reponse = ProtocoleAnnuaire.erreurRequete();
