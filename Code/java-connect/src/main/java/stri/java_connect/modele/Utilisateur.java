@@ -372,7 +372,6 @@ public class Utilisateur
         {
         	Likes.remove(competence);
         }
-        System.err.println(Likes);
     }
 
     /**
