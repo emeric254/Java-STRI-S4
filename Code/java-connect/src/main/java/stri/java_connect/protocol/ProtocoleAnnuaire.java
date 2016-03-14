@@ -220,9 +220,9 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 		if(ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + "/"))
 		{
 			String[] temp = ControlleurProtocole.requeteURI(requete).replace(profilsURI + "/", "").split("/",2);
-			if (CourrielValidateur.valider(temp[0]) && temp[1].startsWith(competencesURI + "/"))
+			if (CourrielValidateur.valider(temp[0]) && temp[1].startsWith("competences/"))
 			{
-				return temp[1].replace(competencesURI + "/", "").length() > 0;
+				return temp[1].replace("competences/", "").length() > 0;
 			}
 			return false;
 		}

@@ -129,8 +129,12 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 			{
 				String competenceCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[1].replace("competences/", "");
 				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
+
 				if (!cible.getLikes().containsKey(utilisateur.getCourriel()))
 						cible.addLike(competenceCible, utilisateur.getCourriel());
+				
+				System.err.println(cible.getLikes());
+				
 				reponse = ProtocoleAnnuaire.ok();
 			}
 			else
