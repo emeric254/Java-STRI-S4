@@ -758,7 +758,7 @@ public class IHM
 				  	  	{
 				  		  	if (pUtilisateur.getLikes().containsKey(temp) && pUtilisateur.getLikes().get(temp).contains(utilisateur.getCourriel()))
 				  		  	{
-				  		  		System.out.println("    "+i+") " + temp);
+				  		  		System.out.println("    " + i + ") " + temp);
 				  		  		c.put(i, temp);
 					  		  	i++;
 				  		  	}
