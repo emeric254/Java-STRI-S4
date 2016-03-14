@@ -692,7 +692,7 @@ public class IHM
 	  	  	}
 		}
     	
-    	if (pUtilisateur.getCourriel() != utilisateur.getCourriel())
+    	if (!pUtilisateur.getCourriel().equals(utilisateur.getCourriel()))
     	{
 	    	// Choix ajout/suppression d'un like
 	    	do
@@ -735,7 +735,7 @@ public class IHM
 					{
 						try
 						{
-							client.inscriptionLike(pUtilisateur.getCourriel(), c.get(val));
+							System.out.println("===>"+client.inscriptionLike(pUtilisateur.getCourriel(), c.get(val)));
 						}
 						catch (IOException e)
 						{
