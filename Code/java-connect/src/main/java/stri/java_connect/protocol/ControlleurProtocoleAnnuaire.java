@@ -160,10 +160,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 			{
 				Utilisateur temp = annuaire.getUtilisateur(u.getCourriel());
 				
-				if ( ( utilisateur.getPrivilege().equals("utilisateur") 
-						&& temp.getCourriel().equals(utilisateur.getCourriel())
-						&& temp.getMotDePasse().equals(utilisateur.getMotDePasse()) )
-					|| utilisateur.getPrivilege().equals("administrateur") )
+				if ( ( utilisateur.getPrivilege().equals("utilisateur") && temp.getCourriel().equals(utilisateur.getCourriel()) && temp.getMotDePasse().equals(utilisateur.getMotDePasse()) ) || utilisateur.getPrivilege().equals("administrateur") )
 				{
 					if (utilisateur.getCourriel().equals(u.getCourriel()))
 						utilisateur = u;
@@ -222,8 +219,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 			{
 				String competenceCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[1].replace("competences/", "");
 				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
-				if (cible.getLikes().containsKey(utilisateur.getCourriel()))
-						cible.supprimerLike(competenceCible, utilisateur.getCourriel());
+				cible.supprimerLike(competenceCible, utilisateur.getCourriel());
 				reponse = ProtocoleAnnuaire.ok();
 			}
 			else
