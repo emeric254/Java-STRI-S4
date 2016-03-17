@@ -160,7 +160,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 			{
 				Utilisateur temp = annuaire.getUtilisateur(u.getCourriel());
 				
-				if ( ( utilisateur.getPrivilege().equals("utilisateur") && temp.getCourriel().equals(utilisateur.getCourriel()) && temp.getMotDePasse().equals(utilisateur.getMotDePasse()) ) || utilisateur.getPrivilege().equals("administrateur") )
+				if ( utilisateur.getPrivilege().equals("administrateur") || utilisateur.getPrivilege().equals("utilisateur") && temp.getCourriel().equals(utilisateur.getCourriel()) && temp.getMotDePasse().equals(utilisateur.getMotDePasse()) )
 				{
 					if (utilisateur.getCourriel().equals(u.getCourriel()))
 						utilisateur = u;
