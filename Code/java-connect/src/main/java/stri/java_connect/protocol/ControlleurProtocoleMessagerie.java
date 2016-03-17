@@ -163,30 +163,8 @@ public class ControlleurProtocoleMessagerie extends ControlleurProtocole
 
         if (utilisateur != null)
         {
-            if (utilisateur == null && ProtocoleAnnuaire.validerRequeteConnexion(requete))
-            {
-                try
-                {
-                    System.out.println("debug " + requete);
-                    String temp = cl.communiquer(requete);
-                    if (ProtocoleGenerique.isOk(temp))
-                    {
-                        utilisateur = new Utilisateur();
-                        utilisateur.fromJSONString(ProtocoleGenerique.extraireJSONObject(temp).toString());
-                        //
-                        reponse = ProtocoleGenerique.ok();
-                    }
-                    else
-                        reponse = temp;
-                }
-                catch (Exception e)
-                {
-                    utilisateur = null;
-                    reponse = ProtocoleGenerique.erreurServeur();
-                }
-            }
-            else
-                reponse = ProtocoleGenerique.erreurRequete();
+            //
+            reponse = ProtocoleMessagerie.erreurImplementionManquante();
         }
         else
             reponse = ProtocoleMessagerie.erreurInterdit();
