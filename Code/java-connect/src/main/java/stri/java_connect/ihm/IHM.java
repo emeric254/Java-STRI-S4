@@ -713,7 +713,7 @@ public class IHM
 						// afficahge de toutes les compétences qu'il est possible d'aimer
 						for(String temp : pUtilisateur.getCompetences())
 				  	  	{
-				  		  	if ( (pUtilisateur.getLikes().containsKey(temp) && !pUtilisateur.getLikes().get(temp).contains(utilisateur.getCourriel())) || ( !pUtilisateur.getLikes().containsKey(temp) ))
+				  		  	if ( !pUtilisateur.getLikes().containsKey(temp) || pUtilisateur.getLikes().containsKey(temp) && !pUtilisateur.getLikes().get(temp).contains(utilisateur.getCourriel()) )
 				  		  	{
 				  		  		System.out.println("    " + i + ") " + temp);
 				  		  		c.put(i, temp);
