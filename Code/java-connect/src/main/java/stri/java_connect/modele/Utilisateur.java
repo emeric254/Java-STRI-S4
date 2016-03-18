@@ -443,32 +443,12 @@ public class Utilisateur
      */
     public String toStringAnonyme()
     {
-        String chaine = "{";
-        chaine += nomJSON + nom + vgl;
         if("anonyme".equals(permissionLecture))
         {
-            chaine += courrielJSON + courriel + vgl;
-            chaine += telephoneJSON + telephone + vgl;
-            chaine += dateDiplomeJSON + dateDiplome + vgl;
-            chaine += competencesJSON;
-            for(String temp : Competences)
-            {
-                chaine += glt + temp + glt + ":" + " [";
-                if (Likes.containsKey(temp))
-                {
-                	for (String courriel : Likes.get(temp))
-                		chaine += glt + courriel + vgl;
-                	if (Likes.get(temp).size() > 0)
-                        chaine = chaine.substring(0, chaine.length()-1);
-                }
-                chaine += "] ,";
-            }
-            if(Competences.size() > 0)
-                chaine = chaine.substring(0, chaine.length()-1);
-            chaine += "}";
+        	return toStringUtilisateur();
         }
-        chaine += "}";
         
+        String chaine = "{" + nomJSON + nom + vgl + "}";
         System.out.println(chaine);
         return chaine;
     }
