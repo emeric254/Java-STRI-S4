@@ -25,31 +25,26 @@ public class ControlleurProtocoleMessagerieDirecte extends ControlleurProtocole
 
 	public String traiterRequeteConnexion(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String traiterRequeteConsulter(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String traiterRequeteInscrire(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String traiterRequeteModification(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String traiterRequeteSuppression(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

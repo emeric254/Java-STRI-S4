@@ -236,6 +236,10 @@ public class IHM
 	        {
 	        	messagerieAfficherMailAttente();
 	        }
+	        else if ("0".equals(choix))
+	        {
+	        	// exit
+	        }
 	        else
 	        {
 	        	System.out.println("Veuillez choisir quelque chose de valide !");
@@ -318,7 +322,6 @@ public class IHM
 	        }
 	        else if ("7".equals(choix))
 	        {
-	        	choix="0";
 	        	afficherMenuMessagerie();
 	        }
 	        else if ("0".equals(choix))
