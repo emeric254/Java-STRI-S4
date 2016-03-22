@@ -709,7 +709,6 @@ public class IHM
     private void afficherProfilUtilisateur(Utilisateur pUtilisateur)
     {
     	String choix = "";
-    	String temp1 = "";
     	int val = 0;
     	int i = 0;
     	
