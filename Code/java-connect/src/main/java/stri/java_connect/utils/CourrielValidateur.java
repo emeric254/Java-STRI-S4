@@ -6,7 +6,7 @@ package stri.java_connect.utils;
 import java.util.regex.Pattern;
 
 /**
- * @author emeric, remi
+ * @author remi, emeric
  *
  */
 public abstract class CourrielValidateur
