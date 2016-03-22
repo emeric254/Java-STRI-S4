@@ -217,7 +217,7 @@ public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 	 */
 	public static boolean validerRequeteLike(String requete)
 	{
-		if(ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + "/"))
+		if(ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + "/") && ControlleurProtocole.requeteURI(requete).length() > new String(profilsURI + "/").length())
 		{
 			String[] temp = ControlleurProtocole.requeteURI(requete).replace(profilsURI + "/", "").split("/",2);
 			if (CourrielValidateur.valider(temp[0]) && temp[1].startsWith("competences/"))

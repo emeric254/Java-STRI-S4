@@ -24,7 +24,8 @@ public class IHM
 {
     private ClientAnnuaire client;
     private Utilisateur utilisateur;
-	
+
+
 	/**
 	 * Creation de l'objet IHM, affichage de l'accueil
 	 * 
@@ -36,7 +37,8 @@ public class IHM
 		utilisateur = null;
 		afficherAccueil();
 	}
-	
+
+
 	/**
 	 * Menu principal, accueil de l'application (utilisateur pas encore connecte)
 	 * 
@@ -108,7 +110,8 @@ public class IHM
 	        }
 	    } while (! "0".equals(choix) );
 	}
-	
+
+
 	/**
 	 * Afficher la liste des profils
 	 * 
@@ -132,7 +135,8 @@ public class IHM
 			System.out.println("Erreur dans l'affichage d'un element");
 		}
 	}
-	
+
+
 	/**
 	 * Envoie d'un message en mode hors ligne
 	 * 
@@ -180,7 +184,8 @@ public class IHM
 		}
         indirect.deconnexion();
 	}
-	
+
+
 	/**
 	 * Afficher les message reçus en mode différé
 	 * 
@@ -199,8 +204,9 @@ public class IHM
 			e2.printStackTrace();
 		}
         indirect.deconnexion();
-
 	}
+
+
 	/**
 	 * Afficher la menu de messagerie (directe ou indirecte)
 	 * 
@@ -213,12 +219,10 @@ public class IHM
 		{
 			System.out.println(" = = = Menu messagerie (vous etes connecté) = = = ");
 			System.out.println("Bonjour " + utilisateur.getNom() + "\n Saisissez votre choix :");
-			//
 			System.out.println("\n =>  1 - Messagerie directe.");
 			System.out.println("\n =>  2 - Messagerie indirecte.");
 			System.out.println("\n =>  3 - Afficher les messages en attente.");
             System.out.println("\n =>  0 - Quitter.");
-			
 
             choix = IHMUtilitaires.saisie();
 
@@ -236,14 +240,18 @@ public class IHM
 	        {
 	        	messagerieAfficherMailAttente();
 	        }
+	        else if ("0".equals(choix))
+	        {
+	        	// exit
+	        }
 	        else
 	        {
 	        	System.out.println("Veuillez choisir quelque chose de valide !");
 	        }
         } while (! "0".equals(choix));
 	}
-	
-	
+
+
 	/**
 	 * Menu principal une fois connecte
 	 * 
@@ -318,7 +326,6 @@ public class IHM
 	        }
 	        else if ("7".equals(choix))
 	        {
-	        	choix="0";
 	        	afficherMenuMessagerie();
 	        }
 	        else if ("0".equals(choix))
@@ -331,7 +338,7 @@ public class IHM
 	        }
         } while (! "0".equals(choix));
     }
-	
+
 
     /**
      * Afficher les details d'un profil dont on saisit le courriel
@@ -363,6 +370,7 @@ public class IHM
         	System.out.println("Cette addresse n'existe pas ...");
 		}
 	}
+
 
 	/**
 	 * S'inscrire
@@ -465,6 +473,7 @@ public class IHM
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
     }
+
 
     /**
      * Modifier son profil
@@ -610,7 +619,8 @@ public class IHM
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
     }
-    
+
+
     /**
      * Connexion a son compte
      * 
@@ -631,18 +641,44 @@ public class IHM
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
     }
-    
+
+
     /**
      * Rechercher un profil
      * 
      */
     private void afficherRecherche()
     {
-    	System.out.println("recherche :");
+    	System.out.println("Recherche");
     	// TODO recherche locale dans /profils recu
-    	System.out.println("Pas encore implemente !");
+        String temp = IHMUtilitaires.saisie("saisir le nom a rechercher ou <!q> pour quitter :");
+        if (!"!q".equals(temp))
+        {
+        	System.out.println("resultat(s) pour : " + temp);
+    		try
+    		{
+				temp = client.consulterProfils();
+    			JSONArray j = ProtocoleAnnuaire.extraireJSONArray(temp);
+    			for (int i = 0; i < j.length(); i++)
+    			{
+    				Utilisateur u = new Utilisateur();
+    				u.fromJSONString(j.getJSONObject(i).toString());
+    				if (u.getNom().contains(temp))
+    					afficherLigneProfilUtilisateur(u);
+    			}
+    		}
+    		catch (IOException e1)
+    		{
+    			System.out.println("Erreur dans la reception des donnees");
+			}
+    		catch (JSONException e)
+    		{
+    			System.out.println("Erreur dans l'affichage d'un element");
+    		}
+	    }
     }
-    
+
+
     /**
      * Supprimer son propre profil
      * 
@@ -653,7 +689,8 @@ public class IHM
     	System.out.println("suppression de votre profil");
     	client.suppressionProfil(utilisateur.getCourriel());
     }
-    
+
+
     /**
      * Afficher son propre profil
      * 
@@ -662,7 +699,8 @@ public class IHM
     {
         afficherProfilUtilisateur(utilisateur);
     }	
-    
+
+
     /**
      * Afficher les details d'un utilisateur
      * 
@@ -714,7 +752,7 @@ public class IHM
 						// afficahge de toutes les compétences qu'il est possible d'aimer
 						for(String temp : pUtilisateur.getCompetences())
 				  	  	{
-				  		  	if ( (pUtilisateur.getLikes().containsKey(temp) && !pUtilisateur.getLikes().get(temp).contains(utilisateur.getCourriel())) || ( !pUtilisateur.getLikes().containsKey(temp) ))
+				  		  	if ( !pUtilisateur.getLikes().containsKey(temp) || pUtilisateur.getLikes().containsKey(temp) && !pUtilisateur.getLikes().get(temp).contains(utilisateur.getCourriel()) )
 				  		  	{
 				  		  		System.out.println("    " + i + ") " + temp);
 				  		  		c.put(i, temp);
@@ -793,7 +831,8 @@ public class IHM
 	    	//} while (! "0".equals(choix));
     	}
     }
-    
+
+
     /**
      * Afficher en ligne les details d'un utilisateur
      * 

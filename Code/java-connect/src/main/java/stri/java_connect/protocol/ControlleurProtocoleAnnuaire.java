@@ -12,6 +12,7 @@ import stri.java_connect.modele.Utilisateur;
  */
 public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 {
+	private final static String profilsURI = "/profils/";
 	private Utilisateur utilisateur;
 	private Annuaire annuaire;
 	
@@ -80,7 +81,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		else if (ProtocoleAnnuaire.validerRequeteConsulterProfil(requete))
 		{
 			// TODO remplacer ça par fonction dans ProtocoleAnnuaire :
-			String courriel = ControlleurProtocole.requeteURI(requete).replace("/profils/", "");
+			String courriel = ControlleurProtocole.requeteURI(requete).replace(profilsURI, "");
 			
 			if (annuaire.existeUtilisateur(courriel))
 			{
@@ -124,10 +125,10 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		}
 		else if (ProtocoleAnnuaire.validerRequeteLike(requete))
 		{
-			String courrielCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[0];
+			String courrielCible = ControlleurProtocole.requeteURI(requete).replace(profilsURI, "").split("/",2)[0];
 			if(annuaire.existeUtilisateur(courrielCible))
 			{
-				String competenceCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[1].replace("competences/", "");
+				String competenceCible = ControlleurProtocole.requeteURI(requete).replace(profilsURI, "").split("/",2)[1].replace("competences/", "");
 				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
 				cible.addLike(competenceCible, utilisateur.getCourriel());
 				annuaire.ajoutUtilisateur(cible);
@@ -160,7 +161,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 			{
 				Utilisateur temp = annuaire.getUtilisateur(u.getCourriel());
 				
-				if ( ( utilisateur.getPrivilege().equals("utilisateur") && temp.getCourriel().equals(utilisateur.getCourriel()) && temp.getMotDePasse().equals(utilisateur.getMotDePasse()) ) || utilisateur.getPrivilege().equals("administrateur") )
+				if ( utilisateur.getPrivilege().equals("administrateur") || utilisateur.getPrivilege().equals("utilisateur") && temp.getCourriel().equals(utilisateur.getCourriel()) && temp.getMotDePasse().equals(utilisateur.getMotDePasse()) )
 				{
 					if (utilisateur.getCourriel().equals(u.getCourriel()))
 						utilisateur = u;
@@ -190,10 +191,10 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 			reponse = ProtocoleAnnuaire.erreurInterdit();
 		else if (ProtocoleAnnuaire.validerRequeteLike(requete))
 		{
-			String courrielCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[0];
+			String courrielCible = ControlleurProtocole.requeteURI(requete).replace(profilsURI, "").split("/",2)[0];
 			if(annuaire.existeUtilisateur(courrielCible))
 			{
-				String competenceCible = ControlleurProtocole.requeteURI(requete).replace("/profils/", "").split("/",2)[1].replace("competences/", "");
+				String competenceCible = ControlleurProtocole.requeteURI(requete).replace(profilsURI, "").split("/",2)[1].replace("competences/", "");
 				Utilisateur cible = annuaire.getUtilisateur(courrielCible);
 				cible.supprimerLike(competenceCible, utilisateur.getCourriel());
 				annuaire.ajoutUtilisateur(cible);
@@ -205,7 +206,7 @@ public class ControlleurProtocoleAnnuaire extends ControlleurProtocole
 		else if (ProtocoleAnnuaire.validerRequeteSuppressionProfil(requete))
 		{
 			// TODO remplacer ca pars fonction dans ProtocoleAnnuaire :
-			String courriel = ControlleurProtocole.requeteURI(requete).replace("/profils/", "");
+			String courriel = ControlleurProtocole.requeteURI(requete).replace(profilsURI, "");
 			
 			if (annuaire.existeUtilisateur(courriel))
 			{
