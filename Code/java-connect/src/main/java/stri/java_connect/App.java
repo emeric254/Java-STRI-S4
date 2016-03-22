@@ -1,43 +1,70 @@
 package stri.java_connect;
 
-import java.io.IOException;
-
-import stri.java_connect.client.ClientAnnuaire;
-import stri.java_connect.modele.Utilisateur;
-import stri.java_connect.protocol.ProtocoleAnnuaire;
+import java.io.*;
+import java.net.*;
+import stri.java_connect.client.*;
+import stri.java_connect.modele.*;
+import stri.java_connect.protocol.*;
 
 /**
  * @author emeric, remi, thomas
  *
  */
-public class App 
+public class App
 {
     /**
      * Main App.java
-     * 
+     *
      * @param args arguments de lancement
      */
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-        System.out.println( "Init annuaire utilisateurs" );
-        //
+
         try
         {
-			initAnnuaire();
-		}
+            initAnnuaire();
+        }
         catch (IOException e)
         {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         //
-        System.out.println("END");
+        //DesktopApplicationContext.main(MenuPrincipal.class, args);
+        //
+        //
+        System.out.println("test msg direct");
+        try
+        {
+            ClientMessagerieDirecte client2 = new ClientMessagerieDirecte(12346);
+            client2.start();
+            ClientMessagerieDirecte client1 = new ClientMessagerieDirecte(12345);
+            client1.start();
+            //
+            client1.emettreMsg("127.0.0.1:12345", "test1");
+            client2.emettreMsg("127.0.0.1:12345", "rgechjgbrweyabuyewagu");
+            client2.emettreMsg("127.0.0.1:12346", "rgechjg41544984789brweyabuyewagu");
+            client1.emettreMsg("127.0.0.1:12346", "testttttttttttttttt");
+            //
+            for (int i = 0 ; i< 200000; i++); // pour attendre les envois / reception des threads
+            //
+            client1.deconnexion();
+            client2.deconnexion();
+        }
+        catch (SocketException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        //
+        //indirect.deconnexion();
+        //
     }
-    
+
     /**
      * Initialiser l'annuaire du serveur
-     * 
+     *
      * @throws IOException exception si la communication echoue
      */
     private static void initAnnuaire() throws IOException
@@ -50,11 +77,11 @@ public class App
         utilisateur.setNom("Remi BARBASTE");
         utilisateur.setTelephone("0123456798");
         utilisateur.setDateDiplome(Long.parseLong("2015"));
-        utilisateur.addCompetence("Mthématiques");
+        utilisateur.addCompetence("Mathématiques");
         String reponse = client.inscription(utilisateur);
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
-       
+
         client = new ClientAnnuaire();
         utilisateur = new Utilisateur();
         utilisateur.setCourriel("emeric.tosi@univ-tlse3.fr");
@@ -68,7 +95,7 @@ public class App
         reponse = client.inscription(utilisateur);
         utilisateur = new Utilisateur();
         utilisateur.fromJSONString(ProtocoleAnnuaire.extraireJSONObject(reponse).toString());
-       
+
         client = new ClientAnnuaire();
         utilisateur = new Utilisateur();
         utilisateur.setCourriel("thomas.maury@univ-tlse3.fr");

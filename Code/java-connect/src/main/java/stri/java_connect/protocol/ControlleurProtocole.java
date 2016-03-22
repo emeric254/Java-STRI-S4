@@ -9,7 +9,7 @@ import org.json.JSONObject;
  * @author emeric
  *
  */
-public abstract class ControlleurProtocole
+public abstract class ControlleurProtocole implements TraitementRequete
 {
     /**
      * Traiter une requete pour generer une reponse
@@ -17,7 +17,34 @@ public abstract class ControlleurProtocole
      * @param requete la requete a traiter
      * @return la reponse
      */
-    public abstract String traiterRequete (String requete);
+	public String traiterRequete(String requete)
+	{
+		String reponse = ProtocoleAnnuaire.erreurServeur();
+		
+		if (ProtocoleAnnuaire.isRequeteConnexion(requete))
+		{
+			reponse = traiterRequeteConnexion(requete);
+		}
+		else if (ProtocoleAnnuaire.isRequeteConsulter(requete))
+		{
+			reponse = traiterRequeteConsulter(requete);
+		}
+		else if (ProtocoleAnnuaire.isRequeteInscrire(requete))
+		{
+			reponse = traiterRequeteInscrire(requete);
+		}
+		else if (ProtocoleAnnuaire.isRequeteModifier(requete))
+		{
+			reponse = traiterRequeteModification(requete);
+		}
+		else if (ProtocoleAnnuaire.isRequeteSuppression(requete))
+		{
+			reponse = traiterRequeteSuppression(requete);
+		}
+		else
+			reponse = ProtocoleAnnuaire.erreurRequete();
+		return reponse;
+	}
 
     /**
      * Extraire la methode d'une requete

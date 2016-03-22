@@ -3,26 +3,23 @@
  */
 package stri.java_connect.protocol;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import stri.java_connect.utils.CourrielValidateur;
 import stri.java_connect.utils.JSONValidateur;
-import stri.java_connect.utils.MD5Hasher;
 
 /**
  * @author emeric
  *
  */
-public abstract class ProtocoleAnnuaire
+public abstract class ProtocoleAnnuaire extends ProtocoleGenerique
 {
 	private final static String profilsURI = "/profils";
-	private final static String code = "{\"code\" : ";
-	private final static String data =  ", \"data\" : \"";
-	private final static String fin = "\"}";
+	private final static String competencesURI = "/competences";
 	
 	//-------------------------------------------------------------------------
 	// constructeurs de requete
+	
+	// CONSULTER
+	
 	
 	/**
 	 * Requete de consultation de la liste des profils
@@ -31,7 +28,7 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteConsulterProfils()
 	{
-		return "CONSULTER " + profilsURI;
+		return consulterMethod + profilsURI;
 	}
 	
 	/**
@@ -42,44 +39,40 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteConsulterProfil(String courriel)
 	{
-		return "CONSULTER "+ profilsURI + "/" + courriel;
-	}
-	
-	/**
-	 * Requete de connexion
-	 * 
-	 * @param courriel le courriel la connexion
-	 * @param motDePasse le mot de passe pour la connexion
-	 * @return la requete
-	 */
-	public static String requeteConnexion(String courriel, String motDePasse)
-	{
-		return "CONNEXION " + courriel + ":" + motDePasse;
-	}
-	
-	/**
-	 * Requete de connexion, le mot de passe sera hash en MD5
-	 * 
-	 * @param courriel le courriel la connexion
-	 * @param motDePasse le mot de passe pour la connexion
-	 * @return la requete
-	 */
-	public static String requeteConnexionHashMD5(String courriel, String motDePasse)
-	{
-		return "CONNEXION " + courriel + ":MD5:" + MD5Hasher.hashString(motDePasse);
+		return consulterMethod + profilsURI + "/" + courriel;
 	}
 
+	
+	// INSCRIPTION
+	
+	
 	/**
 	 * Requete d'inscription d'un profil utilisateur
 	 * 
 	 * @param utilisateurJson le profil utilisateur a inscrire
 	 * @return la requete
 	 */
-	public static String requeteInscrire(String utilisateurJson)
+	public static String requeteInscrireProfil(String utilisateurJson)
 	{
-		return "INSCRIRE ;" + utilisateurJson;
+		return inscrireMethod + profilsURI + " ;" + utilisateurJson;
 	}
 
+	/**
+	 * Requete d'inscription d'un profil utilisateur
+	 * 
+	 * @param courriel le profil utilisateur ou il faut inscrire le like
+	 * @param competence la competence ou inscrire le like
+	 * @return la requete
+	 */
+	public static String requeteInscrireLike(String courriel, String competence)
+	{
+		return inscrireMethod + profilsURI + "/" + courriel + competencesURI + "/" + competence;
+	}
+	
+	
+	// MODIFICATION
+
+	
 	/**
 	 * Requete de modification d'un profil utilisateur
 	 * 
@@ -89,8 +82,12 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteModifierProfil(String courriel, String utilisateurJson)
 	{
-		return "MODIFIER " + profilsURI + "/" + courriel + ";"  + utilisateurJson;
+		return modifierMethod + profilsURI + "/" + courriel + ";"  + utilisateurJson;
 	}
+	
+	
+	// SUPPRESSION
+	
 	
 	/**
 	 * Requete de suppression d'un profil utilisateur
@@ -100,69 +97,25 @@ public abstract class ProtocoleAnnuaire
 	 */
 	public static String requeteSuppressionProfil(String courriel)
 	{
-		return "SUPPRESSION " + profilsURI + "/" + courriel;
-	}
-	
-	//-------------------------------------------------------------------------
-	// testeurs de type de requete
-	
-	/**
-	 * Tester si la requete est une requete de consultation
-	 * 
-	 * @param requete la requete a tester
-	 * @return true si c'est une requete de consultation, false sinon
-	 */
-	public static boolean isRequeteConsulter(String requete)
-	{
-		return ControlleurProtocole.requeteMethode(requete).equals("CONSULTER");
+		return supprimerMethod + profilsURI + "/" + courriel;
 	}
 	
 	/**
-	 * Tester si la requete est une requete de connexion
+	 * Requete de suppression d'un like sur une competence d'un profil utilisateur
 	 * 
-	 * @param requete la requete a tester
-	 * @return true si c'est une requete de connexion, false sinon
+	 * @param courriel le courriel du profil ou supprimer le like
+	 * @param competence la competence ou supprimer le like
+	 * @return la requete
 	 */
-	public static boolean isRequeteConnexion(String requete)
+	public static String requeteSuppressionLike(String courriel, String competence)
 	{
-		return ControlleurProtocole.requeteMethode(requete).equals("CONNEXION");
-	}
-	
-	/**
-	 * Tester si la requete est une requete d'inscription
-	 * 
-	 * @param requete la requete a tester
-	 * @return true si c'est une requete d'inscription, false sinon
-	 */
-	public static boolean isRequeteInscrire(String requete)
-	{
-		return ControlleurProtocole.requeteMethode(requete).equals("INSCRIRE");
-	}
-	
-	/**
-	 * Tester si la requete est une requete de modification
-	 * 
-	 * @param requete la requete a tester
-	 * @return true si c'est une requete de modification, false sinon
-	 */
-	public static boolean isRequeteModifier(String requete)
-	{
-		return ControlleurProtocole.requeteMethode(requete).equals("MODIFIER");
-	}
-	
-	/**
-	 * Tester si la requete est une requete de suppression
-	 * 
-	 * @param requete la requete a tester
-	 * @return true si c'est une requete de suppression, false sinon
-	 */
-	public static boolean isRequeteSuppression(String requete)
-	{
-		return ControlleurProtocole.requeteMethode(requete).equals("SUPPRESSION");
+		return supprimerMethod + profilsURI + "/" + courriel + competencesURI + "/" + competence;
 	}
 
+	
 	//-------------------------------------------------------------------------
 	// valideurs de corps requete
+	
 	
 	/**
 	 * Valider la requete de consultation de la liste des profils
@@ -189,7 +142,7 @@ public abstract class ProtocoleAnnuaire
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Valider la requete de connexion
 	 * 
@@ -220,15 +173,16 @@ public abstract class ProtocoleAnnuaire
 	}
 	
 	/**
-	 * Valider la requete de'inscription
+	 * Valider la requete de l'inscription d'un profil
 	 * 
 	 * @param requete la requete a valider
 	 * @return true si c'est une requete d'inscription valide, false sinon
 	 */
-	public static boolean validerRequeteInscrire(String requete)
+	public static boolean validerRequeteInscrireProfil(String requete)
 	{
 		// TODO valider modele aussi ?
-		return JSONValidateur.valider(ControlleurProtocole.requeteCorps(requete));
+		return ControlleurProtocole.requeteURI(requete).equals(profilsURI) &&
+				JSONValidateur.valider(ControlleurProtocole.requeteCorps(requete));
 	}
 	
 	/**
@@ -254,206 +208,24 @@ public abstract class ProtocoleAnnuaire
 	{
 		return ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + "/");
 	}
-
-	//-------------------------------------------------------------------------
-	// createurs de reponses
-
-	/**
-	 * Creation de la reponse pour une erreur d'implementation manquante
-	 * 
-	 * @return la reponse
-	 */
-	public static String erreurImplementionManquante()
-	{
-		return code + -2 + data + "implementation manquante" + fin;
-	}
 	
 	/**
-	 * Creation de la reponse pour une erreur serveur
+	 * Valider la requete de like
 	 * 
-	 * @return la reponse
+	 * @param requete la requete a valider
+	 * @return true si c'est une requete de like valide, false sinon
 	 */
-	public static String erreurServeur()
+	public static boolean validerRequeteLike(String requete)
 	{
-		return code + -1 + data + "erreur du serveur" + fin;
-	}
-	
-
-	/**
-	 * Creation de la reponse ok de confirmation (sans donnees)
-	 * 
-	 * @return la reponse
-	 */
-	public static String ok()
-	{
-		return code + 0 + data + fin;
-	}
-	
-
-	/**
-	 * Creation de la reponse ok de confirmation (avec donnees)
-	 * 
-	 * @param donnees les donnees a envoyer dans la reponse
-	 * @return la reponse
-	 */
-	public static String ok(String donnees)
-	{
-		return code + 0 + ", \"data\" : " + donnees + " }";
-	}
-	
-
-	/**
-	 * Creation de la reponse pour une erreur de requete
-	 * 
-	 * @return la reponse
-	 */
-	public static String erreurRequete()
-	{
-		return code + 1 + data + "mauvaise requete" + fin;
-	}
-	
-
-	/**
-	 * Creation de la reponse pour une erreur de droits
-	 * 
-	 * @return la reponse
-	 */
-	public static String erreurInterdit()
-	{
-		return code + 2 + data + "interdit" + fin;
-	}
-	
-
-	/**
-	 * Creation de la reponse pour une erreur de connexion perdue
-	 * 
-	 * @return la reponse
-	 */
-	public static String erreurDeconnexion()
-	{
-		return code + 3 + data + "connexion perdue" + fin;
-	}
-
-	//-------------------------------------------------------------------------
-	// testeurs de reponses
-
-	/**
-	 * Tester si une reponse est une erreur d'implementation manquante
-	 * 
-	 * @param reponse la reponse a tester
-	 * @return true si c'est cette erreur, false sinon
-	 */
-	public static boolean isErreurImplementionManquante(String reponse)
-	{
-		return ControlleurProtocole.reponseCode(reponse) == -2;
-	}
-	
-	/**
-	 * Tester si une reponse est une erreur serveur
-	 * 
-	 * @param reponse la reponse a tester
-	 * @return true si c'est cette erreur, false sinon
-	 */
-	public static boolean isErreurServeur(String reponse)
-	{
-		return ControlleurProtocole.reponseCode(reponse) == -1;
-	}
-	
-
-	/**
-	 * Tester si une reponse est une confirmation
-	 * 
-	 * @param reponse la reponse a tester
-	 * @return true si c'est une confirmation, false sinon
-	 */
-	public static boolean isOk(String reponse)
-	{
-		return ControlleurProtocole.reponseCode(reponse) == 0;
-	}
-	
-
-	/**
-	 * Tester si une reponse est une erreur de requete
-	 * 
-	 * @param reponse la reponse a tester
-	 * @return true si c'est cette erreur, false sinon
-	 */
-	public static boolean isErreurRequete(String reponse)
-	{
-		return ControlleurProtocole.reponseCode(reponse) == 1;
-	}
-	
-
-	/**
-	 * Tester si une reponse est une erreur de droits
-	 * 
-	 * @param reponse la reponse a tester
-	 * @return true si c'est cette erreur, false sinon
-	 */
-	public static boolean isErreurInterdit(String reponse)
-	{
-		return ControlleurProtocole.reponseCode(reponse) == 2;
-	}
-	
-
-	/**
-	 * Tester si une reponse est une erreur de connexion perdue
-	 * 
-	 * @param reponse la reponse a tester
-	 * @return true si c'est cette erreur, false sinon
-	 */
-	public static boolean isErreurDeconnexion(String reponse)
-	{
-		return ControlleurProtocole.reponseCode(reponse) == 3;
-	}
-
-	//-------------------------------------------------------------------------
-	// reponse ok - donnees
-
-	/**
-	 * Valide les donnees d'une reponse
-	 * 
-	 * @param reponse la reponse dont on veut valider les donnees
-	 * @return true si les donnees sont valides, false sinon
-	 */
-	public static boolean valideDonnees(String reponse)
-	{
-		// TODO voir si on peut faire mieux
-		return ControlleurProtocole.reponseDonnees(reponse).length() >= 0;
-	}
-
-	/**
-	 * Extrait les donnees d'une reponse
-	 * 
-	 * @param reponse la reponse dont on doit extraire les donnees
-	 * @return les donnees de la reponse
-	 */
-	public static String extraireDonnees(String reponse)
-	{
-		return ControlleurProtocole.reponseDonnees(reponse);
-	}
-
-	/**
-	 * Extrait le JSONObject d'une reponse
-	 * 
-	 * @param reponse la reponse dont on doit extraire le JSONObject
-	 * @return le JSONObject
-	 */
-	public static JSONObject extraireJSONObject(String reponse)
-	{
-    	JSONObject js = new JSONObject(reponse);
-    	return js.getJSONObject("data");
-	}
-
-	/**
-	 * Extrait le JSONArray d'une reponse
-	 * 
-	 * @param reponse la reponse dont on doit extraire le JSONArray
-	 * @return le JSONArray
-	 */
-	public static JSONArray extraireJSONArray(String reponse)
-	{
-    	JSONObject js = new JSONObject(reponse);
-    	return js.getJSONArray("data");
+		if(ControlleurProtocole.requeteURI(requete).startsWith(profilsURI + "/") && ControlleurProtocole.requeteURI(requete).length() > new String(profilsURI + "/").length())
+		{
+			String[] temp = ControlleurProtocole.requeteURI(requete).replace(profilsURI + "/", "").split("/",2);
+			if (CourrielValidateur.valider(temp[0]) && temp[1].startsWith("competences/"))
+			{
+				return temp[1].replace("competences/", "").length() > 0;
+			}
+			return false;
+		}
+		return false;
 	}
 }

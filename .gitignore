@@ -11,3 +11,5 @@ target/*
 *.db
 .project
 *.project
+bin/*
+bin

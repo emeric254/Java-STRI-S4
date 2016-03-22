@@ -17,7 +17,7 @@ public class ClientAnnuaire
 {
 	private final static int portDefaut = 12345;
 	private Client client;
-	
+
 	/**
 	 * Creation d'un objet ClientAnnuaire sur le port par defaut
 	 * 
@@ -26,7 +26,7 @@ public class ClientAnnuaire
 	{
 		this(portDefaut);
 	}
-	
+
 	/**
 	 * Creation d'un objet ClientAnnuaire sur un port fournit
 	 * 
@@ -36,7 +36,7 @@ public class ClientAnnuaire
 	{
 		client = new Client(pPort);
 	}
-	
+
 	/**
 	 * Inscrire un utilisateur
 	 * 
@@ -46,9 +46,9 @@ public class ClientAnnuaire
 	 */
 	public String inscription(Utilisateur u) throws IOException
 	{
-		return client.communiquer(ProtocoleAnnuaire.requeteInscrire(u.toString()));
+		return client.communiquer(ProtocoleAnnuaire.requeteInscrireProfil(u.toString()));
 	}
-	
+
 	/**
 	 * Connecter a un compte utilisateur
 	 * 
@@ -61,7 +61,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteConnexion(courriel, mdp));
 	}
-	
+
 	/**
 	 * Connecter a un compte utilisateur avec mot de passe qui sera envoye sous forme de hash MD5 
 	 * 
@@ -74,7 +74,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteConnexionHashMD5(courriel,MD5Hasher.hashString(mdp)));
 	}
-	
+
 	/**
 	 * Consulter la liste des profils
 	 * 
@@ -86,7 +86,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteConsulterProfils());
 	}
-	
+
 	/**
 	 * Consulter un profil
 	 * 
@@ -98,7 +98,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteConsulterProfil(courriel));
 	}
-	
+
 	/**
 	 * Mettre a jour les details d'un objet/compte Utilisateur
 	 * 
@@ -110,7 +110,7 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteModifierProfil(utilisateur.getCourriel(), utilisateur.toString()));
 	}
-	
+
 	/**
 	 * Supprimer un compte/objet Utilisateur
 	 * 
@@ -122,7 +122,35 @@ public class ClientAnnuaire
 	{
 		return client.communiquer(ProtocoleAnnuaire.requeteSuppressionProfil(courriel));
 	}
-	
+
+
+	/**
+	 * Ajout d'un like sur une competence
+	 * 
+	 * @param courriel le courriel du compte sur lequel est ajoute le like
+	 * @param competence la competence liker
+	 * @return
+	 * @throws IOException si l'ajout echoue
+	 */
+	public String inscriptionLike(String courriel, String competence) throws IOException
+	{
+		return client.communiquer(ProtocoleAnnuaire.requeteInscrireLike(courriel, competence));
+	}
+
+
+	/**
+	 * Suppression d'un like sur une competence
+	 * 
+	 * @param courriel le courriel du compte sur lequel est supprime le like
+	 * @param competence la competence choisie
+	 * @return
+	 * @throws IOException si l'ajout echoue
+	 */
+	public String suppressionLike(String courriel, String competence) throws IOException
+	{
+		return client.communiquer(ProtocoleAnnuaire.requeteSuppressionLike(courriel, competence));
+	}
+
 	/**
 	 * Se deconnecter du serveur.
 	 * 

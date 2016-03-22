@@ -62,6 +62,8 @@ public class ClientHandler extends Thread
                 sortie = traitement(entree);
                 System.out.println(sortie);
                 fluxSortieSocket.println(sortie);
+                if(fluxSortieSocket.checkError())
+                	fini = true;
             }
             else
                 fini = true; // entree @ null == flux brise == fin
@@ -115,6 +117,7 @@ public class ClientHandler extends Thread
         catch (Exception e)
         {
             e.printStackTrace();
+            fini = true;
         }
         
         while(!fini)

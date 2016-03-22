@@ -5,6 +5,7 @@ package stri.java_connect.modele;
 
 import java.util.ArrayDeque;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +26,7 @@ public class Utilisateur
     private final static String telephoneJSON = glt + "telephone" + separ;
     private final static String nomJSON = glt + "nom" + separ;
     private final static String dateDiplomeJSON = glt + "datediplome" + separ;
-    private final static String competencesJSON = glt + "competences" + glt + " : [";
+    private final static String competencesJSON = glt + "competences" + glt + " : {";
 
     private String motDePasse;
     private String nom;
@@ -35,6 +36,7 @@ public class Utilisateur
     private String permissionLecture;
     private String privilege;
     private ArrayDeque<String> Competences;
+    private HashMap<String, ArrayDeque<String>> Likes;
 
 //
 // Constructors
@@ -64,6 +66,7 @@ public class Utilisateur
         */
         privilege = "utilisateur";
         Competences = new ArrayDeque<String>();
+        Likes = new HashMap<String, ArrayDeque<String>>();
     };
 
     /**
@@ -280,6 +283,19 @@ public class Utilisateur
      */
     public void setCompetences (ArrayDeque<String> newVar)
     {
+    	// suppression anciennes comp
+    	for (String com : Competences)
+    	{
+    		if (!newVar.contains(com))
+    			Likes.remove(com);
+    	}
+    	// ajout nouvelles comp
+    	for (String com : newVar)
+    	{
+    		if (!Competences.contains(com))
+    			Likes.put(com, new ArrayDeque<String>());
+    	}
+    	// affectation
         Competences = newVar;
     }
 
@@ -291,11 +307,115 @@ public class Utilisateur
     public void addCompetence (String newVar)
     {
         Competences.add(newVar);
+        Likes.put(newVar, new ArrayDeque<String>());
+    }
+
+	/**
+	 * Represente personnes qui ont liker une competences
+	 * @return
+	 */
+	public HashMap<String, ArrayDeque<String>> getLikes()
+	{
+		return Likes;
+	}
+
+	/**
+	 * Like mis sur les competences
+	 * @param likes
+	 */
+	public void setLikes(HashMap<String, ArrayDeque<String>> likes)
+	{
+		Likes = likes;
+	}
+
+    /**
+     * Ajout d'un like sur une competence
+     * @param competence
+     * @param courriel
+     */
+    public void addLike (String competence, String courriel)
+    {
+        if (Competences.contains(competence))
+        {
+        	ArrayDeque<String> temp;
+        	if (Likes.containsKey(competence))
+        	{
+        		temp = Likes.get(competence);
+        	}
+        	else
+        	{
+        		temp = new ArrayDeque<String>();
+        	}
+    		temp.add(courriel);
+    		Likes.put(competence, temp);
+        }
+    }
+    
+    /**
+     * Suppresion d'un like sur une competence
+     * @param competence
+     * @param courriel
+     */
+    public void supprimerLike (String competence, String courriel)
+    {
+        if (Competences.contains(competence))
+        {
+        	ArrayDeque<String> temp;
+        	if (Likes.containsKey(competence))
+        	{
+        		temp = Likes.get(competence);
+        	}
+        	else
+        	{
+        		temp = new ArrayDeque<String>();
+        	}
+    		temp.remove(courriel);
+    		Likes.put(competence, temp);
+        }
+        else if (Likes.containsKey(competence))
+        {
+        	Likes.remove(competence);
+        }
+    }
+
+    /**
+     * Ajout d'une competence
+     * 
+     * @param newVar the new Competence to add
+     */
+    public int compteLike (String competence)
+    {
+        if (Competences.contains(competence) && Likes.containsKey(competence))
+    	{
+    		return Likes.get(competence).size();
+    	}
+        return 0;
     }
 
 //
 // Other methods
 //
+
+    private String competencesToString()
+    {
+    	String chaine = competencesJSON;
+        for(String temp : Competences)
+        {
+            chaine += glt + temp + glt + ":" + " [";
+            if (Likes.containsKey(temp))
+            {
+            	for (String courriel : Likes.get(temp))
+            		chaine += glt + courriel + vgl;
+            	if (Likes.get(temp).size() > 0)
+                    chaine = chaine.substring(0, chaine.length()-1);
+            }
+            chaine += "] ,";
+        }
+        if(Competences.size() > 0)
+            chaine = chaine.substring(0, chaine.length()-1);
+        return chaine + "}";
+    }
+
 
     /**
      * Get Utilisateur JSON String representation
@@ -322,14 +442,10 @@ public class Utilisateur
 
         chaine += glt + "privilege" + separ + privilege + vgl;
 
-        chaine += competencesJSON;
-        for(String temp : Competences)
-        {
-            chaine += glt + temp + vgl;
-        }
-        if(Competences.size() > 0)
-            chaine = chaine.substring(0, chaine.length()-1);
-        chaine += "] }";
+        chaine += competencesToString();
+        
+        chaine += " }";
+        
         return chaine;
     }
     
@@ -340,24 +456,12 @@ public class Utilisateur
      */
     public String toStringAnonyme()
     {
-        String chaine = "{";
-        chaine += nomJSON + nom + vgl;
         if("anonyme".equals(permissionLecture))
         {
-            chaine += courrielJSON + courriel + vgl;
-            chaine += telephoneJSON + telephone + vgl;
-            chaine += dateDiplomeJSON + dateDiplome + vgl;
-            chaine += competencesJSON;
-            for(String temp : Competences)
-            {
-                chaine += glt + temp + vgl;
-            }
-            if(Competences.size() > 0)
-                chaine = chaine.substring(0, chaine.length()-1);
-            chaine += "]";
+        	return toStringUtilisateur();
         }
-        chaine += "}";
         
+        String chaine = "{" + nomJSON + nom + vgl + "}";
         System.out.println(chaine);
         return chaine;
     }
@@ -374,14 +478,8 @@ public class Utilisateur
         chaine += courrielJSON + courriel + vgl;
         chaine += telephoneJSON + telephone + vgl;
         chaine += dateDiplomeJSON + dateDiplome + vgl;
-        chaine += competencesJSON;
-        for(String temp : Competences)
-        {
-            chaine += glt + temp + vgl;
-        }
-        if(Competences.size() > 0)
-            chaine = chaine.substring(0, chaine.length()-1);
-        chaine += "] }";
+        chaine += competencesToString();
+        chaine += " }";
         
         System.out.println(chaine);
         return chaine;
@@ -405,10 +503,19 @@ public class Utilisateur
         setPrivilege(JSONLoader.readStringJSONObject(details, "privilege"));
         try
         {
-        	JSONArray listeCompetences = details.getJSONArray("competences");
-	        for (Object object : listeCompetences)
+        	JSONObject listeCompetences = details.getJSONObject("competences");
+	        for (String competence : listeCompetences.keySet())
 	        {
-	            Competences.add((String) object);
+	            Competences.add((String) competence);
+	            Likes.put(competence, new ArrayDeque<String>());
+	            if (Likes.containsKey(competence))
+	            {
+	            	ArrayDeque<String> liste = Likes.get(competence);
+	            	JSONArray temp = listeCompetences.getJSONArray(competence);
+	            	for (int i = 0; i < temp.length(); i++)
+	            		liste.add(temp.getString(i));
+	            	Likes.put(competence, liste);
+	            }
 	        }
         } catch (JSONException e) {}
     }
