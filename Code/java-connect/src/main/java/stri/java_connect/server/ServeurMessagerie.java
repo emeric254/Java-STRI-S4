@@ -7,7 +7,7 @@ import stri.java_connect.modele.AnnuaireMessagerie;
 import stri.java_connect.protocol.ControlleurProtocoleMessagerie;
 
 /**
- * @author emeric
+ * @author emeric, thomas
  *
  */
 public class ServeurMessagerie
