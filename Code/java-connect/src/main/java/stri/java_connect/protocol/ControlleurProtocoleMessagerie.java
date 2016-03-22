@@ -6,7 +6,7 @@ import stri.java_connect.modele.Message;
 import stri.java_connect.modele.Utilisateur;
 
 /**
- * @author emeric
+ * @author emeric, remi
  *
  */
 public class ControlleurProtocoleMessagerie extends ControlleurProtocole

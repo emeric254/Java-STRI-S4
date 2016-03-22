@@ -7,7 +7,7 @@ import stri.java_connect.modele.Annuaire;
 import stri.java_connect.protocol.ControlleurProtocoleAnnuaire;
 
 /**
- * @author emeric
+ * @author emeric, remi
  *
  */
 public class ServeurAnnuaire
