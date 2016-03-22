@@ -311,6 +311,7 @@ public class Utilisateur
     }
 
 	/**
+	 * Represente personnes qui ont liker une competences
 	 * @return
 	 */
 	public HashMap<String, ArrayDeque<String>> getLikes()
@@ -319,6 +320,7 @@ public class Utilisateur
 	}
 
 	/**
+	 * Like mis sur les competences
 	 * @param likes
 	 */
 	public void setLikes(HashMap<String, ArrayDeque<String>> likes)
@@ -327,6 +329,7 @@ public class Utilisateur
 	}
 
     /**
+     * Ajout d'un like sur une competence
      * @param competence
      * @param courriel
      */
@@ -349,6 +352,7 @@ public class Utilisateur
     }
     
     /**
+     * Suppresion d'un like sur une competence
      * @param competence
      * @param courriel
      */
@@ -375,7 +379,7 @@ public class Utilisateur
     }
 
     /**
-     * Add a Competence
+     * Ajout d'une competence
      * 
      * @param newVar the new Competence to add
      */

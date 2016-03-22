@@ -22,11 +22,19 @@ public class AnnuaireMessagerie
 		messages = new HashMap<String, ArrayDeque<Message>>();
 	}
 
+	/**
+	 * Recupere dans annuaire
+	 * @return annuaire
+	 */
 	public HashMap<String, String> getAnnuaire()
 	{
 		return annuaire;
 	}
 	
+	/**
+	 * Recupere les donnees utilisateur
+	 * @return temp
+	 */
 	public String getUtilisateurs()
 	{
 		String temp = " { 'liste' : [";
@@ -38,31 +46,59 @@ public class AnnuaireMessagerie
 		return temp;
 	}
 	
+	/**
+	 * Teste si l'utilisateur existe en fonction du courriel
+	 * @param courriel
+	 * @return
+	 */
 	public boolean existeUtilisateur(String courriel)
 	{
 		return annuaire.keySet().contains(courriel);
 	}
 	
+	/**
+	 * Recupere le details des utilisateurs
+	 * @param courriel
+	 * @return
+	 */
 	public String getDetailsUtilisateur(String courriel)
 	{
 		return annuaire.get(courriel);
 	}
 	
+	/**
+	 * Suppression de l'utilisateur
+	 * @param courriel
+	 * @return
+	 */
 	public synchronized String supprimerUtilisateur(String courriel)
 	{
 		return annuaire.remove(courriel);
 	}
 
+	/**
+	 * Initialise l'annuaire
+	 * @param annuaire
+	 */
 	public synchronized void setAnnuaire(HashMap<String, String> annuaire)
 	{
 		this.annuaire = annuaire;
 	}
 	
+	/**
+	 * Ajout d'un utilisateur
+	 * @param courriel
+	 * @param ipPort
+	 */
 	public synchronized void ajoutUtilisateur(String courriel, String ipPort)
 	{
 		annuaire.put(courriel, ipPort);
 	}
 	
+	/**
+	 * Suppression d'un utilisateur
+	 * @param courriel
+	 */
 	public synchronized void enleverUtilisateur(String courriel)
 	{
 		annuaire.remove(courriel);
@@ -75,11 +111,21 @@ public class AnnuaireMessagerie
 		return messages;
 	}
 
+	/**
+	 * Construction du message
+	 * @param messages
+	 */
 	public synchronized void setMessages(HashMap<String, ArrayDeque<Message>> messages)
 	{
 		this.messages = messages;
 	}
 
+	/**
+	 * Ajout du message avec les parametres
+	 * @param courrielDestinataire
+	 * @param courrielAuteur
+	 * @param texte
+	 */
 	public synchronized void ajoutMessage(String courrielDestinataire, String courrielAuteur, String texte)
 	{
 		ArrayDeque<Message> temp = getMessagesUtilisateur(courrielDestinataire);
@@ -89,6 +135,11 @@ public class AnnuaireMessagerie
 		messages.put(courrielDestinataire, temp);
 	}
 
+	/**
+	 * Recupere le message a envoyer
+	 * @param courriel
+	 * @return
+	 */
 	public ArrayDeque<Message> getMessagesUtilisateur(String courriel)
 	{
 		return messages.get(courriel);
@@ -107,6 +158,12 @@ public class AnnuaireMessagerie
 		return temp;
 	}
 
+	/**
+	 * Creation du message
+	 * @param courriel
+	 * @param timestamp
+	 * @return
+	 */
 	public Message getMessageUtilisateur(String courriel, String timestamp)
 	{
 		try
@@ -126,11 +183,20 @@ public class AnnuaireMessagerie
 		return null;
 	}
 	
+	/**
+	 * Suppression du message
+	 * @param courriel
+	 */
 	public synchronized void supprimerMessagesUtilisateur(String courriel)
 	{
 		messages.remove(courriel);
 	}
 	
+	/**
+	 * Suppression du message
+	 * @param courriel
+	 * @param idmsg
+	 */
 	public synchronized void supprimerMessageUtilisateur(String courriel, String idmsg)
 	{
 		ArrayDeque<Message> temp = getMessagesUtilisateur(courriel);
