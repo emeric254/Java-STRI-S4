@@ -123,6 +123,34 @@ public class ClientAnnuaire
 		return client.communiquer(ProtocoleAnnuaire.requeteSuppressionProfil(courriel));
 	}
 
+
+	/**
+	 * Ajout d'un like sur une competence
+	 * 
+	 * @param courriel le courriel du compte sur lequel est ajoute le like
+	 * @param competence la competence liker
+	 * @return
+	 * @throws IOException si l'ajout echoue
+	 */
+	public String inscriptionLike(String courriel, String competence) throws IOException
+	{
+		return client.communiquer(ProtocoleAnnuaire.requeteInscrireLike(courriel, competence));
+	}
+
+
+	/**
+	 * Suppression d'un like sur une competence
+	 * 
+	 * @param courriel le courriel du compte sur lequel est supprime le like
+	 * @param competence la competence choisie
+	 * @return
+	 * @throws IOException si l'ajout echoue
+	 */
+	public String suppressionLike(String courriel, String competence) throws IOException
+	{
+		return client.communiquer(ProtocoleAnnuaire.requeteSuppressionLike(courriel, competence));
+	}
+
 	/**
 	 * Se deconnecter du serveur.
 	 * 

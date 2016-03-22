@@ -1,7 +1,7 @@
 package stri.java_connect.protocol;
 
 /**
- * @author emeric
+ * @author emeric, thomas
  *
  */
 public class ControlleurProtocoleMessagerieDirecte extends ControlleurProtocole
@@ -23,33 +23,43 @@ public class ControlleurProtocoleMessagerieDirecte extends ControlleurProtocole
 		return new ControlleurProtocoleMessagerieDirecte();
 	}
 
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.TraitementRequete#traiterRequeteConnexion(java.lang.String)
+	 */
 	public String traiterRequeteConnexion(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.TraitementRequete#traiterRequeteConsulter(java.lang.String)
+	 */
 	public String traiterRequeteConsulter(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.TraitementRequete#traiterRequeteInscrire(java.lang.String)
+	 */
 	public String traiterRequeteInscrire(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.TraitementRequete#traiterRequeteModification(java.lang.String)
+	 */
 	public String traiterRequeteModification(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see stri.java_connect.protocol.TraitementRequete#traiterRequeteSuppression(java.lang.String)
+	 */
 	public String traiterRequeteSuppression(String requete)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

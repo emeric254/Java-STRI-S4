@@ -74,9 +74,24 @@ public class ClientMessagerieDirecte extends Thread
 	 */
 	public void emettreMsg(String addrport, String msg)
 	{
-		String addr = addrport.split(":")[0];
-		int port = Integer.parseInt(addrport.split(":")[1]);
-		emettreMsg(addr, port, msg);
+		if (addrport.contains(":"))
+		{
+			String addr = addrport.split(":")[0];
+			int port = portDefaut;
+			try
+			{
+				port = Integer.parseInt(addrport.split(":")[1]);
+			}
+			catch (NumberFormatException e)
+			{
+				System.err.println("Port incorrect ! envoi sur le port par defaut ...");
+			}
+			emettreMsg(addr, port, msg);
+		}
+		else
+		{
+			System.err.println("Adresse incorrecte ! envoi impossible !");
+		}
 	}
 
 	// TODO
@@ -101,7 +116,8 @@ public class ClientMessagerieDirecte extends Thread
 			System.err.println("echec de l'envoi @ " + addr + ":" + port + " du message : " + msgenvoi);
 		}
 	}
-	
+
+
 	/**
 	 * Deconnexion, fermeture du socket
 	 */
